@@ -51,6 +51,7 @@ class _HomePageState extends State<HomePage> {
               child: const Text('tab'),
               onPressed: () {
                 // MallIdentityApi().getMalls(mallParamsModel: MallParamsModel(token: token, userid: userId ,action: 'getMallsByCity' ,cityId: '1'));
+              //  GameIdentityApi().game(gameParamsModel: GameParamsModel(action: GameActionEnumsModel.createGame, mallId: 1, token: token, userid: userId));
 
                 showDialog(
                     context: context,
