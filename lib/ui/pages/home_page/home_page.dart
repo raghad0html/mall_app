@@ -108,7 +108,8 @@ class _HomePageState extends StateMVC<HomePage> {
                                     return MallsDropDownDialog(
                                         malls: _con.malls,
                                         selectedMall: (mall) {
-                                          _con.createGame(mall.mallId);
+                                          _con.createGame(
+                                              mall.mallId, mall.name ?? '');
                                         });
                                   },
                                 );

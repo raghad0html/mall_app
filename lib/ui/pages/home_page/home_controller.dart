@@ -43,7 +43,7 @@ class HomeController extends ControllerMVC {
     }
   }
 
-  createGame(int mallId) async {
+  createGame(int mallId, String mallName) async {
     var loader = Helper.overlayLoader(state!.context);
     FocusScope.of(state!.context).unfocus();
     Helper.overlayLoader(state!.context);
@@ -57,11 +57,11 @@ class HomeController extends ControllerMVC {
     );
     ResponseState<GameModel> _gameResponse =
         await GameIdentityApi().game(gameParamsModel: gameParamsModel);
-    Helper.hideLoader(loader); //
-    Navigator.pushNamed(state!.context, Routes.gameDetailScreen); //
-    LocalStorageService().lastMallId = mallId.toString(); //
+
+    LocalStorageService().lastMallId = mallId.toString();
     if (_gameResponse is SuccessState) {
-      GameModel gameModel = _gameResponse as GameModel;
+      SuccessState<GameModel> data = _gameResponse as SuccessState<GameModel>;
+      GameModel gameModel = data.data;
       ScaffoldMessenger.of(state!.context).showSnackBar(SnackBar(
         content: Text(gameModel.msg ?? ''),
       ));
@@ -69,7 +69,13 @@ class HomeController extends ControllerMVC {
       LocalStorageService().lastMallId = mallId.toString();
 
       Helper.hideLoader(loader);
-      Navigator.pushNamed(state!.context, Routes.gameDetailScreen);
+      Navigator.of(state!.context).pop();
+      Navigator.pushNamed(state!.context, Routes.gameDetailScreen,
+          arguments: GameDetails(
+            mallName: mallName,
+            gameId: gameModel.gameId ?? 0,
+            mallId: mallId,
+          ));
     }
     if (_gameResponse is ErrorState) {
       GameModel gameModel = _gameResponse as GameModel;
@@ -78,7 +84,13 @@ class HomeController extends ControllerMVC {
       ));
       LocalStorageService().lastGameId = gameModel.gameId.toString();
       Helper.hideLoader(loader);
-      Navigator.pushNamed(state!.context, Routes.gameDetailScreen);
+      Navigator.of(state!.context).pop();
+      Navigator.pushNamed(state!.context, Routes.gameDetailScreen,
+          arguments: GameDetails(
+            mallName: mallName,
+            gameId: gameModel.gameId ?? 0,
+            mallId: mallId,
+          ));
       LocalStorageService().lastMallId = mallId.toString();
     }
   }
