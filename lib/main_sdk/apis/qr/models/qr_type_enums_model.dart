@@ -9,7 +9,7 @@ extension ParseToString on QrTypeParamsModel {
   }
 }
 extension GetQrTypeParamsModelFromString on QrTypeParamsModel {
-  QrTypeParamsModel fromStringToDayName(String prefix) {
+  QrTypeParamsModel fromStringToQrTypeParamsModel(String prefix) {
     switch (prefix.toLowerCase()) {
       case 'sticker':
         return QrTypeParamsModel.sticker;
