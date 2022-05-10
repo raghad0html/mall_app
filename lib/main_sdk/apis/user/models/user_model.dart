@@ -1,6 +1,6 @@
 class UserModel {
   String? token;
-  String? userId;
+  int? userId;
   String? name;
   String? email;
 
@@ -14,7 +14,7 @@ class UserModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  <String, dynamic>{};
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['token'] = token;
     data['user_id'] = userId;
     data['name'] = name;

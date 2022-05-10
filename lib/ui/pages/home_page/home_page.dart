@@ -1,100 +1,173 @@
 import 'package:flutter/material.dart';
-import 'package:mall_app/main_sdk/apis/core/models/common/result_class.dart';
-import 'package:mall_app/main_sdk/apis/mall/models/mall_action_enums_model.dart';
-import 'package:mall_app/main_sdk/apis/mall/models/mall_model.dart';
-import 'package:mall_app/main_sdk/apis/mall/models/mall_params_model.dart';
-import 'package:mall_app/main_sdk/apis/mall/services/mall_identity_apis.dart';
-import 'package:mall_app/main_sdk/apis/user/models/login_params_model.dart';
-import 'package:mall_app/main_sdk/apis/user/services/user_identity_apis.dart';
-import 'package:mall_app/ui/shared/future_builder_widget/app_future_builder.dart';
+import 'package:lottie/lottie.dart';
+import 'package:mall_app/constants/app_theme.dart';
+import 'package:mvc_pattern/mvc_pattern.dart';
+
+import '../../../generated/l10n.dart';
+import '../../../main_sdk/apis/mall/models/mall_model.dart';
+import '../../widget/mall_widget.dart';
+import 'home_controller.dart';
+import 'malls_drop_down_dialog.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
-  String token =
-      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIzIn0.3jaQbohqbZ-AFwd7JwkcnzEGOEtabGajYsxSKwFmidA';
-  String userId = '3';
-  late Future<ResponseState<ListOfMallModel>> _listOfMallModel;
+class _HomePageState extends StateMVC<HomePage> {
+  late HomeController _con;
+
+  _HomePageState() : super(HomeController()) {
+    _con = controller as HomeController;
+  }
 
   @override
   void initState() {
-    _listOfMallModel = MallIdentityApi().getMalls(
-        mallParamsModel: MallParamsModel(
-            token: token,
-            userid: userId,
-            action:  MallActionEnumsModel.getMallsByCity,
-            cityId: '1'));
     super.initState();
+    _con.getMalls();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: AppFutureBuilder<ListOfMallModel>(
-        future: _listOfMallModel,
-        retry: () => MallIdentityApi().getMalls(
-            mallParamsModel: MallParamsModel(
-                token: token,
-                userid: userId,
-                action: MallActionEnumsModel.getMallsByCity,
-                cityId: '1')),
-        whenDone: (data) {
-          return Center(
-            child: ElevatedButton(
-              child: const Text('tab'),
-              onPressed: () {
-                // MallIdentityApi().getMalls(mallParamsModel: MallParamsModel(token: token, userid: userId ,action: 'getMallsByCity' ,cityId: '1'));
-              //  GameIdentityApi().game(gameParamsModel: GameParamsModel(action: GameActionEnumsModel.createGame, mallId: 1, token: token, userid: userId));
-              UserIdentityApi().login(loginParamsModel: LoginParamsModel(email: 'aaa@aaa.com' ,password: '123456789'));
-                // showDialog(
-                //     context: context,
-                //     //  barrierDismissible: true,
-                //     builder: (BuildContext context) {
-                //       return AppFutureBuilder<QrModel>(
-                //         future: QrIdentityApi().scanQr(
-                //             qrParamsModel: QrParamsModel(
-                //                 qr: 'https://bareeqe.sa/?I3N0aWNrZXIjMzEwMDQ3MDQxMTAwMDAzI0FBQUE=',
-                //                 qrDate: '2022-5-5',
-                //                 mallId: '1',
-                //                 gameId: '1',
-                //                 token: token,
-                //                 userid: userId)),
-                //         whenError: (error) {
-                //           return CustomDialogBox(
-                //             title: "خطأ",
-                //             subTitle: error!.errorMessage.getErrors,
-                //             textInButton: "نعم",
-                //             icon: Icons.error,
-                //             check: true,
-                //             callback: () {
-                //               Navigator.of(context).pop();
-                //             },
-                //           );
-                //         },
-                //         whenDone: (data) {
-                //           return CustomDialogBox(
-                //             title: "تهانينا",
-                //             subTitle: data.msg,
-                //             icon: Icons.check_circle,
-                //             textInButton: "ok",
-                //             check: true,
-                //             callback: () {
-                //               Navigator.of(context).pop();
-                //             },
-                //           );
-                //         },
-                //       );
-                //     });
-              },
-            ),
-          );
-        },
+      key: _con.scaffoldKey,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          S.of(context)!.yourCity,
+                          style: Theme.of(context).textTheme.subtitle1,
+                        ),
+                        Text(
+                          S.of(context)!.riad,
+                          style: Theme.of(context).textTheme.subtitle1,
+                        ),
+                      ],
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {},
+                    child: Container(
+                      padding: const EdgeInsets.all(3.0),
+                      decoration: BoxDecoration(
+                          color:
+                              AppColors.appBarBackGroundColor.withOpacity(0.2)),
+                      child: Text(
+                        S.of(context)!.myCompetitions,
+                        style: Theme.of(context).textTheme.subtitle1,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 16.0, horizontal: 10),
+                decoration:
+                    BoxDecoration(color: AppColors.appYellow.withOpacity(0.2)),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            S.of(context)!.beTheWinnerTitle,
+                            style: Theme.of(context).textTheme.headline6,
+                          ),
+                          Text(
+                            S.of(context)!.beTheWinnerMessage,
+                            style: Theme.of(context).textTheme.subtitle2,
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          InkWell(
+                            onTap: () {
+                              if (_con.malls.isNotEmpty) {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return MallsDropDownDialog(
+                                        malls: _con.malls,
+                                        selectedMall: (mall) {
+                                          _con.createGame(mall.mallId);
+                                        });
+                                  },
+                                );
+                              }
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.all(8.0),
+                              decoration: BoxDecoration(
+                                  color: AppColors.appOrange.withOpacity(0.2)),
+                              child: Text(
+                                S.of(context)!.startACompetition,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .subtitle1
+                                    ?.copyWith(fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                        width: 100,
+                        height: 100,
+                        child: Lottie.asset('assets/lottie/winner.json')),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Text(
+                S.of(context)!.malls,
+                style: Theme.of(context).textTheme.headline6,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              _con.malls.isEmpty && _con.loading
+                  ? const Center(child: CircularProgressIndicator())
+                  : Expanded(
+                      child: SingleChildScrollView(
+                        child: GridView.builder(
+                          itemCount: _con.malls.length,
+                          shrinkWrap: true,
+                          primary: false,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2),
+                          itemBuilder: (context, gridViewIndex) {
+                            MallModel mall = _con.malls[gridViewIndex];
+                            return MallWidget(mall: mall);
+                          },
+                        ),
+                      ),
+                    )
+            ],
+          ),
+        ),
       ),
     );
   }

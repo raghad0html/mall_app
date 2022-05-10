@@ -16,8 +16,8 @@ class ListOfMallModel {
 }
 
 class MallModel {
-  late String mallId;
-  String? cityId;
+  late int mallId;
+  int? cityId;
   String? name;
   String? icon;
   String? linkApp;

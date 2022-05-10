@@ -3,7 +3,7 @@ import 'package:mall_app/main_sdk/apis/game/models/game_level_enums_model.dart';
 class GameModel {
   bool? gameAccepted;
   String? msg;
-  String? gameId;
+  int? gameId;
   GameLevelEnumsModel? level;
 
   GameModel({this.gameAccepted, this.msg, this.gameId, this.level});
