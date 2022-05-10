@@ -17,6 +17,7 @@ class Routes {
   static const String gameDetailScreen = '/gameDetailScreen';
 
   static Route? getRoutes(settings) {
+    final arguments = settings.arguments;
     switch (settings.name) {
       case splashScreen:
         return PageTransition(
@@ -49,7 +50,9 @@ class Routes {
 
       case gameDetailScreen:
         return PageTransition(
-          child: const GameDetailScreen(),
+          child: GameDetailScreen(
+            arguments: arguments,
+          ),
           type: PageTransitionType.fade,
           settings: settings,
           duration: const Duration(milliseconds: 350),
@@ -60,21 +63,11 @@ class Routes {
   }
 }
 
-class NumberUser {
-  final String countryCodeWithPlus;
-  final String phoneNumber;
+class GameDetails {
+  final String mallName;
+  final int mallId;
+  final int gameId;
 
-  NumberUser({required this.countryCodeWithPlus, required this.phoneNumber});
-}
-
-class ItemFilter {
-  final String? categoryObjectId;
-  final String? brandObjectId;
-  final String? nameOfBrandOrCategory;
-  bool isOffer;
-  ItemFilter(
-      {this.categoryObjectId,
-      this.brandObjectId,
-      this.nameOfBrandOrCategory,
-      this.isOffer = false});
+  GameDetails(
+      {required this.mallName, required this.mallId, required this.gameId});
 }
