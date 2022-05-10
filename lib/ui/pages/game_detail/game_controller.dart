@@ -17,16 +17,20 @@ class GameController extends ControllerMVC {
     scaffoldKey = GlobalKey<ScaffoldState>();
   }
 
-  getGameDetails() async {
+  getGameDetails(int mallId, int gameId) async {
     GameParamsModel gameParamsModel = GameParamsModel(
       action: GameActionEnumsModel.getGameLevel,
       mallId: int.tryParse(LocalStorageService().lastMallId ?? '0') ?? 0,
       token: LocalStorageService().token ?? '',
       userid: LocalStorageService().id ?? '',
+      gameId: gameId,
     );
     ResponseState<GameModel> _gameResponse =
         await GameIdentityApi().game(gameParamsModel: gameParamsModel);
 
-    print(_gameResponse);
+    if (_gameResponse is SuccessState) {
+      SuccessState<GameModel> data = _gameResponse as SuccessState<GameModel>;
+      print(data.data.level);
+    }
   }
 }
