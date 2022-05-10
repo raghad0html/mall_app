@@ -1,6 +1,7 @@
 
 import 'package:dio/dio.dart';
-import '/main_sdk/models/common/result_class.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:mall_app/main_sdk/apis/core/models/common/result_class.dart';
 import '/main_sdk/utils/dio_error_handle/error_converter.dart';
 
 import 'error_model.dart';
@@ -36,7 +37,7 @@ class Model {
           if (response is List<MessageModel>) model.errorList = response;
             model.errorList = [MessageModel()];
         } else {
-          print('_withError ${response.runtimeType}');
+          debugPrint('_withError ${response.runtimeType}');
           if (response is MessageModel) {
             model.error = response;
           } else if (response is Map<String, dynamic>) {
@@ -49,7 +50,7 @@ class Model {
         model.error = MessageModel(message: ErrorConverter.errorToHumanReadableString(error));
       }
     } else {
-      print('error: $error & stacktrace: $stacktrace');
+      debugPrint('error: $error & stacktrace: $stacktrace');
       model.error = MessageModel(message: error.toString());
     }
 
@@ -64,7 +65,7 @@ class Model {
         return DateTime.parse(s + addUtc).toLocal();
       }
     } catch (e) {
-      print('error parsing date $s => $e');
+      debugPrint('error parsing date $s => $e');
       return null;
     }
     return null;

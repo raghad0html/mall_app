@@ -14,16 +14,16 @@ class ErrorConverter {
         if (error is DioError) {
           switch (error.type) {
             case DioErrorType.cancel:
-              networkExceptions = NetworkExceptions.requestCancelled();
+              networkExceptions = const NetworkExceptions.requestCancelled();
               break;
             case DioErrorType.connectTimeout:
-              networkExceptions = NetworkExceptions.requestTimeout();
+              networkExceptions = const NetworkExceptions.requestTimeout();
               break;
             case DioErrorType.other:
-              networkExceptions = NetworkExceptions.noInternetConnection();
+              networkExceptions = const NetworkExceptions.noInternetConnection();
               break;
             case DioErrorType.receiveTimeout:
-              networkExceptions = NetworkExceptions.sendTimeout();
+              networkExceptions = const NetworkExceptions.sendTimeout();
               break;
             case DioErrorType.response:
               switch (error.response?.statusCode ?? 0) {
@@ -63,13 +63,13 @@ class ErrorConverter {
               break;
           }
         } else if (error is SocketException) {
-          networkExceptions = NetworkExceptions.noInternetConnection();
+          networkExceptions = const NetworkExceptions.noInternetConnection();
         } else {
-          networkExceptions = NetworkExceptions.unexpectedError();
+          networkExceptions = const NetworkExceptions.unexpectedError();
         }
         return networkExceptions;
       } on FormatException catch (_) {
-        return NetworkExceptions.formatException();
+        return const NetworkExceptions.formatException();
       } catch (_) {
         return const NetworkExceptions.unexpectedError();
       }

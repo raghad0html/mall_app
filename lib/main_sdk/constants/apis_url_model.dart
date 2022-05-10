@@ -1,4 +1,4 @@
 
 class ApisUrlsModel {
-  static String get identity => 'https://awsbazar.iraq-soft.info/parse/';
+  static String get identity => 'https://bareeqe.sa/mob_app/';
 }

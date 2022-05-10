@@ -1,7 +1,7 @@
 
 
+import 'package:mall_app/main_sdk/apis/core/servisec/api.dart';
 import 'package:mall_app/main_sdk/constants/apis_url_model.dart';
-import 'package:mall_app/main_sdk/servisec/api.dart';
 
 
 

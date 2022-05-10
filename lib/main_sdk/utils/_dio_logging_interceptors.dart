@@ -43,7 +43,7 @@ class DioLoggingInterceptors extends InterceptorsWrapper {
     }
 
     //}
-    print('Final Headers:');
+    debugPrint('Final Headers:');
     options.headers.forEach((k, v) => debugPrint('$k: $v', wrapWidth: 1024));
     super.onRequest(options, handler);
   }

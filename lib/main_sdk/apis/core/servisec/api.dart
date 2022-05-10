@@ -3,11 +3,11 @@ import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:dio_cache_interceptor_hive_store/dio_cache_interceptor_hive_store.dart';
+import 'package:mall_app/main_sdk/apis/core/models/common/model.dart';
+import 'package:mall_app/main_sdk/apis/core/models/common/result_class.dart';
 import 'package:path_provider/path_provider.dart';
 
 import '/main_sdk/enum/http_enum.dart';
-import '/main_sdk/models/common/model.dart';
-import '/main_sdk/models/common/result_class.dart';
 import '/main_sdk/utils/_dio_logging_interceptors.dart';
 
 abstract class BaseUrlHandler {
