@@ -1,0 +1,19 @@
+{
+  "@@locale": "en",
+  "email" : "email",
+  "password" : "password" ,
+  "enterEmail" : "please enter email",
+  "enterPassword" : "please enter password" ,
+  "login": "login",
+  "yourCity": "your city:",
+  "loading": "loading",
+  "cancel": "cancel",
+  "ok": "Ok",
+  "chooseMall": "choose mall",
+  "riad": "Riad",
+  "myCompetitions": "My competitions",
+  "beTheWinnerTitle": "Be the Winner title",
+  "beTheWinnerMessage": "Be the Winner message",
+  "startACompetition": "Start A competition",
+  "malls": "Malls"
+}
