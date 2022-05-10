@@ -5,6 +5,7 @@ final ThemeData themeData = ThemeData(
   fontFamily: GoogleFonts.cairo().fontFamily,
   brightness: Brightness.light,
   backgroundColor: AppColors.primaryColor,
+  accentColor: AppColors.primaryColor,
   scaffoldBackgroundColor: AppColors.scaffoldBackGroundColor,
   appBarTheme: AppBarTheme(
       centerTitle: true,
