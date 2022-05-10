@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:mall_app/main_sdk/apis/core/models/common/result_class.dart';
+import 'package:mall_app/main_sdk/apis/mall/models/mall_action_enums_model.dart';
 import 'package:mall_app/main_sdk/apis/mall/models/mall_model.dart';
 import 'package:mall_app/main_sdk/apis/mall/models/mall_params_model.dart';
 import 'package:mall_app/main_sdk/apis/mall/services/mall_identity_apis.dart';
-import 'package:mall_app/main_sdk/apis/qr/models/qr_model.dart';
-import 'package:mall_app/main_sdk/apis/qr/models/qr_params_model.dart';
-import 'package:mall_app/main_sdk/apis/qr/services/qr_identity_apis.dart';
+import 'package:mall_app/main_sdk/apis/user/models/login_params_model.dart';
+import 'package:mall_app/main_sdk/apis/user/services/user_identity_apis.dart';
 import 'package:mall_app/ui/shared/future_builder_widget/app_future_builder.dart';
-import 'package:mall_app/ui/shared/widget/custon_dialog_box.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -28,7 +27,7 @@ class _HomePageState extends State<HomePage> {
         mallParamsModel: MallParamsModel(
             token: token,
             userid: userId,
-            action: 'getMallsByCity',
+            action:  MallActionEnumsModel.getMallsByCity,
             cityId: '1'));
     super.initState();
   }
@@ -43,7 +42,7 @@ class _HomePageState extends State<HomePage> {
             mallParamsModel: MallParamsModel(
                 token: token,
                 userid: userId,
-                action: 'getMallsByCity',
+                action: MallActionEnumsModel.getMallsByCity,
                 cityId: '1')),
         whenDone: (data) {
           return Center(
@@ -52,46 +51,46 @@ class _HomePageState extends State<HomePage> {
               onPressed: () {
                 // MallIdentityApi().getMalls(mallParamsModel: MallParamsModel(token: token, userid: userId ,action: 'getMallsByCity' ,cityId: '1'));
               //  GameIdentityApi().game(gameParamsModel: GameParamsModel(action: GameActionEnumsModel.createGame, mallId: 1, token: token, userid: userId));
-
-                showDialog(
-                    context: context,
-                    //  barrierDismissible: true,
-                    builder: (BuildContext context) {
-                      return AppFutureBuilder<QrModel>(
-                        future: QrIdentityApi().scanQr(
-                            qrParamsModel: QrParamsModel(
-                                qr: 'https://bareeqe.sa/?I3N0aWNrZXIjMzEwMDQ3MDQxMTAwMDAzI0FBQUE=',
-                                qrDate: '2022-5-5',
-                                mallId: '1',
-                                gameId: '1',
-                                token: token,
-                                userid: userId)),
-                        whenError: (error) {
-                          return CustomDialogBox(
-                            title: "خطأ",
-                            subTitle: error!.errorMessage.getErrors,
-                            textInButton: "نعم",
-                            icon: Icons.error,
-                            check: true,
-                            callback: () {
-                              Navigator.of(context).pop();
-                            },
-                          );
-                        },
-                        whenDone: (data) {
-                          return CustomDialogBox(
-                            title: "تهانينا",
-                            subTitle: data.msg,
-                            icon: Icons.check_circle,
-                            textInButton: "ok",
-                            check: true,
-                            callback: () {
-                              Navigator.of(context).pop();
-                            },
-                          );
-                        },
-                      );
-                    });
+              UserIdentityApi().login(loginParamsModel: LoginParamsModel(email: 'aaa@aaa.com' ,password: '123456789'));
+                // showDialog(
+                //     context: context,
+                //     //  barrierDismissible: true,
+                //     builder: (BuildContext context) {
+                //       return AppFutureBuilder<QrModel>(
+                //         future: QrIdentityApi().scanQr(
+                //             qrParamsModel: QrParamsModel(
+                //                 qr: 'https://bareeqe.sa/?I3N0aWNrZXIjMzEwMDQ3MDQxMTAwMDAzI0FBQUE=',
+                //                 qrDate: '2022-5-5',
+                //                 mallId: '1',
+                //                 gameId: '1',
+                //                 token: token,
+                //                 userid: userId)),
+                //         whenError: (error) {
+                //           return CustomDialogBox(
+                //             title: "خطأ",
+                //             subTitle: error!.errorMessage.getErrors,
+                //             textInButton: "نعم",
+                //             icon: Icons.error,
+                //             check: true,
+                //             callback: () {
+                //               Navigator.of(context).pop();
+                //             },
+                //           );
+                //         },
+                //         whenDone: (data) {
+                //           return CustomDialogBox(
+                //             title: "تهانينا",
+                //             subTitle: data.msg,
+                //             icon: Icons.check_circle,
+                //             textInButton: "ok",
+                //             check: true,
+                //             callback: () {
+                //               Navigator.of(context).pop();
+                //             },
+                //           );
+                //         },
+                //       );
+                //     });
               },
             ),
           );

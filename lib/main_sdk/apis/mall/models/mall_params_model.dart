@@ -1,7 +1,8 @@
 import 'package:mall_app/main_sdk/apis/core/models/common/auth_model.dart';
+import 'package:mall_app/main_sdk/apis/mall/models/mall_action_enums_model.dart';
 
 class MallParamsModel extends AuthModel {
-  String? action;
+  MallActionEnumsModel? action;
   String? cityId;
 
   MallParamsModel(
@@ -12,7 +13,7 @@ class MallParamsModel extends AuthModel {
   Map<String, dynamic> toMap() => {
         "token": token,
         "userid": userid,
-        "action": action,
+        "action": action?.toShortString(),
         "city_id": cityId
       }..removeWhere((key, value) => value == null);
 }
