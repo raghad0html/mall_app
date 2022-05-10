@@ -5,22 +5,28 @@ class GameModel {
   String? msg;
   String? gameId;
   GameLevelEnumsModel? level;
+  int? gameStatus;
+  DateTime? gameDateStart;
+  String? mallName;
 
-  GameModel({this.gameAccepted, this.msg, this.gameId, this.level});
+  GameModel(
+      {this.gameAccepted,
+      this.msg,
+      this.gameId,
+      this.level,
+      this.gameDateStart,
+      this.gameStatus,
+      this.mallName});
 
   GameModel.fromJson(Map<String, dynamic> json) {
     gameAccepted = json['gameAccepted'];
     msg = json['msg'];
     gameId = json['game_id'];
-    level = level?.fromStringToGameLevelEnumsModel(json['level']);
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['gameAccepted'] = gameAccepted;
-    data['msg'] = msg;
-    data['game_id'] = gameId;
-    data['level'] = level;
-    return data;
+    level = level?.fromStringToGameLevelEnumsModel(json['game_level']);
+    gameStatus = json['gameStatus'];
+    mallName = json['mall_name'];
+    gameDateStart = json['game_dateStart'] != null
+        ? DateTime.parse(json['game_dateStart'] as String)
+        : null;
   }
 }
