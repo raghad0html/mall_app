@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:mall_app/constants/app_theme.dart';
 
 import '../widget/circular_loading_widget.dart';
 
@@ -21,8 +22,10 @@ class Helper {
         top: 0,
         left: 0,
         child: Material(
-          color: Theme.of(context).primaryColor.withOpacity(0.85),
-          child: const CircularLoadingWidget(height: 200),
+          color: AppColors.blackLightColor.withOpacity(0.75),
+          child: const CircularLoadingWidget(
+            height: 200,
+          ),
         ),
       );
     });
