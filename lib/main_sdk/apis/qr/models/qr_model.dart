@@ -1,5 +1,7 @@
+import 'package:mall_app/main_sdk/apis/qr/models/qr_type_enums_model.dart';
+
 class QrModel {
-  String? qrType;
+  QrTypeParamsModel? qrType;
   String? status;
   String? msg;
   String? invoiceAccepted;
@@ -28,7 +30,7 @@ class QrModel {
   });
 
   QrModel.fromJson(Map<String, dynamic> json) {
-    qrType = json['qrType'];
+    qrType = qrType?.fromStringToDayName(json['qrType']);
     status = json['status'];
     msg = json['msg'];
     invoiceAccepted = json['invoiceAccepted'];

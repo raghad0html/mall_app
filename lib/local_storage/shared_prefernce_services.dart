@@ -56,7 +56,7 @@ class LocalStorageService {
     _preferences.setString(_password, value);
   }
 
-  LogOut() {
+  logOut() {
     _preferences.remove(_password);
     _preferences.remove(_email);
     _preferences.remove(isLogin);

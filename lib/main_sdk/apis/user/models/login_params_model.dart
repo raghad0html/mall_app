@@ -12,7 +12,7 @@ class LoginParamsModel {
   });
 
   Map<String, dynamic> toMap() => {
-        "token": email,
-        "userid": password,
+        "email": email,
+        "password": password,
       }..removeWhere((key, value) => value == null);
 }

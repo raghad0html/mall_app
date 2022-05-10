@@ -12,7 +12,7 @@ class MessageModel {
 
   String toJson() => json.encode(toMap());
 
-  factory MessageModel.EmptyMessageSuccess() => MessageModel(isSuccess: true);
+  // factory MessageModel.EmptyMessageSuccess() => MessageModel(isSuccess: true);
 
   factory MessageModel.fromMap(Map<String, dynamic> json) => MessageModel(
         code: json['code'] ?? '000',

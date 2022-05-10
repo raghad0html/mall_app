@@ -13,6 +13,6 @@ class MallParamsModel extends AuthModel {
         "token": token,
         "userid": userid,
         "action": action,
-        "cityId": cityId
+        "city_id": cityId
       }..removeWhere((key, value) => value == null);
 }

@@ -1,6 +1,6 @@
 class UserModel {
   String? token;
-  int? userId;
+  String? userId;
   String? name;
   String? email;
 

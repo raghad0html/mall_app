@@ -6,7 +6,7 @@ class CustomDialogBox extends StatefulWidget {
   final String? title, subTitle, textInButton, textInButton2;
   final bool check; // to check if one button or tow
   final VoidCallback? callback, callback2;
-  final IconData? icon;
+  final IconData icon;
 
   const CustomDialogBox(
       {Key? key, this.title,
@@ -16,7 +16,7 @@ class CustomDialogBox extends StatefulWidget {
       this.check = true,
       this.callback,
       this.callback2,
-      this.icon}) : super(key: key);
+     required this.icon}) : super(key: key);
 
   @override
   _CustomDialogBoxState createState() => _CustomDialogBoxState();
@@ -56,7 +56,7 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
           children: <Widget>[
             Center(
                 child: Icon(
-                  widget.icon!,
+                  widget.icon,
                   size: 50,
                 )),
             Text(
