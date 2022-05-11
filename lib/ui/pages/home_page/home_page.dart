@@ -48,11 +48,11 @@ class _HomePageState extends StateMVC<HomePage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          S.of(context)!.yourCity,
+                          S.of(context).yourCity,
                           style: Theme.of(context).textTheme.subtitle1,
                         ),
                         Text(
-                          S.of(context)!.riad,
+                          S.of(context).riad,
                           style: Theme.of(context).textTheme.subtitle1,
                         ),
                       ],
@@ -66,7 +66,7 @@ class _HomePageState extends StateMVC<HomePage> {
                           color:
                               AppColors.appBarBackGroundColor.withOpacity(0.2)),
                       child: Text(
-                        S.of(context)!.myCompetitions,
+                        S.of(context).myCompetitions,
                         style: Theme.of(context).textTheme.subtitle1,
                       ),
                     ),
@@ -89,11 +89,11 @@ class _HomePageState extends StateMVC<HomePage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            S.of(context)!.beTheWinnerTitle,
+                            S.of(context).beTheWinnerTitle,
                             style: Theme.of(context).textTheme.headline6,
                           ),
                           Text(
-                            S.of(context)!.beTheWinnerMessage,
+                            S.of(context).beTheWinnerMessage,
                             style: Theme.of(context).textTheme.subtitle2,
                           ),
                           const SizedBox(
@@ -120,7 +120,7 @@ class _HomePageState extends StateMVC<HomePage> {
                               decoration: BoxDecoration(
                                   color: AppColors.appOrange.withOpacity(0.2)),
                               child: Text(
-                                S.of(context)!.startACompetition,
+                                S.of(context).startACompetition,
                                 style: Theme.of(context)
                                     .textTheme
                                     .subtitle1
@@ -142,7 +142,7 @@ class _HomePageState extends StateMVC<HomePage> {
                 height: 20,
               ),
               Text(
-                S.of(context)!.malls,
+                S.of(context).malls,
                 style: Theme.of(context).textTheme.headline6,
               ),
               const SizedBox(

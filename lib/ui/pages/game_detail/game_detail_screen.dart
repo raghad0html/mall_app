@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mall_app/generated/l10n.dart';
 import 'package:mall_app/ui/pages/game_detail/game_controller.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
@@ -22,8 +23,15 @@ class _GameDetailScreenState extends StateMVC<GameDetailScreen> {
   @override
   void initState() {
     super.initState();
-    _con.getGameDetails(widget.arguments.mallId, widget.arguments.gameId);
+    _con.getGameDetails(widget.arguments.mallId, widget.arguments.gameId,
+        init: true);
   }
+
+  // @override
+  // void didChangeDependencies() {
+  //   super.didChangeDependencies();
+  //   _con.getGameDetails(widget.arguments.mallId, widget.arguments.gameId);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -54,29 +62,118 @@ class _GameDetailScreenState extends StateMVC<GameDetailScreen> {
                   const SizedBox(
                     height: 20,
                   ),
-                  Row(children: const [
-                    GameLevelButton(
-                      image: '24hourdaily.png',
-                      locked: false,
-                      title: 'يومي',
+                  Row(children: [
+                    Expanded(
+                      child: InkWell(
+                        onTap: () async {
+                          if (_con.levelIndex == 0) {
+                            if (_con.zero) {
+                              await Navigator.pushNamed(
+                                  context, Routes.invoiceQrScreen,
+                                  arguments: InvoiceQrArguments(
+                                    gameId: widget.arguments.gameId,
+                                    mallId: widget.arguments.mallId,
+                                    daily: true,
+                                    title: S.of(context).dailyCompetitionTitle(
+                                        widget.arguments.mallName),
+                                  ));
+                              _con.getGameDetails(widget.arguments.mallId,
+                                  widget.arguments.gameId);
+                            } else {
+                              await Navigator.pushNamed(
+                                  context, Routes.pontQrScreen,
+                                  arguments: InvoiceQrArguments(
+                                    gameId: widget.arguments.gameId,
+                                    mallId: widget.arguments.mallId,
+                                    daily: true,
+                                    title: S.of(context).dailyCompetitionTitle(
+                                        widget.arguments.mallName),
+                                  ));
+                              _con.getGameDetails(widget.arguments.mallId,
+                                  widget.arguments.gameId);
+                            }
+                          }
+                        },
+                        child: GameLevelButton(
+                          image: '24hourdaily.png',
+                          locked: _con.levelIndex >= 0 ? false : true,
+                          title: 'يومي',
+                          completed: _con.levelIndex > 0 ? true : false,
+                        ),
+                      ),
                     ),
-                    GameLevelButton(
-                      image: 'week.png',
-                      locked: true,
-                      title: 'أسبوعي',
+                    Expanded(
+                      child: InkWell(
+                        onTap: () async {
+                          if (_con.levelIndex == 1) {
+                            await Navigator.pushNamed(
+                                context, Routes.invoiceQrScreen,
+                                arguments: InvoiceQrArguments(
+                                  gameId: widget.arguments.gameId,
+                                  mallId: widget.arguments.mallId,
+                                  daily: true,
+                                  title: 'Daily Game',
+                                ));
+                            _con.getGameDetails(widget.arguments.mallId,
+                                widget.arguments.gameId);
+                          }
+                        },
+                        child: GameLevelButton(
+                          image: 'week.png',
+                          locked: _con.levelIndex >= 1 ? false : true,
+                          title: 'أسبوعي',
+                          completed: _con.levelIndex > 1 ? true : false,
+                        ),
+                      ),
                     ),
                   ]),
-                  Row(children: const [
-                    GameLevelButton(
-                      image: 'month.png',
-                      locked: true,
-                      title: 'شهري',
-                    ),
-                    GameLevelButton(
-                      image: 'week.png',
-                      locked: true,
-                      title: 'ربع سنوي',
-                    ),
+                  Row(children: [
+                    Expanded(
+                        child: InkWell(
+                      onTap: () async {
+                        if (_con.levelIndex == 2) {
+                          await Navigator.pushNamed(
+                              context, Routes.invoiceQrScreen,
+                              arguments: InvoiceQrArguments(
+                                gameId: widget.arguments.gameId,
+                                mallId: widget.arguments.mallId,
+                                daily: true,
+                                title: 'Daily Game',
+                              ));
+                          _con.getGameDetails(
+                              widget.arguments.mallId, widget.arguments.gameId);
+                        }
+                      },
+                      child: GameLevelButton(
+                        image: 'month.png',
+                        locked: _con.levelIndex >= 2 ? false : true,
+                        title: 'شهري',
+                        completed: _con.levelIndex > 2 ? true : false,
+                      ),
+                    )),
+                    Expanded(
+                        child: InkWell(
+                      onTap: () async {
+                        if (_con.levelIndex == 1) {
+                          await Navigator.pushNamed(
+                              context, Routes.invoiceQrScreen,
+                              arguments: InvoiceQrArguments(
+                                gameId: widget.arguments.gameId,
+                                mallId: widget.arguments.mallId,
+                                daily: true,
+                                title: 'Daily Game',
+                              ));
+                          _con.getGameDetails(
+                              widget.arguments.mallId, widget.arguments.gameId);
+                        }
+                      },
+                      child: GameLevelButton(
+                        image: 'week.png',
+                        locked: _con.levelIndex >= 3 ? false : true,
+                        completed: _con.levelIndex > 3 ? true : false,
+                        title: 'ربع سنوي',
+                      ),
+                    )),
                   ]),
                 ],
               ),
@@ -90,54 +187,59 @@ class GameLevelButton extends StatelessWidget {
   final String image;
   final String title;
   final bool locked;
+  final bool completed;
 
   const GameLevelButton(
       {Key? key,
       required this.title,
       required this.image,
-      required this.locked})
+      required this.locked,
+      required this.completed})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          Container(
-            margin: const EdgeInsets.all(8),
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              border: Border.all(color: Colors.white),
-              borderRadius: const BorderRadius.all(Radius.circular(8)),
-            ),
-            child: Column(
-              children: [
-                if (locked)
-                  Image.asset(
-                    'assets/images/$image',
-                    color: Colors.white.withOpacity(0.4),
-                    colorBlendMode: BlendMode.modulate,
-                  )
-                else
-                  Image.asset(
-                    'assets/images/$image',
-                  ),
-                Text(
-                  title,
-                  style: Theme.of(context).textTheme.headline6,
-                ),
-              ],
-            ),
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        Container(
+          margin: const EdgeInsets.all(8),
+          padding: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            border: Border.all(color: Colors.white),
+            borderRadius: const BorderRadius.all(Radius.circular(8)),
           ),
-          if (locked)
-            Image.asset(
-              'assets/images/lock.png',
-              width: 110,
-            ),
-        ],
-      ),
+          child: Column(
+            children: [
+              if (locked)
+                Image.asset(
+                  'assets/images/$image',
+                  color: Colors.white.withOpacity(0.4),
+                  colorBlendMode: BlendMode.modulate,
+                )
+              else
+                Image.asset(
+                  'assets/images/$image',
+                ),
+              Text(
+                title,
+                style: Theme.of(context).textTheme.headline6,
+              ),
+            ],
+          ),
+        ),
+        if (locked)
+          Image.asset(
+            'assets/images/lock.png',
+            width: 110,
+          ),
+        if (completed)
+          const Icon(
+            Icons.check_circle_rounded,
+            color: Colors.green,
+          ),
+      ],
     );
   }
 }

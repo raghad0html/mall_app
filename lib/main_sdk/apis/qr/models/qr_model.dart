@@ -4,9 +4,9 @@ class QrModel {
   QrTypeParamsModel? qrType;
   String? status;
   String? msg;
-  String? invoiceAccepted;
+  bool? invoiceAccepted;
   String? seller;
-  double? taxNumber;
+  int? taxNumber;
   DateTime? date;
   double? cost;
   int? vat;

@@ -14,13 +14,13 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(milliseconds: 800), () {
+    Future.delayed(const Duration(milliseconds: 900), () {
       var login = LocalStorageService().login ?? false;
 
       if (login) {
-        Navigator.pushNamed(context, Routes.homeScreen);
+        Navigator.pushReplacementNamed(context, Routes.homeScreen);
       } else {
-        Navigator.pushNamed(context, Routes.loginScreen);
+        Navigator.pushReplacementNamed(context, Routes.loginScreen);
       }
     });
   }

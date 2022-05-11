@@ -22,6 +22,6 @@ class QrParamsModel extends AuthModel {
         "qr": qr,
         "game_id": gameId,
         "qrDate": qrDate,
-        "mall_id": mallId
+        "mall_id": mallId,
       }..removeWhere((key, value) => value == null);
 }

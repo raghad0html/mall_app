@@ -30,7 +30,7 @@ class _MallsDropDownDialogState extends State<MallsDropDownDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text(S.of(context)!.chooseMall),
+      title: Text(S.of(context).chooseMall),
       content: DropdownButtonHideUnderline(
         child: DropdownButton<MallModel>(
           hint: const Text("--"),
@@ -50,13 +50,13 @@ class _MallsDropDownDialogState extends State<MallsDropDownDialog> {
       ),
       actions: <Widget>[
         FlatButton(
-          child: Text(S.of(context)!.ok),
+          child: Text(S.of(context).ok),
           onPressed: () {
             widget.selectedMall(mall);
           },
         ),
         FlatButton(
-          child: Text(S.of(context)!.cancel),
+          child: Text(S.of(context).cancel),
           onPressed: () {
             Navigator.of(context).pop();
           },

@@ -19,7 +19,7 @@ class _QrReaderScreenState extends State<QrReaderScreen> {
   Barcode? result;
   QRViewController? controller;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
-
+  bool scanned = false;
   // In order to get hot reload to work we need to pause the camera if the platform
   // is android, or resume the camera if the platform is iOS.
   @override
@@ -34,6 +34,11 @@ class _QrReaderScreenState extends State<QrReaderScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Center(
+          child: Text(S.of(context).letsScanQr),
+        ),
+      ),
       body: Column(
         children: <Widget>[
           Expanded(flex: 4, child: _buildQrView(context)),
@@ -44,11 +49,6 @@ class _QrReaderScreenState extends State<QrReaderScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  if (result != null)
-                    Text(
-                        'Barcode Type: ${describeEnum(result!.format)}   Data: ${result!.code}')
-                  else
-                    const Text('Scan a code'),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -63,7 +63,7 @@ class _QrReaderScreenState extends State<QrReaderScreen> {
                             child: FutureBuilder(
                               future: controller?.getFlashStatus(),
                               builder: (context, snapshot) {
-                                return Text('Flash: ${snapshot.data}');
+                                return Text(S.of(context).flashStatus(''));
                               },
                             )),
                       ),
@@ -78,11 +78,9 @@ class _QrReaderScreenState extends State<QrReaderScreen> {
                               future: controller?.getCameraInfo(),
                               builder: (context, snapshot) {
                                 if (snapshot.data != null) {
-                                  return Text('''S
-                                      .of(context)
-                                      .cameraFacingDescribeenumsnapshotdata''');
+                                  return Text(S.of(context).cameraType(''));
                                 } else {
-                                  return Text(S.of(context)!.loading);
+                                  return Text(S.of(context).loading);
                                 }
                               },
                             )),
@@ -100,8 +98,9 @@ class _QrReaderScreenState extends State<QrReaderScreen> {
                               onPressed: () async {
                                 await controller?.pauseCamera();
                               },
-                              child: const Text('pause',
-                                  style: TextStyle(fontSize: 20)),
+                              child: Text(
+                                S.of(context).pause,
+                              ),
                             ),
                           ),
                           Container(
@@ -110,8 +109,9 @@ class _QrReaderScreenState extends State<QrReaderScreen> {
                               onPressed: () async {
                                 await controller?.resumeCamera();
                               },
-                              child: const Text('resume',
-                                  style: TextStyle(fontSize: 20)),
+                              child: Text(
+                                S.of(context).resume,
+                              ),
                             ),
                           )
                         ]),
@@ -147,10 +147,10 @@ class _QrReaderScreenState extends State<QrReaderScreen> {
       this.controller = controller;
     });
     controller.scannedDataStream.listen((scanData) {
-      Navigator.pop(context, scanData.code);
-      setState(() {
-        result = scanData;
-      });
+      if (!scanned) {
+        Navigator.of(context).pop(scanData.code);
+        scanned = true;
+      }
     });
   }
 
@@ -158,7 +158,7 @@ class _QrReaderScreenState extends State<QrReaderScreen> {
     log('${DateTime.now().toIso8601String()}_onPermissionSet $p');
     if (!p) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('no Permission')),
+        SnackBar(content: Text(S.of(context).noPermission)),
       );
     }
   }

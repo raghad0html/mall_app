@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:mall_app/ui/pages/home_page/home_page.dart';
 import 'package:mall_app/ui/pages/login/login_screen.dart';
+import 'package:mall_app/ui/pages/qr/invoice_qr.dart';
 import 'package:mall_app/ui/qr_reader.dart';
 import 'package:page_transition/page_transition.dart';
 
 import 'ui/pages/game_detail/game_detail_screen.dart';
+import 'ui/pages/qr/qr_point_screen.dart';
 import 'ui/pages/splash/splash_screen.dart';
 
 class Routes {
@@ -15,6 +17,9 @@ class Routes {
   static const String loginScreen = '/loginScreen';
   static const String qrReaderScreen = '/qrReaderScreen';
   static const String gameDetailScreen = '/gameDetailScreen';
+  static const String invoiceQrScreen = '/invoiceQrScreen';
+  static const String pontQrScreen = '/pointQrScreen';
+  static const String scanQrScreen = '/scanQrScreen';
 
   static Route? getRoutes(settings) {
     final arguments = settings.arguments;
@@ -57,6 +62,31 @@ class Routes {
           settings: settings,
           duration: const Duration(milliseconds: 350),
         );
+      case invoiceQrScreen:
+        return PageTransition(
+          child: InvoiceQrScreen(
+            arguments: arguments,
+          ),
+          type: PageTransitionType.fade,
+          settings: settings,
+          duration: const Duration(milliseconds: 350),
+        );
+      case scanQrScreen:
+        return PageTransition(
+          child: const QrReaderScreen(),
+          type: PageTransitionType.fade,
+          settings: settings,
+          duration: const Duration(milliseconds: 350),
+        );
+      case pontQrScreen:
+        return PageTransition(
+          child: PointQRScreen(
+            arguments: arguments,
+          ),
+          type: PageTransitionType.fade,
+          settings: settings,
+          duration: const Duration(milliseconds: 350),
+        );
       default:
         return null;
     }
@@ -70,4 +100,17 @@ class GameDetails {
 
   GameDetails(
       {required this.mallName, required this.mallId, required this.gameId});
+}
+
+class InvoiceQrArguments {
+  final int mallId;
+  final int gameId;
+  final String title;
+  final bool daily;
+
+  InvoiceQrArguments(
+      {required this.mallId,
+      required this.gameId,
+      required this.title,
+      required this.daily});
 }
