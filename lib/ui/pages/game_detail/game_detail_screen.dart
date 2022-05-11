@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mall_app/constants/app_theme.dart';
 import 'package:mall_app/generated/l10n.dart';
 import 'package:mall_app/ui/pages/game_detail/game_controller.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
@@ -38,146 +39,179 @@ class _GameDetailScreenState extends StateMVC<GameDetailScreen> {
     return Scaffold(
         key: _con.scaffoldKey,
         body: SafeArea(
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      InkWell(
-                        child: const Icon(Icons.arrow_back_ios),
-                        onTap: () => Navigator.of(context).pop(),
-                      ),
-                      Expanded(
-                          child: Center(child: Text(widget.arguments.mallName)))
-                    ],
-                  ),
-                  Text(
-                    'بعض الكلمات التحفيزية وصورة ',
-                    style: Theme.of(context).textTheme.subtitle2,
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Row(children: [
+          child: Column(
+            children: [
+              Container(
+                color: AppColors.lightGrey,
+                padding: const EdgeInsets.all(10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    InkWell(
+                      child: const Icon(Icons.arrow_back_ios),
+                      onTap: () => Navigator.of(context).pop(),
+                    ),
                     Expanded(
-                      child: InkWell(
-                        onTap: () async {
-                          if (_con.levelIndex == 0) {
-                            if (_con.zero) {
+                        child: Center(
+                            child: Text(
+                      widget.arguments.mallName,
+                      style: Theme.of(context).textTheme.subtitle1,
+                    )))
+                  ],
+                ),
+              ),
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'اختر المرحلة المتاحة لاستكمال المسابقة',
+                            style: Theme.of(context)
+                                .textTheme
+                                .subtitle1!
+                                .copyWith(fontSize: 16),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          const Icon(Icons.info_outline,
+                              color: AppColors.lightGrey),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Row(children: [
+                        Expanded(
+                          child: InkWell(
+                            onTap: () async {
+                              if (_con.levelIndex == 0) {
+                                if (_con.zero) {
+                                  await Navigator.pushNamed(
+                                      context, Routes.invoiceQrScreen,
+                                      arguments: InvoiceQrArguments(
+                                        gameId: widget.arguments.gameId,
+                                        mallId: widget.arguments.mallId,
+                                        daily: true,
+                                        title: S
+                                            .of(context)!
+                                            .dailyCompetitionTitle(
+                                                widget.arguments.mallName),
+                                      ));
+                                  _con.getGameDetails(widget.arguments.mallId,
+                                      widget.arguments.gameId);
+                                } else {
+                                  await Navigator.pushNamed(
+                                      context, Routes.pontQrScreen,
+                                      arguments: InvoiceQrArguments(
+                                        gameId: widget.arguments.gameId,
+                                        mallId: widget.arguments.mallId,
+                                        daily: true,
+                                        title: S
+                                            .of(context)!
+                                            .dailyCompetitionTitle(
+                                                widget.arguments.mallName),
+                                      ));
+                                  _con.getGameDetails(widget.arguments.mallId,
+                                      widget.arguments.gameId);
+                                }
+                              }
+                            },
+                            child: GameLevelButton(
+                              image: '24hourdaily.png',
+                              locked: _con.levelIndex >= 0 ? false : true,
+                              title: 'يومي',
+                              completed: _con.levelIndex > 0 ? true : false,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: InkWell(
+                            onTap: () async {
+                              if (_con.levelIndex == 1) {
+                                await Navigator.pushNamed(
+                                    context, Routes.invoiceQrScreen,
+                                    arguments: InvoiceQrArguments(
+                                      gameId: widget.arguments.gameId,
+                                      mallId: widget.arguments.mallId,
+                                      daily: true,
+                                      title: 'مسابقة اسبوعية',
+                                    ));
+                                _con.getGameDetails(widget.arguments.mallId,
+                                    widget.arguments.gameId);
+                              }
+                            },
+                            child: GameLevelButton(
+                              image: 'week.png',
+                              locked: _con.levelIndex >= 1 ? false : true,
+                              title: 'أسبوعي',
+                              completed: _con.levelIndex > 1 ? true : false,
+                            ),
+                          ),
+                        ),
+                      ]),
+                      Row(children: [
+                        Expanded(
+                            child: InkWell(
+                          onTap: () async {
+                            if (_con.levelIndex == 2) {
                               await Navigator.pushNamed(
                                   context, Routes.invoiceQrScreen,
                                   arguments: InvoiceQrArguments(
                                     gameId: widget.arguments.gameId,
                                     mallId: widget.arguments.mallId,
                                     daily: true,
-                                    title: S.of(context).dailyCompetitionTitle(
-                                        widget.arguments.mallName),
-                                  ));
-                              _con.getGameDetails(widget.arguments.mallId,
-                                  widget.arguments.gameId);
-                            } else {
-                              await Navigator.pushNamed(
-                                  context, Routes.pontQrScreen,
-                                  arguments: InvoiceQrArguments(
-                                    gameId: widget.arguments.gameId,
-                                    mallId: widget.arguments.mallId,
-                                    daily: true,
-                                    title: S.of(context).dailyCompetitionTitle(
-                                        widget.arguments.mallName),
+                                    title: 'مسابقة شهرية',
                                   ));
                               _con.getGameDetails(widget.arguments.mallId,
                                   widget.arguments.gameId);
                             }
-                          }
-                        },
-                        child: GameLevelButton(
-                          image: '24hourdaily.png',
-                          locked: _con.levelIndex >= 0 ? false : true,
-                          title: 'يومي',
-                          completed: _con.levelIndex > 0 ? true : false,
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: InkWell(
-                        onTap: () async {
-                          if (_con.levelIndex == 1) {
-                            await Navigator.pushNamed(
-                                context, Routes.invoiceQrScreen,
-                                arguments: InvoiceQrArguments(
-                                  gameId: widget.arguments.gameId,
-                                  mallId: widget.arguments.mallId,
-                                  daily: true,
-                                  title: 'Daily Game',
-                                ));
-                            _con.getGameDetails(widget.arguments.mallId,
-                                widget.arguments.gameId);
-                          }
-                        },
-                        child: GameLevelButton(
-                          image: 'week.png',
-                          locked: _con.levelIndex >= 1 ? false : true,
-                          title: 'أسبوعي',
-                          completed: _con.levelIndex > 1 ? true : false,
-                        ),
-                      ),
-                    ),
-                  ]),
-                  Row(children: [
-                    Expanded(
-                        child: InkWell(
-                      onTap: () async {
-                        if (_con.levelIndex == 2) {
-                          await Navigator.pushNamed(
-                              context, Routes.invoiceQrScreen,
-                              arguments: InvoiceQrArguments(
-                                gameId: widget.arguments.gameId,
-                                mallId: widget.arguments.mallId,
-                                daily: true,
-                                title: 'Daily Game',
-                              ));
-                          _con.getGameDetails(
-                              widget.arguments.mallId, widget.arguments.gameId);
-                        }
-                      },
-                      child: GameLevelButton(
-                        image: 'month.png',
-                        locked: _con.levelIndex >= 2 ? false : true,
-                        title: 'شهري',
-                        completed: _con.levelIndex > 2 ? true : false,
-                      ),
-                    )),
-                    Expanded(
-                        child: InkWell(
-                      onTap: () async {
-                        if (_con.levelIndex == 1) {
-                          await Navigator.pushNamed(
-                              context, Routes.invoiceQrScreen,
-                              arguments: InvoiceQrArguments(
-                                gameId: widget.arguments.gameId,
-                                mallId: widget.arguments.mallId,
-                                daily: true,
-                                title: 'Daily Game',
-                              ));
-                          _con.getGameDetails(
-                              widget.arguments.mallId, widget.arguments.gameId);
-                        }
-                      },
-                      child: GameLevelButton(
-                        image: 'week.png',
-                        locked: _con.levelIndex >= 3 ? false : true,
-                        completed: _con.levelIndex > 3 ? true : false,
-                        title: 'ربع سنوي',
-                      ),
-                    )),
-                  ]),
-                ],
+                          },
+                          child: GameLevelButton(
+                            image: 'month.png',
+                            locked: _con.levelIndex >= 2 ? false : true,
+                            title: 'شهري',
+                            completed: _con.levelIndex > 2 ? true : false,
+                          ),
+                        )),
+                        Expanded(
+                            child: InkWell(
+                          onTap: () async {
+                            if (_con.levelIndex == 1) {
+                              await Navigator.pushNamed(
+                                  context, Routes.invoiceQrScreen,
+                                  arguments: InvoiceQrArguments(
+                                    gameId: widget.arguments.gameId,
+                                    mallId: widget.arguments.mallId,
+                                    daily: true,
+                                    title: 'مسابقة ربع سنوية ',
+                                  ));
+                              _con.getGameDetails(widget.arguments.mallId,
+                                  widget.arguments.gameId);
+                            }
+                          },
+                          child: GameLevelButton(
+                            image: '90.png',
+                            locked: _con.levelIndex >= 3 ? false : true,
+                            completed: _con.levelIndex > 3 ? true : false,
+                            title: 'ربع سنوي',
+                          ),
+                        )),
+                      ]),
+                    ],
+                  ),
+                ),
               ),
-            ),
+            ],
           ),
         ));
   }
@@ -214,9 +248,13 @@ class GameLevelButton extends StatelessWidget {
             children: [
               if (locked)
                 Image.asset(
-                  'assets/images/$image',
-                  color: Colors.white.withOpacity(0.4),
-                  colorBlendMode: BlendMode.modulate,
+                  'assets/images/lock.png',
+                  // color: Colors.white.withOpacity(0.4),
+                  // colorBlendMode: BlendMode.modulate,
+                )
+              else if (completed)
+                Image.asset(
+                  'assets/images/done.png',
                 )
               else
                 Image.asset(
@@ -229,16 +267,16 @@ class GameLevelButton extends StatelessWidget {
             ],
           ),
         ),
-        if (locked)
-          Image.asset(
-            'assets/images/lock.png',
-            width: 110,
-          ),
-        if (completed)
-          const Icon(
-            Icons.check_circle_rounded,
-            color: Colors.green,
-          ),
+        // if (locked)
+        //   Image.asset(
+        //     'assets/images/lock.png',
+        //     width: 110,
+        //   ),
+        // if (completed)
+        //   const Icon(
+        //     Icons.check_circle_rounded,
+        //     color: Colors.green,
+        //   ),
       ],
     );
   }

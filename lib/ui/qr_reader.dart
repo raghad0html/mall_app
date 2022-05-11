@@ -36,12 +36,12 @@ class _QrReaderScreenState extends State<QrReaderScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Center(
-          child: Text(S.of(context).letsScanQr),
+          child: Text('قم بتوجيه الكاميرا على باركود الفاتورة '),
         ),
       ),
       body: Column(
         children: <Widget>[
-          Expanded(flex: 4, child: _buildQrView(context)),
+          Expanded(flex: 9, child: _buildQrView(context)),
           Expanded(
             flex: 1,
             child: FittedBox(
@@ -50,7 +50,7 @@ class _QrReaderScreenState extends State<QrReaderScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       Container(
@@ -63,7 +63,12 @@ class _QrReaderScreenState extends State<QrReaderScreen> {
                             child: FutureBuilder(
                               future: controller?.getFlashStatus(),
                               builder: (context, snapshot) {
-                                return Text(S.of(context).flashStatus(''));
+                                return Image.asset(
+                                  'assets/images/flash.png',
+                                  color: Colors.white,
+                                  width: 50,
+                                  height: 50,
+                                ); //Text(S.of(context)!.flashStatus(''));
                               },
                             )),
                       ),
@@ -78,47 +83,80 @@ class _QrReaderScreenState extends State<QrReaderScreen> {
                               future: controller?.getCameraInfo(),
                               builder: (context, snapshot) {
                                 if (snapshot.data != null) {
-                                  return Text(S.of(context).cameraType(''));
+                                  return Image.asset(
+                                    'assets/images/flip.png',
+                                    width: 50,
+                                    height: 50,
+                                    color: Colors.white,
+                                  );
                                 } else {
-                                  return Text(S.of(context).loading);
+                                  return Text(S.of(context)!.loading);
                                 }
                               },
                             )),
                       ),
-                    ],
-                  ),
-                  if (Platform.isIOS)
-                    Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Container(
-                            margin: const EdgeInsets.all(8),
-                            child: ElevatedButton(
+                      if (Platform.isIOS)
+                        Container(
+                          margin: const EdgeInsets.all(8),
+                          child: ElevatedButton(
                               onPressed: () async {
                                 await controller?.pauseCamera();
                               },
-                              child: Text(
-                                S.of(context).pause,
-                              ),
-                            ),
-                          ),
-                          Container(
-                            margin: const EdgeInsets.all(8),
-                            child: ElevatedButton(
+                              child: Image.asset(
+                                'assets/images/pause.png',
+                                color: Colors.white,
+                                width: 50,
+                                height: 50,
+                              )),
+                        ),
+                      if (Platform.isIOS)
+                        Container(
+                          margin: const EdgeInsets.all(8),
+                          child: ElevatedButton(
                               onPressed: () async {
                                 await controller?.resumeCamera();
                               },
-                              child: Text(
-                                S.of(context).resume,
-                              ),
-                            ),
-                          )
-                        ]),
+                              child: Image.asset(
+                                'assets/images/resume.png',
+                                color: Colors.white,
+                                width: 50,
+                                height: 50,
+                              )),
+                        )
+                    ],
+                  ),
+                  // if (Platform.isIOS)
+                  //   Row(
+                  //       mainAxisAlignment: MainAxisAlignment.center,
+                  //       crossAxisAlignment: CrossAxisAlignment.center,
+                  //       children: <Widget>[
+                  //         Container(
+                  //           margin: const EdgeInsets.all(8),
+                  //           child: ElevatedButton(
+                  //             onPressed: () async {
+                  //               await controller?.pauseCamera();
+                  //             },
+                  //             child: Text(
+                  //               S.of(context)!.pause,
+                  //             ),
+                  //           ),
+                  //         ),
+                  //         Container(
+                  //           margin: const EdgeInsets.all(8),
+                  //           child: ElevatedButton(
+                  //             onPressed: () async {
+                  //               await controller?.resumeCamera();
+                  //             },
+                  //             child: Text(
+                  //               S.of(context)!.resume,
+                  //             ),
+                  //           ),
+                  //         )
+                  //       ]),
                 ],
               ),
             ),
-          )
+          ),
         ],
       ),
     );
@@ -127,7 +165,7 @@ class _QrReaderScreenState extends State<QrReaderScreen> {
   Widget _buildQrView(BuildContext context) {
     var scanArea = (MediaQuery.of(context).size.width < 400 ||
             MediaQuery.of(context).size.height < 400)
-        ? 150.0
+        ? 50.0
         : 300.0;
     return QRView(
       key: qrKey,
@@ -158,7 +196,7 @@ class _QrReaderScreenState extends State<QrReaderScreen> {
     log('${DateTime.now().toIso8601String()}_onPermissionSet $p');
     if (!p) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(S.of(context).noPermission)),
+        SnackBar(content: Text(S.of(context)!.noPermission)),
       );
     }
   }

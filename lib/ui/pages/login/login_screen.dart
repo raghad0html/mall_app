@@ -46,7 +46,7 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                 ),
                 margin: const EdgeInsets.only(top: 50, bottom: 20)),
             Text(
-              S.of(context).login,
+              S.of(context)!.login,
               style: Theme.of(context).textTheme.headline6,
             ),
             Expanded(
@@ -66,12 +66,12 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                             controller: emailController,
                             keyboardType: TextInputType.emailAddress,
                             decoration: InputDecoration(
-                              hintText: S.of(context).email,
-                              labelText: S.of(context).email,
+                              hintText: S.of(context)!.email,
+                              labelText: S.of(context)!.email,
                             ),
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return S.of(context).enterEmail;
+                                return S.of(context)!.enterEmail;
                               }
                               return null;
                             },
@@ -84,12 +84,12 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                             keyboardType: TextInputType.text,
                             obscureText: true,
                             decoration: InputDecoration(
-                              hintText: S.of(context).password,
-                              labelText: S.of(context).password,
+                              hintText: S.of(context)!.password,
+                              labelText: S.of(context)!.password,
                             ),
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return S.of(context).enterPassword;
+                                return S.of(context)!.enterPassword;
                               }
                               return null;
                             },
@@ -106,7 +106,7 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                                       passwordController.text;
                                   _con.loginUser();
                                 },
-                                child: Text(S.of(context).login),
+                                child: Text(S.of(context)!.login),
                               ),
                             ),
                           ),

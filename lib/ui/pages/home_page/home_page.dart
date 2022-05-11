@@ -5,6 +5,7 @@ import 'package:mvc_pattern/mvc_pattern.dart';
 
 import '../../../generated/l10n.dart';
 import '../../../main_sdk/apis/mall/models/mall_model.dart';
+import '../../widget/cities_drop_down_dialog.dart';
 import '../../widget/mall_widget.dart';
 import 'home_controller.dart';
 import 'malls_drop_down_dialog.dart';
@@ -27,6 +28,7 @@ class _HomePageState extends StateMVC<HomePage> {
   void initState() {
     super.initState();
     _con.getMalls();
+    _con.getCity();
   }
 
   @override
@@ -43,19 +45,34 @@ class _HomePageState extends StateMVC<HomePage> {
               Row(
                 children: [
                   Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          S.of(context).yourCity,
-                          style: Theme.of(context).textTheme.subtitle1,
-                        ),
-                        Text(
-                          S.of(context).riad,
-                          style: Theme.of(context).textTheme.subtitle1,
-                        ),
-                      ],
+                    child: InkWell(
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return CitiesDropDownDialog(
+                                malls: _con.cities,
+                                selectedMall: (mall) {
+                                  Navigator.pop(context);
+                                  _con.saveCity(mall.cityId, mall.cityName);
+                                });
+                          },
+                        );
+                      },
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            S.of(context)!.yourCity,
+                            style: Theme.of(context).textTheme.subtitle1,
+                          ),
+                          Text(
+                            _con.currentCity,
+                            style: Theme.of(context).textTheme.subtitle1,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   InkWell(
@@ -66,7 +83,7 @@ class _HomePageState extends StateMVC<HomePage> {
                           color:
                               AppColors.appBarBackGroundColor.withOpacity(0.2)),
                       child: Text(
-                        S.of(context).myCompetitions,
+                        S.of(context)!.myCompetitions,
                         style: Theme.of(context).textTheme.subtitle1,
                       ),
                     ),
@@ -89,11 +106,11 @@ class _HomePageState extends StateMVC<HomePage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            S.of(context).beTheWinnerTitle,
+                            S.of(context)!.beTheWinnerTitle,
                             style: Theme.of(context).textTheme.headline6,
                           ),
                           Text(
-                            S.of(context).beTheWinnerMessage,
+                            S.of(context)!.beTheWinnerMessage,
                             style: Theme.of(context).textTheme.subtitle2,
                           ),
                           const SizedBox(
@@ -120,7 +137,7 @@ class _HomePageState extends StateMVC<HomePage> {
                               decoration: BoxDecoration(
                                   color: AppColors.appOrange.withOpacity(0.2)),
                               child: Text(
-                                S.of(context).startACompetition,
+                                S.of(context)!.startACompetition,
                                 style: Theme.of(context)
                                     .textTheme
                                     .subtitle1
@@ -142,7 +159,7 @@ class _HomePageState extends StateMVC<HomePage> {
                 height: 20,
               ),
               Text(
-                S.of(context).malls,
+                S.of(context)!.malls,
                 style: Theme.of(context).textTheme.headline6,
               ),
               const SizedBox(

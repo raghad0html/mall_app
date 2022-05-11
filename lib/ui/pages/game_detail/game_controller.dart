@@ -67,9 +67,9 @@ class GameController extends ControllerMVC {
         default:
           break;
       }
-      // if (!init) {
-      Helper.hideLoader(loader);
-      // }
+      if (!init) {
+        Helper.hideLoader(loader);
+      }
 
       setState(() {});
     }

@@ -22,8 +22,8 @@ final ThemeData themeData = ThemeData(
       selectionColor: AppColors.grayColor,
       selectionHandleColor: AppColors.grayColor),
   textTheme: const TextTheme(
-    subtitle1: TextStyle(color: AppColors.blackColor),
-    subtitle2: TextStyle(color: AppColors.grayColor, fontSize: 14.0),
+    subtitle1: TextStyle(color: AppColors.basicColor),
+    subtitle2: TextStyle(color: AppColors.secondColor, fontSize: 14.0),
     headline6: TextStyle(
         color: AppColors.blackColor,
         fontWeight: FontWeight.w900,
@@ -96,4 +96,9 @@ class AppColors {
   static const grayColor = Colors.grey;
   static const greenColor = Colors.green;
   static const whiteColor = Colors.white;
+  static const lightGrey = Color(0xFFCECFD3);
+  static const appBarTextColor = Color(0xFF484848);
+
+  static const basicColor = Color(0xFF8c8e95);
+  static const secondColor = Color(0xFFb8bac1);
 }

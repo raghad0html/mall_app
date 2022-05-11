@@ -18,10 +18,12 @@ class HomeController extends ControllerMVC {
   late GlobalKey<ScaffoldState> scaffoldKey;
   late OverlayEntry loader;
   late List<MallModel> malls = [];
+  List<MallModel> cities = [];
   bool loading = false;
-
+  String currentCity = '';
   HomeController() {
     scaffoldKey = GlobalKey<ScaffoldState>();
+    currentCity = LocalStorageService().cityName ?? '';
   }
 
   getMalls() async {
@@ -33,7 +35,7 @@ class HomeController extends ControllerMVC {
                 token: LocalStorageService().token ?? '',
                 userid: LocalStorageService().id ?? '',
                 action: MallActionEnumsModel.getMallsByCity,
-                cityId: '1'));
+                cityId: LocalStorageService().cityId ?? ''));
     ResponseState<ListOfMallModel> data = await _listOfMallModel;
     if (data is SuccessState) {
       SuccessState<ListOfMallModel> d = data as SuccessState<ListOfMallModel>;
@@ -41,6 +43,36 @@ class HomeController extends ControllerMVC {
       loading = false;
       setState(() {});
     }
+  }
+
+  getCity() async {
+    // loader = Helper.overlayLoader(state!.context);
+    // FocusScope.of(state!.context).unfocus();
+    // Helper.overlayLoader(state!.context);
+    // Overlay.of(state!.context)?.insert(loader);
+
+    Future<ResponseState<ListOfMallModel>> _listOfCities =
+        MallIdentityApi().getMalls(
+            mallParamsModel: MallParamsModel(
+      token: LocalStorageService().token ?? '',
+      userid: LocalStorageService().id ?? '',
+      action: MallActionEnumsModel.getCity,
+    ));
+    ResponseState<ListOfMallModel> data = await _listOfCities;
+    if (data is SuccessState) {
+      SuccessState<ListOfMallModel> d = data as SuccessState<ListOfMallModel>;
+      cities = d.data.data!;
+      setState(() {});
+    }
+    // Helper.hideLoader(loader);
+  }
+
+  saveCity(cityId, cityName) {
+    currentCity = cityName;
+    LocalStorageService().cityName = cityName;
+    LocalStorageService().cityId = cityId.toString();
+    setState(() {});
+    getMalls();
   }
 
   createGame(int mallId, String mallName) async {

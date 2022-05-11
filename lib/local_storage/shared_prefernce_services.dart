@@ -13,6 +13,8 @@ class LocalStorageService {
   final String _password = "password";
   final String gameId = "gameId";
   final String mallId = "mallId";
+  final String _cityId = "cityId";
+  final String _cityName = "cityName";
 
   static Future<void> getInstance() async {
     _instance ??= LocalStorageService();
@@ -30,6 +32,10 @@ class LocalStorageService {
   String? get lastMallId => _preferences.getString(mallId);
 
   String? get id => _preferences.getString(userId);
+
+  String? get cityId => _preferences.getString(_cityId);
+
+  String? get cityName => _preferences.getString(_cityName);
 
   String? get email => _preferences.getString(_email);
 
@@ -65,6 +71,22 @@ class LocalStorageService {
       return;
     }
     _preferences.setString(mallId, value);
+  }
+
+  set cityId(String? value) {
+    if (value == null) {
+      _preferences.remove(_cityId);
+      return;
+    }
+    _preferences.setString(_cityId, value);
+  }
+
+  set cityName(String? value) {
+    if (value == null) {
+      _preferences.remove(_cityName);
+      return;
+    }
+    _preferences.setString(_cityName, value);
   }
 
   set id(String? value) {

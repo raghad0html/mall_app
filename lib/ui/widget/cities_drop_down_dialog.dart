@@ -5,8 +5,8 @@ import '../../../main_sdk/apis/mall/models/mall_model.dart';
 
 typedef SelectedMall = void Function(MallModel);
 
-class MallsDropDownDialog extends StatefulWidget {
-  const MallsDropDownDialog({
+class CitiesDropDownDialog extends StatefulWidget {
+  const CitiesDropDownDialog({
     Key? key,
     required this.malls,
     required this.selectedMall,
@@ -16,10 +16,10 @@ class MallsDropDownDialog extends StatefulWidget {
   final SelectedMall selectedMall;
 
   @override
-  State<MallsDropDownDialog> createState() => _MallsDropDownDialogState();
+  State<CitiesDropDownDialog> createState() => _CitiesDropDownDialogState();
 }
 
-class _MallsDropDownDialogState extends State<MallsDropDownDialog> {
+class _CitiesDropDownDialogState extends State<CitiesDropDownDialog> {
   late MallModel mall;
   @override
   void initState() {
@@ -30,7 +30,7 @@ class _MallsDropDownDialogState extends State<MallsDropDownDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text(S.of(context)!.chooseMall),
+      title: Text('اختر مدينتك الحالية'),
       content: DropdownButtonHideUnderline(
         child: DropdownButton<MallModel>(
           hint: const Text("--"),
@@ -38,7 +38,7 @@ class _MallsDropDownDialogState extends State<MallsDropDownDialog> {
           items: widget.malls.map((value) {
             return DropdownMenuItem<MallModel>(
               value: value,
-              child: Text(value.name ?? ''),
+              child: Text(value.cityName ?? ''),
             );
           }).toList(),
           onChanged: (value) {
