@@ -13,4 +13,6 @@ class Assets {
   static const String assetsLock = 'assets/images/lock.png';
   static const String assetsFlip = 'assets/images/flip.png';
   static const String assetsQrCode1 = 'assets/images/qr-code1.png';
+  static const String assetsQrCode2 = 'assets/images/qr-code2.png';
+
 }
