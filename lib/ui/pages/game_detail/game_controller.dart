@@ -62,15 +62,12 @@ class GameController extends ControllerMVC {
         case GameLevelEnumsModel.quarterlyDone:
           levelIndex = 4;
           break;
-        // case GameLevelEnumsModel.errorDetectLevel:
-        //   break;
         default:
           break;
       }
       if (!init) {
         Helper.hideLoader(loader);
       }
-
       setState(() {});
     }
   }

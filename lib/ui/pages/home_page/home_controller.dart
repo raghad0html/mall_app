@@ -46,11 +46,6 @@ class HomeController extends ControllerMVC {
   }
 
   getCity() async {
-    // loader = Helper.overlayLoader(state!.context);
-    // FocusScope.of(state!.context).unfocus();
-    // Helper.overlayLoader(state!.context);
-    // Overlay.of(state!.context)?.insert(loader);
-
     Future<ResponseState<ListOfMallModel>> _listOfCities =
         MallIdentityApi().getMalls(
             mallParamsModel: MallParamsModel(
@@ -64,7 +59,6 @@ class HomeController extends ControllerMVC {
       cities = d.data.data!;
       setState(() {});
     }
-    // Helper.hideLoader(loader);
   }
 
   saveCity(cityId, cityName) {

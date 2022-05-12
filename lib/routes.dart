@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:mall_app/ui/pages/home_page/home_page.dart';
-import 'package:mall_app/ui/pages/login/login_screen.dart';
-import 'package:mall_app/ui/pages/qr/invoice_qr.dart';
-import 'package:mall_app/ui/qr_reader.dart';
+import 'package:mall_app/ui/pages/user/register_screen.dart';
 import 'package:page_transition/page_transition.dart';
 
 import 'ui/pages/game_detail/game_detail_screen.dart';
+import 'ui/pages/home_page/home_page.dart';
+import 'ui/pages/qr/invoice_qr.dart';
 import 'ui/pages/qr/qr_point_screen.dart';
+import 'ui/pages/qr/qr_reader.dart';
 import 'ui/pages/splash/splash_screen.dart';
+import 'ui/pages/user/login_screen.dart';
 
 class Routes {
   Routes._();
@@ -20,6 +21,7 @@ class Routes {
   static const String invoiceQrScreen = '/invoiceQrScreen';
   static const String pontQrScreen = '/pointQrScreen';
   static const String scanQrScreen = '/scanQrScreen';
+  static const String registerScreen = '/registerScreen';
 
   static Route? getRoutes(settings) {
     final arguments = settings.arguments;
@@ -45,6 +47,14 @@ class Routes {
           settings: settings,
           duration: const Duration(milliseconds: 350),
         );
+      case registerScreen:
+        return PageTransition(
+          child: const RegisterScreen(),
+          type: PageTransitionType.fade,
+          settings: settings,
+          duration: const Duration(milliseconds: 350),
+        );
+
       case qrReaderScreen:
         return PageTransition(
           child: const QrReaderScreen(),

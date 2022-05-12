@@ -1,12 +1,13 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mall_app/constants/app_theme.dart';
+import 'package:mall_app/constants/assets.dart';
 import 'package:mall_app/ui/pages/qr/qr_controller.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 import '../../../generated/l10n.dart';
 import '../../../main_sdk/apis/qr/models/qr_type_enums_model.dart';
 import '../../../routes.dart';
+import '../../widget/costume_appbar.dart';
 import '../../widget/invoice_widget.dart';
 
 class InvoiceQrScreen extends StatefulWidget {
@@ -30,25 +31,7 @@ class _InvoiceQrScreenState extends StateMVC<InvoiceQrScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            Container(
-              color: AppColors.lightGrey,
-              padding: const EdgeInsets.all(10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  InkWell(
-                    child: const Icon(Icons.arrow_back_ios),
-                    onTap: () => Navigator.of(context).pop(),
-                  ),
-                  Expanded(
-                      child: Center(
-                          child: Text(
-                    widget.arguments.title,
-                    style: Theme.of(context).textTheme.subtitle1,
-                  )))
-                ],
-              ),
-            ),
+            CostumeAppBar(title: widget.arguments.title),
             Expanded(
               child: Padding(
                 padding:
@@ -62,65 +45,62 @@ class _InvoiceQrScreenState extends StateMVC<InvoiceQrScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              const SizedBox(
-                                height: 45.0,
-                              ),
-                              if (widget.arguments.daily)
-                                Text(
-                                  'اشتر فاتورة من أحد المحلات المشتركة معنا\n بقيمة 300 ريال على الأقل '
-                                  '\n ثم امسح باركود QR الخاص بها ',
-                                  textAlign: TextAlign.center,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .subtitle2!
-                                      .copyWith(fontSize: 18),
+                              if (_con.qrModelResult == null)
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    const SizedBox(
+                                      height: 45.0,
+                                    ),
+                                    //  if (widget.arguments.daily)
+                                    Text(
+                                      S.of(context).invoiceDescription,
+                                      textAlign: TextAlign.center,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .subtitle2!
+                                          .copyWith(fontSize: 18),
+                                    ),
+                                    const SizedBox(
+                                      height: 30,
+                                    ),
+                                    Image.asset(
+                                      Assets.assetsQrCode1,
+                                      width: 200,
+                                      height: 200,
+                                    ),
+                                    const SizedBox(
+                                      height: 20.0,
+                                    ),
+                                  ],
                                 ),
-                              const SizedBox(
-                                height: 30,
-                              ),
-                              Image.asset(
-                                'assets/images/qr-code1.png',
-                                width: 200,
-                                height: 200,
-                              ),
-                              const SizedBox(
-                                height: 20.0,
-                              ),
-
-                              // ElevatedButton(
-                              //   onPressed: () async {
-                              //     // _con.sendQr(
-                              //         // data:
-                              //         //     'AULYtNix2YPYqSDYsdmI2YUg2KfZhNiq2KzYp9ix2YrYqSDYp9mE2YXYrdiv2YjYr9ipIC0g2YHYsdi5INix2YjZhTECDzMxMDA0NzA0MTEwMDAwMwMUMjAyMi0wNC0yMVQxMTo1Nzo0MloEBTE3Mi41BQEw',
-                              //         // gameId: widget.arguments.gameId,
-                              //         // mallId: widget.arguments.mallId,
-                              //         // qrType: QrTypeParamsModel.invoice);
-                              //     var data =
-                              //         await Navigator.pushNamed(context, Routes.scanQrScreen);
-                              //
-                              //     if (data != null) {
-                              //       _con.sendQr(
-                              //           data: data.toString(),
-                              //           gameId: widget.arguments.gameId,
-                              //           mallId: widget.arguments.mallId,
-                              //           qrType: QrTypeParamsModel.invoice);
-                              //     }
-                              //   },
-                              //   child: Text(S.of(context)!.scanQr),
-                              // ),
                               if (_con.qrModelResult != null)
                                 Column(
                                   children: [
                                     const SizedBox(
                                       height: 20.0,
                                     ),
+                                    InvoiceWidget(
+                                        taxNumber: _con.qrModelResult!.taxNumber
+                                            .toString(),
+                                        name: _con.qrModelResult!.seller,
+                                        date:
+                                            _con.qrModelResult!.date.toString(),
+                                        invoiceAmount:
+                                            _con.qrModelResult!.cost.toString(),
+                                        taxAmount:
+                                            _con.qrModelResult!.vat.toString()),
+                                    const SizedBox(
+                                      height: 24.0,
+                                    ),
                                     Text(
                                       _con.qrModelResult!.invoiceAccepted!
                                           ? S
-                                              .of(context)!
+                                              .of(context)
                                               .congratulationYourInvoiceAccepted
                                           : S
-                                              .of(context)!
+                                              .of(context)
                                               .sorryYourInvoiceHasNotAccepted,
                                       style: Theme.of(context)
                                           .textTheme
@@ -138,19 +118,6 @@ class _InvoiceQrScreenState extends StateMVC<InvoiceQrScreen> {
                                     const SizedBox(
                                       height: 8.0,
                                     ),
-                                    InvoiceWidget(
-                                        taxNumber: _con.qrModelResult!.taxNumber
-                                            .toString(),
-                                        name: _con.qrModelResult!.seller,
-                                        date:
-                                            _con.qrModelResult!.date.toString(),
-                                        invoiceAmount:
-                                            _con.qrModelResult!.cost.toString(),
-                                        taxAmount:
-                                            _con.qrModelResult!.vat.toString()),
-                                    const SizedBox(
-                                      height: 24.0,
-                                    ),
                                     if (widget.arguments.daily &&
                                         _con.qrModelResult!.invoiceAccepted!)
                                       ElevatedButton(
@@ -166,9 +133,8 @@ class _InvoiceQrScreenState extends StateMVC<InvoiceQrScreen> {
                                                   daily:
                                                       widget.arguments.daily));
                                         },
-                                        child: Text(S
-                                            .of(context)!
-                                            .letsCollect500Points),
+                                        child: Text(
+                                            S.of(context).letsCollect500Points),
                                       ),
                                   ],
                                 ),
@@ -195,7 +161,7 @@ class _InvoiceQrScreenState extends StateMVC<InvoiceQrScreen> {
                         width: 1.0, // Underline thickness
                       ))),
                       child: Text(
-                        'عرض المحلات المشتركة',
+                        S.of(context).browseSubscriptionMarkets,
                         style: Theme.of(context).textTheme.headline6!.copyWith(
                             color: AppColors.primaryColor,
                             fontSize: 16.0,
@@ -207,27 +173,41 @@ class _InvoiceQrScreenState extends StateMVC<InvoiceQrScreen> {
                     const SizedBox(
                       height: 20.0,
                     ),
-                    ElevatedButton(
-                      onPressed: () async {
-                        // _con.sendQr(
-                        // data:
-                        //     'AULYtNix2YPYqSDYsdmI2YUg2KfZhNiq2KzYp9ix2YrYqSDYp9mE2YXYrdiv2YjYr9ipIC0g2YHYsdi5INix2YjZhTECDzMxMDA0NzA0MTEwMDAwMwMUMjAyMi0wNC0yMVQxMTo1Nzo0MloEBTE3Mi41BQEw',
-                        // gameId: widget.arguments.gameId,
-                        // mallId: widget.arguments.mallId,
-                        // qrType: QrTypeParamsModel.invoice);
-                        var data = await Navigator.pushNamed(
-                            context, Routes.scanQrScreen);
+                    if (widget.arguments.daily &&
+                        _con.qrModelResult!.invoiceAccepted!)
+                      ElevatedButton(
+                        onPressed: () async {
+                          Navigator.pushNamed(context, Routes.pontQrScreen,
+                              arguments: InvoiceQrArguments(
+                                  mallId: widget.arguments.mallId,
+                                  gameId: widget.arguments.gameId,
+                                  title: widget.arguments.title,
+                                  daily: widget.arguments.daily));
+                        },
+                        child: Text(S.of(context).letsCollect500Points),
+                      )
+                    else
+                      ElevatedButton(
+                        onPressed: () async {
+                          // _con.sendQr(
+                          // data:
+                          //     'AULYtNix2YPYqSDYsdmI2YUg2KfZhNiq2KzYp9ix2YrYqSDYp9mE2YXYrdiv2YjYr9ipIC0g2YHYsdi5INix2YjZhTECDzMxMDA0NzA0MTEwMDAwMwMUMjAyMi0wNC0yMVQxMTo1Nzo0MloEBTE3Mi41BQEw',
+                          // gameId: widget.arguments.gameId,
+                          // mallId: widget.arguments.mallId,
+                          // qrType: QrTypeParamsModel.invoice);
+                          var data = await Navigator.pushNamed(
+                              context, Routes.scanQrScreen);
 
-                        if (data != null) {
-                          _con.sendQr(
-                              data: data.toString(),
-                              gameId: widget.arguments.gameId,
-                              mallId: widget.arguments.mallId,
-                              qrType: QrTypeParamsModel.invoice);
-                        }
-                      },
-                      child: Text('مسح باركود فاتورة'),
-                    ),
+                          if (data != null) {
+                            _con.sendQr(
+                                data: data.toString(),
+                                gameId: widget.arguments.gameId,
+                                mallId: widget.arguments.mallId,
+                                qrType: QrTypeParamsModel.invoice);
+                          }
+                        },
+                        child: Text(S.of(context).scanInvoiceBarcode),
+                      ),
                   ],
                 ),
               ),

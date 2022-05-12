@@ -1,7 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
 import 'intl/messages_all.dart';
 
 // **************************************************************************
@@ -11,12 +10,18 @@ import 'intl/messages_all.dart';
 
 // ignore_for_file: non_constant_identifier_names, lines_longer_than_80_chars
 // ignore_for_file: join_return_with_assignment, prefer_final_in_for_each
-// ignore_for_file: avoid_redundant_argument_values
+// ignore_for_file: avoid_redundant_argument_values, avoid_escaping_inner_quotes
 
 class S {
   S();
 
-  static S? current;
+  static S? _current;
+
+  static S get current {
+    assert(_current != null,
+        'No instance of S was loaded. Try to initialize the S delegate before accessing S.current.');
+    return _current!;
+  }
 
   static const AppLocalizationDelegate delegate = AppLocalizationDelegate();
 
@@ -27,13 +32,21 @@ class S {
     final localeName = Intl.canonicalizedLocale(name);
     return initializeMessages(localeName).then((_) {
       Intl.defaultLocale = localeName;
-      S.current = S();
+      final instance = S();
+      S._current = instance;
 
-      return S.current!;
+      return instance;
     });
   }
 
-  static S? of(BuildContext context) {
+  static S of(BuildContext context) {
+    final instance = S.maybeOf(context);
+    assert(instance != null,
+        'No instance of S present in the widget tree. Did you add S.delegate in localizationsDelegates?');
+    return instance!;
+  }
+
+  static S? maybeOf(BuildContext context) {
     return Localizations.of<S>(context, S);
   }
 
@@ -386,6 +399,256 @@ class S {
       args: [data],
     );
   }
+
+  /// `اختر المرحلة المتاحة لاستكمال المسابقة`
+  String get chooseLevelToContinueTheCompetition {
+    return Intl.message(
+      'اختر المرحلة المتاحة لاستكمال المسابقة',
+      name: 'chooseLevelToContinueTheCompetition',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `يومي`
+  String get daily {
+    return Intl.message(
+      'يومي',
+      name: 'daily',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `مسابقة اسبوعية`
+  String get weeklyCompetition {
+    return Intl.message(
+      'مسابقة اسبوعية',
+      name: 'weeklyCompetition',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `أسبوعي`
+  String get weekly {
+    return Intl.message(
+      'أسبوعي',
+      name: 'weekly',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `مسابقة شهرية`
+  String get monthlyCompetition {
+    return Intl.message(
+      'مسابقة شهرية',
+      name: 'monthlyCompetition',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `شهري`
+  String get monthly {
+    return Intl.message(
+      'شهري',
+      name: 'monthly',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `مسابقة ربع سنوية`
+  String get QuarterManualCompetition {
+    return Intl.message(
+      'مسابقة ربع سنوية',
+      name: 'QuarterManualCompetition',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ربع سنوي`
+  String get QuarterManual {
+    return Intl.message(
+      'ربع سنوي',
+      name: 'QuarterManual',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `--`
+  String get dash {
+    return Intl.message(
+      '--',
+      name: 'dash',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `اشتر فاتورة من أحد المحلات المشتركة معنا\n بقيمة 300 ريال على الأقل  \n ثم امسح باركود QR الخاص بها`
+  String get invoiceDescription {
+    return Intl.message(
+      'اشتر فاتورة من أحد المحلات المشتركة معنا\n بقيمة 300 ريال على الأقل  \n ثم امسح باركود QR الخاص بها',
+      name: 'invoiceDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `عرض المحلات المشتركة`
+  String get browseSubscriptionMarkets {
+    return Intl.message(
+      'عرض المحلات المشتركة',
+      name: 'browseSubscriptionMarkets',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `مسح باركود فاتورة`
+  String get scanInvoiceBarcode {
+    return Intl.message(
+      'مسح باركود فاتورة',
+      name: 'scanInvoiceBarcode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `اعادة المحاولة`
+  String get retry {
+    return Intl.message(
+      'اعادة المحاولة',
+      name: 'retry',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No internet connection`
+  String get noInternetConnection {
+    return Intl.message(
+      'No internet connection',
+      name: 'noInternetConnection',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `اختر مدينتك الحالية`
+  String get chooseCurrentCity {
+    return Intl.message(
+      'اختر مدينتك الحالية',
+      name: 'chooseCurrentCity',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `قم بتوجيه الكاميرا على باركود الفاتورة`
+  String get howToScanBarcode {
+    return Intl.message(
+      'قم بتوجيه الكاميرا على باركود الفاتورة',
+      name: 'howToScanBarcode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create new Account`
+  String get createNewAccount {
+    return Intl.message(
+      'Create new Account',
+      name: 'createNewAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `كلمتا السر غير متطابقتين`
+  String get passwordMismatch {
+    return Intl.message(
+      'كلمتا السر غير متطابقتين',
+      name: 'passwordMismatch',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `أعد كتابة كلمة المرور`
+  String get rewritePassword {
+    return Intl.message(
+      'أعد كتابة كلمة المرور',
+      name: 'rewritePassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `UserName`
+  String get username {
+    return Intl.message(
+      'UserName',
+      name: 'username',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter User Name`
+  String get enterUserName {
+    return Intl.message(
+      'Enter User Name',
+      name: 'enterUserName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Don't have an account`
+  String get dontHaveAnAccount {
+    return Intl.message(
+      'Don\'t have an account',
+      name: 'dontHaveAnAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I have an account`
+  String get iHaveAnAccount {
+    return Intl.message(
+      'I have an account',
+      name: 'iHaveAnAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `forget password`
+  String get forgetPassword {
+    return Intl.message(
+      'forget password',
+      name: 'forgetPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `create new password`
+  String get createNewPassword {
+    return Intl.message(
+      'create new password',
+      name: 'createNewPassword',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
@@ -406,11 +669,9 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
   bool shouldReload(AppLocalizationDelegate old) => false;
 
   bool _isSupported(Locale locale) {
-    if (locale != null) {
-      for (var supportedLocale in supportedLocales) {
-        if (supportedLocale.languageCode == locale.languageCode) {
-          return true;
-        }
+    for (var supportedLocale in supportedLocales) {
+      if (supportedLocale.languageCode == locale.languageCode) {
+        return true;
       }
     }
     return false;

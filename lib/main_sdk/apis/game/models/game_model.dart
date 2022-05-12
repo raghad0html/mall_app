@@ -12,8 +12,7 @@ class GameModel {
     gameAccepted = json['gameAccepted'];
     msg = json['msg'];
     gameId = json['game_id'];
-    level = level?.fromStringToGameLevelEnumsModel(json[
-        'game_level']); //fromStringToGameLevelEnumsModel1(json['level'] ?? 'zero');
+    level = fromStringToGameLevelEnumsModel1(json['level'] ?? 'zero');
   }
 
   Map<String, dynamic> toJson() {
@@ -21,7 +20,7 @@ class GameModel {
     data['gameAccepted'] = gameAccepted;
     data['msg'] = msg;
     data['game_id'] = gameId;
-    data['game_level'] = level;
+    data['level'] = level;
     return data;
   }
 }

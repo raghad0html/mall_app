@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:mall_app/constants/app_theme.dart';
 
+import '../../../generated/l10n.dart';
+
 class ErrorsWidget extends StatefulWidget {
   final VoidCallback? callback;
   final String textError;
@@ -61,7 +63,9 @@ class _ErrorsWidgetState extends State<ErrorsWidget> {
             SizedBox(
                 width: MediaQuery.of(context).size.width * 0.9,
                 child: Text(
-                  checkIfConnect ? widget.textError : "No internet connection",
+                  checkIfConnect
+                      ? widget.textError
+                      : S.of(context).noInternetConnection,
                   style: const TextStyle(
                     color: AppColors.primaryColor,
                     overflow: TextOverflow.clip,
@@ -73,8 +77,8 @@ class _ErrorsWidgetState extends State<ErrorsWidget> {
                 padding: const EdgeInsets.only(top: 10.0),
                 child: ElevatedButton(
                   onPressed: widget.callback,
-                  child: const Text('اعادة المحاولة',
-                      style: TextStyle(fontWeight: FontWeight.w500)),
+                  child: Text(S.of(context).retry,
+                      style: const TextStyle(fontWeight: FontWeight.w500)),
                 ),
               ),
           ],

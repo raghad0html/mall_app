@@ -15,7 +15,7 @@ extension ParseToString on GameLevelEnumsModel {
 }
 
 GameLevelEnumsModel fromStringToGameLevelEnumsModel1(String prefix) {
-  switch (prefix.toLowerCase()) {
+  switch (prefix) {
     case 'zero':
       return GameLevelEnumsModel.zero;
     case 'dailyDone':
@@ -36,7 +36,8 @@ GameLevelEnumsModel fromStringToGameLevelEnumsModel1(String prefix) {
 
 extension GetQrTypeParamsModelFromString on GameLevelEnumsModel {
   GameLevelEnumsModel fromStringToGameLevelEnumsModel(String prefix) {
-    switch (prefix.toLowerCase()) {
+    print('prefixprefixprefix${prefix}');
+    switch (prefix) {
       case 'zero':
         return GameLevelEnumsModel.zero;
       case 'dailyDone':

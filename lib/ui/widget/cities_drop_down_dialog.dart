@@ -30,7 +30,7 @@ class _CitiesDropDownDialogState extends State<CitiesDropDownDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text('اختر مدينتك الحالية'),
+      title: Text(S.of(context).chooseCurrentCity),
       content: DropdownButtonHideUnderline(
         child: DropdownButton<MallModel>(
           hint: const Text("--"),
@@ -50,13 +50,13 @@ class _CitiesDropDownDialogState extends State<CitiesDropDownDialog> {
       ),
       actions: <Widget>[
         FlatButton(
-          child: Text(S.of(context)!.ok),
+          child: Text(S.of(context).ok),
           onPressed: () {
             widget.selectedMall(mall);
           },
         ),
         FlatButton(
-          child: Text(S.of(context)!.cancel),
+          child: Text(S.of(context).cancel),
           onPressed: () {
             Navigator.of(context).pop();
           },

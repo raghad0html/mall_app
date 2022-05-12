@@ -6,6 +6,7 @@ import 'package:mvc_pattern/mvc_pattern.dart';
 import '../../../constants/app_theme.dart';
 import '../../../generated/l10n.dart';
 import '../../../routes.dart';
+import '../../widget/costume_appbar.dart';
 
 class PointQRScreen extends StatefulWidget {
   final InvoiceQrArguments arguments;
@@ -25,33 +26,10 @@ class _PointQRScreenState extends StateMVC<PointQRScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _con.scaffoldKey,
-      // appBar: AppBar(
-      //   title: Center(
-      //     child: Text(widget.arguments.title),
-      //   ),
-      // ),
       body: SafeArea(
         child: Column(
           children: [
-            Container(
-              color: AppColors.lightGrey,
-              padding: const EdgeInsets.all(10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  InkWell(
-                    child: const Icon(Icons.arrow_back_ios),
-                    onTap: () => Navigator.of(context).pop(),
-                  ),
-                  Expanded(
-                      child: Center(
-                          child: Text(
-                    widget.arguments.title,
-                    style: Theme.of(context).textTheme.subtitle1,
-                  )))
-                ],
-              ),
-            ),
+            CostumeAppBar(title: widget.arguments.title),
             Expanded(
               child: Padding(
                 padding:
@@ -60,16 +38,6 @@ class _PointQRScreenState extends StateMVC<PointQRScreen> {
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        // Row(
-                        //   mainAxisAlignment: MainAxisAlignment.center,
-                        //   children: [
-                        //     InkWell(
-                        //       child: const Icon(Icons.arrow_back_ios),
-                        //       onTap: () => Navigator.of(context).pop(),
-                        //     ),
-                        //     Expanded(child: Center(child: Text(widget.arguments.title)))
-                        //   ],
-                        // ),
                         const SizedBox(
                           height: 45.0,
                         ),
@@ -79,13 +47,12 @@ class _PointQRScreenState extends StateMVC<PointQRScreen> {
                             style: Theme.of(context).textTheme.subtitle2,
                           ),
                         Text(
-                          S.of(context)!.letsCollect500Points,
+                          S.of(context).letsCollect500Points,
                           style: Theme.of(context).textTheme.subtitle2,
                         ),
                         const SizedBox(
                           height: 20.0,
                         ),
-
                         if (_con.qrModelResult != null)
                           Column(
                             children: [
@@ -93,7 +60,7 @@ class _PointQRScreenState extends StateMVC<PointQRScreen> {
                                 height: 20.0,
                               ),
                               Text(
-                                S.of(context)!.letsStartToScanAQrForYourBill,
+                                S.of(context).letsStartToScanAQrForYourBill,
                                 style: Theme.of(context)
                                     .textTheme
                                     .subtitle2!
@@ -141,7 +108,7 @@ class _PointQRScreenState extends StateMVC<PointQRScreen> {
                           qrType: QrTypeParamsModel.sticker);
                     }
                   },
-                  child: Text(S.of(context)!.scanQr),
+                  child: Text(S.of(context).scanQr),
                 ),
               ),
             ),

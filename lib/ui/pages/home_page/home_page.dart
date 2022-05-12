@@ -43,33 +43,46 @@ class _HomePageState extends StateMVC<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Expanded(
-                    child: InkWell(
-                      onTap: () {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return CitiesDropDownDialog(
-                                malls: _con.cities,
-                                selectedMall: (mall) {
-                                  Navigator.pop(context);
-                                  _con.saveCity(mall.cityId, mall.cityName);
-                                });
-                          },
-                        );
-                      },
+                  InkWell(
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return CitiesDropDownDialog(
+                              malls: _con.cities,
+                              selectedMall: (mall) {
+                                Navigator.pop(context);
+                                _con.saveCity(mall.cityId, mall.cityName);
+                              });
+                        },
+                      );
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.only(top: 10.0),
+                      padding: const EdgeInsets.all(5.0),
+                      decoration: BoxDecoration(
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(5)),
+                          color: AppColors.grayColor.withOpacity(0.2)),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            S.of(context)!.yourCity,
-                            style: Theme.of(context).textTheme.subtitle1,
+                            S.of(context).yourCity,
+                            style: Theme.of(context)
+                                .textTheme
+                                .subtitle1
+                                ?.copyWith(fontSize: 15),
                           ),
                           Text(
                             _con.currentCity,
-                            style: Theme.of(context).textTheme.subtitle1,
+                            style: Theme.of(context)
+                                .textTheme
+                                .subtitle1
+                                ?.copyWith(fontSize: 15),
                           ),
                         ],
                       ),
@@ -80,10 +93,12 @@ class _HomePageState extends StateMVC<HomePage> {
                     child: Container(
                       padding: const EdgeInsets.all(3.0),
                       decoration: BoxDecoration(
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(5)),
                           color:
                               AppColors.appBarBackGroundColor.withOpacity(0.2)),
                       child: Text(
-                        S.of(context)!.myCompetitions,
+                        S.of(context).myCompetitions,
                         style: Theme.of(context).textTheme.subtitle1,
                       ),
                     ),
@@ -96,8 +111,9 @@ class _HomePageState extends StateMVC<HomePage> {
               Container(
                 padding:
                     const EdgeInsets.symmetric(vertical: 16.0, horizontal: 10),
-                decoration:
-                    BoxDecoration(color: AppColors.appYellow.withOpacity(0.2)),
+                decoration: BoxDecoration(
+                  color: AppColors.appYellow.withOpacity(0.2),
+                ),
                 child: Row(
                   children: [
                     Expanded(
@@ -106,11 +122,11 @@ class _HomePageState extends StateMVC<HomePage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            S.of(context)!.beTheWinnerTitle,
+                            S.of(context).beTheWinnerTitle,
                             style: Theme.of(context).textTheme.headline6,
                           ),
                           Text(
-                            S.of(context)!.beTheWinnerMessage,
+                            S.of(context).beTheWinnerMessage,
                             style: Theme.of(context).textTheme.subtitle2,
                           ),
                           const SizedBox(
@@ -137,7 +153,7 @@ class _HomePageState extends StateMVC<HomePage> {
                               decoration: BoxDecoration(
                                   color: AppColors.appOrange.withOpacity(0.2)),
                               child: Text(
-                                S.of(context)!.startACompetition,
+                                S.of(context).startACompetition,
                                 style: Theme.of(context)
                                     .textTheme
                                     .subtitle1
@@ -159,7 +175,7 @@ class _HomePageState extends StateMVC<HomePage> {
                 height: 20,
               ),
               Text(
-                S.of(context)!.malls,
+                S.of(context).malls,
                 style: Theme.of(context).textTheme.headline6,
               ),
               const SizedBox(

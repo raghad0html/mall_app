@@ -28,6 +28,10 @@ final ThemeData themeData = ThemeData(
         color: AppColors.blackColor,
         fontWeight: FontWeight.w900,
         fontSize: 20.0),
+    headline5: TextStyle(
+        color: AppColors.basicColor,
+        fontWeight: FontWeight.w900,
+        fontSize: 18.0),
   ),
   iconTheme: const IconThemeData(color: AppColors.blackColor),
   inputDecorationTheme: const InputDecorationTheme(
@@ -99,6 +103,6 @@ class AppColors {
   static const lightGrey = Color(0xFFCECFD3);
   static const appBarTextColor = Color(0xFF484848);
 
-  static const basicColor = Color(0xFF8c8e95);
-  static const secondColor = Color(0xFFb8bac1);
+  static const basicColor = Color(0xff7d7d7f);
+  static const secondColor = Color(0xff969799);
 }

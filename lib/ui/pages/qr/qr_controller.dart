@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mall_app/main_sdk/apis/qr/models/qr_params_model.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
-import '../../../generated/l10n.dart';
 import '../../../local_storage/shared_prefernce_services.dart';
 import '../../../main_sdk/apis/core/models/common/result_class.dart';
 import '../../../main_sdk/apis/qr/models/qr_model.dart';
@@ -49,9 +48,11 @@ class QRController extends ControllerMVC {
       qrModelResult = data.data;
       setState(() {});
     } else if (_qrResponse is ErrorState) {
+      SuccessState<QrModel> data = _qrResponse as SuccessState<QrModel>;
       ScaffoldMessenger.of(state!.context).showSnackBar(SnackBar(
-        content: Text(S.of(state!.context)!.sorryWeCouldNotFindTheQr),
-      ));
+          content: Text(data.data.msg ??
+              '') //S.of(state!.context).sorryWeCouldNotFindTheQr),
+          ));
     }
   }
 }

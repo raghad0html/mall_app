@@ -1,12 +1,12 @@
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:mall_app/constants/app_theme.dart';
+import 'package:mall_app/constants/assets.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
-import '../generated/l10n.dart';
+import '../../../generated/l10n.dart';
 
 class QrReaderScreen extends StatefulWidget {
   const QrReaderScreen({Key? key}) : super(key: key);
@@ -36,7 +36,7 @@ class _QrReaderScreenState extends State<QrReaderScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Center(
-          child: Text('قم بتوجيه الكاميرا على باركود الفاتورة '),
+          child: Text(S.of(context).howToScanBarcode),
         ),
       ),
       body: Column(
@@ -64,11 +64,11 @@ class _QrReaderScreenState extends State<QrReaderScreen> {
                               future: controller?.getFlashStatus(),
                               builder: (context, snapshot) {
                                 return Image.asset(
-                                  'assets/images/flash.png',
+                                  Assets.assetsFlash,
                                   color: Colors.white,
                                   width: 50,
                                   height: 50,
-                                ); //Text(S.of(context)!.flashStatus(''));
+                                );
                               },
                             )),
                       ),
@@ -84,13 +84,13 @@ class _QrReaderScreenState extends State<QrReaderScreen> {
                               builder: (context, snapshot) {
                                 if (snapshot.data != null) {
                                   return Image.asset(
-                                    'assets/images/flip.png',
+                                    Assets.assetsFlip,
                                     width: 50,
                                     height: 50,
                                     color: Colors.white,
                                   );
                                 } else {
-                                  return Text(S.of(context)!.loading);
+                                  return Text(S.of(context).loading);
                                 }
                               },
                             )),
@@ -103,7 +103,7 @@ class _QrReaderScreenState extends State<QrReaderScreen> {
                                 await controller?.pauseCamera();
                               },
                               child: Image.asset(
-                                'assets/images/pause.png',
+                                Assets.assetsPause,
                                 color: Colors.white,
                                 width: 50,
                                 height: 50,
@@ -117,7 +117,7 @@ class _QrReaderScreenState extends State<QrReaderScreen> {
                                 await controller?.resumeCamera();
                               },
                               child: Image.asset(
-                                'assets/images/resume.png',
+                                Assets.assetsResume,
                                 color: Colors.white,
                                 width: 50,
                                 height: 50,
@@ -125,34 +125,6 @@ class _QrReaderScreenState extends State<QrReaderScreen> {
                         )
                     ],
                   ),
-                  // if (Platform.isIOS)
-                  //   Row(
-                  //       mainAxisAlignment: MainAxisAlignment.center,
-                  //       crossAxisAlignment: CrossAxisAlignment.center,
-                  //       children: <Widget>[
-                  //         Container(
-                  //           margin: const EdgeInsets.all(8),
-                  //           child: ElevatedButton(
-                  //             onPressed: () async {
-                  //               await controller?.pauseCamera();
-                  //             },
-                  //             child: Text(
-                  //               S.of(context)!.pause,
-                  //             ),
-                  //           ),
-                  //         ),
-                  //         Container(
-                  //           margin: const EdgeInsets.all(8),
-                  //           child: ElevatedButton(
-                  //             onPressed: () async {
-                  //               await controller?.resumeCamera();
-                  //             },
-                  //             child: Text(
-                  //               S.of(context)!.resume,
-                  //             ),
-                  //           ),
-                  //         )
-                  //       ]),
                 ],
               ),
             ),
@@ -196,7 +168,7 @@ class _QrReaderScreenState extends State<QrReaderScreen> {
     log('${DateTime.now().toIso8601String()}_onPermissionSet $p');
     if (!p) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(S.of(context)!.noPermission)),
+        SnackBar(content: Text(S.of(context).noPermission)),
       );
     }
   }

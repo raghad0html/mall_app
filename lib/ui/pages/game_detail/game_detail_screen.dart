@@ -5,6 +5,8 @@ import 'package:mall_app/ui/pages/game_detail/game_controller.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 import '../../../routes.dart';
+import '../../widget/costume_appbar.dart';
+import '../../widget/game_level_button.dart';
 
 class GameDetailScreen extends StatefulWidget {
   final GameDetails arguments;
@@ -28,12 +30,6 @@ class _GameDetailScreenState extends StateMVC<GameDetailScreen> {
         init: true);
   }
 
-  // @override
-  // void didChangeDependencies() {
-  //   super.didChangeDependencies();
-  //   _con.getGameDetails(widget.arguments.mallId, widget.arguments.gameId);
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,25 +37,7 @@ class _GameDetailScreenState extends StateMVC<GameDetailScreen> {
         body: SafeArea(
           child: Column(
             children: [
-              Container(
-                color: AppColors.lightGrey,
-                padding: const EdgeInsets.all(10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    InkWell(
-                      child: const Icon(Icons.arrow_back_ios),
-                      onTap: () => Navigator.of(context).pop(),
-                    ),
-                    Expanded(
-                        child: Center(
-                            child: Text(
-                      widget.arguments.mallName,
-                      style: Theme.of(context).textTheme.subtitle1,
-                    )))
-                  ],
-                ),
-              ),
+              CostumeAppBar(title: widget.arguments.mallName),
               Container(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
@@ -74,7 +52,7 @@ class _GameDetailScreenState extends StateMVC<GameDetailScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            'اختر المرحلة المتاحة لاستكمال المسابقة',
+                            S.of(context).chooseLevelToContinueTheCompetition,
                             style: Theme.of(context)
                                 .textTheme
                                 .subtitle1!
@@ -103,7 +81,7 @@ class _GameDetailScreenState extends StateMVC<GameDetailScreen> {
                                         mallId: widget.arguments.mallId,
                                         daily: true,
                                         title: S
-                                            .of(context)!
+                                            .of(context)
                                             .dailyCompetitionTitle(
                                                 widget.arguments.mallName),
                                       ));
@@ -117,7 +95,7 @@ class _GameDetailScreenState extends StateMVC<GameDetailScreen> {
                                         mallId: widget.arguments.mallId,
                                         daily: true,
                                         title: S
-                                            .of(context)!
+                                            .of(context)
                                             .dailyCompetitionTitle(
                                                 widget.arguments.mallName),
                                       ));
@@ -129,7 +107,7 @@ class _GameDetailScreenState extends StateMVC<GameDetailScreen> {
                             child: GameLevelButton(
                               image: '24hourdaily.png',
                               locked: _con.levelIndex >= 0 ? false : true,
-                              title: 'يومي',
+                              title: S.of(context).daily,
                               completed: _con.levelIndex > 0 ? true : false,
                             ),
                           ),
@@ -144,7 +122,7 @@ class _GameDetailScreenState extends StateMVC<GameDetailScreen> {
                                       gameId: widget.arguments.gameId,
                                       mallId: widget.arguments.mallId,
                                       daily: true,
-                                      title: 'مسابقة اسبوعية',
+                                      title: S.of(context).weeklyCompetition,
                                     ));
                                 _con.getGameDetails(widget.arguments.mallId,
                                     widget.arguments.gameId);
@@ -153,7 +131,7 @@ class _GameDetailScreenState extends StateMVC<GameDetailScreen> {
                             child: GameLevelButton(
                               image: 'week.png',
                               locked: _con.levelIndex >= 1 ? false : true,
-                              title: 'أسبوعي',
+                              title: S.of(context).weekly,
                               completed: _con.levelIndex > 1 ? true : false,
                             ),
                           ),
@@ -170,7 +148,7 @@ class _GameDetailScreenState extends StateMVC<GameDetailScreen> {
                                     gameId: widget.arguments.gameId,
                                     mallId: widget.arguments.mallId,
                                     daily: true,
-                                    title: 'مسابقة شهرية',
+                                    title: S.of(context).monthlyCompetition,
                                   ));
                               _con.getGameDetails(widget.arguments.mallId,
                                   widget.arguments.gameId);
@@ -179,21 +157,22 @@ class _GameDetailScreenState extends StateMVC<GameDetailScreen> {
                           child: GameLevelButton(
                             image: 'month.png',
                             locked: _con.levelIndex >= 2 ? false : true,
-                            title: 'شهري',
+                            title: S.of(context).monthly,
                             completed: _con.levelIndex > 2 ? true : false,
                           ),
                         )),
                         Expanded(
                             child: InkWell(
                           onTap: () async {
-                            if (_con.levelIndex == 1) {
+                            if (_con.levelIndex == 3) {
                               await Navigator.pushNamed(
                                   context, Routes.invoiceQrScreen,
                                   arguments: InvoiceQrArguments(
                                     gameId: widget.arguments.gameId,
                                     mallId: widget.arguments.mallId,
                                     daily: true,
-                                    title: 'مسابقة ربع سنوية ',
+                                    title:
+                                        S.of(context).QuarterManualCompetition,
                                   ));
                               _con.getGameDetails(widget.arguments.mallId,
                                   widget.arguments.gameId);
@@ -203,7 +182,7 @@ class _GameDetailScreenState extends StateMVC<GameDetailScreen> {
                             image: '90.png',
                             locked: _con.levelIndex >= 3 ? false : true,
                             completed: _con.levelIndex > 3 ? true : false,
-                            title: 'ربع سنوي',
+                            title: S.of(context).QuarterManual,
                           ),
                         )),
                       ]),
@@ -214,70 +193,5 @@ class _GameDetailScreenState extends StateMVC<GameDetailScreen> {
             ],
           ),
         ));
-  }
-}
-
-class GameLevelButton extends StatelessWidget {
-  final String image;
-  final String title;
-  final bool locked;
-  final bool completed;
-
-  const GameLevelButton(
-      {Key? key,
-      required this.title,
-      required this.image,
-      required this.locked,
-      required this.completed})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        Container(
-          margin: const EdgeInsets.all(8),
-          padding: const EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            border: Border.all(color: Colors.white),
-            borderRadius: const BorderRadius.all(Radius.circular(8)),
-          ),
-          child: Column(
-            children: [
-              if (locked)
-                Image.asset(
-                  'assets/images/lock.png',
-                  // color: Colors.white.withOpacity(0.4),
-                  // colorBlendMode: BlendMode.modulate,
-                )
-              else if (completed)
-                Image.asset(
-                  'assets/images/done.png',
-                )
-              else
-                Image.asset(
-                  'assets/images/$image',
-                ),
-              Text(
-                title,
-                style: Theme.of(context).textTheme.headline6,
-              ),
-            ],
-          ),
-        ),
-        // if (locked)
-        //   Image.asset(
-        //     'assets/images/lock.png',
-        //     width: 110,
-        //   ),
-        // if (completed)
-        //   const Icon(
-        //     Icons.check_circle_rounded,
-        //     color: Colors.green,
-        //   ),
-      ],
-    );
   }
 }

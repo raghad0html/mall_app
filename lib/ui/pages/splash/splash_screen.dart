@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mall_app/local_storage/shared_prefernce_services.dart';
 
+import '../../../constants/assets.dart';
 import '../../../routes.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -17,11 +18,11 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(const Duration(milliseconds: 900), () {
       var login = LocalStorageService().login ?? false;
 
-      if (login) {
-        Navigator.pushReplacementNamed(context, Routes.homeScreen);
-      } else {
-        Navigator.pushReplacementNamed(context, Routes.loginScreen);
-      }
+      // if (login) {
+      //   Navigator.pushReplacementNamed(context, Routes.homeScreen);
+      // } else {
+      Navigator.pushReplacementNamed(context, Routes.loginScreen);
+      // }
     });
   }
 
@@ -30,7 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       body: Center(
         child: Image.asset(
-          'assets/images/logo.jpg',
+          Assets.assetsLogo,
           width: 200,
           height: 200,
         ),
