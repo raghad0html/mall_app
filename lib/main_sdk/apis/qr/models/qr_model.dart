@@ -13,6 +13,7 @@ class QrModel {
   bool? stickerAccepted;
   int? points;
   int? balancePoints;
+  int? targetPoints;
 
   QrModel({
     this.qrType,
@@ -27,6 +28,7 @@ class QrModel {
     this.stickerAccepted,
     this.points,
     this.balancePoints,
+    this.targetPoints,
   });
 
   QrModel.fromJson(Map<String, dynamic> json) {
@@ -41,6 +43,7 @@ class QrModel {
     vat = json['vat'];
     stickerAccepted = json['stickerAccepted'];
     points = json['points'];
-    balancePoints = json['balancePoints'];
+    targetPoints = json['target_points'];
+    balancePoints = json['balance_points'];
   }
 }

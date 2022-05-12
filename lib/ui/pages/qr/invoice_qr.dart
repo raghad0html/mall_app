@@ -24,6 +24,7 @@ class _InvoiceQrScreenState extends StateMVC<InvoiceQrScreen> {
   _InvoiceQrScreenState() : super(QRController()) {
     _con = controller as QRController;
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,7 +54,6 @@ class _InvoiceQrScreenState extends StateMVC<InvoiceQrScreen> {
                                     const SizedBox(
                                       height: 45.0,
                                     ),
-                                    //  if (widget.arguments.daily)
                                     Text(
                                       S.of(context).invoiceDescription,
                                       textAlign: TextAlign.center,
@@ -125,13 +125,18 @@ class _InvoiceQrScreenState extends StateMVC<InvoiceQrScreen> {
                                           Navigator.pushNamed(
                                               context, Routes.pontQrScreen,
                                               arguments: InvoiceQrArguments(
-                                                  mallId:
-                                                      widget.arguments.mallId,
-                                                  gameId:
-                                                      widget.arguments.gameId,
-                                                  title: widget.arguments.title,
-                                                  daily:
-                                                      widget.arguments.daily));
+                                                mallId: widget.arguments.mallId,
+                                                gameId: widget.arguments.gameId,
+                                                title: widget.arguments.title,
+                                                daily: widget.arguments.daily,
+                                                balancePoints: _con
+                                                        .qrModelResult
+                                                        ?.balancePoints ??
+                                                    0,
+                                                targetPoints: _con.qrModelResult
+                                                        ?.targetPoints ??
+                                                    0,
+                                              ));
                                         },
                                         child: Text(
                                             S.of(context).letsCollect500Points),
@@ -173,16 +178,20 @@ class _InvoiceQrScreenState extends StateMVC<InvoiceQrScreen> {
                     const SizedBox(
                       height: 20.0,
                     ),
-                    if (widget.arguments.daily &&
-                        _con.qrModelResult!.invoiceAccepted!)
+                    if (_con.accepted && widget.arguments.daily)
                       ElevatedButton(
                         onPressed: () async {
                           Navigator.pushNamed(context, Routes.pontQrScreen,
                               arguments: InvoiceQrArguments(
-                                  mallId: widget.arguments.mallId,
-                                  gameId: widget.arguments.gameId,
-                                  title: widget.arguments.title,
-                                  daily: widget.arguments.daily));
+                                mallId: widget.arguments.mallId,
+                                gameId: widget.arguments.gameId,
+                                title: widget.arguments.title,
+                                daily: widget.arguments.daily,
+                                balancePoints:
+                                    _con.qrModelResult?.balancePoints ?? 0,
+                                targetPoints:
+                                    _con.qrModelResult?.targetPoints ?? 0,
+                              ));
                         },
                         child: Text(S.of(context).letsCollect500Points),
                       )

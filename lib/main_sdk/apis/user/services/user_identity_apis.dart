@@ -7,7 +7,7 @@ import 'package:mall_app/main_sdk/enum/http_enum.dart';
 class UserIdentityApi extends ApiModelIdentity {
   Future<ResponseState<UserModel>> login(
       {required LoginParamsModel loginParamsModel}) async {
-    return apiMethod('user.php',
+    return apiMethod('login.php',
         data: loginParamsModel.toMap(),
         httpEnum: HttpEnum.post,
         parseJson: (json) => UserModel.fromJson(json));

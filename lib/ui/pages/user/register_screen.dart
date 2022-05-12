@@ -37,6 +37,8 @@ class _RegisterScreenState extends StateMVC<RegisterScreen> {
     super.dispose();
     emailController.clear();
     passwordController.clear();
+    nameController.clear();
+    rePasswordController.clear();
   }
 
   @override

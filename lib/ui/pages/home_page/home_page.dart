@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mall_app/constants/app_theme.dart';
+import 'package:mall_app/routes.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 import '../../../generated/l10n.dart';
@@ -89,7 +90,9 @@ class _HomePageState extends StateMVC<HomePage> {
                     ),
                   ),
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pushNamed(context, Routes.allGamesScreen);
+                    },
                     child: Container(
                       padding: const EdgeInsets.all(3.0),
                       decoration: BoxDecoration(

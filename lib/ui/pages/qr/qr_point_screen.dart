@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:mall_app/main_sdk/apis/qr/models/qr_type_enums_model.dart';
 import 'package:mall_app/ui/pages/qr/qr_controller.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 import '../../../constants/app_theme.dart';
+import '../../../constants/assets.dart';
 import '../../../generated/l10n.dart';
+import '../../../main_sdk/apis/qr/models/qr_type_enums_model.dart';
 import '../../../routes.dart';
 import '../../widget/costume_appbar.dart';
 
@@ -22,6 +23,16 @@ class _PointQRScreenState extends StateMVC<PointQRScreen> {
   _PointQRScreenState() : super(QRController()) {
     _con = controller as QRController;
   }
+
+  @override
+  void initState() {
+    super.initState();
+
+    _con.initPoints(
+        targetPointsWidget: widget.arguments.targetPoints,
+        balancePointsWidget: widget.arguments.balancePoints);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,19 +47,28 @@ class _PointQRScreenState extends StateMVC<PointQRScreen> {
                     const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
                 child: SingleChildScrollView(
                   child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         const SizedBox(
                           height: 45.0,
                         ),
                         if (widget.arguments.daily)
                           Text(
-                            'بعض الكلمات التحفيزية وصورة ',
-                            style: Theme.of(context).textTheme.subtitle2,
+                            'لإنهاء المسابقة اليومية \n عليك التوجه للمحلات المشاركة \n ومسح لصاقة باركود QR لكسب النقاط والفوز',
+                            style: Theme.of(context)
+                                .textTheme
+                                .subtitle2!
+                                .copyWith(fontSize: 18),
+                            textAlign: TextAlign.center,
                           ),
-                        Text(
-                          S.of(context).letsCollect500Points,
-                          style: Theme.of(context).textTheme.subtitle2,
+                        const SizedBox(
+                          height: 30,
+                        ),
+                        Image.asset(
+                          Assets.assetsQrCode2,
+                          width: 200,
+                          height: 200,
                         ),
                         const SizedBox(
                           height: 20.0,
@@ -81,9 +101,38 @@ class _PointQRScreenState extends StateMVC<PointQRScreen> {
                               ),
                             ],
                           ),
+                        Text(
+                          'رصيد نقاطك الحالي هو ${_con.balancePoints}',
+                          style: Theme.of(context)
+                              .textTheme
+                              .subtitle2!
+                              .copyWith(fontSize: 18),
+                          textAlign: TextAlign.center,
+                        ),
                       ]),
                 ),
               ),
+            ),
+            Container(
+              padding: const EdgeInsets.only(
+                bottom: 1, // Space between underline and text
+              ),
+              decoration: const BoxDecoration(
+                  border: Border(
+                      bottom: BorderSide(
+                color: AppColors.primaryColor,
+                width: 1.0, // Underline thickness
+              ))),
+              child: Text(
+                S.of(context).browseSubscriptionMarkets,
+                style: Theme.of(context).textTheme.headline6!.copyWith(
+                    color: AppColors.primaryColor, fontSize: 16.0, height: 1
+                    //  decoration: TextDecoration.underline,
+                    ),
+              ),
+            ),
+            const SizedBox(
+              height: 20.0,
             ),
             Padding(
               padding:
@@ -97,18 +146,25 @@ class _PointQRScreenState extends StateMVC<PointQRScreen> {
                     //         'https://bareeqe.sa/?I3N0aWNrZXIjMzEwMDQ3MDQxMTAwMDAzI0FBQUE=',
                     //     gameId: widget.arguments.gameId,
                     //     mallId: widget.arguments.mallId);
-                    var data =
-                        await Navigator.pushNamed(context, Routes.scanQrScreen);
 
-                    if (data != null) {
-                      _con.sendQr(
-                          data: data.toString(),
-                          gameId: widget.arguments.gameId,
-                          mallId: widget.arguments.mallId,
-                          qrType: QrTypeParamsModel.sticker);
+                    if (_con.targetPoints > _con.balancePoints) {
+                      var data = await Navigator.pushNamed(
+                          context, Routes.scanQrScreen);
+
+                      if (data != null) {
+                        _con.sendQr(
+                            data: data.toString(),
+                            gameId: widget.arguments.gameId,
+                            mallId: widget.arguments.mallId,
+                            qrType: QrTypeParamsModel.sticker);
+                      }
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content:
+                              Text('لا يمكنك مسح فاتورة تأكد من عدد نقاطك')));
                     }
                   },
-                  child: Text(S.of(context).scanQr),
+                  child: Text('مسح باركود محل'),
                 ),
               ),
             ),

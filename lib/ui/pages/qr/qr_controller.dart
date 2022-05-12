@@ -16,6 +16,9 @@ class QRController extends ControllerMVC {
   int levelIndex = 0;
   QrModel? qrModelResult;
 
+  int targetPoints = 0;
+  int balancePoints = 0;
+  bool accepted = false;
   QRController() {
     scaffoldKey = GlobalKey<ScaffoldState>();
   }
@@ -46,6 +49,9 @@ class QRController extends ControllerMVC {
     if (_qrResponse is SuccessState) {
       SuccessState<QrModel> data = _qrResponse as SuccessState<QrModel>;
       qrModelResult = data.data;
+      accepted = data.data.invoiceAccepted ?? false;
+      targetPoints = data.data.targetPoints ?? 0;
+      balancePoints = data.data.balancePoints ?? 0;
       setState(() {});
     } else if (_qrResponse is ErrorState) {
       SuccessState<QrModel> data = _qrResponse as SuccessState<QrModel>;
@@ -54,5 +60,12 @@ class QRController extends ControllerMVC {
               '') //S.of(state!.context).sorryWeCouldNotFindTheQr),
           ));
     }
+  }
+
+  initPoints(
+      {required int targetPointsWidget, required int balancePointsWidget}) {
+    targetPoints = targetPointsWidget;
+    balancePoints = balancePointsWidget;
+    setState(() {});
   }
 }

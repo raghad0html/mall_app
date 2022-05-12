@@ -13,9 +13,10 @@ import '../../helper/helper.dart';
 class GameController extends ControllerMVC {
   late GlobalKey<ScaffoldState> scaffoldKey;
   late OverlayEntry loader;
-
   int levelIndex = 0;
   bool zero = true;
+  List<GameModel> games = [];
+  bool loading = false;
   GameController() {
     scaffoldKey = GlobalKey<ScaffoldState>();
   }
@@ -70,5 +71,27 @@ class GameController extends ControllerMVC {
       }
       setState(() {});
     }
+  }
+
+  getAllGames() async {
+    loading = true;
+    setState(() {});
+    GameParamsModel gameParamsModel = GameParamsModel(
+      action: GameActionEnumsModel.getGames,
+      mallId: int.tryParse(LocalStorageService().lastMallId ?? '0') ?? 0,
+      token: LocalStorageService().token ?? '',
+      userid: LocalStorageService().id ?? '',
+    );
+    ResponseState<GameModel> _gameResponse =
+        await GameIdentityApi().game(gameParamsModel: gameParamsModel);
+
+    if (_gameResponse is SuccessState) {
+      SuccessState<GameModel> data = _gameResponse as SuccessState<GameModel>;
+    } else if (_gameResponse is ErrorState) {
+      ErrorState<GameModel> data = _gameResponse as ErrorState<GameModel>;
+      print('DIMA DIMA ${data.errorMessage.error!.message}');
+    }
+    loading = false;
+    setState(() {});
   }
 }

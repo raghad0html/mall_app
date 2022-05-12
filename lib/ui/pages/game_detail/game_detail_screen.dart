@@ -28,6 +28,8 @@ class _GameDetailScreenState extends StateMVC<GameDetailScreen> {
     super.initState();
     _con.getGameDetails(widget.arguments.mallId, widget.arguments.gameId,
         init: true);
+
+    _con.getAllGames();
   }
 
   @override

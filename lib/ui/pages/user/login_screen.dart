@@ -162,8 +162,8 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                           Center(
                             child: InkWell(
                               onTap: () {
-                                // Navigator.pushNamed(
-                                //     context, Routes.registerScreen);
+                                Navigator.pushNamed(
+                                    context, Routes.forgetPasswordScreen);
                               },
                               child: RichText(
                                 text: TextSpan(

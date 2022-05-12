@@ -5,6 +5,8 @@ class GameModel {
   String? msg;
   int? gameId;
   GameLevelEnumsModel? level;
+  int? targetPoints ;
+  int? balancePoints ;
 
   GameModel({this.gameAccepted, this.msg, this.gameId, this.level});
 
@@ -13,6 +15,8 @@ class GameModel {
     msg = json['msg'];
     gameId = json['game_id'];
     level = fromStringToGameLevelEnumsModel1(json['level'] ?? 'zero');
+    targetPoints =  json['target_points'];
+    balancePoints =  json['balance_points'];
   }
 
   Map<String, dynamic> toJson() {
@@ -21,6 +25,8 @@ class GameModel {
     data['msg'] = msg;
     data['game_id'] = gameId;
     data['level'] = level;
+    data['target_points'] = targetPoints;
+    data['balance_points'] = balancePoints;
     return data;
   }
 }

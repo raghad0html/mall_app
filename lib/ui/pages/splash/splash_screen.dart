@@ -18,11 +18,11 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(const Duration(milliseconds: 900), () {
       var login = LocalStorageService().login ?? false;
 
-      // if (login) {
-      //   Navigator.pushReplacementNamed(context, Routes.homeScreen);
-      // } else {
-      Navigator.pushReplacementNamed(context, Routes.loginScreen);
-      // }
+      if (login) {
+        Navigator.pushReplacementNamed(context, Routes.homeScreen);
+      } else {
+        Navigator.pushReplacementNamed(context, Routes.loginScreen);
+      }
     });
   }
 
