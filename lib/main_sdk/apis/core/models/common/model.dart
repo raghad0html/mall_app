@@ -1,10 +1,11 @@
 
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:mall_app/main_sdk/apis/core/models/common/message_model.dart';
 import 'package:mall_app/main_sdk/apis/core/models/common/result_class.dart';
 import '/main_sdk/utils/dio_error_handle/error_converter.dart';
 
-import 'error_model.dart';
+
 
 
 class Model {

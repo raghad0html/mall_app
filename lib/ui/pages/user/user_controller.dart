@@ -91,7 +91,7 @@ class UserController extends ControllerMVC {
         LocalStorageService().login = false;
         Helper.hideLoader(loader);
         ScaffoldMessenger.of(state!.context).showSnackBar(SnackBar(
-          content: Text(_res.errorMessage.error!.message),
+          content: Text(_res.errorMessage.error!.message??''),
         ));
       }
     }

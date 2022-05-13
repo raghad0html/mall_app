@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:mall_app/main_sdk/apis/core/models/common/error_model.dart';
+import 'package:mall_app/main_sdk/apis/core/models/common/message_model.dart';
 import 'package:mall_app/main_sdk/apis/core/models/common/model.dart';
 import 'package:mall_app/main_sdk/apis/core/models/common/result_class.dart';
 import 'package:mall_app/ui/shared/widget/custom_error_widget.dart';
@@ -106,10 +106,8 @@ class _AppFutureBuilderState<T> extends State<AppFutureBuilder<T>> {
             } else {
               return widget.whenError?.call(ErrorState<T>(Model(
                       error: MessageModel(
-                          name: "",
                           message: snapshot.error?.toString() ?? "",
-                          code: "0",
-                          isSuccess: false)))) ??
+                         )))) ??
                   retry(snapshot.data as ErrorState<T>?);
             }
           }

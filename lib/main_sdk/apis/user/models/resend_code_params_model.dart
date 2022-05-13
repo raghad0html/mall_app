@@ -1,10 +1,10 @@
-class LoginParamsModel {
-  String? email;
-  String? password;
+class ResendCodeParamsModel {
+  String email;
+  String password;
 
-  LoginParamsModel({
-    this.email,
-    this.password,
+  ResendCodeParamsModel({
+    required this.email,
+    required this.password,
   });
 
   Map<String, dynamic> toMap() => {
