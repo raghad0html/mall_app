@@ -6,7 +6,7 @@ import 'package:mall_app/main_sdk/apis/gift/models/gift_model.dart';
 
 import 'package:mall_app/main_sdk/enum/http_enum.dart';
 
-class MallIdentityApi extends ApiModelIdentity {
+class GiftIdentityApi extends ApiModelIdentity {
   Future<ResponseState<ListOfGiftModel>> getGifts(
       {required GetGiftByMallParamsModel getGiftByMallParamsModel}) async {
     return apiMethod('gifts.php',
