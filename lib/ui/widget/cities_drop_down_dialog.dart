@@ -1,30 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:mall_app/main_sdk/apis/city/models/city_model.dart';
 
 import '../../../generated/l10n.dart';
-import '../../../main_sdk/apis/mall/models/mall_model.dart';
 
-typedef SelectedMall = void Function(MallModel);
+typedef SelectedCity = void Function(CityModel);
 
 class CitiesDropDownDialog extends StatefulWidget {
   const CitiesDropDownDialog({
     Key? key,
-    required this.malls,
-    required this.selectedMall,
+    required this.cities,
+    required this.selectedCity,
   }) : super(key: key);
 
-  final List<MallModel> malls;
-  final SelectedMall selectedMall;
+  final List<CityModel> cities;
+  final SelectedCity selectedCity;
 
   @override
   State<CitiesDropDownDialog> createState() => _CitiesDropDownDialogState();
 }
 
 class _CitiesDropDownDialogState extends State<CitiesDropDownDialog> {
-  late MallModel mall;
+  late CityModel city;
+
   @override
   void initState() {
     super.initState();
-    mall = widget.malls.first;
+    city = widget.cities.first;
   }
 
   @override
@@ -32,18 +33,18 @@ class _CitiesDropDownDialogState extends State<CitiesDropDownDialog> {
     return AlertDialog(
       title: Text(S.of(context).chooseCurrentCity),
       content: DropdownButtonHideUnderline(
-        child: DropdownButton<MallModel>(
+        child: DropdownButton<CityModel>(
           hint: const Text("--"),
-          value: mall,
-          items: widget.malls.map((value) {
-            return DropdownMenuItem<MallModel>(
+          value: city,
+          items: widget.cities.map((value) {
+            return DropdownMenuItem<CityModel>(
               value: value,
               child: Text(value.cityName ?? ''),
             );
           }).toList(),
           onChanged: (value) {
             setState(() {
-              mall = value!;
+              city = value!;
             });
           },
         ),
@@ -52,7 +53,7 @@ class _CitiesDropDownDialogState extends State<CitiesDropDownDialog> {
         TextButton(
           child: Text(S.of(context).ok),
           onPressed: () {
-            widget.selectedMall(mall);
+            widget.selectedCity(city);
           },
         ),
         TextButton(

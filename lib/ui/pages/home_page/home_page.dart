@@ -52,8 +52,8 @@ class _HomePageState extends StateMVC<HomePage> {
                         context: context,
                         builder: (BuildContext context) {
                           return CitiesDropDownDialog(
-                              malls: _con.cities,
-                              selectedMall: (mall) {
+                              cities: _con.cities,
+                              selectedCity: (mall) {
                                 Navigator.pop(context);
                                 _con.saveCity(mall.cityId, mall.cityName);
                               });

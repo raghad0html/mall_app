@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mall_app/main_sdk/apis/city/models/city_model.dart';
+import 'package:mall_app/main_sdk/apis/city/services/ciry_identity_apis.dart';
 import 'package:mall_app/main_sdk/apis/game/services/game_identity_apis.dart';
 import 'package:mall_app/routes.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
@@ -18,9 +20,10 @@ class HomeController extends ControllerMVC {
   late GlobalKey<ScaffoldState> scaffoldKey;
   late OverlayEntry loader;
   late List<MallModel> malls = [];
-  List<MallModel> cities = [];
+  List<CityModel> cities = [];
   bool loading = false;
   String currentCity = '';
+
   HomeController() {
     scaffoldKey = GlobalKey<ScaffoldState>();
     currentCity = LocalStorageService().cityName ?? '';
@@ -46,16 +49,11 @@ class HomeController extends ControllerMVC {
   }
 
   getCity() async {
-    Future<ResponseState<ListOfMallModel>> _listOfCities =
-        MallIdentityApi().getMalls(
-            mallParamsModel: MallParamsModel(
-      token: LocalStorageService().token ?? '',
-      userid: LocalStorageService().id ?? '',
-      action: MallActionEnumsModel.getCity,
-    ));
-    ResponseState<ListOfMallModel> data = await _listOfCities;
+    Future<ResponseState<ListOfCityModel>> _listOfCities =
+        CityIdentityApi().getCities();
+    ResponseState<ListOfCityModel> data = await _listOfCities;
     if (data is SuccessState) {
-      SuccessState<ListOfMallModel> d = data as SuccessState<ListOfMallModel>;
+      SuccessState<ListOfCityModel> d = data as SuccessState<ListOfCityModel>;
       cities = d.data.data!;
       setState(() {});
     }

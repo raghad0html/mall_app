@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mall_app/generated/l10n.dart';
+import 'package:mall_app/main_sdk/apis/city/models/city_model.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 import '../../../constants/app_theme.dart';
 import '../../../constants/assets.dart';
-import '../../../main_sdk/apis/mall/models/mall_model.dart';
 import 'user_controller.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -160,11 +160,11 @@ class _RegisterScreenState extends StateMVC<RegisterScreen> {
                                         Border.all(color: AppColors.grayColor),
                                   ),
                                   child: DropdownButtonHideUnderline(
-                                    child: DropdownButton<MallModel>(
+                                    child: DropdownButton<CityModel>(
                                       hint: const Text("--"),
                                       value: _con.city,
                                       items: _con.cities.map((value) {
-                                        return DropdownMenuItem<MallModel>(
+                                        return DropdownMenuItem<CityModel>(
                                           value: value,
                                           child: Text(value.cityName ?? ''),
                                         );
