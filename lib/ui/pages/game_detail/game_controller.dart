@@ -16,6 +16,8 @@ class GameController extends ControllerMVC {
   int levelIndex = 0;
   bool zero = true;
   List<GameModel> games = [];
+  int targetPoint = 0;
+  int balancePoints = 0;
   bool loading = false;
   GameController() {
     scaffoldKey = GlobalKey<ScaffoldState>();
@@ -41,6 +43,8 @@ class GameController extends ControllerMVC {
 
     if (_gameResponse is SuccessState) {
       SuccessState<GameModel> data = _gameResponse as SuccessState<GameModel>;
+      targetPoint = data.data.targetPoints ?? 0;
+      balancePoints = data.data.balancePoints ?? 0;
 
       switch (data.data.level) {
         case GameLevelEnumsModel.zero:

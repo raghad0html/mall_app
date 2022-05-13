@@ -27,7 +27,7 @@ class _PointQRScreenState extends StateMVC<PointQRScreen> {
   @override
   void initState() {
     super.initState();
-
+    print('widget.arguments.targetPoints ${widget.arguments.targetPoints}');
     _con.initPoints(
         targetPointsWidget: widget.arguments.targetPoints,
         balancePointsWidget: widget.arguments.balancePoints);
@@ -35,6 +35,7 @@ class _PointQRScreenState extends StateMVC<PointQRScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print('widget.arguments.balancePoints ${widget.arguments.balancePoints}');
     return Scaffold(
       key: _con.scaffoldKey,
       body: SafeArea(
@@ -94,15 +95,20 @@ class _PointQRScreenState extends StateMVC<PointQRScreen> {
                                 style: Theme.of(context).textTheme.subtitle2,
                               ),
                               const SizedBox(
-                                height: 8.0,
-                              ),
-                              const SizedBox(
-                                height: 24.0,
+                                height: 12.0,
                               ),
                             ],
                           ),
                         Text(
-                          'رصيد نقاطك الحالي هو ${_con.balancePoints}',
+                          'رصيد نقاطك الحالي هو ',
+                          style: Theme.of(context)
+                              .textTheme
+                              .subtitle2!
+                              .copyWith(fontSize: 18),
+                          textAlign: TextAlign.center,
+                        ),
+                        Text(
+                          '${_con.balancePoints}/${_con.targetPoints}',
                           style: Theme.of(context)
                               .textTheme
                               .subtitle2!

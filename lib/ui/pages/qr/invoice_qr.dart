@@ -118,29 +118,29 @@ class _InvoiceQrScreenState extends StateMVC<InvoiceQrScreen> {
                                     const SizedBox(
                                       height: 8.0,
                                     ),
-                                    if (widget.arguments.daily &&
-                                        _con.qrModelResult!.invoiceAccepted!)
-                                      ElevatedButton(
-                                        onPressed: () async {
-                                          Navigator.pushNamed(
-                                              context, Routes.pontQrScreen,
-                                              arguments: InvoiceQrArguments(
-                                                mallId: widget.arguments.mallId,
-                                                gameId: widget.arguments.gameId,
-                                                title: widget.arguments.title,
-                                                daily: widget.arguments.daily,
-                                                balancePoints: _con
-                                                        .qrModelResult
-                                                        ?.balancePoints ??
-                                                    0,
-                                                targetPoints: _con.qrModelResult
-                                                        ?.targetPoints ??
-                                                    0,
-                                              ));
-                                        },
-                                        child: Text(
-                                            S.of(context).letsCollect500Points),
-                                      ),
+                                    // if (widget.arguments.daily &&
+                                    //     _con.qrModelResult!.invoiceAccepted!)
+                                    //   ElevatedButton(
+                                    //     onPressed: () async {
+                                    //       Navigator.pushNamed(
+                                    //           context, Routes.pontQrScreen,
+                                    //           arguments: InvoiceQrArguments(
+                                    //             mallId: widget.arguments.mallId,
+                                    //             gameId: widget.arguments.gameId,
+                                    //             title: widget.arguments.title,
+                                    //             daily: widget.arguments.daily,
+                                    //             balancePoints: _con
+                                    //                     .qrModelResult
+                                    //                     ?.balancePoints ??
+                                    //                 0,
+                                    //             targetPoints: _con.qrModelResult
+                                    //                     ?.targetPoints ??
+                                    //                 0,
+                                    //           ));
+                                    //     },
+                                    //     child: Text(
+                                    //         S.of(context).letsCollect500Points),
+                                    //   ),
                                   ],
                                 ),
                             ]),
@@ -178,7 +178,8 @@ class _InvoiceQrScreenState extends StateMVC<InvoiceQrScreen> {
                     const SizedBox(
                       height: 20.0,
                     ),
-                    if (_con.accepted && widget.arguments.daily)
+                    if (widget.arguments.daily &&
+                        _con.qrModelResult!.invoiceAccepted!)
                       ElevatedButton(
                         onPressed: () async {
                           Navigator.pushNamed(context, Routes.pontQrScreen,
@@ -217,6 +218,9 @@ class _InvoiceQrScreenState extends StateMVC<InvoiceQrScreen> {
                         },
                         child: Text(S.of(context).scanInvoiceBarcode),
                       ),
+                    const SizedBox(
+                      height: 20.0,
+                    ),
                   ],
                 ),
               ),

@@ -95,6 +95,8 @@ class _GameDetailScreenState extends StateMVC<GameDetailScreen> {
                                       arguments: InvoiceQrArguments(
                                         gameId: widget.arguments.gameId,
                                         mallId: widget.arguments.mallId,
+                                        balancePoints: _con.balancePoints,
+                                        targetPoints: _con.targetPoint,
                                         daily: true,
                                         title: S
                                             .of(context)

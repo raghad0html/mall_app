@@ -67,26 +67,27 @@ class _HomePageState extends StateMVC<HomePage> {
                           borderRadius:
                               const BorderRadius.all(Radius.circular(5)),
                           color: AppColors.grayColor.withOpacity(0.2)),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
+                      child:
+                          // Column(
+                          //   mainAxisAlignment: MainAxisAlignment.start,
+                          //   crossAxisAlignment: CrossAxisAlignment.start,
+                          //   children: [
+                          //     Text(
+                          //       S.of(context).yourCity,
+                          //       style: Theme.of(context)
+                          //           .textTheme
+                          //           .subtitle1
+                          //           ?.copyWith(fontSize: 15),
+                          //     ),
                           Text(
-                            S.of(context).yourCity,
-                            style: Theme.of(context)
-                                .textTheme
-                                .subtitle1
-                                ?.copyWith(fontSize: 15),
-                          ),
-                          Text(
-                            _con.currentCity,
-                            style: Theme.of(context)
-                                .textTheme
-                                .subtitle1
-                                ?.copyWith(fontSize: 15),
-                          ),
-                        ],
+                        _con.currentCity,
+                        style: Theme.of(context)
+                            .textTheme
+                            .subtitle1
+                            ?.copyWith(fontSize: 15),
                       ),
+                      // ],
+                      // ),
                     ),
                   ),
                   InkWell(
