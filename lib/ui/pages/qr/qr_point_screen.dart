@@ -27,7 +27,7 @@ class _PointQRScreenState extends StateMVC<PointQRScreen> {
   @override
   void initState() {
     super.initState();
-    print('widget.arguments.targetPoints ${widget.arguments.targetPoints}');
+    debugPrint('widget.arguments.targetPoints ${widget.arguments.targetPoints}');
     _con.initPoints(
         targetPointsWidget: widget.arguments.targetPoints,
         balancePointsWidget: widget.arguments.balancePoints);
@@ -35,7 +35,7 @@ class _PointQRScreenState extends StateMVC<PointQRScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print('widget.arguments.balancePoints ${widget.arguments.balancePoints}');
+    debugPrint('widget.arguments.balancePoints ${widget.arguments.balancePoints}');
     return Scaffold(
       key: _con.scaffoldKey,
       body: SafeArea(
@@ -165,12 +165,12 @@ class _PointQRScreenState extends StateMVC<PointQRScreen> {
                             qrType: QrTypeParamsModel.sticker);
                       }
                     } else {
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                           content:
                               Text('لا يمكنك مسح فاتورة تأكد من عدد نقاطك')));
                     }
                   },
-                  child: Text('مسح باركود محل'),
+                  child: const Text('مسح باركود محل'),
                 ),
               ),
             ),

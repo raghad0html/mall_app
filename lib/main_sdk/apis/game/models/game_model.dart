@@ -1,5 +1,22 @@
 import 'package:mall_app/main_sdk/apis/game/models/game_level_enums_model.dart';
 
+class ListOfGameModel {
+  ListOfGameModel({
+    this.data,
+  });
+
+  ListOfGameModel.fromJson(dynamic json) {
+    if (json != null) {
+      data = [];
+      json.forEach((v) {
+        data?.add(GameModel.fromJson(v));
+      });
+    }
+  }
+
+  List<GameModel>? data;
+}
+
 class GameModel {
   bool? gameAccepted;
   String? msg;

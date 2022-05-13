@@ -57,7 +57,7 @@ class _ResetPasswordScreenState extends StateMVC<ResetPasswordScreen> {
                           TextFormField(
                             controller: verCodeController,
                             keyboardType: TextInputType.text,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               hintText: 'رمز التأكيد',
                               labelText: 'رمز التأكيد',
                             ),
@@ -123,7 +123,7 @@ class _ResetPasswordScreenState extends StateMVC<ResetPasswordScreen> {
                                   // _con.loginParamsModel.
                                   _con.loginUser();
                                 },
-                                child: Text('إعادة تعيين كلمة المرور'),
+                                child: const Text('إعادة تعيين كلمة المرور'),
                               ),
                             ),
                           ),

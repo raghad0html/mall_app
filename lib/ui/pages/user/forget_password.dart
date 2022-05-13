@@ -89,7 +89,7 @@ class _ForgetPasswordState extends StateMVC<ForgetPassword> {
                                   // // _con.loginParamsModel.
                                   // _con.loginUser();
                                 },
-                                child: Text(
+                                child: const Text(
                                   'أرسال رمز التأكيد',
                                 ),
                               ),

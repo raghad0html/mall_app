@@ -36,7 +36,6 @@ GameLevelEnumsModel fromStringToGameLevelEnumsModel1(String prefix) {
 
 extension GetQrTypeParamsModelFromString on GameLevelEnumsModel {
   GameLevelEnumsModel fromStringToGameLevelEnumsModel(String prefix) {
-    print('prefixprefixprefix${prefix}');
     switch (prefix) {
       case 'zero':
         return GameLevelEnumsModel.zero;

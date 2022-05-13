@@ -49,13 +49,13 @@ class _MallsDropDownDialogState extends State<MallsDropDownDialog> {
         ),
       ),
       actions: <Widget>[
-        FlatButton(
+        TextButton(
           child: Text(S.of(context).ok),
           onPressed: () {
             widget.selectedMall(mall);
           },
         ),
-        FlatButton(
+        TextButton(
           child: Text(S.of(context).cancel),
           onPressed: () {
             Navigator.of(context).pop();

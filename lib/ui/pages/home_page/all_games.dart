@@ -61,8 +61,8 @@ class _AllGamesScreenState extends StateMVC<AllGamesScreen> {
                             'مول الامارات ',
                             style: Theme.of(context).textTheme.headline6,
                           ),
-                          Text('Game Status'),
-                          Text('My points in daily game id 77'),
+                          const Text('Game Status'),
+                          const Text('My points in daily game id 77'),
                         ],
                       ),
                     );

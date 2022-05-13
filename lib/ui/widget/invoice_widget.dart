@@ -4,6 +4,7 @@ import '../../generated/l10n.dart';
 import 'dot_widget.dart';
 import 'invoice_details_text.dart';
 
+// ignore: must_be_immutable
 class InvoiceWidget extends StatelessWidget {
   String? name;
   String? taxNumber;

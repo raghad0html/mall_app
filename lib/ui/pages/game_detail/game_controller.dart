@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mall_app/main_sdk/apis/game/models/all_game_params_model.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 import '../../../local_storage/shared_prefernce_services.dart';
@@ -80,20 +81,17 @@ class GameController extends ControllerMVC {
   getAllGames() async {
     loading = true;
     setState(() {});
-    GameParamsModel gameParamsModel = GameParamsModel(
-      action: GameActionEnumsModel.getGames,
-      mallId: int.tryParse(LocalStorageService().lastMallId ?? '0') ?? 0,
+    AllGameParamsModel allGameParamsModel = AllGameParamsModel(
       token: LocalStorageService().token ?? '',
       userid: LocalStorageService().id ?? '',
     );
-    ResponseState<GameModel> _gameResponse =
-        await GameIdentityApi().game(gameParamsModel: gameParamsModel);
+    ResponseState<ListOfGameModel> _gameResponse =
+        await GameIdentityApi().getAllGame(allGameParamsModel: allGameParamsModel);
 
     if (_gameResponse is SuccessState) {
-      SuccessState<GameModel> data = _gameResponse as SuccessState<GameModel>;
+      SuccessState<ListOfGameModel> data = _gameResponse as SuccessState<ListOfGameModel>;
     } else if (_gameResponse is ErrorState) {
-      ErrorState<GameModel> data = _gameResponse as ErrorState<GameModel>;
-      print('DIMA DIMA ${data.errorMessage.error!.message}');
+      ErrorState<ListOfGameModel> data = _gameResponse as ErrorState<ListOfGameModel>;
     }
     loading = false;
     setState(() {});

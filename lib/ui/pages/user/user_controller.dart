@@ -65,7 +65,7 @@ class UserController extends ControllerMVC {
       } else if (_response is ErrorState) {
         ErrorState<UserModel> _res = _response as ErrorState<UserModel>;
         LocalStorageService().login = false;
-        print(_res.errorMessage.error!.message);
+        debugPrint(_res.errorMessage.error!.message);
         Helper.hideLoader(loader);
         ScaffoldMessenger.of(state!.context).showSnackBar(SnackBar(
           content: Text(_res.errorMessage.error!.message),
