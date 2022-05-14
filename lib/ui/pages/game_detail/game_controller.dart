@@ -85,13 +85,18 @@ class GameController extends ControllerMVC {
       token: LocalStorageService().token ?? '',
       userid: LocalStorageService().id ?? '',
     );
-    ResponseState<ListOfGameModel> _gameResponse =
-        await GameIdentityApi().getAllGame(allGameParamsModel: allGameParamsModel);
+    ResponseState<ListOfGameModel> _gameResponse = await GameIdentityApi()
+        .getAllGame(allGameParamsModel: allGameParamsModel);
 
     if (_gameResponse is SuccessState) {
-      SuccessState<ListOfGameModel> data = _gameResponse as SuccessState<ListOfGameModel>;
+      SuccessState<ListOfGameModel> data =
+          _gameResponse as SuccessState<ListOfGameModel>;
+
+      games = data.data.data ?? [];
+      setState(() {});
     } else if (_gameResponse is ErrorState) {
-      ErrorState<ListOfGameModel> data = _gameResponse as ErrorState<ListOfGameModel>;
+      ErrorState<ListOfGameModel> data =
+          _gameResponse as ErrorState<ListOfGameModel>;
     }
     loading = false;
     setState(() {});

@@ -135,10 +135,10 @@ class _QrReaderScreenState extends State<QrReaderScreen> {
   }
 
   Widget _buildQrView(BuildContext context) {
-    var scanArea = (MediaQuery.of(context).size.width < 400 ||
-            MediaQuery.of(context).size.height < 400)
+    var scanArea = (MediaQuery.of(context).size.width < 300 ||
+            MediaQuery.of(context).size.height < 300)
         ? 50.0
-        : 300.0;
+        : 200.0;
     return QRView(
       key: qrKey,
       onQRViewCreated: _onQRViewCreated,

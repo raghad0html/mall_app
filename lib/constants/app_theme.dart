@@ -32,6 +32,14 @@ final ThemeData themeData = ThemeData(
         color: AppColors.basicColor,
         fontWeight: FontWeight.w900,
         fontSize: 18.0),
+    headline4: TextStyle(
+        color: AppColors.basicColor,
+        fontWeight: FontWeight.w500,
+        fontSize: 18.0),
+    headline3: TextStyle(
+        color: AppColors.basicColor,
+        fontWeight: FontWeight.w500,
+        fontSize: 15.0),
   ),
   iconTheme: const IconThemeData(color: AppColors.blackColor),
   inputDecorationTheme: const InputDecorationTheme(

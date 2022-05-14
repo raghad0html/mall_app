@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:mall_app/constants/app_theme.dart';
 
+import '../../main_sdk/apis/game/models/game_level_enums_model.dart';
 import '../widget/circular_loading_widget.dart';
 
 class Helper {
@@ -40,5 +41,25 @@ class Helper {
         log('error: $e');
       }
     });
+  }
+
+  static String getGameLevelFromEnum(GameLevelEnumsModel level) {
+    switch (level) {
+      case GameLevelEnumsModel.zero:
+        return 'المرحلة اليومية';
+      case GameLevelEnumsModel.dailyDone:
+        return 'تم إنهاء المرحلة اليومية';
+      case GameLevelEnumsModel.dailyProgress:
+        return 'المرحلة اليومية جمع النقاط';
+      case GameLevelEnumsModel.weeklyDone:
+        return 'تم إنهاء المرحلة الاسبوعية';
+      case GameLevelEnumsModel.monthlyDone:
+        return 'تم إنهاء المرحلة الشهرية';
+      case GameLevelEnumsModel.quarterlyDone:
+        return 'تم إنهاء المرحلة الربع سنوية';
+      case GameLevelEnumsModel.errorDetectLevel:
+      default:
+        return '';
+    }
   }
 }

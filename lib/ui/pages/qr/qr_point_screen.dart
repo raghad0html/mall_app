@@ -8,6 +8,7 @@ import '../../../generated/l10n.dart';
 import '../../../main_sdk/apis/qr/models/qr_type_enums_model.dart';
 import '../../../routes.dart';
 import '../../widget/costume_appbar.dart';
+import '../../widget/lined_text.dart';
 
 class PointQRScreen extends StatefulWidget {
   final InvoiceQrArguments arguments;
@@ -27,7 +28,8 @@ class _PointQRScreenState extends StateMVC<PointQRScreen> {
   @override
   void initState() {
     super.initState();
-    debugPrint('widget.arguments.targetPoints ${widget.arguments.targetPoints}');
+    debugPrint(
+        'widget.arguments.targetPoints ${widget.arguments.targetPoints}');
     _con.initPoints(
         targetPointsWidget: widget.arguments.targetPoints,
         balancePointsWidget: widget.arguments.balancePoints);
@@ -35,7 +37,8 @@ class _PointQRScreenState extends StateMVC<PointQRScreen> {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('widget.arguments.balancePoints ${widget.arguments.balancePoints}');
+    debugPrint(
+        'widget.arguments.balancePoints ${widget.arguments.balancePoints}');
     return Scaffold(
       key: _con.scaffoldKey,
       body: SafeArea(
@@ -119,23 +122,9 @@ class _PointQRScreenState extends StateMVC<PointQRScreen> {
                 ),
               ),
             ),
-            Container(
-              padding: const EdgeInsets.only(
-                bottom: 1, // Space between underline and text
-              ),
-              decoration: const BoxDecoration(
-                  border: Border(
-                      bottom: BorderSide(
-                color: AppColors.primaryColor,
-                width: 1.0, // Underline thickness
-              ))),
-              child: Text(
-                S.of(context).browseSubscriptionMarkets,
-                style: Theme.of(context).textTheme.headline6!.copyWith(
-                    color: AppColors.primaryColor, fontSize: 16.0, height: 1
-                    //  decoration: TextDecoration.underline,
-                    ),
-              ),
+            LinedText(
+              color: AppColors.primaryColor,
+              text: S.of(context).browseSubscriptionMarkets,
             ),
             const SizedBox(
               height: 20.0,

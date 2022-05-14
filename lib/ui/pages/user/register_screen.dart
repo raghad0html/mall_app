@@ -26,6 +26,8 @@ class _RegisterScreenState extends StateMVC<RegisterScreen> {
   TextEditingController rePasswordController = TextEditingController();
   TextEditingController nameController = TextEditingController();
 
+  TextEditingController phoneController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
@@ -39,6 +41,7 @@ class _RegisterScreenState extends StateMVC<RegisterScreen> {
     passwordController.clear();
     nameController.clear();
     rePasswordController.clear();
+    phoneController.clear();
   }
 
   @override
@@ -105,6 +108,24 @@ class _RegisterScreenState extends StateMVC<RegisterScreen> {
                                         !value.contains('@') ||
                                         !value.contains('.')) {
                                       return S.of(context).enterEmail;
+                                    }
+                                    return null;
+                                  },
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                TextFormField(
+                                  controller: phoneController,
+                                  keyboardType: TextInputType.phone,
+                                  obscureText: true,
+                                  decoration: InputDecoration(
+                                    hintText: 'رقم الهاتف',
+                                    labelText: 'رقم الهاتف',
+                                  ),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'يرجى ادخال رقم الهاتف';
                                     }
                                     return null;
                                   },
@@ -183,13 +204,19 @@ class _RegisterScreenState extends StateMVC<RegisterScreen> {
                                         vertical: 16.0),
                                     child: ElevatedButton(
                                       onPressed: () {
-                                        _con.loginParamsModel.email =
+                                        _con.registerParamsModel.email =
                                             emailController.text;
-                                        _con.loginParamsModel.password =
+                                        _con.registerParamsModel.password =
                                             passwordController.text;
-                                        //TODO
-                                        // _con.loginParamsModel.
-                                        _con.loginUser();
+                                        _con.registerParamsModel.name =
+                                            nameController.text;
+                                        _con.registerParamsModel.password =
+                                            passwordController.text;
+                                        _con.registerParamsModel.cityId =
+                                            _con.city.cityId ?? 0;
+                                        _con.registerParamsModel.phone =
+                                            phoneController.text;
+                                        _con.registerNewUser();
                                       },
                                       child: Text(S.of(context).login),
                                     ),
@@ -220,7 +247,8 @@ class _RegisterScreenState extends StateMVC<RegisterScreen> {
                                             text: ' ',
                                           ),
                                           TextSpan(
-                                            text: S.of(context).login,
+                                            text:
+                                                S.of(context).createNewAccount,
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .headline6!
