@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mall_app/constants/app_theme.dart';
+import 'package:mall_app/local_storage/shared_prefernce_services.dart';
 import 'package:mall_app/routes.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
@@ -30,6 +31,7 @@ class _HomePageState extends StateMVC<HomePage> {
     _con = controller as HomeController;
   }
 
+  int? cityId;
   @override
   void initState() {
     super.initState();
@@ -60,6 +62,7 @@ class _HomePageState extends StateMVC<HomePage> {
                           return CitiesDropDownDialog(
                               cities: _con.cities,
                               selectedCity: (mall) {
+                                  cityId = mall.cityId;
                                 Navigator.pop(context);
                                 _con.saveCity(mall.cityId, mall.cityName);
                               });
@@ -222,9 +225,16 @@ class _HomePageState extends StateMVC<HomePage> {
                       style: Theme.of(context).textTheme.headline6,
                     ),
                   ),
-                  const LinedText(
-                    color: AppColors.basicColor,
-                    text: 'عرض الكل',
+                  InkWell(
+                    onTap: (){
+                      if( _con.malls.isNotEmpty && !_con.loading){
+                        Navigator.pushNamed(context, Routes.mallsScreen ,arguments: cityId??int.tryParse(LocalStorageService().cityId!));
+                      }
+                    },
+                    child: const LinedText(
+                      color: AppColors.basicColor,
+                      text: 'عرض الكل',
+                    ),
                   ),
                 ],
               ),

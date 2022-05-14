@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mall_app/main_sdk/apis/city/models/city_model.dart';
 import 'package:mall_app/main_sdk/apis/city/services/ciry_identity_apis.dart';
+import 'package:mall_app/main_sdk/apis/core/models/common/message_model.dart';
 import 'package:mall_app/main_sdk/apis/user/models/register_params_model.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
@@ -77,11 +78,11 @@ class UserController extends ControllerMVC {
       Helper.overlayLoader(state!.context);
       Overlay.of(state!.context)?.insert(loader);
 
-      ResponseState<String> _response = await UserIdentityApi()
+      ResponseState<MessageModel> _response = await UserIdentityApi()
           .register(registerParamsModel: registerParamsModel);
       print(_response);
       if (_response is SuccessState) {
-        SuccessState<String> _res = _response as SuccessState<String>;
+        SuccessState<MessageModel> _res = _response as SuccessState<MessageModel>;
 
         print(_res);
         Helper.hideLoader(loader);
