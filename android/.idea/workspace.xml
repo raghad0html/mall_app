@@ -38,6 +38,7 @@
       <change afterPath="$PROJECT_DIR$/../ios/Podfile.lock" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../lib/ui/pages/mall_page/mall_controller.dart" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../lib/ui/pages/mall_page/mall_page.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lib/ui/pages/mall_page/shop_page/shop_page.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.flutter-plugins" beforeDir="false" afterPath="$PROJECT_DIR$/../.flutter-plugins" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/../.flutter-plugins-dependencies" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/libraries/Dart_Packages.xml" afterDir="false" />
