@@ -254,7 +254,13 @@ class _HomePageState extends StateMVC<HomePage> {
                                   crossAxisCount: 2),
                           itemBuilder: (context, gridViewIndex) {
                             MallModel mall = _con.malls[gridViewIndex];
-                            return MallWidget(mall: mall);
+                            return GestureDetector(
+                                onTap: () {
+                                  Navigator.pushNamed(context, Routes.shopsScreen,
+                                      arguments: ShopArguments(
+                                          mallName: _con.malls[gridViewIndex].name ?? '',
+                                          mallId: _con.malls[gridViewIndex].mallId));
+                                },child: MallWidget(mall: mall));
                           },
                         ),
                       ),

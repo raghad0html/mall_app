@@ -51,7 +51,7 @@ class MallWidget extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
                 Text(
-                  mall.name ?? '',
+                  mall.linkApp ?? '',
                   style: Theme.of(context)
                       .textTheme
                       .subtitle1

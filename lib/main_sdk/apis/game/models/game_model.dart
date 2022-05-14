@@ -29,13 +29,13 @@ class GameModel {
 
   GameModel(
       {this.gameAccepted,
-      this.msg,
-      this.gameId,
-      this.level,
-      this.mallName,
-      this.balancePoints,
-      this.targetPoints,
-      this.gameDateStart});
+        this.msg,
+        this.gameId,
+        this.level,
+        this.mallName,
+        this.balancePoints,
+        this.targetPoints,
+        this.gameDateStart});
 
   GameModel.fromJson(Map<String, dynamic> json) {
     gameAccepted = json['gameAccepted'];

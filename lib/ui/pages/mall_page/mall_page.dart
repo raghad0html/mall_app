@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mall_app/generated/l10n.dart';
+import 'package:mall_app/routes.dart';
 import 'package:mall_app/ui/pages/mall_page/mall_controller.dart';
 import 'package:mall_app/ui/widget/mall_widget.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
@@ -31,7 +32,7 @@ class _MallsPageState extends StateMVC<MallsPage> {
     return Scaffold(
         appBar: AppBar(
           leading: const BackButton(),
-          title:  Text(
+          title: Text(
             S.of(context).malls,
           ),
         ),
@@ -45,7 +46,14 @@ class _MallsPageState extends StateMVC<MallsPage> {
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2),
                 itemBuilder: (context, gridViewIndex) {
-                  return MallWidget(mall: _con.malls[gridViewIndex]);
+                  return GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, Routes.shopsScreen,
+                            arguments: ShopArguments(
+                                mallName: _con.malls[gridViewIndex].name ?? '',
+                                mallId: _con.malls[gridViewIndex].mallId));
+                      },
+                      child: MallWidget(mall: _con.malls[gridViewIndex]));
                 },
               ));
   }

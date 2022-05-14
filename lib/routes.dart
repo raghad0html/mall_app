@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mall_app/ui/pages/mall_page/mall_page.dart';
+import 'package:mall_app/ui/pages/mall_page/shop_page/shop_details_page/shop_details_page.dart';
+import 'package:mall_app/ui/pages/mall_page/shop_page/shop_page.dart';
 import 'package:mall_app/ui/pages/user/forget_password.dart';
 import 'package:mall_app/ui/pages/user/register_screen.dart';
 import 'package:mall_app/ui/pages/user/reset_password_screen.dart';
@@ -30,6 +32,8 @@ class Routes {
   static const String resetPasswordScreen = '/resetPasswordScreen';
   static const String allGamesScreen = '/allGamesScreen';
   static const String mallsScreen = '/mallsScreen';
+  static const String shopsScreen = '/shopsScreen';
+  static const String shopDetailsScreen = '/shopDetailsScreen';
 
   static Route? getRoutes(settings) {
     final arguments = settings.arguments;
@@ -135,6 +139,22 @@ class Routes {
           settings: settings,
           duration: const Duration(milliseconds: 350),
         );
+      case shopsScreen:
+        ShopArguments args = settings.arguments;
+        return PageTransition(
+          child: ShopsPage(shopArguments: args),
+          type: PageTransitionType.fade,
+          settings: settings,
+          duration: const Duration(milliseconds: 350),
+        );
+      case shopDetailsScreen:
+        ShopArguments args = settings.arguments;
+        return PageTransition(
+          child: ShopDetailsPage(shopArguments: args),
+          type: PageTransitionType.fade,
+          settings: settings,
+          duration: const Duration(milliseconds: 350),
+        );
 
       default:
         return null;
@@ -149,6 +169,14 @@ class GameDetails {
 
   GameDetails(
       {required this.mallName, required this.mallId, required this.gameId});
+}
+
+class ShopArguments {
+  final String mallName;
+  final int mallId;
+  final String? image;
+
+  ShopArguments({required this.mallName, required this.mallId, this.image});
 }
 
 class InvoiceQrArguments {
