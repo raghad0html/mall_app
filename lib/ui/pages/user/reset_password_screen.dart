@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 import '../../../generated/l10n.dart';
+import '../../../routes.dart';
 import '../../widget/costume_appbar.dart';
 import 'user_controller.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
-  const ResetPasswordScreen({Key? key}) : super(key: key);
+  final StringArguments arguments;
+  const ResetPasswordScreen({Key? key, required this.arguments})
+      : super(key: key);
 
   @override
   _ResetPasswordScreenState createState() => _ResetPasswordScreenState();
@@ -35,106 +38,94 @@ class _ResetPasswordScreenState extends StateMVC<ResetPasswordScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         key: _con.scaffoldKey,
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const CostumeAppBar(title: 'إعادة تعيين كلمة المرور'),
-            const SizedBox(height: 10),
-            Expanded(
-              child: SingleChildScrollView(
-                  child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(24.0),
-                    child: Form(
-                      key: _con.formKey,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          TextFormField(
-                            controller: verCodeController,
-                            keyboardType: TextInputType.text,
-                            decoration: const InputDecoration(
-                              hintText: 'رمز التأكيد',
-                              labelText: 'رمز التأكيد',
-                            ),
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'أدخل رمز التأكيد';
-                              }
-                              return null;
-                            },
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          TextFormField(
-                            controller: passwordController,
-                            keyboardType: TextInputType.text,
-                            obscureText: true,
-                            decoration: InputDecoration(
-                              hintText: S.of(context).password,
-                              labelText: S.of(context).password,
-                            ),
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return S.of(context).enterPassword;
-                              }
-                              return null;
-                            },
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          TextFormField(
-                            controller: rePasswordController,
-                            keyboardType: TextInputType.text,
-                            obscureText: true,
-                            decoration: InputDecoration(
-                              hintText: S.of(context).rewritePassword,
-                              labelText: S.of(context).rewritePassword,
-                            ),
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                if (value != passwordController.text) {
-                                  return S.of(context).passwordMismatch;
+        body: SafeArea(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const CostumeAppBar(title: 'إعادة تعيين كلمة المرور'),
+              const SizedBox(height: 10),
+              Expanded(
+                child: SingleChildScrollView(
+                    child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(24.0),
+                      child: Form(
+                        key: _con.formKey,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            TextFormField(
+                              controller: passwordController,
+                              keyboardType: TextInputType.text,
+                              obscureText: true,
+                              decoration: InputDecoration(
+                                hintText: S.of(context).password,
+                                labelText: S.of(context).password,
+                              ),
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return S.of(context).enterPassword;
                                 }
-                              }
-                              return null;
-                            },
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          Center(
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 16.0),
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  // _con.loginParamsModel.email =
-                                  //     emailController.text;
-                                  // _con.loginParamsModel.password =
-                                  //     passwordController.text;
-                                  //TODO
-                                  // _con.loginParamsModel.
-                                  _con.loginUser();
-                                },
-                                child: const Text('إعادة تعيين كلمة المرور'),
+                                return null;
+                              },
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            TextFormField(
+                              controller: rePasswordController,
+                              keyboardType: TextInputType.text,
+                              obscureText: true,
+                              decoration: InputDecoration(
+                                hintText: S.of(context).rewritePassword,
+                                labelText: S.of(context).rewritePassword,
+                              ),
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  if (value != passwordController.text) {
+                                    return S.of(context).passwordMismatch;
+                                  }
+                                }
+                                return null;
+                              },
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            Center(
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 16.0),
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    // _con.loginParamsModel.email =
+                                    //     emailController.text;
+                                    // _con.loginParamsModel.password =
+                                    //     passwordController.text;
+                                    //TODO
+                                    // _con.loginParamsModel.
+                                    _con.setNewPassword(
+                                        email: widget.arguments.email,
+                                        code: widget.arguments.code ?? '',
+                                        newPassword: passwordController.text);
+                                  },
+                                  child: const Text('إعادة تعيين كلمة المرور'),
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              )),
-            )
-          ],
+                  ],
+                )),
+              )
+            ],
+          ),
         ));
   }
 }

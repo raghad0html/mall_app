@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mall_app/routes.dart';
 import 'package:mall_app/ui/widget/costume_appbar.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
@@ -19,9 +18,7 @@ class _ForgetPasswordState extends StateMVC<ForgetPassword> {
   _ForgetPasswordState() : super(UserController()) {
     _con = controller as UserController;
   }
-
   TextEditingController emailController = TextEditingController();
-  // TextEditingController verCodeController = TextEditingController();
 
   @override
   void dispose() {
@@ -54,7 +51,16 @@ class _ForgetPasswordState extends StateMVC<ForgetPassword> {
                         key: _con.formKey,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
+                            Text(
+                              'سوف نقوم بإرسال رمز تأكيد على بريدك الالكتروني المسجل ',
+                              style: Theme.of(context).textTheme.headline4,
+                              textAlign: TextAlign.center,
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
                             TextFormField(
                               controller: emailController,
                               keyboardType: TextInputType.emailAddress,
@@ -81,14 +87,7 @@ class _ForgetPasswordState extends StateMVC<ForgetPassword> {
                                     const EdgeInsets.symmetric(vertical: 16.0),
                                 child: ElevatedButton(
                                   onPressed: () {
-                                    Navigator.pushNamed(
-                                        context, Routes.resetPasswordScreen);
-                                    // _con.loginParamsModel.email =
-                                    //     emailController.text;
-                                    //
-                                    // //TODO
-                                    // // _con.loginParamsModel.
-                                    // _con.loginUser();
+                                    _con.sendCodeToEmail(emailController.text);
                                   },
                                   child: const Text(
                                     'أرسال رمز التأكيد',

@@ -7,6 +7,7 @@ class MessageModel {
   bool? registerAccepted;
   bool? resendAccepted;
   bool? newPasswordAccepted;
+  String? msg;
 
   MessageModel(
       {this.message = 'Unknown Error',
@@ -14,10 +15,10 @@ class MessageModel {
       this.codeAccepted,
       this.registerAccepted,
       this.resendAccepted,
+      this.msg,
       this.newPasswordAccepted});
-
-  factory MessageModel.fromJson(String str) =>
-      MessageModel.fromMap(json.decode(str));
+  factory MessageModel.fromJson(Map<String, dynamic> json) =>
+      MessageModel.fromMap(json);
 
   String toJson() => json.encode(toMap());
 
@@ -30,6 +31,7 @@ class MessageModel {
         registerAccepted: json['registerAccepted'],
         resendAccepted: json['resendAccepted'],
         newPasswordAccepted: json['newPasswordAccepted'],
+        msg: json['msg'] ?? '',
       );
 
   Map<String, dynamic> toMap() => {
@@ -39,5 +41,6 @@ class MessageModel {
         'registerAccepted': registerAccepted,
         'resendAccepted': resendAccepted,
         'newPasswordAccepted': newPasswordAccepted,
+        'msg': msg,
       };
 }

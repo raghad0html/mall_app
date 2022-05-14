@@ -11,6 +11,7 @@ import 'ui/pages/qr/invoice_qr.dart';
 import 'ui/pages/qr/qr_point_screen.dart';
 import 'ui/pages/qr/qr_reader.dart';
 import 'ui/pages/splash/splash_screen.dart';
+import 'ui/pages/user/check_code_screen.dart';
 import 'ui/pages/user/login_screen.dart';
 
 class Routes {
@@ -28,6 +29,7 @@ class Routes {
   static const String forgetPasswordScreen = '/forgetPasswordScreen';
   static const String resetPasswordScreen = '/resetPasswordScreen';
   static const String allGamesScreen = '/allGamesScreen';
+  static const String checkCodeScreen = '/checkCodeScreen';
 
   static Route? getRoutes(settings) {
     final arguments = settings.arguments;
@@ -113,7 +115,9 @@ class Routes {
         );
       case resetPasswordScreen:
         return PageTransition(
-          child: const ResetPasswordScreen(),
+          child: ResetPasswordScreen(
+            arguments: arguments,
+          ),
           type: PageTransitionType.fade,
           settings: settings,
           duration: const Duration(milliseconds: 350),
@@ -121,6 +125,15 @@ class Routes {
       case allGamesScreen:
         return PageTransition(
           child: const AllGamesScreen(),
+          type: PageTransitionType.fade,
+          settings: settings,
+          duration: const Duration(milliseconds: 350),
+        );
+      case checkCodeScreen:
+        return PageTransition(
+          child: CheckCodeScreen(
+            arguments: arguments,
+          ),
           type: PageTransitionType.fade,
           settings: settings,
           duration: const Duration(milliseconds: 350),
@@ -155,5 +168,14 @@ class InvoiceQrArguments {
     required this.daily,
     this.balancePoints = 0,
     this.targetPoints = 0,
+  });
+}
+
+class StringArguments {
+  final String email;
+  final String? code;
+  StringArguments({
+    required this.email,
+    this.code,
   });
 }
