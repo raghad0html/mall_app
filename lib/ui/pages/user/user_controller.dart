@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mall_app/main_sdk/apis/city/models/city_model.dart';
 import 'package:mall_app/main_sdk/apis/city/services/ciry_identity_apis.dart';
+import 'package:mall_app/main_sdk/apis/user/models/register_params_model.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 import '../../../local_storage/shared_prefernce_services.dart';
@@ -16,12 +17,14 @@ class UserController extends ControllerMVC {
   late GlobalKey<ScaffoldState> scaffoldKey;
   late OverlayEntry loader;
   late LoginParamsModel loginParamsModel;
+  late RegisterParamsModel registerParamsModel;
   List<CityModel> cities = [];
   late CityModel city;
   UserController() {
     formKey = GlobalKey<FormState>();
     scaffoldKey = GlobalKey<ScaffoldState>();
     loginParamsModel = LoginParamsModel();
+    registerParamsModel = RegisterParamsModel();
   }
 
   getCity() async {
@@ -74,13 +77,17 @@ class UserController extends ControllerMVC {
       Helper.overlayLoader(state!.context);
       Overlay.of(state!.context)?.insert(loader);
 
-      ResponseState<UserModel> _response =
-          await UserIdentityApi().login(loginParamsModel: loginParamsModel);
+      ResponseState<String> _response = await UserIdentityApi()
+          .register(registerParamsModel: registerParamsModel);
+      print(_response);
       if (_response is SuccessState) {
+        SuccessState<String> _res = _response as SuccessState<String>;
+
+        print(_res);
         Helper.hideLoader(loader);
         Navigator.pushNamed(state!.context, Routes.loginScreen);
       } else if (_response is ErrorState) {
-        ErrorState<UserModel> _res = _response as ErrorState<UserModel>;
+        ErrorState<String> _res = _response as ErrorState<String>;
         LocalStorageService().login = false;
         Helper.hideLoader(loader);
         ScaffoldMessenger.of(state!.context).showSnackBar(SnackBar(

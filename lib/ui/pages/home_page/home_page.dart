@@ -5,9 +5,14 @@ import 'package:mall_app/routes.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 import '../../../generated/l10n.dart';
+import '../../../main_sdk/apis/game/models/game_level_enums_model.dart';
+import '../../../main_sdk/apis/game/models/game_model.dart';
 import '../../../main_sdk/apis/mall/models/mall_model.dart';
+import '../../helper/helper.dart';
 import '../../widget/cities_drop_down_dialog.dart';
+import '../../widget/lined_text.dart';
 import '../../widget/mall_widget.dart';
+import '../../widget/my_competition_item.dart';
 import 'home_controller.dart';
 import 'malls_drop_down_dialog.dart';
 
@@ -30,6 +35,7 @@ class _HomePageState extends StateMVC<HomePage> {
     super.initState();
     _con.getMalls();
     _con.getCity();
+    _con.getAllGames();
   }
 
   @override
@@ -67,32 +73,18 @@ class _HomePageState extends StateMVC<HomePage> {
                           borderRadius:
                               const BorderRadius.all(Radius.circular(5)),
                           color: AppColors.grayColor.withOpacity(0.2)),
-                      child:
-                          // Column(
-                          //   mainAxisAlignment: MainAxisAlignment.start,
-                          //   crossAxisAlignment: CrossAxisAlignment.start,
-                          //   children: [
-                          //     Text(
-                          //       S.of(context).yourCity,
-                          //       style: Theme.of(context)
-                          //           .textTheme
-                          //           .subtitle1
-                          //           ?.copyWith(fontSize: 15),
-                          //     ),
-                          Text(
+                      child: Text(
                         _con.currentCity,
                         style: Theme.of(context)
                             .textTheme
                             .subtitle1
                             ?.copyWith(fontSize: 15),
                       ),
-                      // ],
-                      // ),
                     ),
                   ),
                   InkWell(
                     onTap: () {
-                      Navigator.pushNamed(context, Routes.allGamesScreen);
+                      print('sdksdvksdv');
                     },
                     child: Container(
                       padding: const EdgeInsets.all(3.0),
@@ -102,7 +94,7 @@ class _HomePageState extends StateMVC<HomePage> {
                           color:
                               AppColors.appBarBackGroundColor.withOpacity(0.2)),
                       child: Text(
-                        S.of(context).myCompetitions,
+                        'الجوائز',
                         style: Theme.of(context).textTheme.subtitle1,
                       ),
                     ),
@@ -178,9 +170,63 @@ class _HomePageState extends StateMVC<HomePage> {
               const SizedBox(
                 height: 20,
               ),
-              Text(
-                S.of(context).malls,
-                style: Theme.of(context).textTheme.headline6,
+              Column(
+                children: [
+                  InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(context, Routes.allGamesScreen);
+                    },
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            S.of(context).myCompetitions,
+                            style: Theme.of(context).textTheme.headline6,
+                          ),
+                        ),
+                        const LinedText(
+                          color: AppColors.basicColor,
+                          text: 'عرض الكل',
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  SizedBox(
+                    height: 200,
+                    child: _con.games.isEmpty && _con.loadingCompetition
+                        ? const Center(child: CircularProgressIndicator())
+                        : ListView.builder(
+                            itemCount: _con.games.length,
+                            itemBuilder: (context, i) {
+                              GameModel _game = _con.games[i];
+                              String gameLevel = Helper.getGameLevelFromEnum(
+                                  _game.level ?? GameLevelEnumsModel.zero);
+                              return MyCompetitionItem(
+                                  game: _game, gameLevel: gameLevel);
+                            },
+                          ),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      S.of(context).malls,
+                      style: Theme.of(context).textTheme.headline6,
+                    ),
+                  ),
+                  const LinedText(
+                    color: AppColors.basicColor,
+                    text: 'عرض الكل',
+                  ),
+                ],
               ),
               const SizedBox(
                 height: 10,

@@ -9,6 +9,7 @@ import '../../../main_sdk/apis/qr/models/qr_type_enums_model.dart';
 import '../../../routes.dart';
 import '../../widget/costume_appbar.dart';
 import '../../widget/invoice_widget.dart';
+import '../../widget/lined_text.dart';
 
 class InvoiceQrScreen extends StatefulWidget {
   final InvoiceQrArguments arguments;
@@ -155,30 +156,30 @@ class _InvoiceQrScreenState extends StateMVC<InvoiceQrScreen> {
                 alignment: Alignment.bottomCenter,
                 child: Column(
                   children: [
-                    Container(
-                      padding: const EdgeInsets.only(
-                        bottom: 1, // Space between underline and text
-                      ),
-                      decoration: const BoxDecoration(
-                          border: Border(
-                              bottom: BorderSide(
-                        color: AppColors.primaryColor,
-                        width: 1.0, // Underline thickness
-                      ))),
-                      child: Text(
-                        S.of(context).browseSubscriptionMarkets,
-                        style: Theme.of(context).textTheme.headline6!.copyWith(
-                            color: AppColors.primaryColor,
-                            fontSize: 16.0,
-                            height: 1
-                            //  decoration: TextDecoration.underline,
-                            ),
-                      ),
+                    LinedText(
+                      color: AppColors.primaryColor,
+                      text: S.of(context).browseSubscriptionMarkets,
                     ),
                     const SizedBox(
                       height: 20.0,
                     ),
-                    if (widget.arguments.daily &&
+                    if (_con.qrModelResult == null)
+                      ElevatedButton(
+                        onPressed: () async {
+                          var data = await Navigator.pushNamed(
+                              context, Routes.scanQrScreen);
+
+                          if (data != null) {
+                            _con.sendQr(
+                                data: data.toString(),
+                                gameId: widget.arguments.gameId,
+                                mallId: widget.arguments.mallId,
+                                qrType: QrTypeParamsModel.invoice);
+                          }
+                        },
+                        child: Text(S.of(context).scanInvoiceBarcode),
+                      )
+                    else if (widget.arguments.daily &&
                         _con.qrModelResult!.invoiceAccepted!)
                       ElevatedButton(
                         onPressed: () async {

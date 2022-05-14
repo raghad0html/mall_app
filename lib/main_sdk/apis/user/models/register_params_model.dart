@@ -1,16 +1,16 @@
 class RegisterParamsModel {
-  String email;
-  String password;
-  String name;
-  String phone;
-  int cityId;
+  String? email;
+  String? password;
+  String? name;
+  String? phone;
+  int? cityId;
 
   RegisterParamsModel({
-    required this.email,
-    required this.password,
-    required this.name,
-    required this.phone,
-    required this.cityId,
+    this.email,
+    this.password,
+    this.name,
+    this.phone,
+    this.cityId,
   });
 
   Map<String, dynamic> toMap() => {

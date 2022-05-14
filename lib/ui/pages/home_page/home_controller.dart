@@ -7,6 +7,7 @@ import 'package:mvc_pattern/mvc_pattern.dart';
 
 import '../../../local_storage/shared_prefernce_services.dart';
 import '../../../main_sdk/apis/core/models/common/result_class.dart';
+import '../../../main_sdk/apis/game/models/all_game_params_model.dart';
 import '../../../main_sdk/apis/game/models/game_action_enums_model.dart';
 import '../../../main_sdk/apis/game/models/game_model.dart';
 import '../../../main_sdk/apis/game/models/game_params_model.dart';
@@ -22,8 +23,9 @@ class HomeController extends ControllerMVC {
   late List<MallModel> malls = [];
   List<CityModel> cities = [];
   bool loading = false;
+  bool loadingCompetition = false;
   String currentCity = '';
-
+  List<GameModel> games = [];
   HomeController() {
     scaffoldKey = GlobalKey<ScaffoldState>();
     currentCity = LocalStorageService().cityName ?? '';
@@ -117,5 +119,29 @@ class HomeController extends ControllerMVC {
           ));
       LocalStorageService().lastMallId = mallId.toString();
     }
+  }
+
+  getAllGames() async {
+    loadingCompetition = true;
+    setState(() {});
+    AllGameParamsModel allGameParamsModel = AllGameParamsModel(
+      token: LocalStorageService().token ?? '',
+      userid: LocalStorageService().id ?? '',
+    );
+    ResponseState<ListOfGameModel> _gameResponse = await GameIdentityApi()
+        .getAllGame(allGameParamsModel: allGameParamsModel);
+
+    if (_gameResponse is SuccessState) {
+      SuccessState<ListOfGameModel> data =
+          _gameResponse as SuccessState<ListOfGameModel>;
+
+      games = data.data.data ?? [];
+      // setState(() {});
+    } else if (_gameResponse is ErrorState) {
+      ErrorState<ListOfGameModel> data =
+          _gameResponse as ErrorState<ListOfGameModel>;
+    }
+    loadingCompetition = false;
+    setState(() {});
   }
 }

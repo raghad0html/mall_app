@@ -33,76 +33,78 @@ class _ForgetPasswordState extends StateMVC<ForgetPassword> {
   Widget build(BuildContext context) {
     return Scaffold(
         key: _con.scaffoldKey,
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const CostumeAppBar(title: 'إعادة تعيين كلمة المرور'),
-            const SizedBox(
-              height: 20,
-            ),
-            Expanded(
-              child: SingleChildScrollView(
-                  child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(24.0),
-                    child: Form(
-                      key: _con.formKey,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          TextFormField(
-                            controller: emailController,
-                            keyboardType: TextInputType.emailAddress,
-                            decoration: InputDecoration(
-                              hintText: S.of(context).email,
-                              labelText: S.of(context).email,
+        body: SafeArea(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const CostumeAppBar(title: 'إعادة تعيين كلمة المرور'),
+              const SizedBox(
+                height: 20,
+              ),
+              Expanded(
+                child: SingleChildScrollView(
+                    child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(24.0),
+                      child: Form(
+                        key: _con.formKey,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            TextFormField(
+                              controller: emailController,
+                              keyboardType: TextInputType.emailAddress,
+                              decoration: InputDecoration(
+                                hintText: S.of(context).email,
+                                labelText: S.of(context).email,
+                              ),
+                              validator: (value) {
+                                if (value == null ||
+                                    value.isEmpty ||
+                                    !value.contains('@') ||
+                                    !value.contains('.')) {
+                                  return S.of(context).enterEmail;
+                                }
+                                return null;
+                              },
                             ),
-                            validator: (value) {
-                              if (value == null ||
-                                  value.isEmpty ||
-                                  !value.contains('@') ||
-                                  !value.contains('.')) {
-                                return S.of(context).enterEmail;
-                              }
-                              return null;
-                            },
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          Center(
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 16.0),
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  Navigator.pushNamed(
-                                      context, Routes.resetPasswordScreen);
-                                  // _con.loginParamsModel.email =
-                                  //     emailController.text;
-                                  //
-                                  // //TODO
-                                  // // _con.loginParamsModel.
-                                  // _con.loginUser();
-                                },
-                                child: const Text(
-                                  'أرسال رمز التأكيد',
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            Center(
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 16.0),
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.pushNamed(
+                                        context, Routes.resetPasswordScreen);
+                                    // _con.loginParamsModel.email =
+                                    //     emailController.text;
+                                    //
+                                    // //TODO
+                                    // // _con.loginParamsModel.
+                                    // _con.loginUser();
+                                  },
+                                  child: const Text(
+                                    'أرسال رمز التأكيد',
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              )),
-            )
-          ],
+                  ],
+                )),
+              )
+            ],
+          ),
         ));
   }
 }

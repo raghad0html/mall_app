@@ -54,9 +54,9 @@ class QRController extends ControllerMVC {
       balancePoints = data.data.balancePoints ?? 0;
       setState(() {});
     } else if (_qrResponse is ErrorState) {
-      SuccessState<QrModel> data = _qrResponse as SuccessState<QrModel>;
+      ErrorState<QrModel> data = _qrResponse as ErrorState<QrModel>;
       ScaffoldMessenger.of(state!.context).showSnackBar(SnackBar(
-          content: Text(data.data.msg ??
+          content: Text(data.errorMessage.error?.message ??
               '') //S.of(state!.context).sorryWeCouldNotFindTheQr),
           ));
     }
