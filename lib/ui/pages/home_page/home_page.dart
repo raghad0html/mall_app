@@ -83,9 +83,7 @@ class _HomePageState extends StateMVC<HomePage> {
                     ),
                   ),
                   InkWell(
-                    onTap: () {
-                      print('sdksdvksdv');
-                    },
+                    onTap: () {},
                     child: Container(
                       padding: const EdgeInsets.all(3.0),
                       decoration: BoxDecoration(
