@@ -218,7 +218,8 @@ class _RegisterScreenState extends StateMVC<RegisterScreen> {
                                             phoneController.text;
                                         _con.registerNewUser();
                                       },
-                                      child: Text(S.of(context).login),
+                                      child:
+                                          Text(S.of(context).createNewAccount),
                                     ),
                                   ),
                                 ),
@@ -247,8 +248,7 @@ class _RegisterScreenState extends StateMVC<RegisterScreen> {
                                             text: ' ',
                                           ),
                                           TextSpan(
-                                            text:
-                                                S.of(context).createNewAccount,
+                                            text: S.of(context).login,
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .headline6!

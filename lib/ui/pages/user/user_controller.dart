@@ -1,11 +1,16 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:mall_app/main_sdk/apis/city/models/city_model.dart';
 import 'package:mall_app/main_sdk/apis/city/services/ciry_identity_apis.dart';
-import 'package:mall_app/main_sdk/apis/core/models/common/message_model.dart';
 import 'package:mall_app/main_sdk/apis/user/models/register_params_model.dart';
+import 'package:mall_app/main_sdk/apis/user/models/resend_code_params_model.dart';
+import 'package:mall_app/main_sdk/apis/user/models/set_new_password_params_model.dart';
+import 'package:mall_app/main_sdk/apis/user/models/verify_code_params_model.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 import '../../../local_storage/shared_prefernce_services.dart';
+import '../../../main_sdk/apis/core/models/common/message_model.dart';
 import '../../../main_sdk/apis/core/models/common/result_class.dart';
 import '../../../main_sdk/apis/user/models/login_params_model.dart';
 import '../../../main_sdk/apis/user/models/user_model.dart';
@@ -21,6 +26,9 @@ class UserController extends ControllerMVC {
   late RegisterParamsModel registerParamsModel;
   List<CityModel> cities = [];
   late CityModel city;
+  bool clickable = true;
+  int timer = 0;
+
   UserController() {
     formKey = GlobalKey<FormState>();
     scaffoldKey = GlobalKey<ScaffoldState>();
@@ -30,7 +38,7 @@ class UserController extends ControllerMVC {
 
   getCity() async {
     Future<ResponseState<ListOfCityModel>> _listOfCities =
-        CityIdentityApi().getCities();
+    CityIdentityApi().getCities();
     ResponseState<ListOfCityModel> data = await _listOfCities;
     if (data is SuccessState) {
       SuccessState<ListOfCityModel> d = data as SuccessState<ListOfCityModel>;
@@ -49,7 +57,7 @@ class UserController extends ControllerMVC {
       Overlay.of(state!.context)?.insert(loader);
 
       ResponseState<UserModel> _response =
-          await UserIdentityApi().login(loginParamsModel: loginParamsModel);
+      await UserIdentityApi().login(loginParamsModel: loginParamsModel);
       if (_response is SuccessState) {
         SuccessState<UserModel> user = _response as SuccessState<UserModel>;
         LocalStorageService().login = true;
@@ -80,15 +88,18 @@ class UserController extends ControllerMVC {
 
       ResponseState<MessageModel> _response = await UserIdentityApi()
           .register(registerParamsModel: registerParamsModel);
-      print(_response);
       if (_response is SuccessState) {
-        SuccessState<MessageModel> _res = _response as SuccessState<MessageModel>;
-
-        print(_res);
+        SuccessState<MessageModel> _res =
+        _response as SuccessState<MessageModel>;
         Helper.hideLoader(loader);
-        Navigator.pushNamed(state!.context, Routes.loginScreen);
+        if (_res.data.registerAccepted ?? true) {
+          Navigator.pushNamed(state!.context, Routes.loginScreen);
+        }
+        ScaffoldMessenger.of(state!.context).showSnackBar(SnackBar(
+          content: Text(_res.data.msg ?? ''),
+        ));
       } else if (_response is ErrorState) {
-        ErrorState<String> _res = _response as ErrorState<String>;
+        ErrorState<MessageModel> _res = _response as ErrorState<MessageModel>;
         LocalStorageService().login = false;
         Helper.hideLoader(loader);
         ScaffoldMessenger.of(state!.context).showSnackBar(SnackBar(
@@ -96,5 +107,183 @@ class UserController extends ControllerMVC {
         ));
       }
     }
+  }
+
+  sendCodeToEmail(String email) async {
+    if (formKey.currentState!.validate()) {
+      var loader = Helper.overlayLoader(state!.context);
+      FocusScope.of(state!.context).unfocus();
+      Helper.overlayLoader(state!.context);
+      Overlay.of(state!.context)?.insert(loader);
+      RegisterParamsModel registerParamsModel =
+      RegisterParamsModel(email: email);
+      ResponseState<MessageModel> _response = await UserIdentityApi()
+          .resetPassword(registerParamsModel: registerParamsModel);
+
+      if (_response is SuccessState) {
+        SuccessState<MessageModel> _res =
+        _response as SuccessState<MessageModel>;
+        Helper.hideLoader(loader);
+
+        if (_res.data.resetAccepted ?? true) {
+          Navigator.pushNamed(state!.context, Routes.checkCodeScreen,
+              arguments: StringArguments(email: email));
+
+          ScaffoldMessenger.of(state!.context).showSnackBar(SnackBar(
+            content: Text(_res.data.msg ?? ''),
+          ));
+        } else {
+          ScaffoldMessenger.of(state!.context).showSnackBar(SnackBar(
+            content: Text(_res.data.msg ?? ''),
+          ));
+        }
+      } else if (_response is ErrorState) {
+        ErrorState<MessageModel> _res = _response as ErrorState<MessageModel>;
+        LocalStorageService().login = false;
+        Helper.hideLoader(loader);
+        ScaffoldMessenger.of(state!.context).showSnackBar(SnackBar(
+          content: Text(_res.errorMessage.error!.message),
+        ));
+      }
+    }
+  }
+
+  checkCode(String email, String code) async {
+    if (formKey.currentState!.validate()) {
+      var loader = Helper.overlayLoader(state!.context);
+      FocusScope.of(state!.context).unfocus();
+      Helper.overlayLoader(state!.context);
+      Overlay.of(state!.context)?.insert(loader);
+      VerifyCodeParamsModel verifyCodeParamsModel =
+      VerifyCodeParamsModel(email: email, code: code);
+      ResponseState<MessageModel> _response = await UserIdentityApi()
+          .verifyCodePassword(verifyCodeParamsModel: verifyCodeParamsModel);
+
+      if (_response is SuccessState) {
+        SuccessState<MessageModel> _res =
+        _response as SuccessState<MessageModel>;
+        Helper.hideLoader(loader);
+
+        if (_res.data.codeAccepted ?? true) {
+          Navigator.pushNamed(state!.context, Routes.resetPasswordScreen,
+              arguments: StringArguments(email: email, code: code));
+          ScaffoldMessenger.of(state!.context).showSnackBar(SnackBar(
+            content: Text(_res.data.msg ?? ''),
+          ));
+        } else {
+          ScaffoldMessenger.of(state!.context).showSnackBar(SnackBar(
+            content: Text(_res.data.msg ?? ''),
+          ));
+        }
+      } else if (_response is ErrorState) {
+        ErrorState<MessageModel> _res = _response as ErrorState<MessageModel>;
+        LocalStorageService().login = false;
+        Helper.hideLoader(loader);
+        ScaffoldMessenger.of(state!.context).showSnackBar(SnackBar(
+          content: Text(_res.errorMessage.error!.message),
+        ));
+      }
+    }
+  }
+
+  setNewPassword(
+      {required String email,
+        required String code,
+        required String newPassword}) async {
+    if (formKey.currentState!.validate()) {
+      var loader = Helper.overlayLoader(state!.context);
+      FocusScope.of(state!.context).unfocus();
+      Helper.overlayLoader(state!.context);
+      Overlay.of(state!.context)?.insert(loader);
+      SetNewPasswordParamsModel setNewPasswordParamsModel =
+      SetNewPasswordParamsModel(
+          email: email, password: newPassword, code: code);
+      ResponseState<MessageModel> _response = await UserIdentityApi()
+          .setNewPassword(setNewPasswordParamsModel: setNewPasswordParamsModel);
+
+      if (_response is SuccessState) {
+        SuccessState<MessageModel> _res =
+        _response as SuccessState<MessageModel>;
+        Helper.hideLoader(loader);
+
+        if (_res.data.newPasswordAccepted ?? true) {
+          Navigator.pushNamed(state!.context, Routes.loginScreen);
+          ScaffoldMessenger.of(state!.context).showSnackBar(SnackBar(
+            content: Text(_res.data.msg ?? ''),
+          ));
+        } else {
+          ScaffoldMessenger.of(state!.context).showSnackBar(SnackBar(
+            content: Text(_res.data.msg ?? ''),
+          ));
+        }
+      } else if (_response is ErrorState) {
+        ErrorState<MessageModel> _res = _response as ErrorState<MessageModel>;
+        LocalStorageService().login = false;
+        Helper.hideLoader(loader);
+        ScaffoldMessenger.of(state!.context).showSnackBar(SnackBar(
+          content: Text(_res.errorMessage.error!.message),
+        ));
+      }
+    }
+  }
+
+  resendCode(String email) async {
+    var loader = Helper.overlayLoader(state!.context);
+    FocusScope.of(state!.context).unfocus();
+    Helper.overlayLoader(state!.context);
+    Overlay.of(state!.context)?.insert(loader);
+    ResendCodeParamsModel resendCodeParamsModel = ResendCodeParamsModel(
+      email: email,
+    );
+    ResponseState<MessageModel> _response = await UserIdentityApi()
+        .resendCodePassword(resendCodeParamsModel: resendCodeParamsModel);
+
+    if (_response is SuccessState) {
+      SuccessState<MessageModel> _res = _response as SuccessState<MessageModel>;
+      Helper.hideLoader(loader);
+
+      if (_res.data.resendAccepted ?? true) {
+        setTimer();
+        ScaffoldMessenger.of(state!.context).showSnackBar(SnackBar(
+          content: Text(_res.data.msg ?? ''),
+        ));
+      } else {
+        ScaffoldMessenger.of(state!.context).showSnackBar(SnackBar(
+          content: Text(_res.data.msg ?? ''),
+        ));
+      }
+    } else if (_response is ErrorState) {
+      ErrorState<MessageModel> _res = _response as ErrorState<MessageModel>;
+      LocalStorageService().login = false;
+      Helper.hideLoader(loader);
+      ScaffoldMessenger.of(state!.context).showSnackBar(SnackBar(
+        content: Text(_res.errorMessage.error!.message),
+      ));
+    }
+  }
+
+  void setTimer() {
+    Timer _timer;
+    int _start = 60;
+    timer = 60;
+    clickable = false;
+    setState(() {});
+    const oneSec = Duration(seconds: 1);
+    _timer = Timer.periodic(
+      oneSec,
+          (Timer timer1) {
+        if (_start == 0) {
+          setState(() {
+            timer1.cancel();
+            clickable = true;
+          });
+        } else {
+          setState(() {
+            _start--;
+            timer = _start;
+          });
+        }
+      },
+    );
   }
 }
