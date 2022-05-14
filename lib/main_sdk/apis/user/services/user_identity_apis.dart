@@ -18,12 +18,12 @@ class UserIdentityApi extends ApiModelIdentity {
         parseJson: (json) => UserModel.fromJson(json));
   }
 
-  Future<ResponseState<String>> register(
+  Future<ResponseState<MessageModel>> register(
       {required RegisterParamsModel registerParamsModel}) async {
     return apiMethod('register.php',
         data: registerParamsModel.toMap(),
         httpEnum: HttpEnum.post,
-        parseJson: (json) => json);
+        parseJson: (json) => MessageModel.fromJson(json));
   }
 
   Future<ResponseState<MessageModel>> resetPassword(
