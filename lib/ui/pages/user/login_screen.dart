@@ -104,17 +104,17 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                             child: InkWell(
                               onTap: () {
                                 Navigator.pushNamed(
-                                    context, Routes.registerScreen);
+                                    context, Routes.forgetPasswordScreen);
                               },
                               child: RichText(
                                 text: TextSpan(
-                                  text: S.of(context).dontHaveAnAccount,
+                                  text: S.of(context).forgetPassword,
                                   style: Theme.of(context)
                                       .textTheme
                                       .headline6!
                                       .copyWith(
                                           color: AppColors.basicColor,
-                                          fontSize: 16.0,
+                                          fontSize: 12.0,
                                           height: 1
                                           //  decoration: TextDecoration.underline,
                                           ),
@@ -123,14 +123,16 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                                       text: ' ',
                                     ),
                                     TextSpan(
-                                      text: S.of(context).createNewAccount,
+                                      text: S.of(context).createNewPassword,
                                       style: Theme.of(context)
                                           .textTheme
                                           .headline6!
                                           .copyWith(
                                               color: AppColors.primaryColor,
-                                              fontSize: 16.0,
-                                              height: 1),
+                                              fontSize: 12.0,
+                                              height: 1
+                                              //  decoration: TextDecoration.underline,
+                                              ),
                                     ),
                                   ],
                                 ),
@@ -163,17 +165,17 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                             child: InkWell(
                               onTap: () {
                                 Navigator.pushNamed(
-                                    context, Routes.forgetPasswordScreen);
+                                    context, Routes.registerScreen);
                               },
                               child: RichText(
                                 text: TextSpan(
-                                  text: S.of(context).forgetPassword,
+                                  text: S.of(context).dontHaveAnAccount,
                                   style: Theme.of(context)
                                       .textTheme
                                       .headline6!
                                       .copyWith(
                                           color: AppColors.basicColor,
-                                          fontSize: 12.0,
+                                          fontSize: 16.0,
                                           height: 1
                                           //  decoration: TextDecoration.underline,
                                           ),
@@ -182,16 +184,14 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                                       text: ' ',
                                     ),
                                     TextSpan(
-                                      text: S.of(context).createNewPassword,
+                                      text: S.of(context).createNewAccount,
                                       style: Theme.of(context)
                                           .textTheme
                                           .headline6!
                                           .copyWith(
                                               color: AppColors.primaryColor,
-                                              fontSize: 12.0,
-                                              height: 1
-                                              //  decoration: TextDecoration.underline,
-                                              ),
+                                              fontSize: 16.0,
+                                              height: 1),
                                     ),
                                   ],
                                 ),

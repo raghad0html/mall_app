@@ -82,16 +82,20 @@ class _InvoiceQrScreenState extends StateMVC<InvoiceQrScreen> {
                                     const SizedBox(
                                       height: 20.0,
                                     ),
-                                    InvoiceWidget(
-                                        taxNumber: _con.qrModelResult!.taxNumber
-                                            .toString(),
-                                        name: _con.qrModelResult!.seller,
-                                        date:
-                                            _con.qrModelResult!.date.toString(),
-                                        invoiceAmount:
-                                            _con.qrModelResult!.cost.toString(),
-                                        taxAmount:
-                                            _con.qrModelResult!.vat.toString()),
+                                    if (_con.qrModelResult?.qrType ==
+                                        QrTypeParamsModel.invoice)
+                                      InvoiceWidget(
+                                          taxNumber: _con
+                                              .qrModelResult!.taxNumber
+                                              .toString(),
+                                          name: _con.qrModelResult!.seller,
+                                          date: _con.qrModelResult!.date
+                                              .toString(),
+                                          invoiceAmount: _con
+                                              .qrModelResult!.cost
+                                              .toString(),
+                                          taxAmount: _con.qrModelResult!.vat
+                                              .toString()),
                                     const SizedBox(
                                       height: 24.0,
                                     ),
@@ -106,15 +110,19 @@ class _InvoiceQrScreenState extends StateMVC<InvoiceQrScreen> {
                                       style: Theme.of(context)
                                           .textTheme
                                           .subtitle2!
-                                          .copyWith(color: AppColors.appOrange),
+                                          .copyWith(
+                                              color: AppColors.appOrange,
+                                              fontSize: 16),
                                     ),
                                     const SizedBox(
                                       height: 8.0,
                                     ),
                                     Text(
                                       _con.qrModelResult!.msg ?? '',
-                                      style:
-                                          Theme.of(context).textTheme.subtitle2,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .subtitle2
+                                          ?.copyWith(fontSize: 16),
                                     ),
                                     const SizedBox(
                                       height: 8.0,
@@ -195,7 +203,7 @@ class _InvoiceQrScreenState extends StateMVC<InvoiceQrScreen> {
                                     _con.qrModelResult?.targetPoints ?? 0,
                               ));
                         },
-                        child: Text(S.of(context).letsCollect500Points),
+                        child: Text('لنقم بجمع نقاط'),
                       )
                     else
                       ElevatedButton(

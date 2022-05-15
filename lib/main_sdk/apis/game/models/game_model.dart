@@ -25,6 +25,7 @@ class GameModel {
   int? targetPoints;
   int? balancePoints;
   String? mallName;
+  int? mallId;
   String? gameDateStart;
 
   GameModel(
@@ -35,7 +36,8 @@ class GameModel {
         this.mallName,
         this.balancePoints,
         this.targetPoints,
-        this.gameDateStart});
+        this.gameDateStart,
+        this.mallId});
 
   GameModel.fromJson(Map<String, dynamic> json) {
     gameAccepted = json['gameAccepted'];
@@ -46,6 +48,7 @@ class GameModel {
     balancePoints = json['balance_points'];
     mallName = json['mall_name'];
     gameDateStart = json['game_dateStart'];
+    mallId = json['mall_id'];
   }
 
   Map<String, dynamic> toJson() {
@@ -58,6 +61,8 @@ class GameModel {
     data['balance_points'] = balancePoints;
     data['mall_name'] = mallName;
     data['game_dateStart'] = gameDateStart;
+    data['mall_id'] = mallId;
+
     return data;
   }
 }

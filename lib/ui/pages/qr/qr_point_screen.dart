@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mall_app/ui/pages/qr/qr_controller.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
+import 'package:video_player/video_player.dart';
 
 import '../../../constants/app_theme.dart';
 import '../../../constants/assets.dart';
@@ -28,8 +29,6 @@ class _PointQRScreenState extends StateMVC<PointQRScreen> {
   @override
   void initState() {
     super.initState();
-    debugPrint(
-        'widget.arguments.targetPoints ${widget.arguments.targetPoints}');
     _con.initPoints(
         targetPointsWidget: widget.arguments.targetPoints,
         balancePointsWidget: widget.arguments.balancePoints);
@@ -37,8 +36,6 @@ class _PointQRScreenState extends StateMVC<PointQRScreen> {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint(
-        'widget.arguments.balancePoints ${widget.arguments.balancePoints}');
     return Scaffold(
       key: _con.scaffoldKey,
       body: SafeArea(
@@ -55,7 +52,7 @@ class _PointQRScreenState extends StateMVC<PointQRScreen> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         const SizedBox(
-                          height: 45.0,
+                          height: 35.0,
                         ),
                         if (widget.arguments.daily)
                           Text(
@@ -74,9 +71,6 @@ class _PointQRScreenState extends StateMVC<PointQRScreen> {
                           width: 200,
                           height: 200,
                         ),
-                        const SizedBox(
-                          height: 20.0,
-                        ),
                         if (_con.qrModelResult != null)
                           Column(
                             children: [
@@ -84,18 +78,11 @@ class _PointQRScreenState extends StateMVC<PointQRScreen> {
                                 height: 20.0,
                               ),
                               Text(
-                                S.of(context).letsStartToScanAQrForYourBill,
+                                _con.qrModelResult!.msg ?? '',
                                 style: Theme.of(context)
                                     .textTheme
-                                    .subtitle2!
-                                    .copyWith(color: AppColors.appOrange),
-                              ),
-                              const SizedBox(
-                                height: 8.0,
-                              ),
-                              Text(
-                                _con.qrModelResult!.msg ?? '',
-                                style: Theme.of(context).textTheme.subtitle2,
+                                    .subtitle2
+                                    ?.copyWith(color: AppColors.blackColor),
                               ),
                               const SizedBox(
                                 height: 12.0,
@@ -122,12 +109,12 @@ class _PointQRScreenState extends StateMVC<PointQRScreen> {
                 ),
               ),
             ),
+            const SizedBox(
+              height: 20.0,
+            ),
             LinedText(
               color: AppColors.primaryColor,
               text: S.of(context).browseSubscriptionMarkets,
-            ),
-            const SizedBox(
-              height: 20.0,
             ),
             Padding(
               padding:
@@ -163,9 +150,13 @@ class _PointQRScreenState extends StateMVC<PointQRScreen> {
                 ),
               ),
             ),
+            const SizedBox(
+              height: 20.0,
+            ),
           ],
         ),
       ),
     );
   }
 }
+
