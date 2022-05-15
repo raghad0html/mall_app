@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mall_app/ui/shared/future_builder_widget/lancher.dart';
 
@@ -24,16 +25,20 @@ class MallWidget extends StatelessWidget {
       child: Column(
         children: [
           Expanded(
-            child: CachedNetworkImage(
-              height: 110,
-              progressIndicatorBuilder: (context, url, progress) => Center(
-                child: CircularProgressIndicator(
-                  value: progress.progress,
+            child: ClipRRect(
+              borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(10), topRight: Radius.circular(10)),
+              child: CachedNetworkImage(
+                height: 110,
+                progressIndicatorBuilder: (context, url, progress) => Center(
+                  child: CircularProgressIndicator(
+                    value: progress.progress,
+                  ),
                 ),
+                errorWidget: (context, url, error) =>
+                    const Icon(Icons.error_outline),
+                imageUrl: mall.icon ?? '',
               ),
-              errorWidget: (context, url, error) =>
-                  const Icon(Icons.error_outline),
-              imageUrl: mall.icon ?? '',
             ),
           ),
           Container(
@@ -51,7 +56,9 @@ class MallWidget extends StatelessWidget {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
-                const SizedBox(height: 5,),
+                const SizedBox(
+                  height: 5,
+                ),
                 InkWell(
                   onTap: ()async{
                     await Launcher().launchInBrowser(

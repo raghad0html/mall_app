@@ -42,10 +42,10 @@ class _HomePageState extends StateMVC<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: _con.scaffoldKey,
-      body: SafeArea(
-        child: Padding(
+    return SafeArea(
+      child: Scaffold(
+        key: _con.scaffoldKey,
+        body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -62,7 +62,7 @@ class _HomePageState extends StateMVC<HomePage> {
                           return CitiesDropDownDialog(
                               cities: _con.cities,
                               selectedCity: (mall) {
-                                  cityId = mall.cityId;
+                                cityId = mall.cityId;
                                 Navigator.pop(context);
                                 _con.saveCity(mall.cityId, mall.cityName);
                               });
@@ -85,27 +85,20 @@ class _HomePageState extends StateMVC<HomePage> {
                       ),
                     ),
                   ),
-                  Row(
-                    children: [
-                      InkWell(
-                        onTap: () {},
-                        child: Container(
-                          padding: const EdgeInsets.all(3.0),
-                          decoration: BoxDecoration(
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(5)),
-                              color:
-                                  AppColors.appBarBackGroundColor.withOpacity(0.2)),
-                          child: Text(
-                            'الجوائز',
-                            style: Theme.of(context).textTheme.subtitle1,
-                          ),
-                        ),
+                  InkWell(
+                    onTap: () {},
+                    child: Container(
+                      padding: const EdgeInsets.all(3.0),
+                      decoration: BoxDecoration(
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(5)),
+                          color:
+                              AppColors.appBarBackGroundColor.withOpacity(0.2)),
+                      child: Text(
+                        'الجوائز',
+                        style: Theme.of(context).textTheme.subtitle1,
                       ),
-                      IconButton(onPressed: (){
-                        Navigator.pushNamed(context, Routes.profileScreen);
-                      }, icon:const  Icon(Icons.account_circle ,size: 35,))
-                    ],
+                    ),
                   ),
                 ],
               ),
@@ -178,98 +171,117 @@ class _HomePageState extends StateMVC<HomePage> {
               const SizedBox(
                 height: 20,
               ),
-              Column(
-                children: [
-                  InkWell(
-                    onTap: () {
-                      Navigator.pushNamed(context, Routes.allGamesScreen);
-                    },
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Text(
-                            S.of(context).myCompetitions,
-                            style: Theme.of(context).textTheme.headline6,
-                          ),
-                        ),
-                        const LinedText(
-                          color: AppColors.basicColor,
-                          text: 'عرض الكل',
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  SizedBox(
-                    height: 200,
-                    child: _con.games.isEmpty && _con.loadingCompetition
-                        ? const Center(child: CircularProgressIndicator())
-                        : ListView.builder(
-                            itemCount: _con.games.length,
-                            itemBuilder: (context, i) {
-                              GameModel _game = _con.games[i];
-                              String gameLevel = Helper.getGameLevelFromEnum(
-                                  _game.level ?? GameLevelEnumsModel.zero);
-                              return MyCompetitionItem(
-                                  game: _game, gameLevel: gameLevel);
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Column(
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              Navigator.pushNamed(
+                                  context, Routes.allGamesScreen);
                             },
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    S.of(context).myCompetitions,
+                                    style:
+                                        Theme.of(context).textTheme.headline6,
+                                  ),
+                                ),
+                                const LinedText(
+                                  color: AppColors.basicColor,
+                                  text: 'عرض الكل',
+                                ),
+                              ],
+                            ),
                           ),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      S.of(context).malls,
-                      style: Theme.of(context).textTheme.headline6,
-                    ),
-                  ),
-                  InkWell(
-                    onTap: (){
-                    //  if( _con.malls.isNotEmpty && !_con.loading){
-                        Navigator.pushNamed(context, Routes.mallsScreen ,arguments: cityId??int.tryParse(LocalStorageService().cityId!));
-                    //  }
-                    },
-                    child: const LinedText(
-                      color: AppColors.basicColor,
-                      text: 'عرض الكل',
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              _con.malls.isEmpty && _con.loading
-                  ? const Center(child: CircularProgressIndicator())
-                  : Expanded(
-                      child: SingleChildScrollView(
-                        child: GridView.builder(
-                          itemCount: _con.malls.length,
-                          shrinkWrap: true,
-                          primary: false,
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2),
-                          itemBuilder: (context, gridViewIndex) {
-                            MallModel mall = _con.malls[gridViewIndex];
-                            return GestureDetector(
-                                onTap: () {
-                                  Navigator.pushNamed(context, Routes.shopsScreen,
-                                      arguments: ShopArguments(
-                                          mallName: _con.malls[gridViewIndex].name ?? '',
-                                          mallId: _con.malls[gridViewIndex].mallId));
-                                },child: MallWidget(mall: mall));
-                          },
-                        ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          SizedBox(
+                            height: 200,
+                            child: _con.games.isEmpty && _con.loadingCompetition
+                                ? const Center(
+                                    child: CircularProgressIndicator())
+                                : ListView.builder(
+                                    itemCount: _con.games.length,
+                                    shrinkWrap: true,
+                                    itemBuilder: (context, i) {
+                                      GameModel _game = _con.games[i];
+                                      String gameLevel =
+                                          Helper.getGameLevelFromEnum(
+                                              _game.level ??
+                                                  GameLevelEnumsModel.zero);
+                                      return MyCompetitionItem(
+                                          game: _game, gameLevel: gameLevel);
+                                    },
+                                  ),
+                          ),
+                        ],
                       ),
-                    )
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              S.of(context).malls,
+                              style: Theme.of(context).textTheme.headline6,
+                            ),
+                          ),
+                          InkWell(
+                            onTap: () {
+                              if (_con.malls.isNotEmpty && !_con.loading) {
+                                Navigator.pushNamed(context, Routes.mallsScreen,
+                                    arguments: cityId ??
+                                        int.tryParse(
+                                            LocalStorageService().cityId!));
+                              }
+                            },
+                            child: const LinedText(
+                              color: AppColors.basicColor,
+                              text: 'عرض الكل',
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      _con.malls.isEmpty && _con.loading
+                          ? const Center(child: CircularProgressIndicator())
+                          : GridView.builder(
+                              itemCount: _con.malls.length,
+                              shrinkWrap: true,
+                              primary: false,
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2),
+                              itemBuilder: (context, gridViewIndex) {
+                                MallModel mall = _con.malls[gridViewIndex];
+                                return GestureDetector(
+                                    onTap: () {
+                                      Navigator.pushNamed(
+                                          context, Routes.shopsScreen,
+                                          arguments: ShopArguments(
+                                              mallName: _con
+                                                      .malls[gridViewIndex]
+                                                      .name ??
+                                                  '',
+                                              mallId: _con.malls[gridViewIndex]
+                                                  .mallId));
+                                    },
+                                    child: MallWidget(mall: mall));
+                              },
+                            )
+                    ],
+                  ),
+                ),
+              )
             ],
           ),
         ),

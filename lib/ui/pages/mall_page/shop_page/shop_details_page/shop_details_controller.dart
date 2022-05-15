@@ -7,14 +7,13 @@ import 'package:mall_app/main_sdk/apis/gift/services/gift_identity_apis.dart';
 import 'package:mall_app/main_sdk/apis/product/models/product_model.dart';
 import 'package:mall_app/main_sdk/apis/product/models/product_params_model.dart';
 import 'package:mall_app/main_sdk/apis/product/services/product_identity_apis.dart';
-
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 class ShopDetailsController extends ControllerMVC {
   late GlobalKey<ScaffoldState> scaffoldKey;
   late OverlayEntry loader;
   late List<ProductModel> products = [];
-  late List<GiftModel> giftModel = [];
+  late List<GiftModel> gifts = [];
   bool loading = false;
   bool loading1 = false;
   bool loadingCompetition = false;
@@ -56,9 +55,15 @@ class ShopDetailsController extends ControllerMVC {
     ResponseState<ListOfGiftModel> data = await _listOfMallModel;
     if (data is SuccessState) {
       SuccessState<ListOfGiftModel> d = data as SuccessState<ListOfGiftModel>;
-      giftModel = d.data.data!;
+      gifts = d.data.data!;
       loading1 = false;
       setState(() {});
+    }
+    if (data is ErrorState) {
+      ErrorState<ListOfGiftModel> d = data as ErrorState<ListOfGiftModel>;
+      ScaffoldMessenger.of(state!.context).showSnackBar(SnackBar(
+        content: Text(d.errorMessage.error!.message),
+      ));
     }
   }
 }

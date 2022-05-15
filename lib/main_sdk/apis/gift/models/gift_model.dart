@@ -42,7 +42,7 @@ class GiftModel {
     giftName = json['gift_name'];
     giftDescription = json['gift_description'];
     giftTo = json['gift_to'];
-    giftBy = json['gift_by'];
+    giftBy = json['gift_by'].toString();
     giftMall = json['gift_mall'];
     giftReceived = json['gift_received'];
     giftDateAdded = json['date'] != null

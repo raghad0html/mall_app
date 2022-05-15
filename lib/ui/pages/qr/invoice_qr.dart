@@ -203,7 +203,7 @@ class _InvoiceQrScreenState extends StateMVC<InvoiceQrScreen> {
                                     _con.qrModelResult?.targetPoints ?? 0,
                               ));
                         },
-                        child: Text('لنقم بجمع نقاط'),
+                        child: const Text('لنقم بجمع نقاط'),
                       )
                     else
                       ElevatedButton(

@@ -17,6 +17,7 @@ class GameController extends ControllerMVC {
   int levelIndex = 0;
   bool zero = true;
   List<GameModel> games = [];
+  List<GameModel> endedGames = [];
   int targetPoint = 0;
   int balancePoints = 0;
   bool loading = false;
@@ -92,7 +93,14 @@ class GameController extends ControllerMVC {
       SuccessState<ListOfGameModel> data =
           _gameResponse as SuccessState<ListOfGameModel>;
 
-      games = data.data.data ?? [];
+      //games = data.data.data ?? [];
+      for (GameModel _game in data.data.data ?? []) {
+        if (_game.level == GameLevelEnumsModel.quarterlyDone) {
+          endedGames.add(_game);
+        } else {
+          games.add(_game);
+        }
+      }
       setState(() {});
     } else if (_gameResponse is ErrorState) {
       ErrorState<ListOfGameModel> data =

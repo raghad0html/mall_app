@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mall_app/generated/l10n.dart';
-import 'package:mall_app/main_sdk/apis/game/models/game_level_enums_model.dart';
 import 'package:mall_app/ui/widget/costume_appbar.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
+import '../../../main_sdk/apis/game/models/game_level_enums_model.dart';
 import '../../../main_sdk/apis/game/models/game_model.dart';
 import '../../helper/helper.dart';
 import '../../widget/my_competition_item.dart';
@@ -31,31 +31,79 @@ class _AllGamesScreenState extends StateMVC<AllGamesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: SafeArea(
-      child: Column(
-        children: [
-          CostumeAppBar(title: S.of(context).myCompetitions),
-          const SizedBox(
-            height: 20,
-          ),
-          _con.loading
-              ? const Center(child: CircularProgressIndicator())
-              : Expanded(
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: _con.games.length,
-                    itemBuilder: (context, i) {
-                      GameModel _game = _con.games[i];
-                      String gameLevel = Helper.getGameLevelFromEnum(
-                          _game.level ?? GameLevelEnumsModel.zero);
-                      return MyCompetitionItem(
-                          game: _game, gameLevel: gameLevel);
-                    },
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+          body: SafeArea(
+        child: Column(
+          children: [
+            CostumeAppBar(title: S.of(context).myCompetitions),
+            Expanded(
+              child: Column(
+                children: <Widget>[
+                  SizedBox(
+                    height: 50,
+                    child: AppBar(
+                      bottom: TabBar(
+                        tabs: [
+                          Tab(
+                            text: 'مسابقات جارية',
+                          ),
+                          Tab(
+                            text: 'مسابقات منتهية',
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
-                ),
-        ],
-      ),
-    ));
+
+                  // create widgets for each tab bar here
+                  Expanded(
+                    child: TabBarView(
+                      children: [
+                        _con.loading
+                            ? const Center(child: CircularProgressIndicator())
+                            : _con.games.isEmpty
+                                ? Center(child: Text('لا يوجد مسابقات جارية'))
+                                : ListView.builder(
+                                    shrinkWrap: true,
+                                    itemCount: _con.games.length,
+                                    itemBuilder: (context, i) {
+                                      GameModel _game = _con.games[i];
+                                      String gameLevel =
+                                          Helper.getGameLevelFromEnum(
+                                              _game.level ??
+                                                  GameLevelEnumsModel.zero);
+                                      return MyCompetitionItem(
+                                          game: _game, gameLevel: gameLevel);
+                                    },
+                                  ),
+                        _con.loading
+                            ? const Center(child: CircularProgressIndicator())
+                            : _con.endedGames.isEmpty
+                                ? Center(child: Text('لا يوجد مسابقات منتهية'))
+                                : ListView.builder(
+                                    shrinkWrap: true,
+                                    itemCount: _con.endedGames.length,
+                                    itemBuilder: (context, i) {
+                                      GameModel _game = _con.games[i];
+                                      String gameLevel =
+                                          Helper.getGameLevelFromEnum(
+                                              _game.level ??
+                                                  GameLevelEnumsModel.zero);
+                                      return MyCompetitionItem(
+                                          game: _game, gameLevel: gameLevel);
+                                    },
+                                  ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      )),
+    );
   }
 }
