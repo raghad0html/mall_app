@@ -5,21 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f2d6b014-fd99-4f2d-9f24-057194a477ff" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../lib/main_sdk/apis/product/models/product_model.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../lib/main_sdk/apis/product/models/product_params_model.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../lib/main_sdk/apis/product/services/product_identity_apis.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../lib/main_sdk/apis/shop/models/shop_model.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../lib/main_sdk/apis/shop/models/shop_params_model.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../lib/main_sdk/apis/shop/services/shop_identity_apis.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../lib/ui/pages/mall_page/shop_page/shop_controller.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../lib/ui/pages/mall_page/shop_page/shop_details_page/shop_details_controller.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../lib/ui/pages/mall_page/shop_page/shop_details_page/shop_details_page.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/main_sdk/apis/game/models/game_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/main_sdk/apis/game/models/game_model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/routes.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/routes.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/ui/pages/mall_page/mall_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/ui/pages/mall_page/mall_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/ui/pages/mall_page/shop_page/shop_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/ui/pages/mall_page/shop_page/shop_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/ui/widget/mall_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/ui/widget/mall_widget.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,5 +108,17 @@
       <updated>1652560105555</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>
