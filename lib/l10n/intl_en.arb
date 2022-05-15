@@ -59,5 +59,7 @@
   "dontHaveAnAccount": "Don't have an account",
   "iHaveAnAccount": "I have an account",
   "forgetPassword": "forget password",
-  "createNewPassword": "create new password"
+  "createNewPassword": "create new password",
+  "edit": "Edit",
+  "save": "حفظ"
 }

@@ -5,6 +5,7 @@ class UserModel {
   String? email;
   int? cityId;
   String? cityName;
+  String? phone;
 
   UserModel(
       {this.token,
@@ -12,7 +13,8 @@ class UserModel {
       this.name,
       this.email,
       this.cityId,
-      this.cityName});
+      this.cityName,
+      this.phone});
 
   UserModel.fromJson(Map<String, dynamic> json) {
     token = json['token'];
@@ -20,6 +22,7 @@ class UserModel {
     name = json['name'];
     email = json['email'];
     cityId = json['city_id'];
+    phone = json['phone'];
     cityName = json['city_name'] ?? '-';
   }
 
@@ -30,7 +33,7 @@ class UserModel {
     data['name'] = name;
     data['email'] = email;
     data['city_id'] = cityId;
-    data['city_name'] = cityName;
+    data['phone'] = phone;
 
     return data;
   }

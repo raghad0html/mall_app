@@ -59,5 +59,7 @@
   "dontHaveAnAccount": "ليس لديك حساب",
   "iHaveAnAccount": "لديك حساب",
   "forgetPassword": "نسيت كلمة المرور",
-  "createNewPassword": "إنشاء كلمة مرور جديدة"
+  "createNewPassword": "إنشاء كلمة مرور جديدة",
+  "edit": "تعديل",
+  "save": "Save"
 }

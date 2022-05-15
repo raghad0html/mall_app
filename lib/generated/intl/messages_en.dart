@@ -59,6 +59,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "date": MessageLookupByLibrary.simpleMessage("date:"),
         "dontHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("Don\'t have an account"),
+        "edit": MessageLookupByLibrary.simpleMessage("Edit"),
         "email": MessageLookupByLibrary.simpleMessage("email"),
         "enterEmail":
             MessageLookupByLibrary.simpleMessage("please enter email"),
@@ -104,6 +105,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "rewritePassword":
             MessageLookupByLibrary.simpleMessage("أعد كتابة كلمة المرور"),
         "riad": MessageLookupByLibrary.simpleMessage("Riad"),
+        "save": MessageLookupByLibrary.simpleMessage("حفظ"),
         "scanInvoiceBarcode":
             MessageLookupByLibrary.simpleMessage("مسح باركود فاتورة"),
         "scanQr": MessageLookupByLibrary.simpleMessage(" scan Qr "),

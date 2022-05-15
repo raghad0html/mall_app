@@ -85,20 +85,27 @@ class _HomePageState extends StateMVC<HomePage> {
                       ),
                     ),
                   ),
-                  InkWell(
-                    onTap: () {},
-                    child: Container(
-                      padding: const EdgeInsets.all(3.0),
-                      decoration: BoxDecoration(
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(5)),
-                          color:
-                              AppColors.appBarBackGroundColor.withOpacity(0.2)),
-                      child: Text(
-                        'الجوائز',
-                        style: Theme.of(context).textTheme.subtitle1,
+                  Row(
+                    children: [
+                      InkWell(
+                        onTap: () {},
+                        child: Container(
+                          padding: const EdgeInsets.all(3.0),
+                          decoration: BoxDecoration(
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(5)),
+                              color:
+                                  AppColors.appBarBackGroundColor.withOpacity(0.2)),
+                          child: Text(
+                            'الجوائز',
+                            style: Theme.of(context).textTheme.subtitle1,
+                          ),
+                        ),
                       ),
-                    ),
+                      IconButton(onPressed: (){
+                        Navigator.pushNamed(context, Routes.profileScreen);
+                      }, icon:const  Icon(Icons.account_circle ,size: 35,))
+                    ],
                   ),
                 ],
               ),

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:mall_app/main_sdk/apis/user/models/user_model.dart';
 import 'package:mall_app/ui/pages/mall_page/mall_page.dart';
 import 'package:mall_app/ui/pages/mall_page/shop_page/shop_details_page/shop_details_page.dart';
 import 'package:mall_app/ui/pages/mall_page/shop_page/shop_page.dart';
 import 'package:mall_app/ui/pages/user/forget_password.dart';
+import 'package:mall_app/ui/pages/user/profile_page.dart';
 import 'package:mall_app/ui/pages/user/register_screen.dart';
 import 'package:mall_app/ui/pages/user/reset_password_screen.dart';
+import 'package:mall_app/ui/pages/user/update_profile_page.dart';
 import 'package:page_transition/page_transition.dart';
 
 import 'ui/pages/game_detail/game_detail_screen.dart';
@@ -36,6 +39,8 @@ class Routes {
   static const String mallsScreen = '/mallsScreen';
   static const String shopsScreen = '/shopsScreen';
   static const String shopDetailsScreen = '/shopDetailsScreen';
+  static const String profileScreen = '/profileScreen';
+  static const String updateProfileScreen = '/updateProfileScreen';
 
   static Route? getRoutes(settings) {
     final arguments = settings.arguments;
@@ -168,6 +173,21 @@ class Routes {
           settings: settings,
           duration: const Duration(milliseconds: 350),
         );
+      case profileScreen:
+        return PageTransition(
+          child: const ProfilePage(),
+          type: PageTransitionType.fade,
+          settings: settings,
+          duration: const Duration(milliseconds: 350),
+        );
+      case updateProfileScreen:
+        final UserArgs args = settings.arguments;
+        return PageTransition(
+          child:  UpdateProfilePage(userModel: args.userModel, onChanged: args.onChanges),
+          type: PageTransitionType.fade,
+          settings: settings,
+          duration: const Duration(milliseconds: 350),
+        );
 
       default:
         return null;
@@ -182,6 +202,13 @@ class GameDetails {
 
   GameDetails(
       {required this.mallName, required this.mallId, required this.gameId});
+}
+
+class UserArgs {
+  final UserModel userModel;
+  final Function(UserModel) onChanges;
+
+  UserArgs({required this.userModel, required this.onChanges});
 }
 
 class ShopArguments {
@@ -199,6 +226,7 @@ class InvoiceQrArguments {
   final bool daily;
   final int targetPoints;
   final int balancePoints;
+
   InvoiceQrArguments({
     required this.mallId,
     required this.gameId,
@@ -212,6 +240,7 @@ class InvoiceQrArguments {
 class StringArguments {
   final String email;
   final String? code;
+
   StringArguments({
     required this.email,
     this.code,

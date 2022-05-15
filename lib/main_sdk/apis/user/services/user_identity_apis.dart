@@ -2,9 +2,11 @@ import 'package:mall_app/main_sdk/apis/core/models/common/message_model.dart';
 import 'package:mall_app/main_sdk/apis/core/models/common/result_class.dart';
 import 'package:mall_app/main_sdk/apis/core/servisec/identity/api_identity.dart';
 import 'package:mall_app/main_sdk/apis/user/models/login_params_model.dart';
+import 'package:mall_app/main_sdk/apis/user/models/profile_params_model.dart';
 import 'package:mall_app/main_sdk/apis/user/models/register_params_model.dart';
 import 'package:mall_app/main_sdk/apis/user/models/resend_code_params_model.dart';
 import 'package:mall_app/main_sdk/apis/user/models/set_new_password_params_model.dart';
+import 'package:mall_app/main_sdk/apis/user/models/update_profile_params_model.dart';
 import 'package:mall_app/main_sdk/apis/user/models/user_model.dart';
 import 'package:mall_app/main_sdk/apis/user/models/verify_code_params_model.dart';
 import 'package:mall_app/main_sdk/enum/http_enum.dart';
@@ -18,10 +20,26 @@ class UserIdentityApi extends ApiModelIdentity {
         parseJson: (json) => UserModel.fromJson(json));
   }
 
+  Future<ResponseState<UserModel>> profile(
+      {required ProfileParamsModel profileParamsModel}) async {
+    return apiMethod('profile.php',
+        data: profileParamsModel.toMap(),
+        httpEnum: HttpEnum.post,
+        parseJson: (json) => UserModel.fromJson(json));
+  }
+
   Future<ResponseState<MessageModel>> register(
       {required RegisterParamsModel registerParamsModel}) async {
     return apiMethod('register.php',
         data: registerParamsModel.toMap(),
+        httpEnum: HttpEnum.post,
+        parseJson: (json) => MessageModel.fromJson(json));
+  }
+
+  Future<ResponseState<MessageModel>> updateProfile(
+      {required UpdateProfileParamsModel updateProfileParamsModel}) async {
+    return apiMethod('profile.php',
+        data: updateProfileParamsModel.toMap(),
         httpEnum: HttpEnum.post,
         parseJson: (json) => MessageModel.fromJson(json));
   }

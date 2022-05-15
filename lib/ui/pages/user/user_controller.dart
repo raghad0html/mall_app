@@ -3,9 +3,11 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:mall_app/main_sdk/apis/city/models/city_model.dart';
 import 'package:mall_app/main_sdk/apis/city/services/ciry_identity_apis.dart';
+import 'package:mall_app/main_sdk/apis/user/models/profile_params_model.dart';
 import 'package:mall_app/main_sdk/apis/user/models/register_params_model.dart';
 import 'package:mall_app/main_sdk/apis/user/models/resend_code_params_model.dart';
 import 'package:mall_app/main_sdk/apis/user/models/set_new_password_params_model.dart';
+import 'package:mall_app/main_sdk/apis/user/models/update_profile_params_model.dart';
 import 'package:mall_app/main_sdk/apis/user/models/verify_code_params_model.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
@@ -28,6 +30,8 @@ class UserController extends ControllerMVC {
   late CityModel city;
   bool clickable = true;
   int timer = 0;
+  bool loading = false;
+  UserModel? userModel;
 
   UserController() {
     formKey = GlobalKey<FormState>();
@@ -38,7 +42,7 @@ class UserController extends ControllerMVC {
 
   getCity() async {
     Future<ResponseState<ListOfCityModel>> _listOfCities =
-    CityIdentityApi().getCities();
+        CityIdentityApi().getCities();
     ResponseState<ListOfCityModel> data = await _listOfCities;
     if (data is SuccessState) {
       SuccessState<ListOfCityModel> d = data as SuccessState<ListOfCityModel>;
@@ -57,7 +61,7 @@ class UserController extends ControllerMVC {
       Overlay.of(state!.context)?.insert(loader);
 
       ResponseState<UserModel> _response =
-      await UserIdentityApi().login(loginParamsModel: loginParamsModel);
+          await UserIdentityApi().login(loginParamsModel: loginParamsModel);
       if (_response is SuccessState) {
         SuccessState<UserModel> user = _response as SuccessState<UserModel>;
         LocalStorageService().login = true;
@@ -90,7 +94,7 @@ class UserController extends ControllerMVC {
           .register(registerParamsModel: registerParamsModel);
       if (_response is SuccessState) {
         SuccessState<MessageModel> _res =
-        _response as SuccessState<MessageModel>;
+            _response as SuccessState<MessageModel>;
         Helper.hideLoader(loader);
         if (_res.data.registerAccepted ?? true) {
           Navigator.pushNamed(state!.context, Routes.loginScreen);
@@ -108,6 +112,31 @@ class UserController extends ControllerMVC {
       }
     }
   }
+  updateProfile({required UpdateProfileParamsModel updateProfileParamsModel}) async {
+    if (formKey.currentState!.validate()) {
+      var loader = Helper.overlayLoader(state!.context);
+      FocusScope.of(state!.context).unfocus();
+      Helper.overlayLoader(state!.context);
+      Overlay.of(state!.context)?.insert(loader);
+
+      ResponseState<MessageModel> _response = await UserIdentityApi()
+          .updateProfile(updateProfileParamsModel: updateProfileParamsModel);
+      if (_response is SuccessState) {
+        SuccessState<MessageModel> _res =
+            _response as SuccessState<MessageModel>;
+        Helper.hideLoader(loader);
+        ScaffoldMessenger.of(state!.context).showSnackBar(SnackBar(
+          content: Text(_res.data.msg ?? ''),
+        ));
+      } else if (_response is ErrorState) {
+        ErrorState<MessageModel> _res = _response as ErrorState<MessageModel>;
+        Helper.hideLoader(loader);
+        ScaffoldMessenger.of(state!.context).showSnackBar(SnackBar(
+          content: Text(_res.errorMessage.error!.message),
+        ));
+      }
+    }
+  }
 
   sendCodeToEmail(String email) async {
     if (formKey.currentState!.validate()) {
@@ -116,13 +145,13 @@ class UserController extends ControllerMVC {
       Helper.overlayLoader(state!.context);
       Overlay.of(state!.context)?.insert(loader);
       RegisterParamsModel registerParamsModel =
-      RegisterParamsModel(email: email);
+          RegisterParamsModel(email: email);
       ResponseState<MessageModel> _response = await UserIdentityApi()
           .resetPassword(registerParamsModel: registerParamsModel);
 
       if (_response is SuccessState) {
         SuccessState<MessageModel> _res =
-        _response as SuccessState<MessageModel>;
+            _response as SuccessState<MessageModel>;
         Helper.hideLoader(loader);
 
         if (_res.data.resetAccepted ?? true) {
@@ -155,13 +184,13 @@ class UserController extends ControllerMVC {
       Helper.overlayLoader(state!.context);
       Overlay.of(state!.context)?.insert(loader);
       VerifyCodeParamsModel verifyCodeParamsModel =
-      VerifyCodeParamsModel(email: email, code: code);
+          VerifyCodeParamsModel(email: email, code: code);
       ResponseState<MessageModel> _response = await UserIdentityApi()
           .verifyCodePassword(verifyCodeParamsModel: verifyCodeParamsModel);
 
       if (_response is SuccessState) {
         SuccessState<MessageModel> _res =
-        _response as SuccessState<MessageModel>;
+            _response as SuccessState<MessageModel>;
         Helper.hideLoader(loader);
 
         if (_res.data.codeAccepted ?? true) {
@@ -188,22 +217,22 @@ class UserController extends ControllerMVC {
 
   setNewPassword(
       {required String email,
-        required String code,
-        required String newPassword}) async {
+      required String code,
+      required String newPassword}) async {
     if (formKey.currentState!.validate()) {
       var loader = Helper.overlayLoader(state!.context);
       FocusScope.of(state!.context).unfocus();
       Helper.overlayLoader(state!.context);
       Overlay.of(state!.context)?.insert(loader);
       SetNewPasswordParamsModel setNewPasswordParamsModel =
-      SetNewPasswordParamsModel(
-          email: email, password: newPassword, code: code);
+          SetNewPasswordParamsModel(
+              email: email, password: newPassword, code: code);
       ResponseState<MessageModel> _response = await UserIdentityApi()
           .setNewPassword(setNewPasswordParamsModel: setNewPasswordParamsModel);
 
       if (_response is SuccessState) {
         SuccessState<MessageModel> _res =
-        _response as SuccessState<MessageModel>;
+            _response as SuccessState<MessageModel>;
         Helper.hideLoader(loader);
 
         if (_res.data.newPasswordAccepted ?? true) {
@@ -271,7 +300,7 @@ class UserController extends ControllerMVC {
     const oneSec = Duration(seconds: 1);
     _timer = Timer.periodic(
       oneSec,
-          (Timer timer1) {
+      (Timer timer1) {
         if (_start == 0) {
           setState(() {
             timer1.cancel();
@@ -285,5 +314,22 @@ class UserController extends ControllerMVC {
         }
       },
     );
+  }
+
+  getUserData() async {
+    loading = true;
+    setState(() {});
+    Future<ResponseState<UserModel>> _user = UserIdentityApi().profile(
+        profileParamsModel: ProfileParamsModel(
+      token: LocalStorageService().token ?? '',
+      userid: LocalStorageService().id ?? '',
+    ));
+    ResponseState<UserModel> data = await _user;
+    if (data is SuccessState) {
+      SuccessState<UserModel> d = data as SuccessState<UserModel>;
+      userModel = d.data;
+      loading = false;
+      setState(() {});
+    }
   }
 }
