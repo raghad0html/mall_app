@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:mall_app/ui/shared/future_builder_widget/lancher.dart';
 
 import '../../main_sdk/apis/mall/models/mall_model.dart';
 
@@ -51,14 +52,20 @@ class MallWidget extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
                 const SizedBox(height: 5,),
-                Text(
-                  mall.linkApp ?? '',
-                  style: Theme.of(context)
-                      .textTheme
-                      .subtitle1
-                      ?.copyWith(height: 1.1, fontSize: 13),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
+                InkWell(
+                  onTap: ()async{
+                    await Launcher().launchInBrowser(
+                        Uri(scheme: 'https',host: mall.linkApp?.replaceAll('https://', '') ?? ""));
+                  },
+                  child: Text(
+                    mall.linkApp ?? '',
+                    style: Theme.of(context)
+                        .textTheme
+                        .subtitle1
+                        ?.copyWith(height: 1.1, fontSize: 13),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
               ],
             ),

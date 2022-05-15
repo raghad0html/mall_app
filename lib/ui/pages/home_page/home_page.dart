@@ -232,9 +232,9 @@ class _HomePageState extends StateMVC<HomePage> {
                   ),
                   InkWell(
                     onTap: (){
-                      if( _con.malls.isNotEmpty && !_con.loading){
+                    //  if( _con.malls.isNotEmpty && !_con.loading){
                         Navigator.pushNamed(context, Routes.mallsScreen ,arguments: cityId??int.tryParse(LocalStorageService().cityId!));
-                      }
+                    //  }
                     },
                     child: const LinedText(
                       color: AppColors.basicColor,

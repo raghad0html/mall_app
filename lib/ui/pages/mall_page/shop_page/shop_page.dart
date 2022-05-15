@@ -2,6 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mall_app/routes.dart';
 import 'package:mall_app/ui/pages/mall_page/shop_page/shop_controller.dart';
+import 'package:mall_app/ui/shared/future_builder_widget/lancher.dart';
+import 'package:mall_app/ui/widget/maps_sheet.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 class ShopsPage extends StatefulWidget {
@@ -37,11 +39,10 @@ class _ShopsPageState extends StateMVC<ShopsPage> {
       ),
       body: _con.shops.isEmpty && _con.loading
           ? const Center(child: CircularProgressIndicator())
-          : Builder(
-            builder: (context) {
-              if(_con.shops.isEmpty && _con.loading){
+          : Builder(builder: (context) {
+              if (_con.shops.isEmpty && _con.loading) {
                 return const Center(child: CircularProgressIndicator());
-              }else if(_con.shops.isNotEmpty){
+              } else if (_con.shops.isNotEmpty) {
                 return ListView.builder(
                     physics: const ScrollPhysics(),
                     shrinkWrap: true,
@@ -60,7 +61,8 @@ class _ShopsPageState extends StateMVC<ShopsPage> {
                           decoration: BoxDecoration(
                             color: Colors.black12,
                             border: Border.all(color: Colors.white),
-                            borderRadius: const BorderRadius.all(Radius.circular(8)),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(8)),
                           ),
                           child: Column(
                             children: [
@@ -77,7 +79,7 @@ class _ShopsPageState extends StateMVC<ShopsPage> {
                                     ),
                                   ),
                                   errorWidget: (context, url, error) =>
-                                  const Icon(Icons.error_outline),
+                                      const Icon(Icons.error_outline),
                                   imageUrl: _con.shops[index].picture ?? '',
                                 ),
                               ),
@@ -97,75 +99,120 @@ class _ShopsPageState extends StateMVC<ShopsPage> {
                                       overflow: TextOverflow.ellipsis,
                                     ),
                                     Padding(
-                                      padding:
-                                      const EdgeInsets.only(top: 15, bottom: 15),
+                                      padding: const EdgeInsets.only(
+                                          top: 15, bottom: 15),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
-                                          if (_con.shops[index].shopEmail != null)
-                                            Row(
-                                              children: [
-                                                const Icon(Icons.call),
-                                                const SizedBox(
-                                                  width: 5,
-                                                ),
-                                                Text(
-                                                  _con.shops[index].shopEmail ?? '',
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .labelMedium
-                                                      ?.copyWith(
-                                                      height: 1.1, fontSize: 15),
-                                                  maxLines: 2,
-                                                  overflow: TextOverflow.ellipsis,
-                                                ),
-                                              ],
+                                          if (_con.shops[index].shapPhone !=
+                                              null)
+                                            InkWell(
+                                              onTap: () async {
+                                                await Launcher().makePhoneCall(
+                                                    "${_con.shops[index].shapPhone ?? ""}");
+                                              },
+                                              child: Row(
+                                                children: [
+                                                  const Icon(Icons.call),
+                                                  const SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  Text(
+                                                    _con.shops[index].shapPhone
+                                                            ?.toString() ??
+                                                        '',
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .labelMedium
+                                                        ?.copyWith(
+                                                            height: 1.1,
+                                                            fontSize: 15),
+                                                    maxLines: 2,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                  ),
+                                                ],
+                                              ),
                                             ),
-                                          if (_con.shops[index].shapPhone != null)
-                                            Row(
-                                              children: [
-                                                const Icon(Icons.email),
-                                                const SizedBox(
-                                                  width: 5,
-                                                ),
-                                                Text(
-                                                  _con.shops[index].shapPhone
-                                                      ?.toString() ??
-                                                      '',
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .labelMedium
-                                                      ?.copyWith(
-                                                      height: 1.1, fontSize: 15),
-                                                  maxLines: 2,
-                                                  overflow: TextOverflow.ellipsis,
-                                                ),
-                                              ],
+                                          if (_con.shops[index].shopEmail !=
+                                              null)
+                                            InkWell(
+                                              onTap: () async {
+                                                await Launcher().sendEmail(_con
+                                                        .shops[index]
+                                                        .shopEmail ??
+                                                    "");
+                                              },
+                                              child: Row(
+                                                children: [
+                                                  const Icon(Icons.email),
+                                                  const SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  Text(
+                                                    _con.shops[index].shopEmail
+                                                            ?.toString() ??
+                                                        '',
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .labelMedium
+                                                        ?.copyWith(
+                                                            height: 1.1,
+                                                            fontSize: 15),
+                                                    maxLines: 2,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                         ],
                                       ),
                                     ),
                                     if (_con.shops[index].shopAddress != null)
-                                      Row(
-                                        children: [
-                                          const Icon(Icons.location_on_rounded),
-                                          const SizedBox(
-                                            width: 5,
-                                          ),
-                                          Text(
-                                            _con.shops[index].shopAddress
-                                                ?.toString() ??
-                                                '',
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .labelMedium
-                                                ?.copyWith(height: 1.1, fontSize: 15),
-                                            maxLines: 2,
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                        ],
+                                      InkWell(
+                                        onTap: () {
+                                          if (_con.shops[index]
+                                                      .shopAddressLat !=
+                                                  null &&
+                                              _con.shops[index]
+                                                      .shopAddressLon !=
+                                                  null) {
+                                            MapsSheet.show(
+                                                context: context,
+                                                title: _con.shops[index]
+                                                        .shopName ??
+                                                    '',
+                                                latUser: _con.shops[index]
+                                                    .shopAddressLat!,
+                                                longUser: _con.shops[index]
+                                                    .shopAddressLon!);
+                                          }
+                                        },
+                                        child: Row(
+                                          children: [
+                                            const Icon(
+                                                Icons.location_on_rounded),
+                                            const SizedBox(
+                                              width: 5,
+                                            ),
+                                            Text(
+                                              _con.shops[index].shopAddress
+                                                      ?.toString() ??
+                                                  '',
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .labelMedium
+                                                  ?.copyWith(
+                                                      height: 1.1,
+                                                      fontSize: 15),
+                                              maxLines: 2,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                   ],
                                 ),
@@ -175,12 +222,12 @@ class _ShopsPageState extends StateMVC<ShopsPage> {
                         ),
                       );
                     });
-              }else{
-                return const Center(child: Text('لا يوجد محلات لعرضها'),);
+              } else {
+                return const Center(
+                  child: Text('لا يوجد محلات لعرضها'),
+                );
               }
-
-            }
-          ),
+            }),
     );
   }
 }
