@@ -28,6 +28,9 @@ class ShopModel {
   String? code;
   String? timeCode;
   String? picture;
+  double? shopAddressLat;
+  double? shopAddressLon;
+  String? shopAddress;
 
   ShopModel(
       {this.shopId,
@@ -41,7 +44,10 @@ class ShopModel {
       this.point,
       this.code,
       this.timeCode,
-      this.picture});
+      this.picture,
+      this.shopAddress,
+      this.shopAddressLat,
+      this.shopAddressLon});
 
   ShopModel.fromJson(Map<String, dynamic> json) {
     shopId = json['shop_id'];
@@ -56,5 +62,8 @@ class ShopModel {
     code = json['code'];
     timeCode = json['time_code'];
     picture = json['picture'];
+    shopAddress = json['shop_address'];
+    shopAddressLat = json['shop_address_lat'];
+    shopAddressLon = json['shop_address_lon'];
   }
 }

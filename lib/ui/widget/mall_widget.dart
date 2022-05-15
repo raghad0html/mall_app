@@ -50,6 +50,7 @@ class MallWidget extends StatelessWidget {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
+                const SizedBox(height: 5,),
                 Text(
                   mall.linkApp ?? '',
                   style: Theme.of(context)
