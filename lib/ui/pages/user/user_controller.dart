@@ -112,7 +112,9 @@ class UserController extends ControllerMVC {
       }
     }
   }
-  updateProfile({required UpdateProfileParamsModel updateProfileParamsModel}) async {
+
+  updateProfile(
+      {required UpdateProfileParamsModel updateProfileParamsModel}) async {
     if (formKey.currentState!.validate()) {
       var loader = Helper.overlayLoader(state!.context);
       FocusScope.of(state!.context).unfocus();

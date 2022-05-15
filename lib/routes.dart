@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mall_app/main_sdk/apis/user/models/user_model.dart';
+import 'package:mall_app/ui/pages/about_page/about_page.dart';
 import 'package:mall_app/ui/pages/mall_page/mall_page.dart';
 import 'package:mall_app/ui/pages/mall_page/shop_page/shop_details_page/shop_details_page.dart';
 import 'package:mall_app/ui/pages/mall_page/shop_page/shop_page.dart';
@@ -41,6 +42,7 @@ class Routes {
   static const String shopDetailsScreen = '/shopDetailsScreen';
   static const String profileScreen = '/profileScreen';
   static const String updateProfileScreen = '/updateProfileScreen';
+  static const String aboutScreen = '/aboutScreen';
 
   static Route? getRoutes(settings) {
     final arguments = settings.arguments;
@@ -184,6 +186,13 @@ class Routes {
         final UserArgs args = settings.arguments;
         return PageTransition(
           child:  UpdateProfilePage(userModel: args.userModel, onChanged: args.onChanges),
+          type: PageTransitionType.fade,
+          settings: settings,
+          duration: const Duration(milliseconds: 350),
+        );
+        case aboutScreen:
+        return PageTransition(
+          child: const AboutPage(),
           type: PageTransitionType.fade,
           settings: settings,
           duration: const Duration(milliseconds: 350),

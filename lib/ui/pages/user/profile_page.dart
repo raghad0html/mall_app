@@ -61,7 +61,12 @@ class _ProfilePageState extends StateMVC<ProfilePage> {
                       );
                     });
               },
-              icon: const Icon(Icons.logout_rounded))
+              icon: const Icon(Icons.logout_rounded)),
+          IconButton(
+              onPressed: () {
+               Navigator.pushNamed(context, Routes.aboutScreen);
+              },
+              icon: const Icon(Icons.info_outline)),
         ],
       ),
       body: Builder(builder: (context) {
