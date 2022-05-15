@@ -86,7 +86,9 @@ class _HomePageState extends StateMVC<HomePage> {
                     ),
                   ),
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pushNamed(context, Routes.profileScreen);
+                    },
                     child: Container(
                       padding: const EdgeInsets.all(3.0),
                       decoration: BoxDecoration(
@@ -95,11 +97,14 @@ class _HomePageState extends StateMVC<HomePage> {
                           color:
                               AppColors.appBarBackGroundColor.withOpacity(0.2)),
                       child: Text(
-                        'الجوائز',
+                        'حسابي',
                         style: Theme.of(context).textTheme.subtitle1,
                       ),
                     ),
                   ),
+                  // IconButton(onPressed: (){
+                  //   Navigator.pushNamed(context, Routes.profileScreen);
+                  // }, icon:const  Icon(Icons.account_circle ,size: 35,))
                 ],
               ),
               const SizedBox(

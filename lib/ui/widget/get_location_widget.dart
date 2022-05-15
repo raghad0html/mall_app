@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:location/location.dart' as loc;
-
 import 'package:permission_handler/permission_handler.dart';
 
 class GetLocationWidget extends StatefulWidget {
@@ -28,7 +27,7 @@ class _GetLocationWidgetState extends State<GetLocationWidget> {
   @override
   void initState() {
     gpsServiceStatus = loc.Location.instance.requestService();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
       _goToLocation();
     });
     super.initState();
@@ -37,6 +36,7 @@ class _GetLocationWidgetState extends State<GetLocationWidget> {
   final loc.Location location = loc.Location();
 
   late loc.LocationData locationData;
+
   ///canada lat and long
   double _lat = 54.87043037410258;
   double _long = -104.91493251174687;
@@ -176,34 +176,34 @@ class _GetLocationWidgetState extends State<GetLocationWidget> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             ElevatedButton(
-                              onPressed: () {
-                                setState(() {
-                                  locationPermissionStatus = loc
-                                      .Location.instance
-                                      .requestPermission()
-                                      .then((value) async {
-                                    if (value == loc.PermissionStatus.granted ||
-                                        value ==
-                                            loc.PermissionStatus
-                                                .grantedLimited) {
-                                      locationData =
-                                          await location.getLocation();
-                                      if (locationData.longitude != null &&
-                                          locationData.latitude != null) {
-                                        _lat = locationData.latitude!;
-                                        _long = locationData.longitude!;
-                                      }
+                                onPressed: () {
+                                  setState(() {
+                                    locationPermissionStatus = loc
+                                        .Location.instance
+                                        .requestPermission()
+                                        .then((value) async {
+                                      if (value ==
+                                              loc.PermissionStatus.granted ||
+                                          value ==
+                                              loc.PermissionStatus
+                                                  .grantedLimited) {
+                                        locationData =
+                                            await location.getLocation();
+                                        if (locationData.longitude != null &&
+                                            locationData.latitude != null) {
+                                          _lat = locationData.latitude!;
+                                          _long = locationData.longitude!;
+                                        }
 
-                                      widget.onLocationFounded(_lat, _long);
-                                    }
-                                    return Future.value(value);
+                                        widget.onLocationFounded(_lat, _long);
+                                      }
+                                      return Future.value(value);
+                                    });
                                   });
-                                });
-                              },
-                              child: const Text(
-                                'enable location permission',
-                              )
-                            ),
+                                },
+                                child: const Text(
+                                  'enable location permission',
+                                )),
                             _buttonSkip()
                           ],
                         ),
@@ -229,7 +229,7 @@ class _GetLocationWidgetState extends State<GetLocationWidget> {
               child: Text(
                 'skip',
                 style: TextStyle(
-                    fontSize:18,
+                    fontSize: 18,
                     color: Theme.of(context).textTheme.caption!.color),
               ),
             ),
