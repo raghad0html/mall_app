@@ -70,13 +70,13 @@ class _UpdateProfilePageState extends StateMVC<UpdateProfilePage> {
                           TextFormField(
                             controller: nameController,
                             keyboardType: TextInputType.text,
-                            decoration: InputDecoration(
-                              hintText: S.of(context).username,
-                              labelText: S.of(context).username,
+                            decoration: const InputDecoration(
+                              hintText: 'الاسم الكامل',
+                              labelText: 'الاسم الكامل',
                             ),
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return S.of(context).enterUserName;
+                                return 'الاسم الكامل';
                               }
                               return null;
                             },
@@ -175,7 +175,7 @@ class _UpdateProfilePageState extends StateMVC<UpdateProfilePage> {
                                       name: nameController.text,
                                       phone: phoneController.text));
                                 },
-                                child: Text(S.of(context).save),
+                                child: const Text('حفظ'),
                               ),
                             ),
                           ),
