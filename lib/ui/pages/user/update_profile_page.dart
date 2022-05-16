@@ -107,7 +107,7 @@ class _UpdateProfilePageState extends StateMVC<UpdateProfilePage> {
                           TextFormField(
                             controller: phoneController,
                             keyboardType: TextInputType.phone,
-                            obscureText: true,
+                            obscureText: false,
                             decoration: const InputDecoration(
                               hintText: 'رقم الهاتف',
                               labelText: 'رقم الهاتف',

@@ -1,5 +1,6 @@
 import 'package:mall_app/main_sdk/apis/core/models/common/result_class.dart';
 import 'package:mall_app/main_sdk/apis/core/servisec/identity/api_identity.dart';
+import 'package:mall_app/main_sdk/apis/shop/models/share_shop_params_model.dart';
 import 'package:mall_app/main_sdk/apis/shop/models/shop_model.dart';
 import 'package:mall_app/main_sdk/apis/shop/models/shop_params_model.dart';
 import 'package:mall_app/main_sdk/enum/http_enum.dart';
@@ -9,6 +10,14 @@ class ShopIdentityApi extends ApiModelIdentity {
       {required ShopParamsModel shopParamsModel}) async {
     return apiMethod('shop.php',
         data: shopParamsModel.toMap(),
+        httpEnum: HttpEnum.post,
+        parseJson: (json) => ListOfShopModel.fromJson(json));
+  }
+
+  Future<ResponseState<ListOfShopModel>> getShareShops(
+      {required ShareShopParamsModel shareShopParamsModel}) async {
+    return apiMethod('shop.php',
+        data: shareShopParamsModel.toMap(),
         httpEnum: HttpEnum.post,
         parseJson: (json) => ListOfShopModel.fromJson(json));
   }

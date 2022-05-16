@@ -3,6 +3,7 @@ import 'package:mall_app/main_sdk/apis/user/models/user_model.dart';
 import 'package:mall_app/ui/pages/about_page/about_page.dart';
 import 'package:mall_app/ui/pages/gift_for_shop_page/gifts_for_shop_screen.dart';
 import 'package:mall_app/ui/pages/mall_page/mall_page.dart';
+import 'package:mall_app/ui/pages/mall_page/share_shop_page/share_shop_page.dart';
 import 'package:mall_app/ui/pages/mall_page/shop_page/shop_details_page/shop_details_page.dart';
 import 'package:mall_app/ui/pages/mall_page/shop_page/shop_page.dart';
 import 'package:mall_app/ui/pages/user/forget_password.dart';
@@ -40,11 +41,13 @@ class Routes {
   static const String checkCodeScreen = '/checkCodeScreen';
   static const String mallsScreen = '/mallsScreen';
   static const String shopsScreen = '/shopsScreen';
+  static const String shareShopsScreen = '/shareShopsScreen';
   static const String shopDetailsScreen = '/shopDetailsScreen';
   static const String profileScreen = '/profileScreen';
   static const String updateProfileScreen = '/updateProfileScreen';
   static const String aboutScreen = '/aboutScreen';
   static const String giftsForShopScreen = '/giftsForShopScreen';
+
   static Route? getRoutes(settings) {
     final arguments = settings.arguments;
     switch (settings.name) {
@@ -168,6 +171,14 @@ class Routes {
           settings: settings,
           duration: const Duration(milliseconds: 350),
         );
+      case shareShopsScreen:
+        ShopArguments args = settings.arguments;
+        return PageTransition(
+          child: ShareShopsPage(shopArguments: args),
+          type: PageTransitionType.fade,
+          settings: settings,
+          duration: const Duration(milliseconds: 350),
+        );
       case shopDetailsScreen:
         ShopArguments args = settings.arguments;
         return PageTransition(
@@ -246,12 +257,13 @@ class InvoiceQrArguments {
   final bool daily;
   final int targetPoints;
   final int balancePoints;
-
+  final String? mallName;
   InvoiceQrArguments({
     required this.mallId,
     required this.gameId,
     required this.title,
     required this.daily,
+    this.mallName,
     this.balancePoints = 0,
     this.targetPoints = 0,
   });

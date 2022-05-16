@@ -13,6 +13,7 @@ import '../../widget/lined_text.dart';
 
 class InvoiceQrScreen extends StatefulWidget {
   final InvoiceQrArguments arguments;
+
   const InvoiceQrScreen({Key? key, required this.arguments}) : super(key: key);
 
   @override
@@ -164,9 +165,17 @@ class _InvoiceQrScreenState extends StateMVC<InvoiceQrScreen> {
                 alignment: Alignment.bottomCenter,
                 child: Column(
                   children: [
-                    LinedText(
-                      color: AppColors.primaryColor,
-                      text: S.of(context).browseSubscriptionMarkets,
+                    InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(context, Routes.shareShopsScreen,
+                            arguments: ShopArguments(
+                                mallName: widget.arguments.mallName??'',
+                                mallId: widget.arguments.mallId));
+                      },
+                      child: LinedText(
+                        color: AppColors.primaryColor,
+                        text: S.of(context).browseSubscriptionMarkets,
+                      ),
                     ),
                     const SizedBox(
                       height: 20.0,

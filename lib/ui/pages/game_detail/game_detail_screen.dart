@@ -10,6 +10,7 @@ import '../../widget/game_level_button.dart';
 
 class GameDetailScreen extends StatefulWidget {
   final GameDetails arguments;
+
   const GameDetailScreen({Key? key, required this.arguments}) : super(key: key);
 
   @override
@@ -81,6 +82,8 @@ class _GameDetailScreenState extends StateMVC<GameDetailScreen> {
                                         await Navigator.pushNamed(
                                             context, Routes.invoiceQrScreen,
                                             arguments: InvoiceQrArguments(
+                                              mallName:
+                                                  widget.arguments.mallName,
                                               gameId: widget.arguments.gameId,
                                               mallId: widget.arguments.mallId,
                                               daily: true,
@@ -96,6 +99,8 @@ class _GameDetailScreenState extends StateMVC<GameDetailScreen> {
                                         await Navigator.pushNamed(
                                             context, Routes.pontQrScreen,
                                             arguments: InvoiceQrArguments(
+                                              mallName:
+                                                  widget.arguments.mallName,
                                               gameId: widget.arguments.gameId,
                                               mallId: widget.arguments.mallId,
                                               balancePoints: _con.balancePoints,
@@ -130,6 +135,7 @@ class _GameDetailScreenState extends StateMVC<GameDetailScreen> {
                                           arguments: InvoiceQrArguments(
                                             gameId: widget.arguments.gameId,
                                             mallId: widget.arguments.mallId,
+                                            mallName: widget.arguments.mallName,
                                             daily: true,
                                             title:
                                                 S.of(context).weeklyCompetition,
@@ -163,6 +169,7 @@ class _GameDetailScreenState extends StateMVC<GameDetailScreen> {
                                         arguments: InvoiceQrArguments(
                                           gameId: widget.arguments.gameId,
                                           mallId: widget.arguments.mallId,
+                                          mallName: widget.arguments.mallName,
                                           daily: true,
                                           title:
                                               S.of(context).monthlyCompetition,
@@ -187,6 +194,7 @@ class _GameDetailScreenState extends StateMVC<GameDetailScreen> {
                                         arguments: InvoiceQrArguments(
                                           gameId: widget.arguments.gameId,
                                           mallId: widget.arguments.mallId,
+                                          mallName: widget.arguments.mallName,
                                           daily: true,
                                           title: S
                                               .of(context)

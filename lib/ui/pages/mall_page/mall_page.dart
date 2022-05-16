@@ -36,25 +36,35 @@ class _MallsPageState extends StateMVC<MallsPage> {
             S.of(context).malls,
           ),
         ),
-        body: _con.malls.isEmpty && _con.loading
-            ? const Center(child: CircularProgressIndicator())
-            : GridView.builder(
-                itemCount: _con.malls.length,
-                shrinkWrap: true,
-                primary: false,
-                physics: const ScrollPhysics(),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2),
-                itemBuilder: (context, gridViewIndex) {
-                  return GestureDetector(
-                      onTap: () {
-                        Navigator.pushNamed(context, Routes.shopsScreen,
-                            arguments: ShopArguments(
-                                mallName: _con.malls[gridViewIndex].name ?? '',
-                                mallId: _con.malls[gridViewIndex].mallId));
-                      },
-                      child: MallWidget(mall: _con.malls[gridViewIndex]));
-                },
-              ));
+        body: Builder(builder: (context) {
+                if (_con.malls.isEmpty && _con.loading) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (_con.malls.isNotEmpty) {
+                  return GridView.builder(
+                    itemCount: _con.malls.length,
+                    shrinkWrap: true,
+                    primary: false,
+                    physics: const ScrollPhysics(),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2),
+                    itemBuilder: (context, gridViewIndex) {
+                      return GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, Routes.shopsScreen,
+                                arguments: ShopArguments(
+                                    mallName:
+                                        _con.malls[gridViewIndex].name ?? '',
+                                    mallId: _con.malls[gridViewIndex].mallId));
+                          },
+                          child: MallWidget(mall: _con.malls[gridViewIndex]));
+                    },
+                  );
+                } else {
+                  return const Center(
+                    child: Text('لا يوجد مولات لعرضها'),
+                  );
+                }
+              }));
   }
 }

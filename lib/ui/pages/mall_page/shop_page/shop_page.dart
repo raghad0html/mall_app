@@ -39,9 +39,7 @@ class _ShopsPageState extends StateMVC<ShopsPage> {
           CostumeAppBar(
             title: widget.shopArguments.mallName,
           ),
-          _con.shops.isEmpty && _con.loading
-              ? const Center(child: CircularProgressIndicator())
-              : Expanded(
+           Expanded(
                   child: Builder(builder: (context) {
                     if (_con.shops.isEmpty && _con.loading) {
                       return const Center(child: CircularProgressIndicator());
@@ -229,15 +227,15 @@ class _ShopsPageState extends StateMVC<ShopsPage> {
                                                     _con.shops[index]
                                                             .shopAddressLon !=
                                                         null) {
-                                                  // MapsSheet.show(
-                                                  //     context: context,
-                                                  //     latUser: _con.shops[index]
-                                                  //         .shopAddressLat!,
-                                                  //     longUser: _con
-                                                  //         .shops[index]
-                                                  //         .shopAddressLon!,
-                                                  //     title: _con.shops[index]
-                                                  //         .shopAddress!);
+                                                  MapsSheet.show(
+                                                      context: context,
+                                                      latUser: _con.shops[index]
+                                                          .shopAddressLat!,
+                                                      longUser: _con
+                                                          .shops[index]
+                                                          .shopAddressLon!,
+                                                      title: _con.shops[index]
+                                                          .shopAddress!);
                                                 }
                                               },
                                               child: Row(
