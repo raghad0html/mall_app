@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:mall_app/main_sdk/apis/qr/models/qr_params_model.dart';
+import 'package:mall_app/routes.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
+import '../../../generated/l10n.dart';
 import '../../../local_storage/shared_prefernce_services.dart';
 import '../../../main_sdk/apis/core/models/common/result_class.dart';
 import '../../../main_sdk/apis/qr/models/qr_model.dart';
@@ -56,7 +59,7 @@ class QRController extends ControllerMVC {
       setState(() {});
 
       if (data.data.stickerAccepted ?? false) {
-        switch (data.data.balancePoints) {
+        switch (balancePoints) {
           case 2:
             showVideos(2);
             break;
@@ -69,6 +72,40 @@ class QRController extends ControllerMVC {
           case 12:
             showVideos(12);
             break;
+        }
+
+        if (balancePoints >= targetPoints) {
+          showDialog(
+            context: state!.context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text('تهانينا'),
+                content: Column(
+                  children: [
+                    SizedBox(
+                        width: 100,
+                        height: 100,
+                        child: Lottie.asset('assets/lottie/win_gift.json')),
+                    Text('لننتقل للمرحلة التالية')
+                  ],
+                ),
+                actions: <Widget>[
+                  TextButton(
+                    child: Text(S.of(context).ok),
+                    onPressed: () {
+                      Navigator.pushReplacementNamed(
+                          context, Routes.gameDetailScreen,
+                          arguments: GameDetails(
+                            mallName: data.data.mallName ?? '',
+                            gameId: gameId,
+                            mallId: mallId,
+                          ));
+                    },
+                  ),
+                ],
+              );
+            },
+          );
         }
       }
     } else if (_qrResponse is ErrorState) {

@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 import 'package:mall_app/constants/app_theme.dart';
 import 'package:mall_app/routes.dart';
 import 'package:mall_app/ui/pages/mall_page/shop_page/shop_details_page/shop_details_controller.dart';
@@ -9,8 +8,9 @@ import 'package:mall_app/ui/widget/costume_appbar.dart';
 import 'package:mall_app/ui/widget/custom_dialog_product.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
-import '../../../../../generated/l10n.dart';
 import '../../../../../main_sdk/apis/gift/models/gift_model.dart';
+import '../../../../widget/gift_item.dart';
+import '../../../../widget/lined_text.dart';
 
 class ShopDetailsPage extends StatefulWidget {
   final ShopArguments shopArguments;
@@ -57,7 +57,10 @@ class _ShopDetailsPageState extends StateMVC<ShopDetailsPage> {
                             InkWell(
                               onTap: () {
                                 Navigator.pushNamed(
-                                    context, Routes.allGamesScreen);
+                                    context, Routes.giftsForShopScreen,
+                                    arguments: ShopArguments(
+                                        mallName: widget.shopArguments.mallName,
+                                        mallId: widget.shopArguments.mallId));
                               },
                               child: Row(
                                 children: [
@@ -68,10 +71,10 @@ class _ShopDetailsPageState extends StateMVC<ShopDetailsPage> {
                                           Theme.of(context).textTheme.headline6,
                                     ),
                                   ),
-                                  // const LinedText(
-                                  //   color: AppColors.basicColor,
-                                  //   text: 'عرض الكل',
-                                  // ),
+                                  const LinedText(
+                                    color: AppColors.basicColor,
+                                    text: 'عرض الكل',
+                                  ),
                                 ],
                               ),
                             ),
@@ -87,56 +90,7 @@ class _ShopDetailsPageState extends StateMVC<ShopDetailsPage> {
                                 itemBuilder: (context, i) {
                                   GiftModel _gift = _con.gifts[i];
 
-                                  return InkWell(
-                                    onTap: () {
-                                      showDialog(
-                                        context: context,
-                                        builder: (BuildContext context) {
-                                          return AlertDialog(
-                                            title: Text(_gift.giftName ?? ''),
-                                            content: Container(
-                                              child: Text(
-                                                  _gift.giftDescription ?? ''),
-                                            ),
-                                            actions: <Widget>[
-                                              TextButton(
-                                                child: Text(S.of(context).ok),
-                                                onPressed: () {
-                                                  Navigator.of(context).pop();
-                                                },
-                                              ),
-                                            ],
-                                          );
-                                        },
-                                      );
-                                    },
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                          borderRadius: const BorderRadius.all(
-                                              Radius.circular(5)),
-                                          border: Border.all(
-                                              color: AppColors.appYellow),
-                                          color: AppColors.grayColor
-                                              .withOpacity(0.1)),
-                                      margin: const EdgeInsets.all(8.0),
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Column(
-                                        children: [
-                                          SizedBox(
-                                              width: 50,
-                                              height: 60,
-                                              child: Lottie.asset(
-                                                  'assets/lottie/gift.json')),
-                                          Text(
-                                            _gift.giftDescription ?? '',
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .headline3,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  );
+                                  return GiftItem(gift: _gift);
                                 },
                               ),
                             )

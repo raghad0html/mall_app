@@ -68,126 +68,142 @@ class _GameDetailScreenState extends StateMVC<GameDetailScreen> {
                       const SizedBox(
                         height: 20,
                       ),
-                      Row(children: [
-                        Expanded(
-                          child: InkWell(
-                            onTap: () async {
-                              if (_con.levelIndex == 0) {
-                                if (_con.zero) {
-                                  await Navigator.pushNamed(
-                                      context, Routes.invoiceQrScreen,
-                                      arguments: InvoiceQrArguments(
-                                        gameId: widget.arguments.gameId,
-                                        mallId: widget.arguments.mallId,
-                                        daily: true,
-                                        title: S
-                                            .of(context)
-                                            .dailyCompetitionTitle(
-                                                widget.arguments.mallName),
-                                      ));
-                                  _con.getGameDetails(widget.arguments.mallId,
-                                      widget.arguments.gameId);
-                                } else {
-                                  await Navigator.pushNamed(
-                                      context, Routes.pontQrScreen,
-                                      arguments: InvoiceQrArguments(
-                                        gameId: widget.arguments.gameId,
-                                        mallId: widget.arguments.mallId,
-                                        balancePoints: _con.balancePoints,
-                                        targetPoints: _con.targetPoint,
-                                        daily: true,
-                                        title: S
-                                            .of(context)
-                                            .dailyCompetitionTitle(
-                                                widget.arguments.mallName),
-                                      ));
-                                  _con.getGameDetails(widget.arguments.mallId,
-                                      widget.arguments.gameId);
-                                }
-                              }
-                            },
-                            child: GameLevelButton(
-                              image: '24hourdaily.png',
-                              locked: _con.levelIndex >= 0 ? false : true,
-                              title: S.of(context).daily,
-                              completed: _con.levelIndex > 0 ? true : false,
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: InkWell(
-                            onTap: () async {
-                              if (_con.levelIndex == 1) {
-                                await Navigator.pushNamed(
-                                    context, Routes.invoiceQrScreen,
-                                    arguments: InvoiceQrArguments(
-                                      gameId: widget.arguments.gameId,
-                                      mallId: widget.arguments.mallId,
-                                      daily: true,
-                                      title: S.of(context).weeklyCompetition,
-                                    ));
-                                _con.getGameDetails(widget.arguments.mallId,
-                                    widget.arguments.gameId);
-                              }
-                            },
-                            child: GameLevelButton(
-                              image: 'week.png',
-                              locked: _con.levelIndex >= 1 ? false : true,
-                              title: S.of(context).weekly,
-                              completed: _con.levelIndex > 1 ? true : false,
-                            ),
-                          ),
-                        ),
-                      ]),
-                      Row(children: [
-                        Expanded(
-                            child: InkWell(
-                          onTap: () async {
-                            if (_con.levelIndex == 2) {
-                              await Navigator.pushNamed(
-                                  context, Routes.invoiceQrScreen,
-                                  arguments: InvoiceQrArguments(
-                                    gameId: widget.arguments.gameId,
-                                    mallId: widget.arguments.mallId,
-                                    daily: true,
-                                    title: S.of(context).monthlyCompetition,
-                                  ));
-                              _con.getGameDetails(widget.arguments.mallId,
-                                  widget.arguments.gameId);
-                            }
-                          },
-                          child: GameLevelButton(
-                            image: 'month.png',
-                            locked: _con.levelIndex >= 2 ? false : true,
-                            title: S.of(context).monthly,
-                            completed: _con.levelIndex > 2 ? true : false,
-                          ),
-                        )),
-                        Expanded(
-                            child: InkWell(
-                          onTap: () async {
-                            if (_con.levelIndex == 3) {
-                              await Navigator.pushNamed(
-                                  context, Routes.invoiceQrScreen,
-                                  arguments: InvoiceQrArguments(
-                                    gameId: widget.arguments.gameId,
-                                    mallId: widget.arguments.mallId,
-                                    daily: true,
-                                    title:
-                                        S.of(context).QuarterManualCompetition,
-                                  ));
-                              _con.getGameDetails(widget.arguments.mallId,
-                                  widget.arguments.gameId);
-                            }
-                          },
-                          child: GameLevelButton(
-                            image: '90.png',
-                            locked: _con.levelIndex >= 3 ? false : true,
-                            completed: _con.levelIndex > 3 ? true : false,
-                            title: S.of(context).QuarterManual,
-                          ),
-                        )),
-                      ]),
+                      _con.loadingDetails
+                          ? const Center(
+                              child: CircularProgressIndicator(),
+                            )
+                          : Row(children: [
+                              Expanded(
+                                child: InkWell(
+                                  onTap: () async {
+                                    if (_con.levelIndex == 0) {
+                                      if (_con.zero) {
+                                        await Navigator.pushNamed(
+                                            context, Routes.invoiceQrScreen,
+                                            arguments: InvoiceQrArguments(
+                                              gameId: widget.arguments.gameId,
+                                              mallId: widget.arguments.mallId,
+                                              daily: true,
+                                              title: S
+                                                  .of(context)
+                                                  .dailyCompetitionTitle(widget
+                                                      .arguments.mallName),
+                                            ));
+                                        _con.getGameDetails(
+                                            widget.arguments.mallId,
+                                            widget.arguments.gameId);
+                                      } else {
+                                        await Navigator.pushNamed(
+                                            context, Routes.pontQrScreen,
+                                            arguments: InvoiceQrArguments(
+                                              gameId: widget.arguments.gameId,
+                                              mallId: widget.arguments.mallId,
+                                              balancePoints: _con.balancePoints,
+                                              targetPoints: _con.targetPoint,
+                                              daily: true,
+                                              title: S
+                                                  .of(context)
+                                                  .dailyCompetitionTitle(widget
+                                                      .arguments.mallName),
+                                            ));
+                                        _con.getGameDetails(
+                                            widget.arguments.mallId,
+                                            widget.arguments.gameId);
+                                      }
+                                    }
+                                  },
+                                  child: GameLevelButton(
+                                    image: '24hourdaily.png',
+                                    locked: _con.levelIndex >= 0 ? false : true,
+                                    title: S.of(context).daily,
+                                    completed:
+                                        _con.levelIndex > 0 ? true : false,
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                child: InkWell(
+                                  onTap: () async {
+                                    if (_con.levelIndex == 1) {
+                                      await Navigator.pushNamed(
+                                          context, Routes.invoiceQrScreen,
+                                          arguments: InvoiceQrArguments(
+                                            gameId: widget.arguments.gameId,
+                                            mallId: widget.arguments.mallId,
+                                            daily: true,
+                                            title:
+                                                S.of(context).weeklyCompetition,
+                                          ));
+                                      _con.getGameDetails(
+                                          widget.arguments.mallId,
+                                          widget.arguments.gameId);
+                                    }
+                                  },
+                                  child: GameLevelButton(
+                                    image: 'week.png',
+                                    locked: _con.levelIndex >= 1 ? false : true,
+                                    title: S.of(context).weekly,
+                                    completed:
+                                        _con.levelIndex > 1 ? true : false,
+                                  ),
+                                ),
+                              ),
+                            ]),
+                      _con.loadingDetails
+                          ? const Center(
+                              child: CircularProgressIndicator(),
+                            )
+                          : Row(children: [
+                              Expanded(
+                                  child: InkWell(
+                                onTap: () async {
+                                  if (_con.levelIndex == 2) {
+                                    await Navigator.pushNamed(
+                                        context, Routes.invoiceQrScreen,
+                                        arguments: InvoiceQrArguments(
+                                          gameId: widget.arguments.gameId,
+                                          mallId: widget.arguments.mallId,
+                                          daily: true,
+                                          title:
+                                              S.of(context).monthlyCompetition,
+                                        ));
+                                    _con.getGameDetails(widget.arguments.mallId,
+                                        widget.arguments.gameId);
+                                  }
+                                },
+                                child: GameLevelButton(
+                                  image: 'month.png',
+                                  locked: _con.levelIndex >= 2 ? false : true,
+                                  title: S.of(context).monthly,
+                                  completed: _con.levelIndex > 2 ? true : false,
+                                ),
+                              )),
+                              Expanded(
+                                  child: InkWell(
+                                onTap: () async {
+                                  if (_con.levelIndex == 3) {
+                                    await Navigator.pushNamed(
+                                        context, Routes.invoiceQrScreen,
+                                        arguments: InvoiceQrArguments(
+                                          gameId: widget.arguments.gameId,
+                                          mallId: widget.arguments.mallId,
+                                          daily: true,
+                                          title: S
+                                              .of(context)
+                                              .QuarterManualCompetition,
+                                        ));
+                                    _con.getGameDetails(widget.arguments.mallId,
+                                        widget.arguments.gameId);
+                                  }
+                                },
+                                child: GameLevelButton(
+                                  image: '90.png',
+                                  locked: _con.levelIndex >= 3 ? false : true,
+                                  completed: _con.levelIndex > 3 ? true : false,
+                                  title: S.of(context).QuarterManual,
+                                ),
+                              )),
+                            ]),
                     ],
                   ),
                 ),
