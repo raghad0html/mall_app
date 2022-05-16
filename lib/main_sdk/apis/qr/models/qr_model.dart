@@ -14,6 +14,7 @@ class QrModel {
   int? points;
   int? balancePoints;
   int? targetPoints;
+  String? mallName;
 
   QrModel({
     this.qrType,
@@ -29,6 +30,7 @@ class QrModel {
     this.points,
     this.balancePoints,
     this.targetPoints,
+    this.mallName,
   });
 
   QrModel.fromJson(Map<String, dynamic> json) {
@@ -45,5 +47,6 @@ class QrModel {
     points = json['points'];
     targetPoints = json['target_points'];
     balancePoints = json['balance_points'];
+    mallName = json['mall_name'];
   }
 }

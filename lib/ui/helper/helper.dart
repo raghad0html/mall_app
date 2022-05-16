@@ -44,6 +44,8 @@ class Helper {
   }
 
   static String getGameLevelFromEnum(GameLevelEnumsModel level) {
+    print(' level level level level level $level');
+
     switch (level) {
       case GameLevelEnumsModel.zero:
         return 'المرحلة اليومية';

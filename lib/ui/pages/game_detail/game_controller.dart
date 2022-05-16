@@ -21,11 +21,14 @@ class GameController extends ControllerMVC {
   int targetPoint = 0;
   int balancePoints = 0;
   bool loading = false;
+  bool loadingDetails = false;
   GameController() {
     scaffoldKey = GlobalKey<ScaffoldState>();
   }
 
   getGameDetails(int mallId, int gameId, {bool init = false}) async {
+    loadingDetails = true;
+    setState(() {});
     if (!init) {
       loader = Helper.overlayLoader(state!.context);
       FocusScope.of(state!.context).unfocus();
@@ -42,7 +45,8 @@ class GameController extends ControllerMVC {
     );
     ResponseState<GameModel> _gameResponse =
         await GameIdentityApi().game(gameParamsModel: gameParamsModel);
-
+    loadingDetails = false;
+    setState(() {});
     if (_gameResponse is SuccessState) {
       SuccessState<GameModel> data = _gameResponse as SuccessState<GameModel>;
       targetPoint = data.data.targetPoints ?? 0;
