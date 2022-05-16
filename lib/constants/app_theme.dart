@@ -68,7 +68,7 @@ final ThemeData themeData = ThemeData(
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ButtonStyle(
       padding: MaterialStateProperty.all(
-          const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10)),
+          const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15)),
       overlayColor:
           MaterialStateProperty.all(AppColors.whiteColor.withAlpha(50)),
       foregroundColor: MaterialStateProperty.all(AppColors.whiteColor),

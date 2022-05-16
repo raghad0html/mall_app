@@ -87,7 +87,7 @@ class _HomePageState extends StateMVC<HomePage> {
                   ),
                   InkWell(
                     onTap: () {
-                      Navigator.pushNamed(context, Routes.profileScreen);
+                      Navigator.pushNamed(context, Routes.profileScreen).then((value) => setState((){_con.getAllGames();}));
                     },
                     child: Container(
                       padding: const EdgeInsets.all(3.0),
@@ -185,7 +185,7 @@ class _HomePageState extends StateMVC<HomePage> {
                           InkWell(
                             onTap: () {
                               Navigator.pushNamed(
-                                  context, Routes.allGamesScreen);
+                                  context, Routes.allGamesScreen).then((value) => setState((){_con.getAllGames();}));
                             },
                             child: Row(
                               children: [

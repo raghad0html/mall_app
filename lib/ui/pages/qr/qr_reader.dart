@@ -36,7 +36,7 @@ class _QrReaderScreenState extends State<QrReaderScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Center(
-          child: Text(S.of(context).howToScanBarcode),
+          child: Text(S.of(context).howToScanBarcode ,style: TextStyle(fontSize: 16),),
         ),
       ),
       body: Column(
