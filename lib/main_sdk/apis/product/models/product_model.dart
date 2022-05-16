@@ -23,6 +23,7 @@ class ProductModel {
   String? picture;
   int? stock;
   String? dateAdd;
+  String? prodDescription;
 
   ProductModel(
       {this.prodId,
@@ -31,7 +32,8 @@ class ProductModel {
       this.price,
       this.picture,
       this.stock,
-      this.dateAdd});
+      this.dateAdd,
+      this.prodDescription});
 
   ProductModel.fromJson(Map<String, dynamic> json) {
     prodId = json['prod_id'];
@@ -41,5 +43,6 @@ class ProductModel {
     picture = json['picture'];
     stock = json['stock'];
     dateAdd = json['dateAdd'];
+    prodDescription = json['prod_description'];
   }
 }

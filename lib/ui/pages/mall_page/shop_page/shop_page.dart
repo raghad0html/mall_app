@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:mall_app/constants/assets.dart';
 import 'package:mall_app/routes.dart';
 import 'package:mall_app/ui/pages/mall_page/shop_page/shop_controller.dart';
 import 'package:mall_app/ui/shared/future_builder_widget/lancher.dart';
@@ -97,14 +98,43 @@ class _ShopsPageState extends StateMVC<ShopsPage> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Text(
-                                            _con.shops[index].shopName ?? '',
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .titleLarge
-                                                ?.copyWith(height: 1.1),
-                                            maxLines: 1,
-                                            overflow: TextOverflow.ellipsis,
+                                          Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
+                                            children: [
+                                              Expanded(
+                                                child: Text(
+                                                  _con.shops[index].shopName ??
+                                                      '',
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .titleLarge
+                                                      ?.copyWith(height: 1.1),
+                                                  maxLines: 1,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                ),
+                                              ),
+                                              if (_con.shops[index].shopPlan !=
+                                                  null)
+                                                Image.asset(
+                                                  _con.shops[index].shopPlan ==
+                                                          2
+                                                      ? Assets.iconPlan1
+                                                      : _con.shops[index]
+                                                                  .shopPlan ==
+                                                              5
+                                                          ? Assets.iconPlan2
+                                                          : _con.shops[index]
+                                                                      .shopPlan ==
+                                                                  8
+                                                              ? Assets.iconPlan3
+                                                              : Assets
+                                                                  .iconPlan4,
+                                                  width: 35,
+                                                  height: 35,
+                                                )
+                                            ],
                                           ),
                                           Padding(
                                             padding: const EdgeInsets.only(
@@ -123,7 +153,8 @@ class _ShopsPageState extends StateMVC<ShopsPage> {
                                                       await Launcher()
                                                           .makePhoneCall(_con
                                                               .shops[index]
-                                                              .shapPhone.toString());
+                                                              .shapPhone
+                                                              .toString());
                                                     },
                                                     child: Row(
                                                       children: [
@@ -133,7 +164,8 @@ class _ShopsPageState extends StateMVC<ShopsPage> {
                                                         ),
                                                         Text(
                                                           _con.shops[index]
-                                                                  .shapPhone.toString() ??
+                                                                  .shapPhone
+                                                                  .toString() ??
                                                               '',
                                                           style: Theme.of(
                                                                   context)
@@ -156,8 +188,8 @@ class _ShopsPageState extends StateMVC<ShopsPage> {
                                                     onTap: () async {
                                                       await Launcher()
                                                           .sendEmail(_con
-                                                          .shops[index]
-                                                          .shopEmail!);
+                                                              .shops[index]
+                                                              .shopEmail!);
                                                     },
                                                     child: Row(
                                                       children: [
@@ -170,7 +202,8 @@ class _ShopsPageState extends StateMVC<ShopsPage> {
                                                                   .shopEmail
                                                                   ?.toString() ??
                                                               '',
-                                                          style: Theme.of(context)
+                                                          style: Theme.of(
+                                                                  context)
                                                               .textTheme
                                                               .labelMedium
                                                               ?.copyWith(
@@ -190,10 +223,23 @@ class _ShopsPageState extends StateMVC<ShopsPage> {
                                               null)
                                             InkWell(
                                               onTap: () {
-                                                if(_con.shops[index].shopAddressLat!=null && _con.shops[index].shopAddressLon!=null) {
-                                                  MapsSheet.show(context: context, latUser: _con.shops[index].shopAddressLat!, longUser: _con.shops[index].shopAddressLon!, title: _con.shops[index].shopAddress!);
-
-                                                }},
+                                                if (_con.shops[index]
+                                                            .shopAddressLat !=
+                                                        null &&
+                                                    _con.shops[index]
+                                                            .shopAddressLon !=
+                                                        null) {
+                                                  // MapsSheet.show(
+                                                  //     context: context,
+                                                  //     latUser: _con.shops[index]
+                                                  //         .shopAddressLat!,
+                                                  //     longUser: _con
+                                                  //         .shops[index]
+                                                  //         .shopAddressLon!,
+                                                  //     title: _con.shops[index]
+                                                  //         .shopAddress!);
+                                                }
+                                              },
                                               child: Row(
                                                 children: [
                                                   const Icon(Icons

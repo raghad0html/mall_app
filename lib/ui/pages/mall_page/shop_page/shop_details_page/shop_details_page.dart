@@ -6,6 +6,7 @@ import 'package:mall_app/constants/app_theme.dart';
 import 'package:mall_app/routes.dart';
 import 'package:mall_app/ui/pages/mall_page/shop_page/shop_details_page/shop_details_controller.dart';
 import 'package:mall_app/ui/widget/costume_appbar.dart';
+import 'package:mall_app/ui/widget/custom_dialog_product.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 import '../../../../../generated/l10n.dart';
@@ -181,74 +182,106 @@ class _ShopDetailsPageState extends StateMVC<ShopDetailsPage> {
                                     const SliverGridDelegateWithFixedCrossAxisCount(
                                         crossAxisCount: 2),
                                 itemBuilder: (context, gridViewIndex) {
-                                  return Container(
-                                    margin: const EdgeInsets.all(8),
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      border: Border.all(color: Colors.white),
-                                      borderRadius: const BorderRadius.all(
-                                          Radius.circular(8)),
-                                    ),
-                                    child: Column(
-                                      children: [
-                                        ClipRRect(
-                                          borderRadius: const BorderRadius.only(
-                                              topLeft: Radius.circular(10),
-                                              topRight: Radius.circular(10)),
-                                          child: CachedNetworkImage(
-                                            height: 130,
-                                            progressIndicatorBuilder:
-                                                (context, url, progress) =>
-                                                    Center(
-                                              child: CircularProgressIndicator(
-                                                value: progress.progress,
-                                              ),
-                                            ),
-                                            errorWidget: (context, url,
-                                                    error) =>
-                                                const Icon(Icons.error_outline),
-                                            imageUrl: _con
-                                                    .products[gridViewIndex]
-                                                    .picture ??
-                                                '',
-                                          ),
-                                        ),
-                                        Container(
-                                          margin: const EdgeInsets.all(5),
-                                          alignment: Alignment.bottomRight,
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                _con.products[gridViewIndex]
+                                  return GestureDetector(
+                                    onTap: () {
+                                      showDialog(
+                                          context: context,
+                                          //  barrierDismissible: false,
+                                          builder: (BuildContext context) {
+                                            return CustomDialogProduct(
+                                                title: _con
+                                                        .products[gridViewIndex]
                                                         .name ??
                                                     '',
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .subtitle1
-                                                    ?.copyWith(height: 1.1),
-                                                maxLines: 1,
-                                                overflow: TextOverflow.ellipsis,
+                                                price: _con
+                                                            .products[
+                                                                gridViewIndex]
+                                                            .price !=
+                                                        null
+                                                    ? 'السعر: ${_con.products[gridViewIndex].price} ريال '
+                                                    : '',
+                                                description: _con
+                                                            .products[
+                                                                gridViewIndex]
+                                                            .prodDescription !=
+                                                        null
+                                                    ? 'الوصف: ${_con.products[gridViewIndex].prodDescription}'
+                                                    : '');
+                                          });
+                                    },
+                                    child: Container(
+                                      margin: const EdgeInsets.all(8),
+                                      padding: const EdgeInsets.only(top: 5),
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        border: Border.all(color: Colors.white),
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(8)),
+                                      ),
+                                      child: Column(
+                                        children: [
+                                          ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                            child: CachedNetworkImage(
+                                              height: 130,
+                                              progressIndicatorBuilder:
+                                                  (context, url, progress) =>
+                                                      Center(
+                                                child:
+                                                    CircularProgressIndicator(
+                                                  value: progress.progress,
+                                                ),
                                               ),
-                                              Text(
-                                                _con.products[gridViewIndex]
-                                                        .price
-                                                        ?.toString() ??
-                                                    '',
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .subtitle1
-                                                    ?.copyWith(
-                                                        height: 1.1,
-                                                        fontSize: 13),
-                                                maxLines: 2,
-                                                overflow: TextOverflow.ellipsis,
-                                              ),
-                                            ],
+                                              errorWidget:
+                                                  (context, url, error) =>
+                                                      const Icon(
+                                                          Icons.error_outline),
+                                              imageUrl: _con
+                                                      .products[gridViewIndex]
+                                                      .picture ??
+                                                  '',
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                          Container(
+                                            margin: const EdgeInsets.all(10),
+                                            alignment: Alignment.bottomRight,
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  _con.products[gridViewIndex]
+                                                          .name ??
+                                                      '',
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .subtitle1
+                                                      ?.copyWith(height: 1.1),
+                                                  maxLines: 1,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                ),
+                                                Text(
+                                                  _con.products[gridViewIndex]
+                                                          .price
+                                                          ?.toString() ??
+                                                      '',
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .subtitle1
+                                                      ?.copyWith(
+                                                          height: 1.1,
+                                                          fontSize: 13),
+                                                  maxLines: 2,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   );
                                 },
