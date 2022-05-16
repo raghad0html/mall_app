@@ -154,29 +154,32 @@ class _ShopsPageState extends StateMVC<ShopsPage> {
                                                               .shapPhone
                                                               .toString());
                                                     },
-                                                    child: Row(
-                                                      children: [
-                                                        const Icon(Icons.call),
-                                                        const SizedBox(
-                                                          width: 5,
-                                                        ),
-                                                        Text(
-                                                          _con.shops[index]
-                                                                  .shapPhone
-                                                                  .toString() ??
-                                                              '',
-                                                          style: Theme.of(
-                                                                  context)
-                                                              .textTheme
-                                                              .labelMedium
-                                                              ?.copyWith(
-                                                                  height: 1.1,
-                                                                  fontSize: 15),
-                                                          maxLines: 2,
-                                                          overflow: TextOverflow
-                                                              .ellipsis,
-                                                        ),
-                                                      ],
+                                                    child: SizedBox(
+                                                      height: 40,
+                                                      child: Row(
+                                                        children: [
+                                                          const Icon(Icons.call),
+                                                          const SizedBox(
+                                                            width: 5,
+                                                          ),
+                                                          Text(
+                                                            _con.shops[index]
+                                                                    .shapPhone
+                                                                    .toString() ??
+                                                                '',
+                                                            style: Theme.of(
+                                                                    context)
+                                                                .textTheme
+                                                                .labelMedium
+                                                                ?.copyWith(
+                                                                    height: 1.1,
+                                                                    fontSize: 15),
+                                                            maxLines: 2,
+                                                            overflow: TextOverflow
+                                                                .ellipsis,
+                                                          ),
+                                                        ],
+                                                      ),
                                                     ),
                                                   ),
                                                 if (_con.shops[index]
@@ -189,29 +192,32 @@ class _ShopsPageState extends StateMVC<ShopsPage> {
                                                               .shops[index]
                                                               .shopEmail!);
                                                     },
-                                                    child: Row(
-                                                      children: [
-                                                        const Icon(Icons.email),
-                                                        const SizedBox(
-                                                          width: 5,
-                                                        ),
-                                                        Text(
-                                                          _con.shops[index]
-                                                                  .shopEmail
-                                                                  ?.toString() ??
-                                                              '',
-                                                          style: Theme.of(
-                                                                  context)
-                                                              .textTheme
-                                                              .labelMedium
-                                                              ?.copyWith(
-                                                                  height: 1.1,
-                                                                  fontSize: 15),
-                                                          maxLines: 2,
-                                                          overflow: TextOverflow
-                                                              .ellipsis,
-                                                        ),
-                                                      ],
+                                                    child: SizedBox(
+                                                      height: 40,
+                                                      child: Row(
+                                                        children: [
+                                                          const Icon(Icons.email),
+                                                          const SizedBox(
+                                                            width: 5,
+                                                          ),
+                                                          Text(
+                                                            _con.shops[index]
+                                                                    .shopEmail
+                                                                    ?.toString() ??
+                                                                '',
+                                                            style: Theme.of(
+                                                                    context)
+                                                                .textTheme
+                                                                .labelMedium
+                                                                ?.copyWith(
+                                                                    height: 1.1,
+                                                                    fontSize: 15),
+                                                            maxLines: 2,
+                                                            overflow: TextOverflow
+                                                                .ellipsis,
+                                                          ),
+                                                        ],
+                                                      ),
                                                     ),
                                                   ),
                                               ],
@@ -238,29 +244,32 @@ class _ShopsPageState extends StateMVC<ShopsPage> {
                                                           .shopAddress!);
                                                 }
                                               },
-                                              child: Row(
-                                                children: [
-                                                  const Icon(Icons
-                                                      .location_on_rounded),
-                                                  const SizedBox(
-                                                    width: 5,
-                                                  ),
-                                                  Text(
-                                                    _con.shops[index]
-                                                            .shopAddress
-                                                            ?.toString() ??
-                                                        '',
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .labelMedium
-                                                        ?.copyWith(
-                                                            height: 1.1,
-                                                            fontSize: 15),
-                                                    maxLines: 2,
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                  ),
-                                                ],
+                                              child: SizedBox(
+                                                height: 40,
+                                                child: Row(
+                                                  children: [
+                                                    const Icon(Icons
+                                                        .location_on_rounded),
+                                                    const SizedBox(
+                                                      width: 5,
+                                                    ),
+                                                    Text(
+                                                      _con.shops[index]
+                                                              .shopAddress
+                                                              ?.toString() ??
+                                                          '',
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .labelMedium
+                                                          ?.copyWith(
+                                                              height: 1.1,
+                                                              fontSize: 15),
+                                                      maxLines: 2,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
                                             ),
                                         ],
