@@ -19,12 +19,18 @@ class QRController extends ControllerMVC {
   bool loading = false;
   int levelIndex = 0;
   QrModel? qrModelResult;
+  bool daily = false;
 
   int targetPoints = 0;
   int balancePoints = 0;
   bool accepted = false;
   QRController() {
     scaffoldKey = GlobalKey<ScaffoldState>();
+  }
+
+  setDaily(bool daily1) {
+    daily = daily1;
+    setState(() {});
   }
 
   sendQr(
@@ -59,7 +65,7 @@ class QRController extends ControllerMVC {
       setState(() {});
 
       if (data.data.stickerAccepted ?? false) {
-        switch (balancePoints) {
+        switch (data.data.points) {
           case 2:
             showVideos(2);
             break;
@@ -107,6 +113,7 @@ class QRController extends ControllerMVC {
             },
           );
         }
+        daily = false;
       }
     } else if (_qrResponse is ErrorState) {
       ErrorState<QrModel> data = _qrResponse as ErrorState<QrModel>;
