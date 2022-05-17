@@ -1,3 +1,4 @@
+import 'package:mall_app/main_sdk/apis/core/models/common/message_model.dart';
 import 'package:mall_app/main_sdk/apis/core/models/common/result_class.dart';
 import 'package:mall_app/main_sdk/apis/core/servisec/identity/api_identity.dart';
 import 'package:mall_app/main_sdk/apis/gift/models/assign_randon_gift_to_user_params_model.dart';
@@ -23,11 +24,11 @@ class GiftIdentityApi extends ApiModelIdentity {
         parseJson: (json) => ListOfGiftModel.fromJson(json));
   }
 
-  Future<ResponseState<GiftModel>> getAssingRandomGiftToUser(
+  Future<ResponseState<MessageModel>> getAssingRandomGiftToUser(
       {required AssingRandomGiftToUserParamsModel assingRandomGiftToUserParamsModel}) async {
     return apiMethod('gifts.php',
         data: assingRandomGiftToUserParamsModel.toMap(),
         httpEnum: HttpEnum.post,
-        parseJson: (json) => GiftModel.fromJson(json));
+        parseJson: (json) => MessageModel.fromJson(json));
   }
 }

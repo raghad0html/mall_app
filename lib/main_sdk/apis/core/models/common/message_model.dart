@@ -7,6 +7,7 @@ class MessageModel {
   bool? registerAccepted;
   bool? resendAccepted;
   bool? newPasswordAccepted;
+  bool? giftAccepted;
   bool? updateProfileAccepted;
   String? msg;
 
@@ -18,6 +19,7 @@ class MessageModel {
       this.resendAccepted,
       this.msg,
       this.updateProfileAccepted,
+      this.giftAccepted,
       this.newPasswordAccepted});
 
   factory MessageModel.fromJson(Map<String, dynamic> json) =>
@@ -35,6 +37,7 @@ class MessageModel {
         resendAccepted: json['resendAccepted'],
         newPasswordAccepted: json['newPasswordAccepted'],
         updateProfileAccepted: json['updateProfileAccepted'],
+        giftAccepted: json['giftAccepted'],
         msg: json['msg'] ?? '',
       );
 
@@ -45,6 +48,7 @@ class MessageModel {
         'registerAccepted': registerAccepted,
         'resendAccepted': resendAccepted,
         'newPasswordAccepted': newPasswordAccepted,
+        'giftAccepted': giftAccepted,
         'msg': msg,
       };
 }
