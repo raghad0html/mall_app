@@ -26,6 +26,11 @@ class _InvoiceQrScreenState extends StateMVC<InvoiceQrScreen> {
   _InvoiceQrScreenState() : super(QRController()) {
     _con = controller as QRController;
   }
+  @override
+  void initState() {
+    super.initState();
+    _con.setDaily(widget.arguments.daily);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +62,7 @@ class _InvoiceQrScreenState extends StateMVC<InvoiceQrScreen> {
                                       height: 45.0,
                                     ),
                                     Text(
-                                      S.of(context).invoiceDescription,
+                                      'اشتر فاتورة من أحد المحلات المشتركة معنا\n بقيمة \${_con.bill_amount} ريال على الأقل  \n ثم امسح باركود QR الخاص بها',
                                       textAlign: TextAlign.center,
                                       style: Theme.of(context)
                                           .textTheme
@@ -165,7 +170,6 @@ class _InvoiceQrScreenState extends StateMVC<InvoiceQrScreen> {
                 alignment: Alignment.bottomCenter,
                 child: Column(
                   children: [
-
                     if (_con.qrModelResult == null)
                       ElevatedButton(
                         onPressed: () async {
@@ -182,8 +186,7 @@ class _InvoiceQrScreenState extends StateMVC<InvoiceQrScreen> {
                         },
                         child: Text(S.of(context).scanInvoiceBarcode),
                       )
-                    else if (widget.arguments.daily &&
-                        _con.qrModelResult!.invoiceAccepted!)
+                    else if (_con.daily && _con.qrModelResult!.invoiceAccepted!)
                       ElevatedButton(
                         onPressed: () async {
                           Navigator.pushNamed(context, Routes.pontQrScreen,
@@ -229,7 +232,7 @@ class _InvoiceQrScreenState extends StateMVC<InvoiceQrScreen> {
                       onTap: () {
                         Navigator.pushNamed(context, Routes.shareShopsScreen,
                             arguments: ShopArguments(
-                                mallName: widget.arguments.mallName??'',
+                                mallName: widget.arguments.mallName ?? '',
                                 mallId: widget.arguments.mallId));
                       },
                       child: LinedText(
@@ -237,7 +240,6 @@ class _InvoiceQrScreenState extends StateMVC<InvoiceQrScreen> {
                         text: S.of(context).browseSubscriptionMarkets,
                       ),
                     ),
-
                     const SizedBox(
                       height: 20.0,
                     ),
