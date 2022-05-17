@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mall_app/constants/app_theme.dart';
 
 class CustomBottomSheet extends StatefulWidget {
   final List<Widget> options;
@@ -23,7 +24,7 @@ class _CustomBottomSheetState extends State<CustomBottomSheet> {
       width: MediaQuery.of(context).size.width,
       height: widget.bottomSheetHeight,
       decoration: BoxDecoration(
-        color: Theme.of(context).backgroundColor,
+        color: AppColors.scaffoldBackGroundColor ,
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(20.0),
           topRight: Radius.circular(12.0),
@@ -37,7 +38,7 @@ class _CustomBottomSheetState extends State<CustomBottomSheet> {
               width: 75,
               height: 5,
               decoration: BoxDecoration(
-                  color: Theme.of(context).cardTheme.color,
+                  color:Colors.black,
                   borderRadius: const BorderRadius.all(Radius.circular(5))),
             ),
           ),

@@ -69,7 +69,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "forgetPassword":
             MessageLookupByLibrary.simpleMessage("نسيت كلمة المرور"),
         "howToScanBarcode": MessageLookupByLibrary.simpleMessage(
-            "قم بتوجيه الكاميرا على باركود الفاتورة"),
+            "قم بتوجيه الكاميرا على باركود QR"),
         "iHaveAnAccount": MessageLookupByLibrary.simpleMessage("لديك حساب"),
         "invoiceDescription": MessageLookupByLibrary.simpleMessage(
             "اشتر فاتورة من أحد المحلات المشتركة معنا\n بقيمة 300 ريال على الأقل \n ثم امسح باركود QR الخاص بها"),

@@ -82,8 +82,8 @@ class _RegisterScreenState extends StateMVC<RegisterScreen> {
                                   controller: nameController,
                                   keyboardType: TextInputType.text,
                                   decoration: InputDecoration(
-                                    hintText: S.of(context).username,
-                                    labelText: S.of(context).username,
+                                    hintText:'الاسم الكامل',
+                                    labelText:'الاسم الكامل',
                                   ),
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
@@ -118,7 +118,7 @@ class _RegisterScreenState extends StateMVC<RegisterScreen> {
                                 TextFormField(
                                   controller: phoneController,
                                   keyboardType: TextInputType.phone,
-                                  obscureText: true,
+                                  obscureText: false,
                                   decoration: InputDecoration(
                                     hintText: 'رقم الهاتف',
                                     labelText: 'رقم الهاتف',

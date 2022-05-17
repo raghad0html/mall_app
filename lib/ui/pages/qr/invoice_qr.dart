@@ -165,21 +165,7 @@ class _InvoiceQrScreenState extends StateMVC<InvoiceQrScreen> {
                 alignment: Alignment.bottomCenter,
                 child: Column(
                   children: [
-                    InkWell(
-                      onTap: () {
-                        Navigator.pushNamed(context, Routes.shareShopsScreen,
-                            arguments: ShopArguments(
-                                mallName: widget.arguments.mallName??'',
-                                mallId: widget.arguments.mallId));
-                      },
-                      child: LinedText(
-                        color: AppColors.primaryColor,
-                        text: S.of(context).browseSubscriptionMarkets,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20.0,
-                    ),
+
                     if (_con.qrModelResult == null)
                       ElevatedButton(
                         onPressed: () async {
@@ -236,6 +222,22 @@ class _InvoiceQrScreenState extends StateMVC<InvoiceQrScreen> {
                         },
                         child: Text(S.of(context).scanInvoiceBarcode),
                       ),
+                    const SizedBox(
+                      height: 20.0,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(context, Routes.shareShopsScreen,
+                            arguments: ShopArguments(
+                                mallName: widget.arguments.mallName??'',
+                                mallId: widget.arguments.mallId));
+                      },
+                      child: LinedText(
+                        color: AppColors.primaryColor,
+                        text: S.of(context).browseSubscriptionMarkets,
+                      ),
+                    ),
+
                     const SizedBox(
                       height: 20.0,
                     ),

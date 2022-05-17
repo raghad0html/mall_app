@@ -236,12 +236,12 @@ class _ShareShopsPageState extends StateMVC<ShareShopsPage> {
                                         Row(
                                           children: [
                                             const Icon(
-                                                Icons.point_of_sale_rounded),
+                                                Icons.qr_code),
                                             const SizedBox(
                                               width: 5,
                                             ),
                                             Text(
-                                              _con.shops[index].shopPlan!=null ? 'عدد النقاط: ${ _con.shops[index].shopPlan}':
+                                              _con.shops[index].shopPlan!=null ? 'النقاط: + ${ _con.shops[index].shopPlan}':
                                                   '',
                                               style: Theme.of(context)
                                                   .textTheme

@@ -50,7 +50,7 @@
   "retry": "اعادة المحاولة",
   "noInternetConnection": "لا يوجد اتصال بالإنترنت",
   "chooseCurrentCity": "اختر مدينتك الحالية",
-  "howToScanBarcode": "قم بتوجيه الكاميرا على باركود الفاتورة",
+  "howToScanBarcode": "قم بتوجيه الكاميرا على باركود QR",
   "createNewAccount": "انشاء حساب جديد",
   "passwordMismatch": "كلمتا السر غير متطابقتين",
   "rewritePassword": "أعد كتابة كلمة المرور",
