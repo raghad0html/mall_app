@@ -1,5 +1,5 @@
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mall_app/constants/app_theme.dart';
 import 'package:mall_app/local_storage/shared_prefernce_services.dart';
@@ -30,7 +30,7 @@ class _HomePageState extends StateMVC<HomePage> {
   _HomePageState() : super(HomeController()) {
     _con = controller as HomeController;
   }
-
+  DateTime? currentBackPressTime;
   int? cityId;
   @override
   void initState() {
@@ -43,9 +43,8 @@ class _HomePageState extends StateMVC<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-
     return WillPopScope(
-      onWillPop: () => Helper.of(context).onWillPop(),
+      onWillPop: () => onWillPop(),
       child: SafeArea(
         child: Scaffold(
           key: _con.scaffoldKey,
@@ -360,7 +359,15 @@ class _HomePageState extends StateMVC<HomePage> {
       ),
     );
   }
+
+  Future<bool> onWillPop() {
+    DateTime now = DateTime.now();
+    if (currentBackPressTime == null ||
+        now.difference(currentBackPressTime!) > Duration(seconds: 2)) {
+      currentBackPressTime = now;
+      Fluttertoast.showToast(msg: 'اضغط مرة ثانية للمغادرة');
+      return Future.value(false);
+    }
+    return Future.value(true);
+  }
 }
-
-
-

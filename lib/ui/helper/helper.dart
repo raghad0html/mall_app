@@ -6,13 +6,13 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mall_app/constants/app_theme.dart';
 
-import '../../generated/l10n.dart';
 import '../../main_sdk/apis/game/models/game_level_enums_model.dart';
 import '../widget/circular_loading_widget.dart';
 
 class Helper {
   BuildContext? context;
   DateTime? currentBackPressTime;
+  bool back = false;
   Helper.of(BuildContext _context) {
     context = _context;
   }
@@ -70,13 +70,19 @@ class Helper {
 
   Future<bool> onWillPop() {
     DateTime now = DateTime.now();
-    if (currentBackPressTime == null ||
-        now.difference(currentBackPressTime!) > Duration(seconds: 2)) {
-      currentBackPressTime = now;
-      Fluttertoast.showToast(msg: S.of(context!).tapagaintoleave);
+    print(back);
+
+    if (!back) {
+      // if ( now.difference(currentBackPressTime!) > Duration(seconds: 2)) {
+      //   currentBackPressTime = now;
+      back = true;
+      print(currentBackPressTime);
+      Fluttertoast.showToast(msg: 'اضغط مرة ثانية للمغادرة');
       return Future.value(false);
+      // }
     }
     SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+    back = false;
     return Future.value(true);
   }
 }

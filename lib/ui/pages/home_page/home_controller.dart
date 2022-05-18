@@ -145,7 +145,6 @@ class HomeController extends ControllerMVC {
           _gameResponse as SuccessState<ListOfGameModel>;
 
       games = data.data.data ?? [];
-      // setState(() {});
     } else if (_gameResponse is ErrorState) {
       ErrorState<ListOfGameModel> data =
           _gameResponse as ErrorState<ListOfGameModel>;

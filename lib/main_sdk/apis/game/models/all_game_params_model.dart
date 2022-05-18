@@ -11,5 +11,6 @@ class AllGameParamsModel extends AuthModel {
         "token": token,
         "userid": userid,
         "action": "getGames",
+        'action': 'getActiveGames'
       }..removeWhere((key, value) => value == null);
 }

@@ -41,7 +41,13 @@ class _PointQRScreenState extends StateMVC<PointQRScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            CostumeAppBar(title: widget.arguments.title),
+            CostumeAppBar(
+                title: widget.arguments.title,
+                returnToDetails: true,
+                gameDetails: GameDetails(
+                    mallName: widget.arguments.mallName ?? '',
+                    mallId: widget.arguments.mallId,
+                    gameId: widget.arguments.gameId)),
             Expanded(
               child: Padding(
                 padding:

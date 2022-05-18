@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mall_app/constants/assets.dart';
 import 'package:mall_app/routes.dart';
-import 'package:mall_app/ui/pages/mall_page/share_shop_page/share_shop_controller.dart';
+import 'package:mall_app/ui/pages/share_shop_page/share_shop_controller.dart';
 import 'package:mall_app/ui/shared/future_builder_widget/lancher.dart';
 import 'package:mall_app/ui/widget/costume_appbar.dart';
 import 'package:mall_app/ui/widget/maps_sheet.dart';

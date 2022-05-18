@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:mall_app/routes.dart';
 
 import '../../constants/app_theme.dart';
 
 class CostumeAppBar extends StatelessWidget {
-  const CostumeAppBar({
-    Key? key,
-    required this.title,
-  }) : super(key: key);
+  const CostumeAppBar(
+      {Key? key,
+      required this.title,
+      this.returnToDetails = false,
+      this.gameDetails})
+      : super(key: key);
 
   final String title;
+  final bool returnToDetails;
+  final GameDetails? gameDetails;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +25,14 @@ class CostumeAppBar extends StatelessWidget {
         children: [
           InkWell(
             child: const Icon(Icons.arrow_back_ios),
-            onTap: () => Navigator.of(context).pop(),
+            onTap: () {
+              print(returnToDetails);
+              returnToDetails
+                  ? Navigator.pushReplacementNamed(
+                      context, Routes.gameDetailScreen,
+                      arguments: gameDetails)
+                  : Navigator.of(context).pop();
+            },
           ),
           Expanded(
               child: Center(
