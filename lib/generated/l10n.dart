@@ -1069,6 +1069,46 @@ class S {
       args: [],
     );
   }
+
+  /// `جارية`
+  String get active {
+    return Intl.message(
+      'جارية',
+      name: 'active',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `حظ اوفر`
+  String get googLuck {
+    return Intl.message(
+      'حظ اوفر',
+      name: 'googLuck',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ربحت`
+  String get youAreTheWinner {
+    return Intl.message(
+      'ربحت',
+      name: 'youAreTheWinner',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `اضغط مرة ثانية للمغادرة`
+  String get tapAgainToLeave {
+    return Intl.message(
+      'اضغط مرة ثانية للمغادرة',
+      name: 'tapAgainToLeave',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

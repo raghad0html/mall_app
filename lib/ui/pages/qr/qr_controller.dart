@@ -86,7 +86,41 @@ class QRController extends ControllerMVC {
             break;
         }
 
-        if (balancePoints >= targetPoints) {
+        if (data.data.status!.contains('you_won')) {
+          showDialog(
+            context: state!.context,
+            barrierDismissible: true,
+            builder: (BuildContext context) {
+              runAudio();
+              return AlertDialog(
+                title: Text(S.of(state!.context).congradulatins),
+                content: Column(
+                  children: [
+                    SizedBox(
+                        width: 100,
+                        height: 100,
+                        child: Lottie.asset('assets/lottie/cup.json')),
+                    Text('${data.data.msg}')
+                  ],
+                ),
+                actions: <Widget>[
+                  TextButton(
+                    child: Text(S.of(context).ok),
+                    onPressed: () {
+                      Navigator.pushReplacementNamed(
+                          context, Routes.gameDetailScreen,
+                          arguments: GameDetails(
+                            mallName: data.data.mallName ?? '',
+                            gameId: gameId,
+                            mallId: mallId,
+                          ));
+                    },
+                  ),
+                ],
+              );
+            },
+          );
+        } else if (balancePoints >= targetPoints) {
           showDialog(
             context: state!.context,
             barrierDismissible: true,

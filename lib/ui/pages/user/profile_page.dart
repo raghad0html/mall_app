@@ -55,10 +55,6 @@ class _ProfilePageState extends StateMVC<ProfilePage> {
                           LocalStorageService().login = false;
                           Navigator.pushReplacementNamed(
                               context, Routes.loginScreen);
-                          // Navigator.popUntil(
-                          //   context,
-                          //   ModalRoute.withName(Routes.loginScreen),
-                          // );
                         },
                         callback2: () {
                           Navigator.pop(context);

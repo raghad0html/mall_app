@@ -101,5 +101,9 @@
   "readed": "مقروء",
   "notReaded": "غير مقروء",
   "notifications": "الاشعارات",
-  "letUsCollectPoints": "لنقم بجمع نقاط"
+  "letUsCollectPoints": "لنقم بجمع نقاط",
+  "active": "جارية",
+  "googLuck": "حظ اوفر",
+  "youAreTheWinner": "ربحت",
+  "tapAgainToLeave": "اضغط مرة ثانية للمغادرة"
 }

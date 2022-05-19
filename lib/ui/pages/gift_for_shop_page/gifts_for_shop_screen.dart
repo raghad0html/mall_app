@@ -32,31 +32,32 @@ class _GiftsForShopScreenState extends StateMVC<GiftsForShopScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: Scaffold(
-            key: _con.scaffoldKey,
-            body: Column(
-              children: [
-                CostumeAppBar(title: S.of(context).gifts),
-                Expanded(
-                  child: SingleChildScrollView(
-                    child: GridView.builder(
-                      itemCount: _con.gifts.length,
-                      shrinkWrap: true,
-                      primary: false,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2),
-                      itemBuilder: (context, gridViewIndex) {
-                        GiftModel _gift = _con.gifts[gridViewIndex];
-                        return GiftItem(
-                          gift: _gift,
-                          fromGrid: true,
-                        );
-                      },
-                    ),
-                  ),
-                )
-              ],
-            )));
+      child: Scaffold(
+        key: _con.scaffoldKey,
+        body: Column(
+          children: [
+            CostumeAppBar(title: S.of(context).gifts),
+            Expanded(
+              child: SingleChildScrollView(
+                child: GridView.builder(
+                  itemCount: _con.gifts.length,
+                  shrinkWrap: true,
+                  primary: false,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2),
+                  itemBuilder: (context, gridViewIndex) {
+                    GiftModel _gift = _con.gifts[gridViewIndex];
+                    return GiftItem(
+                      gift: _gift,
+                      fromGrid: true,
+                    );
+                  },
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }

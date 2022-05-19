@@ -10,8 +10,8 @@ import 'package:mall_app/ui/pages/user/reset_password_screen.dart';
 import 'package:mall_app/ui/pages/user/update_profile_page.dart';
 import 'package:page_transition/page_transition.dart';
 
+import 'ui/pages/all_games/all_games.dart';
 import 'ui/pages/game_detail/game_detail_screen.dart';
-import 'ui/pages/home_page/all_games.dart';
 import 'ui/pages/home_page/home_page.dart';
 import 'ui/pages/notifications/notification_screen.dart';
 import 'ui/pages/qr/invoice_qr.dart';

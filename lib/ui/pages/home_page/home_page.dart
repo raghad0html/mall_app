@@ -13,9 +13,9 @@ import '../../helper/helper.dart';
 import '../../widget/cities_drop_down_dialog.dart';
 import '../../widget/lined_text.dart';
 import '../../widget/mall_widget.dart';
+import '../../widget/malls_drop_down_dialog.dart';
 import '../../widget/my_competition_item.dart';
 import 'home_controller.dart';
-import 'malls_drop_down_dialog.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -116,7 +116,7 @@ class _HomePageState extends StateMVC<HomePage> {
                                         color: Colors.red),
                                     alignment: Alignment.center,
                                     child: Text(
-                                      '${_con.notifications.length}',
+                                      '${_con.count}',
                                       style: TextStyle(
                                           color: AppColors.whiteColor),
                                     ),
@@ -137,18 +137,6 @@ class _HomePageState extends StateMVC<HomePage> {
                             size: 30,
                             color: AppColors.grayColor,
                           ),
-                          // Container(
-                          //   padding: const EdgeInsets.all(3.0),
-                          //   decoration: BoxDecoration(
-                          //       borderRadius:
-                          //           const BorderRadius.all(Radius.circular(5)),
-                          //       color: AppColors.appBarBackGroundColor
-                          //           .withOpacity(0.2)),
-                          //   child: Text(
-                          //     S.of(context).myAccount,
-                          //     style: Theme.of(context).textTheme.subtitle1,
-                          //   ),
-                          // ),
                         ),
                       ],
                     ),
@@ -365,7 +353,7 @@ class _HomePageState extends StateMVC<HomePage> {
     if (currentBackPressTime == null ||
         now.difference(currentBackPressTime!) > Duration(seconds: 2)) {
       currentBackPressTime = now;
-      Fluttertoast.showToast(msg: 'اضغط مرة ثانية للمغادرة');
+      Fluttertoast.showToast(msg: S.of(context).tapAgainToLeave);
       return Future.value(false);
     }
     return Future.value(true);

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../generated/l10n.dart';
-import '../../../main_sdk/apis/mall/models/mall_model.dart';
+import '../../generated/l10n.dart';
+import '../../main_sdk/apis/mall/models/mall_model.dart';
 
 typedef SelectedMall = void Function(MallModel);
 

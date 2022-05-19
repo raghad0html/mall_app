@@ -32,6 +32,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "QuarterManualCompetition":
             MessageLookupByLibrary.simpleMessage("مسابقة ربع سنوية"),
         "about": MessageLookupByLibrary.simpleMessage("حول"),
+        "active": MessageLookupByLibrary.simpleMessage("جارية"),
         "amount": MessageLookupByLibrary.simpleMessage("amount:"),
         "attention": MessageLookupByLibrary.simpleMessage("انتباه"),
         "backTopreviousLevel":
@@ -89,6 +90,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "gifts": MessageLookupByLibrary.simpleMessage("الجوائز"),
         "giftsGiven":
             MessageLookupByLibrary.simpleMessage("مجموعة الجوائز المقدمة"),
+        "googLuck": MessageLookupByLibrary.simpleMessage("حظ اوفر"),
         "havetGotTheCode":
             MessageLookupByLibrary.simpleMessage("لم يصلك الرمز"),
         "howToScanBarcode": MessageLookupByLibrary.simpleMessage(
@@ -163,6 +165,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Sorry, Your Invoice has not Accepted"),
         "startACompetition":
             MessageLookupByLibrary.simpleMessage("Start A competition"),
+        "tapAgainToLeave":
+            MessageLookupByLibrary.simpleMessage("اضغط مرة ثانية للمغادرة"),
         "tapagaintoleave":
             MessageLookupByLibrary.simpleMessage("tapAgainToLeave"),
         "taxAmount": MessageLookupByLibrary.simpleMessage("tax amount:"),
@@ -176,6 +180,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "weeklyCompetition":
             MessageLookupByLibrary.simpleMessage("مسابقة اسبوعية"),
         "yes": MessageLookupByLibrary.simpleMessage("نعم"),
+        "youAreTheWinner": MessageLookupByLibrary.simpleMessage("ربحت"),
         "youCantscanQr": MessageLookupByLibrary.simpleMessage(
             "لا يمكنك مسح فاتورة تأكد من عدد نقاطك"),
         "yourCity": MessageLookupByLibrary.simpleMessage("your city:"),

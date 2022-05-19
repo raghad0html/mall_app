@@ -29,6 +29,7 @@ class HomeController extends ControllerMVC {
   bool loadingCompetition = false;
   String currentCity = '';
   List<GameModel> games = [];
+  int count = 0;
   List<NotificationModel> notifications = [];
   bool loadingNotifications = false;
   HomeController() {
@@ -134,9 +135,9 @@ class HomeController extends ControllerMVC {
     loadingCompetition = true;
     setState(() {});
     AllGameParamsModel allGameParamsModel = AllGameParamsModel(
-      token: LocalStorageService().token ?? '',
-      userid: LocalStorageService().id ?? '',
-    );
+        token: LocalStorageService().token ?? '',
+        userid: LocalStorageService().id ?? '',
+        action: GameActionEnumsModel.getGames);
     ResponseState<ListOfGameModel> _gameResponse = await GameIdentityApi()
         .getAllGame(allGameParamsModel: allGameParamsModel);
 
@@ -168,7 +169,9 @@ class HomeController extends ControllerMVC {
       if (data is SuccessState) {
         SuccessState<ListOfNotificationModel> d =
             data as SuccessState<ListOfNotificationModel>;
-        notifications = d.data.data!;
+        count = d.data.count!;
+        print('countcountcount ${count}');
+        notifications = d.data.notifications ?? [];
         loadingNotifications = false;
         setState(() {});
       }
@@ -190,7 +193,6 @@ class HomeController extends ControllerMVC {
     if (data is SuccessState) {
       SuccessState<NotificationModel> d =
           data as SuccessState<NotificationModel>;
-      print('datadatadatadata ${d.data.notificationSeen}');
       getAllNotification();
     }
   }

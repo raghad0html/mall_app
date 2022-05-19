@@ -1,16 +1,16 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mall_app/constants/app_theme.dart';
 import 'package:mall_app/routes.dart';
 import 'package:mall_app/ui/pages/shop_details_page/shop_details_controller.dart';
 import 'package:mall_app/ui/widget/costume_appbar.dart';
-import 'package:mall_app/ui/widget/custom_dialog_product.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 import '../../../../../generated/l10n.dart';
 import '../../../../../main_sdk/apis/gift/models/gift_model.dart';
+import '../../../main_sdk/apis/product/models/product_model.dart';
 import '../../widget/gift_item.dart';
 import '../../widget/lined_text.dart';
+import '../../widget/product_item.dart';
 
 class ShopDetailsPage extends StatefulWidget {
   final ShopArguments shopArguments;
@@ -83,13 +83,10 @@ class _ShopDetailsPageState extends StateMVC<ShopDetailsPage> {
                             ),
                             Expanded(
                               child: ListView.builder(
-                                // shrinkWrap: true,
-                                // primary: false,
                                 scrollDirection: Axis.horizontal,
                                 itemCount: _con.gifts.length,
                                 itemBuilder: (context, i) {
                                   GiftModel _gift = _con.gifts[i];
-
                                   return GiftItem(gift: _gift);
                                 },
                               ),
@@ -119,10 +116,6 @@ class _ShopDetailsPageState extends StateMVC<ShopDetailsPage> {
                                         Theme.of(context).textTheme.headline6,
                                   ),
                                 ),
-                                // const LinedText(
-                                //   color: AppColors.basicColor,
-                                //   text: 'عرض الكل',
-                                // ),
                               ],
                             ),
                           ),
@@ -135,115 +128,20 @@ class _ShopDetailsPageState extends StateMVC<ShopDetailsPage> {
                                   itemCount: _con.products.length,
                                   shrinkWrap: true,
                                   primary: false,
-                                  physics: const ScrollPhysics(),
+                                  //  physics: const ScrollPhysics(),
                                   gridDelegate:
-                                      const SliverGridDelegateWithFixedCrossAxisCount(
-                                          crossAxisCount: 2),
+                                      SliverGridDelegateWithFixedCrossAxisCount(
+                                          crossAxisCount: 2,
+                                          crossAxisSpacing: 18,
+                                          mainAxisSpacing: 18),
+                                  // gridDelegate:
+                                  //     const SliverGridDelegateWithFixedCrossAxisCount(
+                                  //         crossAxisCount: 2),
                                   itemBuilder: (context, gridViewIndex) {
-                                    return GestureDetector(
-                                      onTap: () {
-                                        showDialog(
-                                            context: context,
-                                            //  barrierDismissible: false,
-                                            builder: (BuildContext context) {
-                                              //TODO
-                                              return CustomDialogProduct(
-                                                  title: _con
-                                                          .products[
-                                                              gridViewIndex]
-                                                          .name ??
-                                                      '',
-                                                  price: _con
-                                                              .products[
-                                                                  gridViewIndex]
-                                                              .price !=
-                                                          null
-                                                      ? 'السعر: ${_con.products[gridViewIndex].price} ريال '
-                                                      : '',
-                                                  description: _con
-                                                              .products[
-                                                                  gridViewIndex]
-                                                              .prodDescription !=
-                                                          null
-                                                      ? 'الوصف: ${_con.products[gridViewIndex].prodDescription}'
-                                                      : '');
-                                            });
-                                      },
-                                      child: Container(
-                                        margin: const EdgeInsets.all(8),
-                                        padding: const EdgeInsets.only(top: 5),
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          border:
-                                              Border.all(color: Colors.white),
-                                          borderRadius: const BorderRadius.all(
-                                              Radius.circular(8)),
-                                        ),
-                                        child: Column(
-                                          children: [
-                                            ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                              child: CachedNetworkImage(
-                                                height: 130,
-                                                progressIndicatorBuilder:
-                                                    (context, url, progress) =>
-                                                        Center(
-                                                  child:
-                                                      CircularProgressIndicator(
-                                                    value: progress.progress,
-                                                  ),
-                                                ),
-                                                errorWidget: (context, url,
-                                                        error) =>
-                                                    const Icon(
-                                                        Icons.error_outline),
-                                                imageUrl: _con
-                                                        .products[gridViewIndex]
-                                                        .picture ??
-                                                    '',
-                                              ),
-                                            ),
-                                            Container(
-                                              margin: const EdgeInsets.all(10),
-                                              alignment: Alignment.bottomRight,
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    _con.products[gridViewIndex]
-                                                            .name ??
-                                                        '',
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .subtitle1
-                                                        ?.copyWith(height: 1.1),
-                                                    maxLines: 1,
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                  ),
-                                                  Text(
-                                                    _con.products[gridViewIndex]
-                                                            .price
-                                                            ?.toString() ??
-                                                        '',
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .subtitle1
-                                                        ?.copyWith(
-                                                            height: 1.1,
-                                                            fontSize: 13),
-                                                    maxLines: 2,
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
+                                    ProductModel _product =
+                                        _con.products[gridViewIndex];
+                                    return ProductItem(
+                                      product: _product,
                                     );
                                   },
                                 )
