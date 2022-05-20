@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mall_app/main_sdk/apis/city/models/city_model.dart';
 import 'package:mall_app/main_sdk/apis/city/services/ciry_identity_apis.dart';
 import 'package:mall_app/main_sdk/apis/game/services/game_identity_apis.dart';
+import 'package:mall_app/main_sdk/apis/notification/models/notification_model.dart';
+import 'package:mall_app/main_sdk/apis/notification/services/notification_identity_apis.dart';
 import 'package:mall_app/routes.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
@@ -15,6 +17,7 @@ import '../../../main_sdk/apis/mall/models/mall_action_enums_model.dart';
 import '../../../main_sdk/apis/mall/models/mall_model.dart';
 import '../../../main_sdk/apis/mall/models/mall_params_model.dart';
 import '../../../main_sdk/apis/mall/services/mall_identity_apis.dart';
+import '../../../main_sdk/apis/notification/models/notification_params_model.dart';
 import '../../helper/helper.dart';
 
 class HomeController extends ControllerMVC {
@@ -26,27 +29,34 @@ class HomeController extends ControllerMVC {
   bool loadingCompetition = false;
   String currentCity = '';
   List<GameModel> games = [];
+  int count = 0;
+  List<NotificationModel> notifications = [];
+  bool loadingNotifications = false;
   HomeController() {
     scaffoldKey = GlobalKey<ScaffoldState>();
     currentCity = LocalStorageService().cityName ?? '';
   }
 
   getMalls() async {
-    loading = true;
-    setState(() {});
-    Future<ResponseState<ListOfMallModel>> _listOfMallModel = MallIdentityApi()
-        .getMalls(
-            mallParamsModel: MallParamsModel(
-                token: LocalStorageService().token ?? '',
-                userid: LocalStorageService().id ?? '',
-                action: MallActionEnumsModel.getMallsByCity,
-                cityId: LocalStorageService().cityId ?? ''));
-    ResponseState<ListOfMallModel> data = await _listOfMallModel;
-    if (data is SuccessState) {
-      SuccessState<ListOfMallModel> d = data as SuccessState<ListOfMallModel>;
-      malls = d.data.data!;
-      loading = false;
+    if (LocalStorageService().login ?? false) {
+      loading = true;
       setState(() {});
+      Future<ResponseState<ListOfMallModel>> _listOfMallModel =
+          MallIdentityApi().getMalls(
+              mallParamsModel: MallParamsModel(
+                  token: LocalStorageService().token ?? '',
+                  userid: LocalStorageService().id ?? '',
+                  action: MallActionEnumsModel.getMallsByCity,
+                  cityId: LocalStorageService().cityId ?? ''));
+      ResponseState<ListOfMallModel> data = await _listOfMallModel;
+      if (data is SuccessState) {
+        SuccessState<ListOfMallModel> d = data as SuccessState<ListOfMallModel>;
+        malls = d.data.data!;
+        loading = false;
+        setState(() {});
+      }
+    } else {
+      Navigator.pushReplacementNamed(state!.context, Routes.loginScreen);
     }
   }
 
@@ -125,9 +135,9 @@ class HomeController extends ControllerMVC {
     loadingCompetition = true;
     setState(() {});
     AllGameParamsModel allGameParamsModel = AllGameParamsModel(
-      token: LocalStorageService().token ?? '',
-      userid: LocalStorageService().id ?? '',
-    );
+        token: LocalStorageService().token ?? '',
+        userid: LocalStorageService().id ?? '',
+        action: GameActionEnumsModel.getGames);
     ResponseState<ListOfGameModel> _gameResponse = await GameIdentityApi()
         .getAllGame(allGameParamsModel: allGameParamsModel);
 
@@ -136,12 +146,54 @@ class HomeController extends ControllerMVC {
           _gameResponse as SuccessState<ListOfGameModel>;
 
       games = data.data.data ?? [];
-      // setState(() {});
     } else if (_gameResponse is ErrorState) {
       ErrorState<ListOfGameModel> data =
           _gameResponse as ErrorState<ListOfGameModel>;
     }
     loadingCompetition = false;
     setState(() {});
+  }
+
+  getAllNotification() async {
+    if (LocalStorageService().login ?? false) {
+      loadingNotifications = true;
+      setState(() {});
+      Future<ResponseState<ListOfNotificationModel>> _listOfNotifications =
+          NotificationIdentityApi().getNotifications(
+              notificationParamsModel: NotificationParamsModel(
+                  token: LocalStorageService().token ?? '',
+                  userid: LocalStorageService().id ?? '',
+                  notificationId: '',
+                  action: 'allNotifications'));
+      ResponseState<ListOfNotificationModel> data = await _listOfNotifications;
+      if (data is SuccessState) {
+        SuccessState<ListOfNotificationModel> d =
+            data as SuccessState<ListOfNotificationModel>;
+        count = d.data.count!;
+        print('countcountcount ${count}');
+        notifications = d.data.notifications ?? [];
+        loadingNotifications = false;
+        setState(() {});
+      }
+    } else {
+      Navigator.pushReplacementNamed(state!.context, Routes.loginScreen);
+    }
+  }
+
+  changeNotificationStatus(NotificationModel _notificationModel) async {
+    Future<ResponseState<NotificationModel>> _notification =
+        NotificationIdentityApi().changeNotificationStatus(
+            notificationParamsModel: NotificationParamsModel(
+                token: LocalStorageService().token ?? '',
+                userid: LocalStorageService().id ?? '',
+                notificationId: '${_notificationModel.notificationId}',
+                action: 'setSeen'));
+    ResponseState<NotificationModel> data = await _notification;
+
+    if (data is SuccessState) {
+      SuccessState<NotificationModel> d =
+          data as SuccessState<NotificationModel>;
+      getAllNotification();
+    }
   }
 }

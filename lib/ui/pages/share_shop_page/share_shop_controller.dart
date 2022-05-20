@@ -3,7 +3,6 @@ import 'package:mall_app/local_storage/shared_prefernce_services.dart';
 import 'package:mall_app/main_sdk/apis/core/models/common/result_class.dart';
 import 'package:mall_app/main_sdk/apis/shop/models/share_shop_params_model.dart';
 import 'package:mall_app/main_sdk/apis/shop/models/shop_model.dart';
-import 'package:mall_app/main_sdk/apis/shop/models/shop_params_model.dart';
 import 'package:mall_app/main_sdk/apis/shop/services/shop_identity_apis.dart';
 
 import 'package:mvc_pattern/mvc_pattern.dart';

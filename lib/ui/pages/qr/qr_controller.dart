@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mall_app/main_sdk/apis/qr/models/qr_params_model.dart';
@@ -19,7 +20,8 @@ class QRController extends ControllerMVC {
   bool loading = false;
   int levelIndex = 0;
   QrModel? qrModelResult;
-
+  bool daily = false;
+  bool showVideo = false;
   int targetPoints = 0;
   int balancePoints = 0;
   bool accepted = false;
@@ -27,11 +29,17 @@ class QRController extends ControllerMVC {
     scaffoldKey = GlobalKey<ScaffoldState>();
   }
 
+  setDaily(bool daily1) {
+    daily = daily1;
+    setState(() {});
+  }
+
   sendQr(
       {required int mallId,
       required int gameId,
       required String data,
       required QrTypeParamsModel qrType}) async {
+    showVideo = false;
     var loader = Helper.overlayLoader(state!.context);
     FocusScope.of(state!.context).unfocus();
     Helper.overlayLoader(state!.context);
@@ -59,34 +67,74 @@ class QRController extends ControllerMVC {
       setState(() {});
 
       if (data.data.stickerAccepted ?? false) {
-        switch (balancePoints) {
+        switch (data.data.points) {
           case 2:
-            showVideos(2);
+            showVideo = true;
+            // showVideos(2);
             break;
           case 5:
-            showVideos(5);
+            showVideo = true;
+            // showVideos(5);
             break;
           case 8:
-            showVideos(8);
+            showVideo = true;
+            // showVideos(8);
             break;
           case 12:
-            showVideos(12);
+            showVideo = true;
+            // showVideos(12);
             break;
         }
 
-        if (balancePoints >= targetPoints) {
+        if (data.data.status!.contains('you_won')) {
           showDialog(
             context: state!.context,
+            barrierDismissible: true,
             builder: (BuildContext context) {
+              runAudio();
               return AlertDialog(
-                title: Text('تهانينا'),
+                title: Text(S.of(state!.context).congradulatins),
                 content: Column(
                   children: [
                     SizedBox(
                         width: 100,
                         height: 100,
-                        child: Lottie.asset('assets/lottie/win_gift.json')),
-                    Text('لننتقل للمرحلة التالية')
+                        child: Lottie.asset('assets/lottie/cup.json')),
+                    Text('${data.data.msg}')
+                  ],
+                ),
+                actions: <Widget>[
+                  TextButton(
+                    child: Text(S.of(context).ok),
+                    onPressed: () {
+                      Navigator.pushReplacementNamed(
+                          context, Routes.gameDetailScreen,
+                          arguments: GameDetails(
+                            mallName: data.data.mallName ?? '',
+                            gameId: gameId,
+                            mallId: mallId,
+                          ));
+                    },
+                  ),
+                ],
+              );
+            },
+          );
+        } else if (balancePoints >= targetPoints) {
+          showDialog(
+            context: state!.context,
+            barrierDismissible: true,
+            builder: (BuildContext context) {
+              runAudio();
+              return AlertDialog(
+                title: Text(S.of(state!.context).congradulatins),
+                content: Column(
+                  children: [
+                    SizedBox(
+                        width: 100,
+                        height: 100,
+                        child: Lottie.asset('assets/lottie/cup.json')),
+                    Text('${data.data.msg}')
                   ],
                 ),
                 actions: <Widget>[
@@ -107,6 +155,7 @@ class QRController extends ControllerMVC {
             },
           );
         }
+        daily = false;
       }
     } else if (_qrResponse is ErrorState) {
       ErrorState<QrModel> data = _qrResponse as ErrorState<QrModel>;
@@ -139,17 +188,26 @@ class QRController extends ControllerMVC {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               InteractiveViewer(
-                  panEnabled: true, // Set it to false
-                  boundaryMargin: const EdgeInsets.all(100),
-                  minScale: 0.5,
-                  maxScale: 2,
-                  child: AssetVideo(
-                    videoName: '$points.mp4',
-                  )),
+                panEnabled: true, // Set it to false
+                boundaryMargin: const EdgeInsets.all(100),
+                minScale: 0.5,
+                maxScale: 2,
+                child: AssetVideo(
+                  videoName: '$points.mp4',
+                ),
+              ),
             ],
           ),
         );
       },
+    );
+  }
+
+  runAudio() async {
+    AudioCache audioCache = AudioCache();
+    await audioCache.play(
+      'audios/audio.mp3',
+      mode: PlayerMode.LOW_LATENCY,
     );
   }
 }

@@ -7,6 +7,8 @@ import 'package:mall_app/ui/pages/user/user_controller.dart';
 import 'package:mall_app/ui/shared/widget/custon_dialog_box.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
+import '../../widget/header_widget.dart';
+
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
 
@@ -33,7 +35,7 @@ class _ProfilePageState extends StateMVC<ProfilePage> {
     return Scaffold(
       appBar: AppBar(
         leading: const BackButton(),
-        title: const Text('الملف الشخصي'),
+        title: Text(S.of(context).userProfile),
         actions: [
           IconButton(
               onPressed: () {
@@ -42,18 +44,17 @@ class _ProfilePageState extends StateMVC<ProfilePage> {
                     //  barrierDismissible: false,
                     builder: (BuildContext context) {
                       return CustomDialogBox(
-                        title: "انتباه",
-                        subTitle: "هل تريد تسجيل الخروج؟",
-                        textInButton: "نعم",
-                        textInButton2: "لا",
+                        title: S.of(context).attention,
+                        subTitle: S.of(context).doyouWantToLogout,
+                        textInButton: S.of(context).yes,
+                        textInButton2: S.of(context).no,
                         icon: Icons.account_circle,
                         check: false,
                         callback: () {
                           LocalStorageService().logOut();
-                          Navigator.popUntil(
-                            context,
-                            ModalRoute.withName(Routes.loginScreen),
-                          );
+                          LocalStorageService().login = false;
+                          Navigator.pushReplacementNamed(
+                              context, Routes.loginScreen);
                         },
                         callback2: () {
                           Navigator.pop(context);
@@ -64,7 +65,7 @@ class _ProfilePageState extends StateMVC<ProfilePage> {
               icon: const Icon(Icons.logout_rounded)),
           IconButton(
               onPressed: () {
-               Navigator.pushNamed(context, Routes.aboutScreen);
+                Navigator.pushNamed(context, Routes.aboutScreen);
               },
               icon: const Icon(Icons.info_outline)),
         ],
@@ -93,15 +94,15 @@ class _ProfilePageState extends StateMVC<ProfilePage> {
                       width: MediaQuery.of(context).size.width * 0.5,
                       child: ElevatedButton(
                         onPressed: () {
-                          Navigator.of(context).pushNamed(
-                              Routes.updateProfileScreen,
-                              arguments: UserArgs(
-                                  userModel: _con.userModel!,
-                                  onChanges: (UserModel user) {
-                                    setState(() {
-                                      _con.userModel = user;
-                                    });
-                                  }));
+                          Navigator.of(context)
+                              .pushNamed(Routes.updateProfileScreen,
+                                  arguments: UserArgs(
+                                      userModel: _con.userModel!,
+                                      onChanges: (UserModel user) {
+                                        setState(() {
+                                          _con.userModel = user;
+                                        });
+                                      }));
                         },
                         child: Text(S.of(context).edit),
                       ),
@@ -113,43 +114,6 @@ class _ProfilePageState extends StateMVC<ProfilePage> {
           );
         }
       }),
-    );
-  }
-}
-
-class HeaderWidget extends StatelessWidget {
-  final String text;
-  final IconData iconData;
-
-  const HeaderWidget({Key? key, required this.text, required this.iconData})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 10),
-      padding: const EdgeInsets.all(8),
-      decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(10)),
-      child: Row(
-        children: [
-          Icon(iconData),
-          const SizedBox(
-            width: 10,
-          ),
-          Expanded(
-            child: Text(
-              text,
-              style: Theme.of(context)
-                  .textTheme
-                  .labelMedium
-                  ?.copyWith(height: 1.1, fontSize: 15),
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

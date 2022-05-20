@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mall_app/ui/pages/qr/qr_controller.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
-import 'package:video_player/video_player.dart';
 
 import '../../../constants/app_theme.dart';
 import '../../../constants/assets.dart';
@@ -10,6 +9,7 @@ import '../../../main_sdk/apis/qr/models/qr_type_enums_model.dart';
 import '../../../routes.dart';
 import '../../widget/costume_appbar.dart';
 import '../../widget/lined_text.dart';
+import '../../widget/video_widget.dart';
 
 class PointQRScreen extends StatefulWidget {
   final InvoiceQrArguments arguments;
@@ -41,7 +41,13 @@ class _PointQRScreenState extends StateMVC<PointQRScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            CostumeAppBar(title: widget.arguments.title),
+            CostumeAppBar(
+                title: widget.arguments.title,
+                returnToDetails: true,
+                gameDetails: GameDetails(
+                    mallName: widget.arguments.mallName ?? '',
+                    mallId: widget.arguments.mallId,
+                    gameId: widget.arguments.gameId)),
             Expanded(
               child: Padding(
                 padding:
@@ -56,7 +62,7 @@ class _PointQRScreenState extends StateMVC<PointQRScreen> {
                         ),
                         if (widget.arguments.daily)
                           Text(
-                            'لإنهاء المسابقة اليومية \n عليك التوجه للمحلات المشاركة \n ومسح لصاقة باركود QR لكسب النقاط والفوز',
+                            S.of(context).nNQrTowin,
                             style: Theme.of(context)
                                 .textTheme
                                 .subtitle2!
@@ -66,11 +72,22 @@ class _PointQRScreenState extends StateMVC<PointQRScreen> {
                         const SizedBox(
                           height: 30,
                         ),
-                        Image.asset(
-                          Assets.assetsQrCode2,
-                          width: 200,
-                          height: 200,
-                        ),
+                        if (_con.showVideo)
+                          InteractiveViewer(
+                            panEnabled: true, // Set it to false
+                            boundaryMargin: const EdgeInsets.all(100),
+                            minScale: 0.5,
+                            maxScale: 2,
+                            child: AssetVideo(
+                              videoName: '${_con.qrModelResult?.points}.mp4',
+                            ),
+                          )
+                        else
+                          Image.asset(
+                            Assets.assetsQrCode2,
+                            width: 200,
+                            height: 200,
+                          ),
                         if (_con.qrModelResult != null)
                           Column(
                             children: [
@@ -90,7 +107,7 @@ class _PointQRScreenState extends StateMVC<PointQRScreen> {
                             ],
                           ),
                         Text(
-                          'رصيد نقاطك الحالي هو ',
+                          S.of(context).yourPoints,
                           style: Theme.of(context)
                               .textTheme
                               .subtitle2!
@@ -123,12 +140,6 @@ class _PointQRScreenState extends StateMVC<PointQRScreen> {
                 alignment: Alignment.bottomCenter,
                 child: ElevatedButton(
                   onPressed: () async {
-                    // _con.sendQr(
-                    //     data:
-                    //         'https://bareeqe.sa/?I3N0aWNrZXIjMzEwMDQ3MDQxMTAwMDAzI0FBQUE=',
-                    //     gameId: widget.arguments.gameId,
-                    //     mallId: widget.arguments.mallId);
-
                     if (_con.targetPoints > _con.balancePoints) {
                       var data = await Navigator.pushNamed(
                           context, Routes.scanQrScreen);
@@ -141,12 +152,11 @@ class _PointQRScreenState extends StateMVC<PointQRScreen> {
                             qrType: QrTypeParamsModel.sticker);
                       }
                     } else {
-                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                          content:
-                              Text('لا يمكنك مسح فاتورة تأكد من عدد نقاطك')));
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text(S.of(context).youCantscanQr)));
                     }
                   },
-                  child: const Text('مسح باركود محل'),
+                  child: Text(S.of(context).scanQrforShop),
                 ),
               ),
             ),
@@ -159,4 +169,3 @@ class _PointQRScreenState extends StateMVC<PointQRScreen> {
     );
   }
 }
-

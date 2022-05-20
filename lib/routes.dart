@@ -3,9 +3,6 @@ import 'package:mall_app/main_sdk/apis/user/models/user_model.dart';
 import 'package:mall_app/ui/pages/about_page/about_page.dart';
 import 'package:mall_app/ui/pages/gift_for_shop_page/gifts_for_shop_screen.dart';
 import 'package:mall_app/ui/pages/mall_page/mall_page.dart';
-import 'package:mall_app/ui/pages/mall_page/share_shop_page/share_shop_page.dart';
-import 'package:mall_app/ui/pages/mall_page/shop_page/shop_details_page/shop_details_page.dart';
-import 'package:mall_app/ui/pages/mall_page/shop_page/shop_page.dart';
 import 'package:mall_app/ui/pages/user/forget_password.dart';
 import 'package:mall_app/ui/pages/user/profile_page.dart';
 import 'package:mall_app/ui/pages/user/register_screen.dart';
@@ -13,12 +10,16 @@ import 'package:mall_app/ui/pages/user/reset_password_screen.dart';
 import 'package:mall_app/ui/pages/user/update_profile_page.dart';
 import 'package:page_transition/page_transition.dart';
 
+import 'ui/pages/all_games/all_games.dart';
 import 'ui/pages/game_detail/game_detail_screen.dart';
-import 'ui/pages/home_page/all_games.dart';
 import 'ui/pages/home_page/home_page.dart';
+import 'ui/pages/notifications/notification_screen.dart';
 import 'ui/pages/qr/invoice_qr.dart';
 import 'ui/pages/qr/qr_point_screen.dart';
 import 'ui/pages/qr/qr_reader.dart';
+import 'ui/pages/share_shop_page/share_shop_page.dart';
+import 'ui/pages/shop_details_page/shop_details_page.dart';
+import 'ui/pages/shop_page/shop_page.dart';
 import 'ui/pages/splash/splash_screen.dart';
 import 'ui/pages/user/check_code_screen.dart';
 import 'ui/pages/user/login_screen.dart';
@@ -47,6 +48,7 @@ class Routes {
   static const String updateProfileScreen = '/updateProfileScreen';
   static const String aboutScreen = '/aboutScreen';
   static const String giftsForShopScreen = '/giftsForShopScreen';
+  static const String notificationScreen = '/notificationScreen';
 
   static Route? getRoutes(settings) {
     final arguments = settings.arguments;
@@ -219,6 +221,13 @@ class Routes {
           settings: settings,
           duration: const Duration(milliseconds: 350),
         );
+      case notificationScreen:
+        return PageTransition(
+          child: NotificationScreen(),
+          type: PageTransitionType.fade,
+          settings: settings,
+          duration: const Duration(milliseconds: 350),
+        );
 
       default:
         return null;
@@ -258,11 +267,16 @@ class InvoiceQrArguments {
   final int targetPoints;
   final int balancePoints;
   final String? mallName;
+  final String? billAmount;
+  final String? currency;
+
   InvoiceQrArguments({
     required this.mallId,
     required this.gameId,
     required this.title,
     required this.daily,
+    required this.billAmount,
+    required this.currency,
     this.mallName,
     this.balancePoints = 0,
     this.targetPoints = 0,

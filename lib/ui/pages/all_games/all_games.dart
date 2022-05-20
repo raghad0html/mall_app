@@ -7,6 +7,7 @@ import '../../../main_sdk/apis/game/models/game_level_enums_model.dart';
 import '../../../main_sdk/apis/game/models/game_model.dart';
 import '../../helper/helper.dart';
 import '../../widget/my_competition_item.dart';
+import '../../widget/my_expired_competition_item.dart';
 import '../game_detail/game_controller.dart';
 
 class AllGamesScreen extends StatefulWidget {
@@ -26,7 +27,8 @@ class _AllGamesScreenState extends StateMVC<AllGamesScreen> {
   @override
   void initState() {
     super.initState();
-    _con.getAllGames();
+    _con.getExpiredGames();
+    _con.getActiveGames();
   }
 
   @override
@@ -47,10 +49,10 @@ class _AllGamesScreenState extends StateMVC<AllGamesScreen> {
                       bottom: TabBar(
                         tabs: [
                           Tab(
-                            text: 'مسابقات جارية',
+                            text: S.of(context).currentCpmpetitions,
                           ),
                           Tab(
-                            text: 'مسابقات منتهية',
+                            text: S.of(context).endedCompetitions,
                           ),
                         ],
                       ),
@@ -61,10 +63,12 @@ class _AllGamesScreenState extends StateMVC<AllGamesScreen> {
                   Expanded(
                     child: TabBarView(
                       children: [
-                        _con.loading
+                        _con.loadingActive
                             ? const Center(child: CircularProgressIndicator())
                             : _con.games.isEmpty
-                                ? Center(child: Text('لا يوجد مسابقات جارية'))
+                                ? Center(
+                                    child: Text(
+                                        S.of(context).noCurrentCompetitions))
                                 : ListView.builder(
                                     shrinkWrap: true,
                                     itemCount: _con.games.length,
@@ -78,10 +82,12 @@ class _AllGamesScreenState extends StateMVC<AllGamesScreen> {
                                           game: _game, gameLevel: gameLevel);
                                     },
                                   ),
-                        _con.loading
+                        _con.loadingExpired
                             ? const Center(child: CircularProgressIndicator())
                             : _con.endedGames.isEmpty
-                                ? Center(child: Text('لا يوجد مسابقات منتهية'))
+                                ? Center(
+                                    child:
+                                        Text(S.of(context).noEndedCompetitions))
                                 : ListView.builder(
                                     shrinkWrap: true,
                                     itemCount: _con.endedGames.length,
@@ -91,7 +97,7 @@ class _AllGamesScreenState extends StateMVC<AllGamesScreen> {
                                           Helper.getGameLevelFromEnum(
                                               _game.level ??
                                                   GameLevelEnumsModel.zero);
-                                      return MyCompetitionItem(
+                                      return MyExpiredCompetitionItem(
                                           game: _game, gameLevel: gameLevel);
                                     },
                                   ),

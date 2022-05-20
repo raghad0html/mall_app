@@ -35,7 +35,7 @@ class _ForgetPasswordState extends StateMVC<ForgetPassword> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const CostumeAppBar(title: 'إعادة تعيين كلمة المرور'),
+              CostumeAppBar(title: S.of(context).resetPassword),
               const SizedBox(
                 height: 20,
               ),

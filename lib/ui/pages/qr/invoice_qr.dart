@@ -26,6 +26,11 @@ class _InvoiceQrScreenState extends StateMVC<InvoiceQrScreen> {
   _InvoiceQrScreenState() : super(QRController()) {
     _con = controller as QRController;
   }
+  @override
+  void initState() {
+    super.initState();
+    _con.setDaily(widget.arguments.daily);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +39,13 @@ class _InvoiceQrScreenState extends StateMVC<InvoiceQrScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            CostumeAppBar(title: widget.arguments.title),
+            CostumeAppBar(
+                title: widget.arguments.title,
+                returnToDetails: true,
+                gameDetails: GameDetails(
+                    mallName: widget.arguments.mallName ?? '',
+                    mallId: widget.arguments.mallId,
+                    gameId: widget.arguments.gameId)),
             Expanded(
               child: Padding(
                 padding:
@@ -56,8 +67,9 @@ class _InvoiceQrScreenState extends StateMVC<InvoiceQrScreen> {
                                     const SizedBox(
                                       height: 45.0,
                                     ),
+                                    //TODO
                                     Text(
-                                      S.of(context).invoiceDescription,
+                                      'اشتر فاتورة من أحد المحلات المشتركة معنا\n بقيمة ${widget.arguments.billAmount} ${widget.arguments.currency} على الأقل  \n ثم امسح باركود QR الخاص بها',
                                       textAlign: TextAlign.center,
                                       style: Theme.of(context)
                                           .textTheme
@@ -123,34 +135,13 @@ class _InvoiceQrScreenState extends StateMVC<InvoiceQrScreen> {
                                       style: Theme.of(context)
                                           .textTheme
                                           .subtitle2
-                                          ?.copyWith(fontSize: 16),
+                                          ?.copyWith(
+                                              fontSize: 18,
+                                              color: AppColors.appOrange),
                                     ),
                                     const SizedBox(
                                       height: 8.0,
                                     ),
-                                    // if (widget.arguments.daily &&
-                                    //     _con.qrModelResult!.invoiceAccepted!)
-                                    //   ElevatedButton(
-                                    //     onPressed: () async {
-                                    //       Navigator.pushNamed(
-                                    //           context, Routes.pontQrScreen,
-                                    //           arguments: InvoiceQrArguments(
-                                    //             mallId: widget.arguments.mallId,
-                                    //             gameId: widget.arguments.gameId,
-                                    //             title: widget.arguments.title,
-                                    //             daily: widget.arguments.daily,
-                                    //             balancePoints: _con
-                                    //                     .qrModelResult
-                                    //                     ?.balancePoints ??
-                                    //                 0,
-                                    //             targetPoints: _con.qrModelResult
-                                    //                     ?.targetPoints ??
-                                    //                 0,
-                                    //           ));
-                                    //     },
-                                    //     child: Text(
-                                    //         S.of(context).letsCollect500Points),
-                                    //   ),
                                   ],
                                 ),
                             ]),
@@ -165,7 +156,6 @@ class _InvoiceQrScreenState extends StateMVC<InvoiceQrScreen> {
                 alignment: Alignment.bottomCenter,
                 child: Column(
                   children: [
-
                     if (_con.qrModelResult == null)
                       ElevatedButton(
                         onPressed: () async {
@@ -182,8 +172,8 @@ class _InvoiceQrScreenState extends StateMVC<InvoiceQrScreen> {
                         },
                         child: Text(S.of(context).scanInvoiceBarcode),
                       )
-                    else if (widget.arguments.daily &&
-                        _con.qrModelResult!.invoiceAccepted!)
+                    else if (_con.qrModelResult!.status!
+                        .contains('invoice_accepted_daily'))
                       ElevatedButton(
                         onPressed: () async {
                           Navigator.pushNamed(context, Routes.pontQrScreen,
@@ -192,23 +182,20 @@ class _InvoiceQrScreenState extends StateMVC<InvoiceQrScreen> {
                                 gameId: widget.arguments.gameId,
                                 title: widget.arguments.title,
                                 daily: widget.arguments.daily,
+                                billAmount: widget.arguments.billAmount,
+                                currency: widget.arguments.currency,
                                 balancePoints:
                                     _con.qrModelResult?.balancePoints ?? 0,
                                 targetPoints:
                                     _con.qrModelResult?.targetPoints ?? 0,
                               ));
                         },
-                        child: const Text('لنقم بجمع نقاط'),
+                        child: Text(S.of(context).letUsCollectPoints),
                       )
-                    else
+                    else if (_con.qrModelResult!.status!
+                        .contains('invoice_accepted_zero'))
                       ElevatedButton(
                         onPressed: () async {
-                          // _con.sendQr(
-                          // data:
-                          //     'AULYtNix2YPYqSDYsdmI2YUg2KfZhNiq2KzYp9ix2YrYqSDYp9mE2YXYrdiv2YjYr9ipIC0g2YHYsdi5INix2YjZhTECDzMxMDA0NzA0MTEwMDAwMwMUMjAyMi0wNC0yMVQxMTo1Nzo0MloEBTE3Mi41BQEw',
-                          // gameId: widget.arguments.gameId,
-                          // mallId: widget.arguments.mallId,
-                          // qrType: QrTypeParamsModel.invoice);
                           var data = await Navigator.pushNamed(
                               context, Routes.scanQrScreen);
 
@@ -221,6 +208,13 @@ class _InvoiceQrScreenState extends StateMVC<InvoiceQrScreen> {
                           }
                         },
                         child: Text(S.of(context).scanInvoiceBarcode),
+                      )
+                    else
+                      ElevatedButton(
+                        onPressed: () async {
+                          Navigator.pop(context);
+                        },
+                        child: Text(S.of(context).backTopreviousLevel),
                       ),
                     const SizedBox(
                       height: 20.0,
@@ -229,7 +223,7 @@ class _InvoiceQrScreenState extends StateMVC<InvoiceQrScreen> {
                       onTap: () {
                         Navigator.pushNamed(context, Routes.shareShopsScreen,
                             arguments: ShopArguments(
-                                mallName: widget.arguments.mallName??'',
+                                mallName: widget.arguments.mallName ?? '',
                                 mallId: widget.arguments.mallId));
                       },
                       child: LinedText(
@@ -237,7 +231,6 @@ class _InvoiceQrScreenState extends StateMVC<InvoiceQrScreen> {
                         text: S.of(context).browseSubscriptionMarkets,
                       ),
                     ),
-
                     const SizedBox(
                       height: 20.0,
                     ),

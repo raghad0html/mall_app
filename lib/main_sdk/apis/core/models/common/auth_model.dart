@@ -1,5 +1,3 @@
-
-
 class AuthModel {
   String? token;
   String? userid;

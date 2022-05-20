@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mall_app/constants/app_theme.dart';
 
 import '../../main_sdk/apis/game/models/game_level_enums_model.dart';
@@ -9,7 +11,8 @@ import '../widget/circular_loading_widget.dart';
 
 class Helper {
   BuildContext? context;
-
+  DateTime? currentBackPressTime;
+  bool back = false;
   Helper.of(BuildContext _context) {
     context = _context;
   }
@@ -63,5 +66,22 @@ class Helper {
       default:
         return '';
     }
+  }
+
+  Future<bool> onWillPop() {
+    print(back);
+
+    if (!back) {
+      // if ( now.difference(currentBackPressTime!) > Duration(seconds: 2)) {
+      //   currentBackPressTime = now;
+      back = true;
+      print(currentBackPressTime);
+      Fluttertoast.showToast(msg: 'اضغط مرة ثانية للمغادرة');
+      return Future.value(false);
+      // }
+    }
+    SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+    back = false;
+    return Future.value(true);
   }
 }

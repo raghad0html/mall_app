@@ -669,6 +669,446 @@ class S {
       args: [],
     );
   }
+
+  /// `tapAgainToLeave`
+  String get tapagaintoleave {
+    return Intl.message(
+      'tapAgainToLeave',
+      name: 'tapagaintoleave',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `تهانينا`
+  String get congradulatins {
+    return Intl.message(
+      'تهانينا',
+      name: 'congradulatins',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `حول`
+  String get about {
+    return Intl.message(
+      'حول',
+      name: 'about',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `السادة: وفقهم الله`
+  String get mr_s {
+    return Intl.message(
+      'السادة: وفقهم الله',
+      name: 'mr_s',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `الجوائز`
+  String get gifts {
+    return Intl.message(
+      'الجوائز',
+      name: 'gifts',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `مسابقات جارية`
+  String get currentCpmpetitions {
+    return Intl.message(
+      'مسابقات جارية',
+      name: 'currentCpmpetitions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `مسابقات منتهية`
+  String get endedCompetitions {
+    return Intl.message(
+      'مسابقات منتهية',
+      name: 'endedCompetitions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `لا يوجد مسابقات جارية`
+  String get noCurrentCompetitions {
+    return Intl.message(
+      'لا يوجد مسابقات جارية',
+      name: 'noCurrentCompetitions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `لا يوجد مسابقات منتهية`
+  String get noEndedCompetitions {
+    return Intl.message(
+      'لا يوجد مسابقات منتهية',
+      name: 'noEndedCompetitions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `عرض الكل`
+  String get showAll {
+    return Intl.message(
+      'عرض الكل',
+      name: 'showAll',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `لا يوجد مولات لعرضها`
+  String get noMalls {
+    return Intl.message(
+      'لا يوجد مولات لعرضها',
+      name: 'noMalls',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `لا يوجد محلات لعرضها`
+  String get noShop {
+    return Intl.message(
+      'لا يوجد محلات لعرضها',
+      name: 'noShop',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `مجموعة الجوائز المقدمة`
+  String get giftsGiven {
+    return Intl.message(
+      'مجموعة الجوائز المقدمة',
+      name: 'giftsGiven',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `منتجاتنا`
+  String get ourProducts {
+    return Intl.message(
+      'منتجاتنا',
+      name: 'ourProducts',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `العودة لمراحل المسابقة`
+  String get backTopreviousLevel {
+    return Intl.message(
+      'العودة لمراحل المسابقة',
+      name: 'backTopreviousLevel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `لإنهاء المسابقة اليومية \n عليك التوجه للمحلات المشاركة \n ومسح لصاقة باركود QR لكسب النقاط والفوز`
+  String get nNQrTowin {
+    return Intl.message(
+      'لإنهاء المسابقة اليومية \n عليك التوجه للمحلات المشاركة \n ومسح لصاقة باركود QR لكسب النقاط والفوز',
+      name: 'nNQrTowin',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `رصيد نقاطك الحالي`
+  String get yourPoints {
+    return Intl.message(
+      'رصيد نقاطك الحالي',
+      name: 'yourPoints',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `لا يمكنك مسح فاتورة تأكد من عدد نقاطك`
+  String get youCantscanQr {
+    return Intl.message(
+      'لا يمكنك مسح فاتورة تأكد من عدد نقاطك',
+      name: 'youCantscanQr',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `مسح باركود محل`
+  String get scanQrforShop {
+    return Intl.message(
+      'مسح باركود محل',
+      name: 'scanQrforShop',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `إعادة تعيين كلمة المرور`
+  String get resetPassword {
+    return Intl.message(
+      'إعادة تعيين كلمة المرور',
+      name: 'resetPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `تم إرسال كود التأكيد على بريدك الالكتروني`
+  String get verCodeHasSentToYourEmail {
+    return Intl.message(
+      'تم إرسال كود التأكيد على بريدك الالكتروني',
+      name: 'verCodeHasSentToYourEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `كود التأكيد`
+  String get verificationCode {
+    return Intl.message(
+      'كود التأكيد',
+      name: 'verificationCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `يرجى ادخال كود التأكيد`
+  String get pleaseAddVerificationCode {
+    return Intl.message(
+      'يرجى ادخال كود التأكيد',
+      name: 'pleaseAddVerificationCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `تأكيد رمز التأكيد`
+  String get beSureFromVerificationCode {
+    return Intl.message(
+      'تأكيد رمز التأكيد',
+      name: 'beSureFromVerificationCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `لم يصلك الرمز`
+  String get havetGotTheCode {
+    return Intl.message(
+      'لم يصلك الرمز',
+      name: 'havetGotTheCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `إعادة إرسال الرمز`
+  String get resendCode {
+    return Intl.message(
+      'إعادة إرسال الرمز',
+      name: 'resendCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `انتباه`
+  String get attention {
+    return Intl.message(
+      'انتباه',
+      name: 'attention',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `هل تريد تسجيل الخروج؟`
+  String get doyouWantToLogout {
+    return Intl.message(
+      'هل تريد تسجيل الخروج؟',
+      name: 'doyouWantToLogout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `نعم`
+  String get yes {
+    return Intl.message(
+      'نعم',
+      name: 'yes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `لا`
+  String get no {
+    return Intl.message(
+      'لا',
+      name: 'no',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `الملف الشخصي`
+  String get userProfile {
+    return Intl.message(
+      'الملف الشخصي',
+      name: 'userProfile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `رقم الهاتف`
+  String get phoneNumber {
+    return Intl.message(
+      'رقم الهاتف',
+      name: 'phoneNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `يرجى ادخال رقم الهاتف`
+  String get pleaseEnterPhoneNumber {
+    return Intl.message(
+      'يرجى ادخال رقم الهاتف',
+      name: 'pleaseEnterPhoneNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `تعديل الملف الشخصي`
+  String get editProfile {
+    return Intl.message(
+      'تعديل الملف الشخصي',
+      name: 'editProfile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `الاسم الكامل`
+  String get fullName {
+    return Intl.message(
+      'الاسم الكامل',
+      name: 'fullName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `حسابي`
+  String get myAccount {
+    return Intl.message(
+      'حسابي',
+      name: 'myAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `مقروء`
+  String get readed {
+    return Intl.message(
+      'مقروء',
+      name: 'readed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `غير مقروء`
+  String get notReaded {
+    return Intl.message(
+      'غير مقروء',
+      name: 'notReaded',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `الاشعارات`
+  String get notifications {
+    return Intl.message(
+      'الاشعارات',
+      name: 'notifications',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `لنقم بجمع نقاط`
+  String get letUsCollectPoints {
+    return Intl.message(
+      'لنقم بجمع نقاط',
+      name: 'letUsCollectPoints',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `جارية`
+  String get active {
+    return Intl.message(
+      'جارية',
+      name: 'active',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `حظ اوفر`
+  String get googLuck {
+    return Intl.message(
+      'حظ اوفر',
+      name: 'googLuck',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ربحت`
+  String get youAreTheWinner {
+    return Intl.message(
+      'ربحت',
+      name: 'youAreTheWinner',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `اضغط مرة ثانية للمغادرة`
+  String get tapAgainToLeave {
+    return Intl.message(
+      'اضغط مرة ثانية للمغادرة',
+      name: 'tapAgainToLeave',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

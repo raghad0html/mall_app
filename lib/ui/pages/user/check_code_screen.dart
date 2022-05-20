@@ -3,6 +3,7 @@ import 'package:mall_app/ui/pages/user/user_controller.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 import '../../../constants/app_theme.dart';
+import '../../../generated/l10n.dart';
 import '../../../routes.dart';
 import '../../widget/costume_appbar.dart';
 
@@ -43,7 +44,7 @@ class _CheckCodeScreenState extends StateMVC<CheckCodeScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const CostumeAppBar(title: 'إعادة تعيين كلمة المرور'),
+              CostumeAppBar(title: S.of(context).resetPassword),
               const SizedBox(
                 height: 20,
               ),
@@ -62,7 +63,7 @@ class _CheckCodeScreenState extends StateMVC<CheckCodeScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              'تم إرسال كود التأكيد على بريدك الالكتروني',
+                              S.of(context).verCodeHasSentToYourEmail,
                               style: Theme.of(context).textTheme.headline4,
                               textAlign: TextAlign.center,
                             ),
@@ -78,12 +79,14 @@ class _CheckCodeScreenState extends StateMVC<CheckCodeScreen> {
                               controller: codeController,
                               keyboardType: TextInputType.emailAddress,
                               decoration: InputDecoration(
-                                hintText: 'كود التأكيد',
-                                labelText: 'كود التأكيد',
+                                hintText: S.of(context).verificationCode,
+                                labelText: S.of(context).verificationCode,
                               ),
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
-                                  return 'يرجى ادخال كود التأكيد';
+                                  return S
+                                      .of(context)
+                                      .pleaseAddVerificationCode;
                                 }
                                 return null;
                               },
@@ -100,8 +103,8 @@ class _CheckCodeScreenState extends StateMVC<CheckCodeScreen> {
                                     _con.checkCode(widget.arguments.email,
                                         codeController.text);
                                   },
-                                  child: const Text(
-                                    'تأكيد رمز التأكيد',
+                                  child: Text(
+                                    S.of(context).beSureFromVerificationCode,
                                   ),
                                 ),
                               ),
@@ -119,7 +122,7 @@ class _CheckCodeScreenState extends StateMVC<CheckCodeScreen> {
                                 },
                                 child: RichText(
                                   text: TextSpan(
-                                    text: 'لم يصلك الرمز',
+                                    text: S.of(context).havetGotTheCode,
                                     style: Theme.of(context)
                                         .textTheme
                                         .headline6!
@@ -134,7 +137,7 @@ class _CheckCodeScreenState extends StateMVC<CheckCodeScreen> {
                                         text: ' ',
                                       ),
                                       TextSpan(
-                                        text: 'إعادة إرسال الرمز',
+                                        text: S.of(context).resendCode,
                                         style: Theme.of(context)
                                             .textTheme
                                             .headline6!

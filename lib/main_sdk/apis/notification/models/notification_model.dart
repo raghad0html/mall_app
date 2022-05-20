@@ -1,18 +1,21 @@
 class ListOfNotificationModel {
+  int? count;
+  List<NotificationModel>? notifications;
+
   ListOfNotificationModel({
-    this.data,
+    this.count,
+    this.notifications,
   });
 
-  ListOfNotificationModel.fromJson(dynamic json) {
-    if (json != null) {
-      data = [];
-      json.forEach((v) {
-        data?.add(NotificationModel.fromJson(v));
-      });
-    }
-  }
+  ListOfNotificationModel.fromJson(Map<String, dynamic> json) {
+    count = json['count'] ?? 0;
 
-  List<NotificationModel>? data;
+    notifications = json['notifications'] != null
+        ? List.from(json['notifications'])
+            .map((element) => NotificationModel.fromJson(element))
+            .toList()
+        : [];
+  }
 }
 
 class NotificationModel {

@@ -22,6 +22,12 @@ class GameController extends ControllerMVC {
   int balancePoints = 0;
   bool loading = false;
   bool loadingDetails = false;
+  bool loadingActive = false;
+  bool loadingExpired = false;
+  String? billAmount;
+  String? currency;
+  String? message;
+
   GameController() {
     scaffoldKey = GlobalKey<ScaffoldState>();
   }
@@ -51,7 +57,9 @@ class GameController extends ControllerMVC {
       SuccessState<GameModel> data = _gameResponse as SuccessState<GameModel>;
       targetPoint = data.data.targetPoints ?? 0;
       balancePoints = data.data.balancePoints ?? 0;
-
+      currency = data.data.currency;
+      billAmount = data.data.billAmount;
+      message = data.data.msg;
       switch (data.data.level) {
         case GameLevelEnumsModel.zero:
           levelIndex = 0;
@@ -83,13 +91,39 @@ class GameController extends ControllerMVC {
     }
   }
 
-  getAllGames() async {
-    loading = true;
+  getActiveGames() async {
+    loadingActive = true;
     setState(() {});
     AllGameParamsModel allGameParamsModel = AllGameParamsModel(
-      token: LocalStorageService().token ?? '',
-      userid: LocalStorageService().id ?? '',
-    );
+        token: LocalStorageService().token ?? '',
+        userid: LocalStorageService().id ?? '',
+        action: GameActionEnumsModel.getActiveGames);
+    ResponseState<ListOfGameModel> _gameResponse = await GameIdentityApi()
+        .getAllGame(allGameParamsModel: allGameParamsModel);
+
+    if (_gameResponse is SuccessState) {
+      SuccessState<ListOfGameModel> data =
+          _gameResponse as SuccessState<ListOfGameModel>;
+
+      for (GameModel _game in data.data.data ?? []) {
+        games.add(_game);
+      }
+      setState(() {});
+    } else if (_gameResponse is ErrorState) {
+      ErrorState<ListOfGameModel> data =
+          _gameResponse as ErrorState<ListOfGameModel>;
+    }
+    loadingActive = false;
+    setState(() {});
+  }
+
+  getExpiredGames() async {
+    loadingExpired = true;
+    setState(() {});
+    AllGameParamsModel allGameParamsModel = AllGameParamsModel(
+        token: LocalStorageService().token ?? '',
+        userid: LocalStorageService().id ?? '',
+        action: GameActionEnumsModel.getExpiredGames);
     ResponseState<ListOfGameModel> _gameResponse = await GameIdentityApi()
         .getAllGame(allGameParamsModel: allGameParamsModel);
 
@@ -99,18 +133,14 @@ class GameController extends ControllerMVC {
 
       //games = data.data.data ?? [];
       for (GameModel _game in data.data.data ?? []) {
-        if (_game.level == GameLevelEnumsModel.quarterlyDone) {
-          endedGames.add(_game);
-        } else {
-          games.add(_game);
-        }
+        endedGames.add(_game);
       }
       setState(() {});
     } else if (_gameResponse is ErrorState) {
       ErrorState<ListOfGameModel> data =
           _gameResponse as ErrorState<ListOfGameModel>;
     }
-    loading = false;
+    loadingExpired = false;
     setState(() {});
   }
 }

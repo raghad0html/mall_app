@@ -27,7 +27,7 @@ class _GetLocationWidgetState extends State<GetLocationWidget> {
   @override
   void initState() {
     gpsServiceStatus = loc.Location.instance.requestService();
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       _goToLocation();
     });
     super.initState();

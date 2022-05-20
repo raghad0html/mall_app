@@ -49,14 +49,14 @@ class _UpdateProfilePageState extends StateMVC<UpdateProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          leading: const BackButton(),
-          title: const Text('تعديل الملف الشخصي'),
-        ),
-        body: _con.cities.isEmpty
-            ? const Center(child: CircularProgressIndicator())
-            : SingleChildScrollView(
-                child: Column(
+      appBar: AppBar(
+        leading: const BackButton(),
+        title: Text(S.of(context).editProfile),
+      ),
+      body: _con.cities.isEmpty
+          ? const Center(child: CircularProgressIndicator())
+          : SingleChildScrollView(
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -70,13 +70,13 @@ class _UpdateProfilePageState extends StateMVC<UpdateProfilePage> {
                           TextFormField(
                             controller: nameController,
                             keyboardType: TextInputType.text,
-                            decoration: const InputDecoration(
-                              hintText: 'الاسم الكامل',
-                              labelText: 'الاسم الكامل',
+                            decoration: InputDecoration(
+                              hintText: S.of(context).fullName,
+                              labelText: S.of(context).fullName,
                             ),
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'الاسم الكامل';
+                                return S.of(context).fullName;
                               }
                               return null;
                             },
@@ -108,13 +108,13 @@ class _UpdateProfilePageState extends StateMVC<UpdateProfilePage> {
                             controller: phoneController,
                             keyboardType: TextInputType.phone,
                             obscureText: false,
-                            decoration: const InputDecoration(
-                              hintText: 'رقم الهاتف',
-                              labelText: 'رقم الهاتف',
+                            decoration: InputDecoration(
+                              hintText: S.of(context).phoneNumber,
+                              labelText: S.of(context).phoneNumber,
                             ),
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'يرجى ادخال رقم الهاتف';
+                                return S.of(context).pleaseEnterPhoneNumber;
                               }
                               return null;
                             },
@@ -165,7 +165,9 @@ class _UpdateProfilePageState extends StateMVC<UpdateProfilePage> {
                                               token:
                                                   LocalStorageService().token ??
                                                       '',
-                                              userid: LocalStorageService().id??''));
+                                              userid:
+                                                  LocalStorageService().id ??
+                                                      ''));
 
                                   widget.onChanged(UserModel(
                                       token: LocalStorageService().token ?? '',
@@ -175,7 +177,7 @@ class _UpdateProfilePageState extends StateMVC<UpdateProfilePage> {
                                       name: nameController.text,
                                       phone: phoneController.text));
                                 },
-                                child: const Text('حفظ'),
+                                child: Text(S.of(context).save),
                               ),
                             ),
                           ),
@@ -184,6 +186,8 @@ class _UpdateProfilePageState extends StateMVC<UpdateProfilePage> {
                     ),
                   ),
                 ],
-              )));
+              ),
+            ),
+    );
   }
 }

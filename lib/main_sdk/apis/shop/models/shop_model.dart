@@ -59,7 +59,7 @@ class ShopModel {
     shopPlan = json['shop_plan'];
     shopQrScannedCount = json['shop_qrScannedCount'];
     point = json['point'];
-    code = json['code'];
+    code = json['code'].toString();
     timeCode = json['time_code'];
     picture = json['picture'];
     shopAddress = json['shop_address'];

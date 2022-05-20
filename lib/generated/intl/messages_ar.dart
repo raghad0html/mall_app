@@ -31,7 +31,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "QuarterManual": MessageLookupByLibrary.simpleMessage("ربع سنوي"),
         "QuarterManualCompetition":
             MessageLookupByLibrary.simpleMessage("مسابقة ربع سنوية"),
+        "about": MessageLookupByLibrary.simpleMessage("حول"),
+        "active": MessageLookupByLibrary.simpleMessage("جارية"),
         "amount": MessageLookupByLibrary.simpleMessage("المبلغ:"),
+        "attention": MessageLookupByLibrary.simpleMessage("انتباه"),
+        "backTopreviousLevel":
+            MessageLookupByLibrary.simpleMessage("العودة لمراحل المسابقة"),
+        "beSureFromVerificationCode":
+            MessageLookupByLibrary.simpleMessage("تأكيد رمز التأكيد"),
         "beTheWinnerMessage": MessageLookupByLibrary.simpleMessage(
             "اربح العديد من الجوائو معنا :)"),
         "beTheWinnerTitle": MessageLookupByLibrary.simpleMessage("كن الفائز !"),
@@ -45,20 +52,29 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage(
                 "اختر المرحلة المتاحة لاستكمال المسابقة"),
         "chooseMall": MessageLookupByLibrary.simpleMessage("قم باختيار مول"),
+        "congradulatins": MessageLookupByLibrary.simpleMessage("تهانينا"),
         "congratulationYourInvoiceAccepted":
             MessageLookupByLibrary.simpleMessage("تهانينا ، فاتورتك مقبولة"),
         "createNewAccount":
             MessageLookupByLibrary.simpleMessage("انشاء حساب جديد"),
         "createNewPassword":
             MessageLookupByLibrary.simpleMessage("إنشاء كلمة مرور جديدة"),
+        "currentCpmpetitions":
+            MessageLookupByLibrary.simpleMessage("مسابقات جارية"),
         "daily": MessageLookupByLibrary.simpleMessage("يومي"),
         "dailyCompetitionTitle": m1,
         "dash": MessageLookupByLibrary.simpleMessage("--"),
         "date": MessageLookupByLibrary.simpleMessage("التاريخ:"),
         "dontHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("ليس لديك حساب"),
+        "doyouWantToLogout":
+            MessageLookupByLibrary.simpleMessage("هل تريد تسجيل الخروج؟"),
         "edit": MessageLookupByLibrary.simpleMessage("تعديل"),
+        "editProfile":
+            MessageLookupByLibrary.simpleMessage("تعديل الملف الشخصي"),
         "email": MessageLookupByLibrary.simpleMessage("البريد الإلكتروني"),
+        "endedCompetitions":
+            MessageLookupByLibrary.simpleMessage("مسابقات منتهية"),
         "enterEmail": MessageLookupByLibrary.simpleMessage(
             "الرجاء إدخال عنوان بريد إلكتروني صالح"),
         "enterPassword": MessageLookupByLibrary.simpleMessage(
@@ -68,6 +84,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "flashStatus": m2,
         "forgetPassword":
             MessageLookupByLibrary.simpleMessage("نسيت كلمة المرور"),
+        "fullName": MessageLookupByLibrary.simpleMessage("الاسم الكامل"),
+        "gifts": MessageLookupByLibrary.simpleMessage("الجوائز"),
+        "giftsGiven":
+            MessageLookupByLibrary.simpleMessage("مجموعة الجوائز المقدمة"),
+        "googLuck": MessageLookupByLibrary.simpleMessage("حظ اوفر"),
+        "havetGotTheCode":
+            MessageLookupByLibrary.simpleMessage("لم يصلك الرمز"),
         "howToScanBarcode": MessageLookupByLibrary.simpleMessage(
             "قم بتوجيه الكاميرا على باركود QR"),
         "iHaveAnAccount": MessageLookupByLibrary.simpleMessage("لديك حساب"),
@@ -75,6 +98,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "اشتر فاتورة من أحد المحلات المشتركة معنا\n بقيمة 300 ريال على الأقل \n ثم امسح باركود QR الخاص بها"),
         "invoiceDetails":
             MessageLookupByLibrary.simpleMessage("تفاصيل الفاتورة"),
+        "letUsCollectPoints":
+            MessageLookupByLibrary.simpleMessage("لنقم بجمع نقاط"),
         "letsCollect500Points":
             MessageLookupByLibrary.simpleMessage("لنجمع 500 نقطة"),
         "letsScanQr": MessageLookupByLibrary.simpleMessage("فلنبدأ في مسح Qr "),
@@ -86,16 +111,39 @@ class MessageLookup extends MessageLookupByLibrary {
         "monthly": MessageLookupByLibrary.simpleMessage("شهري"),
         "monthlyCompetition":
             MessageLookupByLibrary.simpleMessage("مسابقة شهرية"),
+        "mr_s": MessageLookupByLibrary.simpleMessage("السادة: وفقهم الله"),
+        "myAccount": MessageLookupByLibrary.simpleMessage("حسابي"),
         "myCompetitions": MessageLookupByLibrary.simpleMessage("مسابقاتي"),
+        "nNQrTowin": MessageLookupByLibrary.simpleMessage(
+            "لإنهاء المسابقة اليومية \n عليك التوجه للمحلات المشاركة \n ومسح لصاقة باركود QR لكسب النقاط والفوز"),
         "name": MessageLookupByLibrary.simpleMessage("اسم:"),
+        "no": MessageLookupByLibrary.simpleMessage("لا"),
+        "noCurrentCompetitions":
+            MessageLookupByLibrary.simpleMessage("لا يوجد مسابقات جارية"),
+        "noEndedCompetitions":
+            MessageLookupByLibrary.simpleMessage("لا يوجد مسابقات منتهية"),
         "noInternetConnection":
             MessageLookupByLibrary.simpleMessage("لا يوجد اتصال بالإنترنت"),
+        "noMalls": MessageLookupByLibrary.simpleMessage("لا يوجد مولات لعرضها"),
         "noPermission": MessageLookupByLibrary.simpleMessage("لا يوجد إذن"),
+        "noShop": MessageLookupByLibrary.simpleMessage("لا يوجد محلات لعرضها"),
+        "notReaded": MessageLookupByLibrary.simpleMessage("غير مقروء"),
+        "notifications": MessageLookupByLibrary.simpleMessage("الاشعارات"),
         "ok": MessageLookupByLibrary.simpleMessage("حسناً"),
+        "ourProducts": MessageLookupByLibrary.simpleMessage("منتجاتنا"),
         "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
         "passwordMismatch":
             MessageLookupByLibrary.simpleMessage("كلمتا السر غير متطابقتين"),
         "pause": MessageLookupByLibrary.simpleMessage("إيقاف مؤقت"),
+        "phoneNumber": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
+        "pleaseAddVerificationCode":
+            MessageLookupByLibrary.simpleMessage("يرجى ادخال كود التأكيد"),
+        "pleaseEnterPhoneNumber":
+            MessageLookupByLibrary.simpleMessage("يرجى ادخال رقم الهاتف"),
+        "readed": MessageLookupByLibrary.simpleMessage("مقروء"),
+        "resendCode": MessageLookupByLibrary.simpleMessage("إعادة إرسال الرمز"),
+        "resetPassword":
+            MessageLookupByLibrary.simpleMessage("إعادة تعيين كلمة المرور"),
         "resume": MessageLookupByLibrary.simpleMessage("استئناف"),
         "retry": MessageLookupByLibrary.simpleMessage("اعادة المحاولة"),
         "rewritePassword":
@@ -105,18 +153,33 @@ class MessageLookup extends MessageLookupByLibrary {
         "scanInvoiceBarcode":
             MessageLookupByLibrary.simpleMessage("مسح باركود فاتورة"),
         "scanQr": MessageLookupByLibrary.simpleMessage(" امسح Qr "),
+        "scanQrforShop": MessageLookupByLibrary.simpleMessage("مسح باركود محل"),
+        "showAll": MessageLookupByLibrary.simpleMessage("عرض الكل"),
         "sorryWeCouldNotFindTheQr": MessageLookupByLibrary.simpleMessage(
             "عذرًا ، لم نتمكن من العثور على QR"),
         "sorryYourInvoiceHasNotAccepted":
             MessageLookupByLibrary.simpleMessage("عذرًا ، لم يتم قبول فاتورتك"),
         "startACompetition":
             MessageLookupByLibrary.simpleMessage("ابدأ مسابقة"),
+        "tapAgainToLeave":
+            MessageLookupByLibrary.simpleMessage("اضغط مرة ثانية للمغادرة"),
+        "tapagaintoleave":
+            MessageLookupByLibrary.simpleMessage("tapAgainToLeave"),
         "taxAmount": MessageLookupByLibrary.simpleMessage("مبلغ الضريبة:"),
         "taxNumber": MessageLookupByLibrary.simpleMessage("رقم الضريبة:"),
+        "userProfile": MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
         "username": MessageLookupByLibrary.simpleMessage("اسم المستخدم"),
+        "verCodeHasSentToYourEmail": MessageLookupByLibrary.simpleMessage(
+            "تم إرسال كود التأكيد على بريدك الالكتروني"),
+        "verificationCode": MessageLookupByLibrary.simpleMessage("كود التأكيد"),
         "weekly": MessageLookupByLibrary.simpleMessage("أسبوعي"),
         "weeklyCompetition":
             MessageLookupByLibrary.simpleMessage("مسابقة اسبوعية"),
-        "yourCity": MessageLookupByLibrary.simpleMessage("مدينتك الحالية")
+        "yes": MessageLookupByLibrary.simpleMessage("نعم"),
+        "youAreTheWinner": MessageLookupByLibrary.simpleMessage("ربحت"),
+        "youCantscanQr": MessageLookupByLibrary.simpleMessage(
+            "لا يمكنك مسح فاتورة تأكد من عدد نقاطك"),
+        "yourCity": MessageLookupByLibrary.simpleMessage("مدينتك الحالية"),
+        "yourPoints": MessageLookupByLibrary.simpleMessage("رصيد نقاطك الحالي")
       };
 }

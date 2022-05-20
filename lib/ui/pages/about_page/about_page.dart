@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../generated/l10n.dart';
+
 class AboutPage extends StatefulWidget {
   const AboutPage({Key? key}) : super(key: key);
 
@@ -13,14 +15,14 @@ class _AboutPageState extends State<AboutPage> {
     return Scaffold(
       appBar: AppBar(
         leading: const BackButton(),
-        title: const Text('حول'),
+        title: Text(S.of(context).about),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(17),
         child: Column(
-          children: const [
+          children: [
             Text(
-              "السادة: وفقهم الله",
+              S.of(context).mr_s,
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
             ),
             Text(
@@ -82,7 +84,6 @@ class _AboutPageState extends State<AboutPage> {
                 "-القسم الخاص بالمتسابقين.\n"
                 "-امنح عائلتك المتعة بالتسوق من اليوم عن طريق تطبيق بريق الاعلان بربح الجوائز اليومية والأسبوعية والشهرية والثلاث أشهر من خلال تجميع النقاط بطريقة ممتعة ومسلية عند تسوقك وبحثك عن الباركود الخاص بالمحلات المشاركة بالمسابقة.\n"
                 "-حمل تطبيق بريق الإعلان وادخل على المول المتواجد به وسجل رقم فاتورة الشراء الخاصة بك على أن لا تقل قيمتها 300 ريال وذلك عن طريق أحد المحلات المشتركة في التطبيق مع رقم الموبايل الخاص بك وبعض المعلومات الشخصية للبدء في المسابقة وتحميل الباركود وجمع النقاط للفوز بالجوائز اليومية ليؤهلك ذلك بالدخول للمسابقات الأسبوعية والشهرية والثلاث أشهر في حال شرائك أي منتجات أخرى من المحلات المشتركة في تطبيق بريق الإعلان (معنا الكل فائز)\n"),
-
           ],
         ),
       ),

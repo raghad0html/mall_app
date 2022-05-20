@@ -43,7 +43,7 @@ class _ResetPasswordScreenState extends StateMVC<ResetPasswordScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const CostumeAppBar(title: 'إعادة تعيين كلمة المرور'),
+              CostumeAppBar(title: S.of(context).resetPassword),
               const SizedBox(height: 10),
               Expanded(
                 child: SingleChildScrollView(
@@ -102,18 +102,12 @@ class _ResetPasswordScreenState extends StateMVC<ResetPasswordScreen> {
                                     const EdgeInsets.symmetric(vertical: 16.0),
                                 child: ElevatedButton(
                                   onPressed: () {
-                                    // _con.loginParamsModel.email =
-                                    //     emailController.text;
-                                    // _con.loginParamsModel.password =
-                                    //     passwordController.text;
-                                    //TODO
-                                    // _con.loginParamsModel.
                                     _con.setNewPassword(
                                         email: widget.arguments.email,
                                         code: widget.arguments.code ?? '',
                                         newPassword: passwordController.text);
                                   },
-                                  child: const Text('إعادة تعيين كلمة المرور'),
+                                  child: Text(S.of(context).resetPassword),
                                 ),
                               ),
                             ),

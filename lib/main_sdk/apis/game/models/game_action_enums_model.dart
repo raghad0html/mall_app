@@ -19,7 +19,7 @@ extension GameActionEnumsModelFromString on GameActionEnumsModel {
       case 'createGame':
         return GameActionEnumsModel.createGame;
       case 'getGames':
-        return GameActionEnumsModel.createGame;
+        return GameActionEnumsModel.getGames;
       case 'getActiveGames':
         return GameActionEnumsModel.getActiveGames;
       case 'getExpiredGames':

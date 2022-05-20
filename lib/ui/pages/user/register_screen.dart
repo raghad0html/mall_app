@@ -82,8 +82,8 @@ class _RegisterScreenState extends StateMVC<RegisterScreen> {
                                   controller: nameController,
                                   keyboardType: TextInputType.text,
                                   decoration: InputDecoration(
-                                    hintText:'الاسم الكامل',
-                                    labelText:'الاسم الكامل',
+                                    hintText: 'الاسم الكامل',
+                                    labelText: 'الاسم الكامل',
                                   ),
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
@@ -120,12 +120,14 @@ class _RegisterScreenState extends StateMVC<RegisterScreen> {
                                   keyboardType: TextInputType.phone,
                                   obscureText: false,
                                   decoration: InputDecoration(
-                                    hintText: 'رقم الهاتف',
-                                    labelText: 'رقم الهاتف',
+                                    hintText: S.of(context).phoneNumber,
+                                    labelText: S.of(context).phoneNumber,
                                   ),
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
-                                      return 'يرجى ادخال رقم الهاتف';
+                                      return S
+                                          .of(context)
+                                          .pleaseEnterPhoneNumber;
                                     }
                                     return null;
                                   },

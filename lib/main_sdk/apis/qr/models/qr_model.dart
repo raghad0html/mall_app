@@ -9,7 +9,7 @@ class QrModel {
   int? taxNumber;
   DateTime? date;
   double? cost;
-  int? vat;
+  double? vat;
   bool? stickerAccepted;
   int? points;
   int? balancePoints;
