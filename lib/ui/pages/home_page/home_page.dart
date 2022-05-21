@@ -261,8 +261,23 @@ class _HomePageState extends StateMVC<HomePage> {
                                             Helper.getGameLevelFromEnum(
                                                 _game.level ??
                                                     GameLevelEnumsModel.zero);
-                                        return MyCompetitionItem(
-                                            game: _game, gameLevel: gameLevel);
+                                        return InkWell(
+                                          onTap: () async {
+                                            await Navigator.pushNamed(context,
+                                                Routes.gameDetailScreen,
+                                                arguments: GameDetails(
+                                                  mallName:
+                                                      _game.mallName ?? '',
+                                                  gameId: _game.gameId ?? 0,
+                                                  mallId: _game.mallId ?? 0,
+                                                ));
+                                            print('sdsdcsdcsdcsdcsdc');
+                                            _con.getAllGames();
+                                          },
+                                          child: MyCompetitionItem(
+                                              game: _game,
+                                              gameLevel: gameLevel),
+                                        );
                                       },
                                     ),
                             ),

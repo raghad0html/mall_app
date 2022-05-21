@@ -137,7 +137,7 @@ class _InvoiceQrScreenState extends StateMVC<InvoiceQrScreen> {
                                           .subtitle2
                                           ?.copyWith(
                                               fontSize: 18,
-                                              color: AppColors.appOrange),
+                                              color: AppColors.blackColor),
                                     ),
                                     const SizedBox(
                                       height: 8.0,
@@ -190,7 +190,7 @@ class _InvoiceQrScreenState extends StateMVC<InvoiceQrScreen> {
                                     _con.qrModelResult?.targetPoints ?? 0,
                               ));
                         },
-                        child: Text(S.of(context).letUsCollectPoints),
+                        child: Text(' بدء جمع  النقاط'),
                       )
                     else if (_con.qrModelResult!.status!
                         .contains('invoice_accepted_zero'))

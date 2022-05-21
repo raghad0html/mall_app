@@ -103,10 +103,7 @@ class _ShopDetailsPageState extends StateMVC<ShopDetailsPage> {
                             height: 15,
                           ),
                           InkWell(
-                            onTap: () {
-                              Navigator.pushNamed(
-                                  context, Routes.allGamesScreen);
-                            },
+                            onTap: () {},
                             child: Row(
                               children: [
                                 Expanded(

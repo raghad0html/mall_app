@@ -58,7 +58,7 @@ class _PointQRScreenState extends StateMVC<PointQRScreen> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         const SizedBox(
-                          height: 35.0,
+                          height: 12.0,
                         ),
                         if (widget.arguments.daily)
                           Text(
@@ -73,13 +73,17 @@ class _PointQRScreenState extends StateMVC<PointQRScreen> {
                           height: 30,
                         ),
                         if (_con.showVideo)
-                          InteractiveViewer(
-                            panEnabled: true, // Set it to false
-                            boundaryMargin: const EdgeInsets.all(100),
-                            minScale: 0.5,
-                            maxScale: 2,
-                            child: AssetVideo(
-                              videoName: '${_con.qrModelResult?.points}.mp4',
+                          SizedBox(
+                            height: 100,
+                            width: 100,
+                            child: InteractiveViewer(
+                              panEnabled: true, // Set it to false
+                              boundaryMargin: const EdgeInsets.all(100),
+                              minScale: 0.5,
+                              maxScale: 2,
+                              child: AssetVideo(
+                                videoName: '${_con.qrModelResult?.points}.mp4',
+                              ),
                             ),
                           )
                         else
@@ -99,7 +103,7 @@ class _PointQRScreenState extends StateMVC<PointQRScreen> {
                                 style: Theme.of(context)
                                     .textTheme
                                     .subtitle2
-                                    ?.copyWith(color: AppColors.blackColor),
+                                    ?.copyWith(color: AppColors.appOrange),
                               ),
                               const SizedBox(
                                 height: 12.0,
