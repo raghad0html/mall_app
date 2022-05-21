@@ -34,7 +34,7 @@ class QrModel {
   });
 
   QrModel.fromJson(Map<String, dynamic> json) {
-    qrType = qrType?.fromStringToQrTypeParamsModel(json['qrType']);
+    qrType = fromStringToQrTypeParamsModel1(json['qrType']);
     status = json['status'];
     msg = json['msg'];
     invoiceAccepted = json['invoiceAccepted'];

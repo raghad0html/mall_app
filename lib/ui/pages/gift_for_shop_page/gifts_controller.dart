@@ -24,6 +24,7 @@ class GiftsController extends ControllerMVC {
             getGiftByShopParamsModel: GetGiftByShopParamsModel(
       token: LocalStorageService().token ?? '',
       userid: LocalStorageService().id ?? '',
+      action: 'getGiftsByShop',
       shopId: shopId,
     ));
     ResponseState<ListOfGiftModel> data = await _listOfMallModel;

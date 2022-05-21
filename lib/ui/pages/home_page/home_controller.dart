@@ -132,6 +132,7 @@ class HomeController extends ControllerMVC {
   }
 
   getAllGames() async {
+    games.clear();
     loadingCompetition = true;
     setState(() {});
     AllGameParamsModel allGameParamsModel = AllGameParamsModel(
