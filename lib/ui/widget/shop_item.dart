@@ -69,11 +69,11 @@ class ShopItem extends StatelessWidget {
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        if (shop.shapPhone != null)
+                        if (shop.shopPhone != null)
                           InkWell(
                             onTap: () async {
                               await Launcher()
-                                  .makePhoneCall(shop.shapPhone.toString());
+                                  .makePhoneCall(shop.shopPhone.toString());
                             },
                             child: SizedBox(
                               height: 40,
@@ -84,7 +84,7 @@ class ShopItem extends StatelessWidget {
                                     width: 5,
                                   ),
                                   Text(
-                                    shop.shapPhone.toString(),
+                                    shop.shopPhone.toString(),
                                     style: Theme.of(context)
                                         .textTheme
                                         .labelMedium
@@ -96,7 +96,7 @@ class ShopItem extends StatelessWidget {
                               ),
                             ),
                           ),
-                        if (shop.shopEmail != null)
+                        if (shop.shopEmail?.isNotEmpty??false)
                           InkWell(
                             onTap: () async {
                               await Launcher().sendEmail(shop.shopEmail!);
@@ -129,15 +129,15 @@ class ShopItem extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      if (shop.shopAddress != null)
+                      if (shop.shopAddress?.isNotEmpty ??false)
                         InkWell(
                           onTap: () {
-                            if (shop.shopAddressLat != null &&
-                                shop.shopAddressLon != null) {
+                            if ((shop.shopAddressLat?.isNotEmpty??false)  &&
+                                (shop.shopAddressLon?.isNotEmpty??false)) {
                               MapsSheet.show(
                                   context: context,
-                                  latUser: shop.shopAddressLat!,
-                                  longUser: shop.shopAddressLon!,
+                                  latUser: double.parse(shop.shopAddressLat!),
+                                  longUser: double.parse(shop.shopAddressLon!),
                                   title: shop.shopAddress!);
                             }
                           },

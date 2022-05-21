@@ -8,6 +8,7 @@ class CostumeAppBar extends StatelessWidget {
       {Key? key,
       required this.title,
       this.returnToDetails = false,
+
       this.gameDetails})
       : super(key: key);
 

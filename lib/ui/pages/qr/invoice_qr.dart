@@ -137,7 +137,7 @@ class _InvoiceQrScreenState extends StateMVC<InvoiceQrScreen> {
                                           .subtitle2
                                           ?.copyWith(
                                               fontSize: 18,
-                                              color: AppColors.appOrange),
+                                              color: AppColors.blackColor),
                                     ),
                                     const SizedBox(
                                       height: 8.0,

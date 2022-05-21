@@ -21,15 +21,15 @@ class ShopModel {
   int? shopTaxNumber;
   String? shopName;
   String? shopEmail;
-  int? shapPhone;
+  String? shopPhone;
   int? shopPlan;
   int? shopQrScannedCount;
   int? point;
   String? code;
   String? timeCode;
   String? picture;
-  double? shopAddressLat;
-  double? shopAddressLon;
+  String? shopAddressLat;
+  String? shopAddressLon;
   String? shopAddress;
 
   ShopModel(
@@ -38,7 +38,7 @@ class ShopModel {
       this.shopTaxNumber,
       this.shopName,
       this.shopEmail,
-      this.shapPhone,
+      this.shopPhone,
       this.shopPlan,
       this.shopQrScannedCount,
       this.point,
@@ -55,7 +55,7 @@ class ShopModel {
     shopTaxNumber = json['shop_taxNumber'];
     shopName = json['shop_name'];
     shopEmail = json['shop_email'];
-    shapPhone = json['shap_phone'];
+    shopPhone = json['shop_phone'];
     shopPlan = json['shop_plan'];
     shopQrScannedCount = json['shop_qrScannedCount'];
     point = json['point'];

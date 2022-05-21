@@ -8,8 +8,8 @@ class QrModel {
   String? seller;
   int? taxNumber;
   DateTime? date;
-  double? cost;
-  double? vat;
+  String? cost;
+  String? vat;
   bool? stickerAccepted;
   int? points;
   int? balancePoints;
