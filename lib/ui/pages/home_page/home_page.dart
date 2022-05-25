@@ -91,8 +91,12 @@ class _HomePageState extends StateMVC<HomePage> {
                     Row(
                       children: [
                         InkWell(
-                          onTap: () => Navigator.pushNamed(
-                              context, Routes.notificationScreen),
+                          onTap: () async {
+                            await Navigator.pushNamed(
+                                context, Routes.notificationScreen);
+                            _con.getAllGames();
+                            _con.getAllNotification();
+                          },
                           child: Container(
                             width: 42,
                             height: 42,
@@ -131,6 +135,7 @@ class _HomePageState extends StateMVC<HomePage> {
                             await Navigator.pushNamed(
                                 context, Routes.profileScreen);
                             _con.getAllGames();
+                            _con.getAllNotification();
                           },
                           child: Icon(
                             Icons.person_rounded,
@@ -221,11 +226,10 @@ class _HomePageState extends StateMVC<HomePage> {
                             InkWell(
                               onTap: () async {
                                 await Navigator.pushNamed(
-                                        context, Routes.allGamesScreen)
-                                    .then((value) => setState(() {
-                                          _con.getAllGames();
-                                        }));
+                                    context, Routes.allGamesScreen);
+
                                 _con.getAllGames();
+                                _con.getAllNotification();
                               },
                               child: Row(
                                 children: [
@@ -271,8 +275,9 @@ class _HomePageState extends StateMVC<HomePage> {
                                                   gameId: _game.gameId ?? 0,
                                                   mallId: _game.mallId ?? 0,
                                                 ));
-                                            print('sdsdcsdcsdcsdcsdc');
+
                                             _con.getAllGames();
+                                            _con.getAllNotification();
                                           },
                                           child: MyCompetitionItem(
                                               game: _game,
@@ -295,13 +300,15 @@ class _HomePageState extends StateMVC<HomePage> {
                               ),
                             ),
                             InkWell(
-                              onTap: () {
+                              onTap: () async {
                                 if (_con.malls.isNotEmpty && !_con.loading) {
-                                  Navigator.pushNamed(
+                                  await Navigator.pushNamed(
                                       context, Routes.mallsScreen,
                                       arguments: cityId ??
                                           int.tryParse(
                                               LocalStorageService().cityId!));
+                                  _con.getAllGames();
+                                  _con.getAllNotification();
                                 }
                               },
                               child: LinedText(
@@ -340,6 +347,7 @@ class _HomePageState extends StateMVC<HomePage> {
                                               mallId: _con.malls[gridViewIndex]
                                                   .mallId));
                                       _con.getAllGames();
+                                      _con.getAllNotification();
                                     },
                                     child: MallWidget(
                                         mall: _con.malls[gridViewIndex]));

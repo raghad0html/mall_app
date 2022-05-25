@@ -69,7 +69,9 @@ class Routes {
         );
       case loginScreen:
         return PageTransition(
-          child: const LoginScreen(),
+          child: LoginScreen(
+            arguments: arguments,
+          ),
           type: PageTransitionType.fade,
           settings: settings,
           duration: const Duration(milliseconds: 350),
@@ -290,5 +292,13 @@ class StringArguments {
   StringArguments({
     required this.email,
     this.code,
+  });
+}
+
+class BoolArguments {
+  final bool fromLogout;
+
+  BoolArguments({
+    required this.fromLogout,
   });
 }

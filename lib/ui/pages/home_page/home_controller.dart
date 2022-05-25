@@ -56,7 +56,8 @@ class HomeController extends ControllerMVC {
         setState(() {});
       }
     } else {
-      Navigator.pushReplacementNamed(state!.context, Routes.loginScreen);
+      Navigator.pushReplacementNamed(state!.context, Routes.loginScreen,
+          arguments: BoolArguments(fromLogout: false));
     }
   }
 
@@ -177,7 +178,8 @@ class HomeController extends ControllerMVC {
         setState(() {});
       }
     } else {
-      Navigator.pushReplacementNamed(state!.context, Routes.loginScreen);
+      Navigator.pushReplacementNamed(state!.context, Routes.loginScreen,
+          arguments: BoolArguments(fromLogout: false));
     }
   }
 

@@ -97,7 +97,8 @@ class UserController extends ControllerMVC {
             _response as SuccessState<MessageModel>;
         Helper.hideLoader(loader);
         if (_res.data.registerAccepted ?? true) {
-          Navigator.pushNamed(state!.context, Routes.loginScreen);
+          Navigator.pushReplacementNamed(state!.context, Routes.loginScreen,
+              arguments: BoolArguments(fromLogout: false));
         }
         ScaffoldMessenger.of(state!.context).showSnackBar(SnackBar(
           content: Text(_res.data.msg ?? ''),
@@ -238,7 +239,8 @@ class UserController extends ControllerMVC {
         Helper.hideLoader(loader);
 
         if (_res.data.newPasswordAccepted ?? true) {
-          Navigator.pushNamed(state!.context, Routes.loginScreen);
+          Navigator.pushReplacementNamed(state!.context, Routes.loginScreen,
+              arguments: BoolArguments(fromLogout: false));
           ScaffoldMessenger.of(state!.context).showSnackBar(SnackBar(
             content: Text(_res.data.msg ?? ''),
           ));
