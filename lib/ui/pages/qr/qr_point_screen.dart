@@ -133,9 +133,17 @@ class _PointQRScreenState extends StateMVC<PointQRScreen> {
             const SizedBox(
               height: 20.0,
             ),
-            LinedText(
-              color: AppColors.primaryColor,
-              text: S.of(context).browseSubscriptionMarkets,
+            InkWell(
+              onTap: () {
+                Navigator.pushNamed(context, Routes.shareShopsScreen,
+                    arguments: ShopArguments(
+                        mallName: widget.arguments.mallName ?? '',
+                        mallId: widget.arguments.mallId));
+              },
+              child: LinedText(
+                color: AppColors.primaryColor,
+                text: S.of(context).browseSubscriptionMarkets,
+              ),
             ),
             Padding(
               padding:
