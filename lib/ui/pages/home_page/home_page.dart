@@ -130,6 +130,9 @@ class _HomePageState extends StateMVC<HomePage> {
                             ),
                           ),
                         ),
+                        SizedBox(
+                          width: 5,
+                        ),
                         InkWell(
                           onTap: () async {
                             await Navigator.pushNamed(
@@ -139,6 +142,20 @@ class _HomePageState extends StateMVC<HomePage> {
                           },
                           child: Icon(
                             Icons.person_rounded,
+                            size: 30,
+                            color: AppColors.grayColor,
+                          ),
+                        ),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        InkWell(
+                          onTap: () async {
+                            await Navigator.pushNamed(
+                                context, Routes.contactInfoScreen);
+                          },
+                          child: Icon(
+                            Icons.call,
                             size: 30,
                             color: AppColors.grayColor,
                           ),

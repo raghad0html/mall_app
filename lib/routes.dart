@@ -12,6 +12,7 @@ import 'package:page_transition/page_transition.dart';
 
 import 'ui/pages/all_games/all_games.dart';
 import 'ui/pages/game_detail/game_detail_screen.dart';
+import 'ui/pages/home_page/contact_info_screen.dart';
 import 'ui/pages/home_page/home_page.dart';
 import 'ui/pages/notifications/notification_screen.dart';
 import 'ui/pages/qr/invoice_qr.dart';
@@ -49,6 +50,7 @@ class Routes {
   static const String aboutScreen = '/aboutScreen';
   static const String giftsForShopScreen = '/giftsForShopScreen';
   static const String notificationScreen = '/notificationScreen';
+  static const String contactInfoScreen = '/contactInfoScreen';
 
   static Route? getRoutes(settings) {
     final arguments = settings.arguments;
@@ -226,6 +228,14 @@ class Routes {
       case notificationScreen:
         return PageTransition(
           child: NotificationScreen(),
+          type: PageTransitionType.fade,
+          settings: settings,
+          duration: const Duration(milliseconds: 350),
+        );
+
+      case contactInfoScreen:
+        return PageTransition(
+          child: ContactInfoScreen(),
           type: PageTransitionType.fade,
           settings: settings,
           duration: const Duration(milliseconds: 350),

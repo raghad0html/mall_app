@@ -50,10 +50,10 @@ class _ProfilePageState extends StateMVC<ProfilePage> {
                         textInButton2: S.of(context).no,
                         icon: Icons.account_circle,
                         check: false,
-                        callback: () async{
+                        callback: () async {
                           LocalStorageService().logOut();
                           LocalStorageService().login = false;
-                         await Navigator.pushReplacementNamed(
+                          await Navigator.pushReplacementNamed(
                               context, Routes.loginScreen,
                               arguments: BoolArguments(fromLogout: true));
                           var login = LocalStorageService().login ?? false;
@@ -61,7 +61,8 @@ class _ProfilePageState extends StateMVC<ProfilePage> {
                           if (login) {
                             Navigator.pop(context);
                           } else {
-                            Navigator.pushReplacementNamed(context, Routes.loginScreen,
+                            Navigator.pushReplacementNamed(
+                                context, Routes.loginScreen,
                                 arguments: BoolArguments(fromLogout: true));
                           }
                         },
