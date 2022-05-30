@@ -4,6 +4,7 @@ import 'package:lottie/lottie.dart';
 import 'package:mall_app/constants/app_theme.dart';
 import 'package:mall_app/local_storage/shared_prefernce_services.dart';
 import 'package:mall_app/routes.dart';
+import 'package:mall_app/ui/widget/custom_dialog_contest_tips.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 import '../../../generated/l10n.dart';
@@ -191,36 +192,67 @@ class _HomePageState extends StateMVC<HomePage> {
                             const SizedBox(
                               height: 10,
                             ),
-                            InkWell(
-                              onTap: () {
-                                if (_con.malls.isNotEmpty) {
-                                  showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return MallsDropDownDialog(
-                                          malls: _con.malls,
-                                          selectedMall: (mall) {
-                                            _con.createGame(
-                                                mall.mallId, mall.name ?? '');
-                                          });
-                                    },
-                                  );
-                                }
-                              },
-                              child: Container(
-                                padding: const EdgeInsets.all(8.0),
-                                decoration: BoxDecoration(
-                                    color:
-                                        AppColors.appOrange.withOpacity(0.2)),
-                                child: Text(
-                                  S.of(context).startACompetition,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .subtitle1
-                                      ?.copyWith(fontWeight: FontWeight.bold),
+                            Row(
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    if (_con.malls.isNotEmpty) {
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return MallsDropDownDialog(
+                                              malls: _con.malls,
+                                              selectedMall: (mall) {
+                                                _con.createGame(
+                                                    mall.mallId, mall.name ?? '');
+                                              });
+                                        },
+                                      );
+                                    }
+                                  },
+                                  child: Container(
+                                    padding: const EdgeInsets.all(8.0),
+                                    decoration: BoxDecoration(
+                                        color:
+                                            AppColors.appOrange.withOpacity(0.2)),
+                                    child: Text(
+                                      S.of(context).startACompetition,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .subtitle1
+                                          ?.copyWith(fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            )
+                                const SizedBox(width: 15,),
+                                InkWell(
+                                  onTap: () {
+                                    if (_con.malls.isNotEmpty) {
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return CustomDialogContestTips();
+                                        },
+                                      );
+                                    }
+                                  },
+                                  child: Container(
+                                    padding: const EdgeInsets.all(8.0),
+                                    decoration: BoxDecoration(
+                                        color:
+                                        AppColors.appOrange.withOpacity(0.2)),
+                                    child: Text(
+                                      'ارشادات المسابقة',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .subtitle1
+                                          ?.copyWith(fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+
                           ],
                         ),
                       ),
