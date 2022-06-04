@@ -28,12 +28,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="534a920d-bf52-40b7-8723-fbdb9356a459" name="Default Changelist" comment="--fix datatype qr model">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_29_05_2022_20_00__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_29_05_2022_20_00__Default_Changelist_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/mall_app_android.iml" beforeDir="false" afterPath="$PROJECT_DIR$/android/mall_app_android.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/widget/get_location_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/widget/get_location_widget.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/widget/maps_sheet.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/widget/maps_sheet.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/widget/shop_item.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/widget/shop_item.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -164,7 +162,13 @@
       <option name="project" value="LOCAL" />
       <updated>1653506970740</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL؜٠٠٠٠٩" summary="--fix datatype qr model">
+      <created>1654370843930</created>
+      <option name="number" value="LOCAL؜٠٠٠٠٩" />
+      <option name="presentableId" value="LOCAL؜٠٠٠٠٩" />
+      <updated>1654370843930</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -199,7 +203,8 @@
     <MESSAGE value="version 11" />
     <MESSAGE value="version 12" />
     <MESSAGE value="version 13" />
-    <option name="LAST_COMMIT_MESSAGE" value="version 13" />
+    <MESSAGE value="--fix datatype qr model" />
+    <option name="LAST_COMMIT_MESSAGE" value="--fix datatype qr model" />
     <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
   </component>
 </project>

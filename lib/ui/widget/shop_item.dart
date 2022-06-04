@@ -4,7 +4,7 @@ import '../../constants/assets.dart';
 import '../../main_sdk/apis/shop/models/shop_model.dart';
 import '../../routes.dart';
 import '../shared/future_builder_widget/lancher.dart';
-import 'maps_sheet.dart';
+//import 'maps_sheet.dart';
 
 class ShopItem extends StatelessWidget {
   ShopModel shop;
@@ -134,11 +134,13 @@ class ShopItem extends StatelessWidget {
                           onTap: () {
                             if ((shop.shopAddressLat?.isNotEmpty??false)  &&
                                 (shop.shopAddressLon?.isNotEmpty??false)) {
+                              /*
                               MapsSheet.show(
                                   context: context,
                                   latUser: double.parse(shop.shopAddressLat!),
                                   longUser: double.parse(shop.shopAddressLon!),
                                   title: shop.shopAddress!);
+                              */
                             }
                           },
                           child: SizedBox(
