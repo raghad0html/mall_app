@@ -1,6 +1,8 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:mall_app/generated/l10n.dart';
 import 'package:mall_app/main_sdk/apis/city/models/city_model.dart';
+import 'package:mall_app/ui/shared/future_builder_widget/lancher.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 import '../../../constants/app_theme.dart';
@@ -27,6 +29,7 @@ class _RegisterScreenState extends StateMVC<RegisterScreen> {
   TextEditingController nameController = TextEditingController();
 
   TextEditingController phoneController = TextEditingController();
+  bool check1 = false;
 
   @override
   void initState() {
@@ -200,72 +203,230 @@ class _RegisterScreenState extends StateMVC<RegisterScreen> {
                                     ),
                                   ),
                                 ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      if (!check1) {
+                                        check1 = true;
+                                      } else {
+                                        check1 = false;
+                                      }
+                                    });
+                                  },
+                                  child: Row(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      Checkbox(
+                                          value: check1,
+                                          onChanged: (check) {
+                                            if (check != null)
+                                              setState(() {
+                                                check1 = check;
+                                                if (check1) {
+                                                  Launcher().launchInBrowser(
+                                                      Uri.parse(
+                                                          'https://bareeqe.sa/policy/usage/'));
+                                                }
+                                              });
+                                          }),
+                                      SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.7,
+                                        child: Text.rich(
+                                          TextSpan(
+                                            children: [
+                                              TextSpan(
+                                                text: 'اوافق على ',
+                                                style: TextStyle(
+                                                    color: Theme.of(context)
+                                                        .textTheme
+                                                        .caption!
+                                                        .color),
+                                              ),
+                                              TextSpan(
+                                                  text: 'سياسة الاستخدام',
+                                                  style: const TextStyle(
+                                                      fontWeight: FontWeight.bold
+                                                    ),
+                                                  recognizer:
+                                                      TapGestureRecognizer()
+                                                        ..onTap = () {
+                                                          Launcher()
+                                                              .launchInBrowser(
+                                                                  Uri.parse(
+                                                                      'https://bareeqe.sa/policy/usage/'));
+                                                        }),
+                                              TextSpan(
+                                                text: ' و ',
+                                                style: TextStyle(
+                                                    color: Theme.of(context)
+                                                        .textTheme
+                                                        .caption!
+                                                        .color),
+                                              ),
+                                              TextSpan(
+                                                  text: 'سياسة الخصوصية',
+                                                  style: const TextStyle(
+                                                      fontWeight: FontWeight.bold
+                                                  ),
+                                                  recognizer:
+                                                      TapGestureRecognizer()
+                                                        ..onTap = () {
+                                                          Launcher()
+                                                              .launchInBrowser(
+                                                                  Uri.parse(
+                                                                      'https://bareeqe.sa/policy/privacy/'));
+                                                        }),
+                                            ],
+                                          ),
+                                          style: const TextStyle(height: 1.5),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
                                 Center(
                                   child: Padding(
                                     padding: const EdgeInsets.symmetric(
                                         vertical: 16.0),
                                     child: ElevatedButton(
                                       onPressed: () {
-                                        _con.registerParamsModel.email =
-                                            emailController.text;
-                                        _con.registerParamsModel.password =
-                                            passwordController.text;
-                                        _con.registerParamsModel.name =
-                                            nameController.text;
-                                        _con.registerParamsModel.password =
-                                            passwordController.text;
-                                        _con.registerParamsModel.cityId =
-                                            _con.city.cityId ?? 0;
-                                        _con.registerParamsModel.phone =
-                                            phoneController.text;
-                                        _con.registerNewUser();
+                                        if (check1) {
+                                          _con.registerParamsModel.email =
+                                              emailController.text;
+                                          _con.registerParamsModel.password =
+                                              passwordController.text;
+                                          _con.registerParamsModel.name =
+                                              nameController.text;
+                                          _con.registerParamsModel.password =
+                                              passwordController.text;
+                                          _con.registerParamsModel.cityId =
+                                              _con.city.cityId ?? 0;
+                                          _con.registerParamsModel.phone =
+                                              phoneController.text;
+                                          _con.registerNewUser();
+                                        } else {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            const SnackBar(
+                                                content: Text(
+                                                    'يرجى الموافقة على سياسة الخصوصية وسياسة الاستخدام ')),
+                                          );
+                                          return;
+                                        }
                                       },
                                       child:
                                           Text(S.of(context).createNewAccount),
                                     ),
                                   ),
                                 ),
-                                const SizedBox(
-                                  height: 20,
-                                ),
-                                Center(
-                                  child: InkWell(
-                                    onTap: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: RichText(
-                                      text: TextSpan(
-                                        text: S.of(context).iHaveAnAccount,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headline6!
-                                            .copyWith(
-                                                color: AppColors.basicColor,
-                                                fontSize: 16.0,
-                                                height: 1
-                                                //  decoration: TextDecoration.underline,
-                                                ),
-                                        children: <TextSpan>[
-                                          const TextSpan(
-                                            text: ' ',
-                                          ),
-                                          TextSpan(
-                                            text: S.of(context).login,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .headline6!
-                                                .copyWith(
-                                                    color:
-                                                        AppColors.primaryColor,
-                                                    fontSize: 16.0,
-                                                    height: 1
-                                                    //  decoration: TextDecoration.underline,
-                                                    ),
-                                          ),
-                                        ],
+
+
+                                Padding(
+                                  padding: const EdgeInsets.only(bottom: 15 ,top: 15),
+                                  child: Center(
+                                    child: InkWell(
+                                      onTap: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: RichText(
+                                        text: TextSpan(
+                                          text: S.of(context).iHaveAnAccount,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline6!
+                                              .copyWith(
+                                                  color: AppColors.basicColor,
+                                                  fontSize: 16.0,
+                                                  height: 1
+                                                  //  decoration: TextDecoration.underline,
+                                                  ),
+                                          children: <TextSpan>[
+                                            const TextSpan(
+                                              text: ' ',
+                                            ),
+                                            TextSpan(
+                                              text: S.of(context).login,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .headline6!
+                                                  .copyWith(
+                                                      color:
+                                                          AppColors.primaryColor,
+                                                      fontSize: 16.0,
+                                                      height: 1
+                                                      //  decoration: TextDecoration.underline,
+                                                      ),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),
+                                ),
+                                Text.rich(
+                                  TextSpan(
+                                    children: [
+                                      TextSpan(
+                                        text: 'يعني إنشاء حساب لدينا واستخدامك التطبيق موافقتك على ',
+                                        style: TextStyle(
+                                            color: Theme.of(context)
+                                                .textTheme
+                                                .caption!
+                                                .color),
+                                      ),
+                                      TextSpan(
+                                          text: 'سياسة الاستخدام',
+                                          style: const TextStyle(
+                                            decoration: TextDecoration
+                                                .underline,
+                                          ),
+                                          recognizer:
+                                          TapGestureRecognizer()
+                                            ..onTap = () {
+                                              Launcher()
+                                                  .launchInBrowser(
+                                                  Uri.parse(
+                                                      'https://bareeqe.sa/policy/usage/'));
+                                            }),
+                                      TextSpan(
+                                        text: ' و ',
+                                        style: TextStyle(
+                                            color: Theme.of(context)
+                                                .textTheme
+                                                .caption!
+                                                .color),
+                                      ),
+                                      TextSpan(
+                                          text: 'سياسة الخصوصية',
+                                          style: const TextStyle(
+                                            decoration: TextDecoration
+                                                .underline,
+                                          ),
+                                          recognizer:
+                                          TapGestureRecognizer()
+                                            ..onTap = () {
+                                              Launcher()
+                                                  .launchInBrowser(
+                                                  Uri.parse(
+                                                      'https://bareeqe.sa/policy/privacy/'));
+                                            }),
+                                      TextSpan(
+                                        text: ' الخاصة بنا ',
+                                        style: TextStyle(
+                                            color: Theme.of(context)
+                                                .textTheme
+                                                .caption!
+                                                .color),
+                                      ),
+                                    ],
+                                  ),
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(height: 1.5),
                                 ),
                               ],
                             ),

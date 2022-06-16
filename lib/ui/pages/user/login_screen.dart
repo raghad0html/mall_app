@@ -1,6 +1,9 @@
+
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mall_app/generated/l10n.dart';
+import 'package:mall_app/ui/shared/future_builder_widget/lancher.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 import '../../../constants/app_theme.dart';
@@ -209,6 +212,8 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                                 ),
                               ),
                             ),
+                            const SizedBox(height: 20,),
+
                           ],
                         ),
                       ),
@@ -217,7 +222,68 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                 )),
               )
             ],
-          )),
+          ),
+      bottomNavigationBar:   Padding(
+        padding: const EdgeInsets.only(bottom: 40),
+        child: Text.rich(
+          TextSpan(
+            children: [
+              TextSpan(
+                text: 'يعني تسجيل الدخول واستخدامك التطبيق موافقتك على ',
+                style: TextStyle(
+                    color: Theme.of(context)
+                        .textTheme
+                        .caption!
+                        .color),
+              ),
+              TextSpan(
+                  text: 'سياسة الاستخدام',
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold
+                  ),
+                  recognizer:
+                  TapGestureRecognizer()
+                    ..onTap = () {
+                      Launcher()
+                          .launchInBrowser(
+                          Uri.parse(
+                              'https://bareeqe.sa/policy/usage/'));
+                    }),
+              TextSpan(
+                text: ' و ',
+                style: TextStyle(
+                    color: Theme.of(context)
+                        .textTheme
+                        .caption!
+                        .color),
+              ),
+              TextSpan(
+                  text: 'سياسة الخصوصية',
+                  style: const TextStyle(
+                   fontWeight: FontWeight.bold
+                  ),
+                  recognizer:
+                  TapGestureRecognizer()
+                    ..onTap = () {
+                      Launcher()
+                          .launchInBrowser(
+                          Uri.parse(
+                              'https://bareeqe.sa/policy/privacy/'));
+                    }),
+              TextSpan(
+                text: ' الخاصة بنا ',
+                style: TextStyle(
+                    color: Theme.of(context)
+                        .textTheme
+                        .caption!
+                        .color),
+              ),
+            ],
+          ),
+          textAlign: TextAlign.center,
+          style: const TextStyle(height: 1.5),
+        ),
+      ),),
     );
   }
 

@@ -74,8 +74,8 @@ class _PointQRScreenState extends StateMVC<PointQRScreen> {
                         ),
                         if (_con.showVideo)
                           SizedBox(
-                            height: 100,
-                            width: 100,
+                            height: 250,
+                            width: 250,
                             child: InteractiveViewer(
                               panEnabled: true, // Set it to false
                               boundaryMargin: const EdgeInsets.all(100),

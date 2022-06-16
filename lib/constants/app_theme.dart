@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 final ThemeData themeData = ThemeData(
   fontFamily: GoogleFonts.cairo().fontFamily,
   brightness: Brightness.light,
+
   backgroundColor: AppColors.primaryColor,
   accentColor: AppColors.primaryColor,
   scaffoldBackgroundColor: AppColors.scaffoldBackGroundColor,

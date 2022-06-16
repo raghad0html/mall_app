@@ -30,6 +30,7 @@ class _InvoiceQrScreenState extends StateMVC<InvoiceQrScreen> {
   void initState() {
     super.initState();
     _con.setDaily(widget.arguments.daily);
+    _con.getData();
   }
 
   @override
@@ -67,15 +68,23 @@ class _InvoiceQrScreenState extends StateMVC<InvoiceQrScreen> {
                                     const SizedBox(
                                       height: 45.0,
                                     ),
-                                    //TODO
-                                    Text(
-                                      'اشتر فاتورة من أحد المحلات المشتركة معنا\n بقيمة ${widget.arguments.billAmount} ${widget.arguments.currency} على الأقل  \n ثم امسح باركود QR الخاص بها',
-                                      textAlign: TextAlign.center,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .subtitle2!
-                                          .copyWith(fontSize: 18),
-                                    ),
+                                    Builder(builder: (context) {
+                                      if (_con.loading) {
+                                        return const Center(
+                                            child: CircularProgressIndicator());
+                                      } else {
+                                        return Center(
+                                          child: Text(
+                                            _con.dataModel.billAmount ?? '',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .subtitle2!
+                                                .copyWith(fontSize: 18),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                        );
+                                      }
+                                    }),
                                     const SizedBox(
                                       height: 30,
                                     ),

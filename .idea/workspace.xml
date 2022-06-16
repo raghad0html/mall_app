@@ -28,10 +28,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="534a920d-bf52-40b7-8723-fbdb9356a459" name="Default Changelist" comment="--fix datatype qr model">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/main_sdk/apis/mall/models/data_model.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/main_sdk/apis/mall/models/data_params_model.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.flutter-plugins" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ui/widget/get_location_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/widget/get_location_widget.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ui/widget/maps_sheet.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/widget/maps_sheet.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ui/widget/shop_item.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/widget/shop_item.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/constants/app_theme.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/constants/app_theme.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/main_sdk/apis/mall/services/mall_identity_apis.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main_sdk/apis/mall/services/mall_identity_apis.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/pages/qr/invoice_qr.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/qr/invoice_qr.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/pages/qr/qr_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/qr/qr_controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/pages/qr/qr_point_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/qr/qr_point_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/pages/user/login_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/user/login_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/pages/user/register_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/user/register_screen.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,6 +64,14 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
   <component name="ProjectId" id="28yxHSOR0oAjKgsKZv67JzyR0WN" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -61,27 +80,29 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="cidr.known.project.marker" value="true" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/ui/widget" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/main_sdk/apis/mall/models" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="flutter.settings" />
+    <property name="settings.editor.selected.configurable" value="dart.settings" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/lib/main_sdk/apis/mall/models" />
       <recent name="$PROJECT_DIR$/lib/ui/widget" />
       <recent name="G:\Freelance Souliman\mall_app\android\app\cert" />
       <recent name="G:\Freelance Souliman\mall_app\android" />
       <recent name="G:\Freelance Souliman\mall_app\assets\lottie" />
-      <recent name="G:\Freelance Souliman\mall_app\assets\images" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="G:\Freelance Souliman\mall_app\lib\ui\pages" />
@@ -96,6 +117,10 @@
       <option name="filePath" value="$PROJECT_DIR$/lib/main.dart" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Flutter.main.dart" />
+      <item itemvalue="Flutter.mall_app" />
+    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">

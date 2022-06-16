@@ -1,6 +1,9 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:mall_app/main_sdk/apis/mall/models/data_model.dart';
+import 'package:mall_app/main_sdk/apis/mall/models/data_params_model.dart';
+import 'package:mall_app/main_sdk/apis/mall/services/mall_identity_apis.dart';
 import 'package:mall_app/main_sdk/apis/qr/models/qr_params_model.dart';
 import 'package:mall_app/routes.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
@@ -25,6 +28,8 @@ class QRController extends ControllerMVC {
   int targetPoints = 0;
   int balancePoints = 0;
   bool accepted = false;
+  late DataModel dataModel;
+
   QRController() {
     scaffoldKey = GlobalKey<ScaffoldState>();
   }
@@ -176,19 +181,20 @@ class QRController extends ControllerMVC {
   showVideos(points) {
     showGeneralDialog(
       context: state!.context,
-      barrierColor: Colors.black12.withOpacity(0.6), // Background color
+      barrierColor: Colors.black12.withOpacity(0.6),
+      // Background color
       barrierDismissible: true,
       barrierLabel: '',
-      transitionDuration: const Duration(
-          milliseconds:
-              400), // How long it takes to popup dialog after button click
+      transitionDuration: const Duration(milliseconds: 400),
+      // How long it takes to popup dialog after button click
       pageBuilder: (_, __, ___) {
         return SizedBox.expand(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               InteractiveViewer(
-                panEnabled: true, // Set it to false
+                panEnabled: true,
+                // Set it to false
                 boundaryMargin: const EdgeInsets.all(100),
                 minScale: 0.5,
                 maxScale: 2,
@@ -209,5 +215,23 @@ class QRController extends ControllerMVC {
       'audios/audio.mp3',
       mode: PlayerMode.LOW_LATENCY,
     );
+  }
+
+  getData() async {
+    loading = true;
+    setState(() {});
+    Future<ResponseState<DataModel>> _listOfMallModel =
+        MallIdentityApi().getData(
+            dataParamsModel: DataParamsModel(
+      token: LocalStorageService().token ?? '',
+      userid: LocalStorageService().id ?? '',
+    ));
+    ResponseState<DataModel> data = await _listOfMallModel;
+    if (data is SuccessState) {
+      SuccessState<DataModel> d = data as SuccessState<DataModel>;
+      dataModel = d.data;
+      loading = false;
+      setState(() {});
+    }
   }
 }
