@@ -8,25 +8,27 @@ import '../../../routes.dart';
 import '../../widget/gift_item.dart';
 import 'gifts_controller.dart';
 
-class GiftsForShopScreen extends StatefulWidget {
-  ShopArguments arguments;
-  GiftsForShopScreen({Key? key, required this.arguments}) : super(key: key);
+// ignore: must_be_immutable
+class GiftsForAllShopScreen extends StatefulWidget {
+  GiftsForAllShopScreen({
+    Key? key,
+  }) : super(key: key);
 
   @override
-  _GiftsForShopScreenState createState() => _GiftsForShopScreenState();
+  _GiftsForAllShopScreenState createState() => _GiftsForAllShopScreenState();
 }
 
-class _GiftsForShopScreenState extends StateMVC<GiftsForShopScreen> {
+class _GiftsForAllShopScreenState extends StateMVC<GiftsForAllShopScreen> {
   late GiftsController _con;
 
-  _GiftsForShopScreenState() : super(GiftsController()) {
+  _GiftsForAllShopScreenState() : super(GiftsController()) {
     _con = controller as GiftsController;
   }
 
   @override
   void initState() {
     super.initState();
-    _con.getGiftsByShop(widget.arguments.mallId.toString());
+    _con.getGifts();
   }
 
   @override
@@ -40,13 +42,13 @@ class _GiftsForShopScreenState extends StateMVC<GiftsForShopScreen> {
             Expanded(
               child: SingleChildScrollView(
                 child: GridView.builder(
-                  itemCount: _con.giftsByShop.length,
+                  itemCount: _con.gifts.length,
                   shrinkWrap: true,
                   primary: false,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2),
                   itemBuilder: (context, gridViewIndex) {
-                    GiftModel _gift = _con.giftsByShop[gridViewIndex];
+                    GiftModel _gift = _con.gifts[gridViewIndex];
                     return GiftItem(
                       gift: _gift,
                       fromGrid: true,

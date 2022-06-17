@@ -18,6 +18,7 @@ class ListOfGiftModel {
 class GiftModel {
   int? giftId;
   String? giftName;
+  String? giftPicture;
   String? giftDescription;
   int? giftTo;
   String? giftBy;
@@ -25,6 +26,8 @@ class GiftModel {
   int? giftReceived;
   DateTime? giftDateAdded;
   String? mallName;
+  String? giftByName;
+  String? giftReceiverName;
 
   GiftModel(
       {this.giftId,
@@ -35,7 +38,11 @@ class GiftModel {
       this.giftMall,
       this.giftReceived,
       this.giftDateAdded,
-      this.mallName});
+      this.mallName,
+      this.giftByName,
+      this.giftReceiverName,
+      this.giftPicture,
+      });
 
   GiftModel.fromJson(Map<String, dynamic> json) {
     giftId = json['gift_id'];
@@ -45,9 +52,12 @@ class GiftModel {
     giftBy = json['gift_by'].toString();
     giftMall = json['gift_mall'];
     giftReceived = json['gift_received'];
+    giftPicture = json['gift_picture'];
     giftDateAdded = json['date'] != null
         ? DateTime.parse(json['gift_dateAdded'] as String)
         : null;
     mallName = json['mall_name'];
+    giftByName = json['gift_byName'];
+    giftReceiverName = json['gift_receiverName'];
   }
 }

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
@@ -24,9 +25,18 @@ class GiftItem extends StatelessWidget {
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              title: Text(_gift.giftName ?? ''),
+              title: Center(child: Text(_gift.giftName ?? '')),
               content: Container(
-                child: Text(_gift.giftDescription ?? ''),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(_gift.giftDescription ?? ''),
+                    Text('تقدمة: ${_gift.giftByName}'),
+                    if (_gift.giftReceived == 1)
+                      Text('الى: ${_gift.giftReceiverName}'),
+                  ],
+                ),
               ),
               actions: <Widget>[
                 TextButton(
@@ -47,17 +57,38 @@ class GiftItem extends StatelessWidget {
             border: Border.all(color: AppColors.appYellow),
             color: AppColors.grayColor.withOpacity(0.1)),
         margin: const EdgeInsets.all(8.0),
-        padding: const EdgeInsets.all(8.0),
+        //  padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
             SizedBox(
                 width: fromGrid ? 120 : 50,
                 height: fromGrid ? 120 : 60,
-                child: Lottie.asset('assets/lottie/gift.json')),
-            Text(
-              _gift.giftName ?? '',
-              style: Theme.of(context).textTheme.headline3,
-            ),
+                child: _gift.giftPicture != null
+                    ? CachedNetworkImage(
+                        progressIndicatorBuilder: (context, url, progress) =>
+                            Center(
+                          child: CircularProgressIndicator(
+                            value: progress.progress,
+                          ),
+                        ),
+                        errorWidget: (context, url, error) =>
+                            const Icon(Icons.error_outline),
+                        imageUrl: _gift.giftPicture!,
+                      )
+                    : Lottie.asset('assets/lottie/gift.json')),
+            Text(_gift.giftName ?? '',
+                style: Theme.of(context).textTheme.headline3!.copyWith(
+                    decoration: _gift.giftReceived == 1
+                        ? TextDecoration.lineThrough
+                        : TextDecoration.none)),
+            if (_gift.giftReceived == 1)
+              Text(
+                '[مُستلمة]',
+                style: Theme.of(context)
+                    .textTheme
+                    .headline3!
+                    .copyWith(color: Colors.red, fontSize: 14),
+              ),
           ],
         ),
       ),

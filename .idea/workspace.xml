@@ -27,22 +27,25 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="534a920d-bf52-40b7-8723-fbdb9356a459" name="Default Changelist" comment="--fix datatype qr model">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/main_sdk/apis/mall/models/data_model.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/main_sdk/apis/mall/models/data_params_model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.flutter-plugins" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins" afterDir="false" />
+    <list default="true" id="534a920d-bf52-40b7-8723-fbdb9356a459" name="Default Changelist" comment="--some edit">
+      <change afterPath="$PROJECT_DIR$/assets/lottie/giftbox.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/main_sdk/apis/gift/models/get_gift_params_model.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/main_sdk/apis/gift/models/gift_data_model.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/main_sdk/apis/gift/models/gift_data_params_model.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/ui/pages/gift_for_shop_page/gifts_for_all_shop_screen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/constants/app_theme.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/constants/app_theme.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main_sdk/apis/mall/services/mall_identity_apis.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main_sdk/apis/mall/services/mall_identity_apis.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ui/pages/qr/invoice_qr.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/qr/invoice_qr.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ui/pages/qr/qr_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/qr/qr_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ui/pages/qr/qr_point_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/qr/qr_point_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ui/pages/user/login_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/user/login_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ui/pages/user/register_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/user/register_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/constants/assets.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/constants/assets.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/main_sdk/apis/gift/models/gift_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main_sdk/apis/gift/models/gift_model.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/main_sdk/apis/gift/services/gift_identity_apis.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main_sdk/apis/gift/services/gift_identity_apis.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/routes.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/routes.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/pages/gift_for_shop_page/gifts_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/gift_for_shop_page/gifts_controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/pages/gift_for_shop_page/gifts_for_shop_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/gift_for_shop_page/gifts_for_shop_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/pages/home_page/home_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/home_page/home_controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/pages/home_page/home_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/home_page/home_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/pages/shop_details_page/shop_details_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/shop_details_page/shop_details_controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/pages/shop_details_page/shop_details_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/shop_details_page/shop_details_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/widget/gift_item.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/widget/gift_item.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,7 +91,7 @@
     <property name="cidr.known.project.marker" value="true" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/main_sdk/apis/mall/models" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/assets/lottie" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -98,11 +101,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/assets/lottie" />
+      <recent name="$PROJECT_DIR$/lib/main_sdk/apis/gift/models" />
+      <recent name="$PROJECT_DIR$/lib/ui/pages/gift_for_shop_page" />
       <recent name="$PROJECT_DIR$/lib/main_sdk/apis/mall/models" />
       <recent name="$PROJECT_DIR$/lib/ui/widget" />
-      <recent name="G:\Freelance Souliman\mall_app\android\app\cert" />
-      <recent name="G:\Freelance Souliman\mall_app\android" />
-      <recent name="G:\Freelance Souliman\mall_app\assets\lottie" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="G:\Freelance Souliman\mall_app\lib\ui\pages" />
@@ -193,7 +196,14 @@
       <option name="presentableId" value="LOCAL؜٠٠٠٠٩" />
       <updated>1654370843930</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="--some edit">
+      <created>1655419932299</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1655419932299</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -229,7 +239,8 @@
     <MESSAGE value="version 12" />
     <MESSAGE value="version 13" />
     <MESSAGE value="--fix datatype qr model" />
-    <option name="LAST_COMMIT_MESSAGE" value="--fix datatype qr model" />
+    <MESSAGE value="--some edit" />
+    <option name="LAST_COMMIT_MESSAGE" value="--some edit" />
     <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
   </component>
 </project>

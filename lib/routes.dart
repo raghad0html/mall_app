@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mall_app/main_sdk/apis/user/models/user_model.dart';
 import 'package:mall_app/ui/pages/about_page/about_page.dart';
+import 'package:mall_app/ui/pages/gift_for_shop_page/gifts_for_all_shop_screen.dart';
 import 'package:mall_app/ui/pages/gift_for_shop_page/gifts_for_shop_screen.dart';
 import 'package:mall_app/ui/pages/mall_page/mall_page.dart';
 import 'package:mall_app/ui/pages/user/forget_password.dart';
@@ -49,6 +50,7 @@ class Routes {
   static const String updateProfileScreen = '/updateProfileScreen';
   static const String aboutScreen = '/aboutScreen';
   static const String giftsForShopScreen = '/giftsForShopScreen';
+  static const String giftsAllForShopScreen = '/giftsAllForShopScreen';
   static const String notificationScreen = '/notificationScreen';
   static const String contactInfoScreen = '/contactInfoScreen';
 
@@ -220,6 +222,14 @@ class Routes {
         return PageTransition(
           child: GiftsForShopScreen(
             arguments: arguments,
+          ),
+          type: PageTransitionType.fade,
+          settings: settings,
+          duration: const Duration(milliseconds: 350),
+        );
+        case giftsAllForShopScreen:
+        return PageTransition(
+          child: GiftsForAllShopScreen(
           ),
           type: PageTransitionType.fade,
           settings: settings,

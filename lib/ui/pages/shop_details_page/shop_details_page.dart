@@ -33,7 +33,7 @@ class _ShopDetailsPageState extends StateMVC<ShopDetailsPage> {
   void initState() {
     super.initState();
     _con.getProducts(widget.shopArguments.mallId.toString());
-    _con.getGifts(widget.shopArguments.mallId.toString());
+    _con.getGiftsByShop(widget.shopArguments.mallId.toString());
   }
 
   @override
@@ -84,9 +84,9 @@ class _ShopDetailsPageState extends StateMVC<ShopDetailsPage> {
                             Expanded(
                               child: ListView.builder(
                                 scrollDirection: Axis.horizontal,
-                                itemCount: _con.gifts.length,
+                                itemCount: _con.giftsByShop.length,
                                 itemBuilder: (context, i) {
-                                  GiftModel _gift = _con.gifts[i];
+                                  GiftModel _gift = _con.giftsByShop[i];
                                   return GiftItem(gift: _gift);
                                 },
                               ),

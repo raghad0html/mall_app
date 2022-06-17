@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mall_app/constants/app_theme.dart';
+import 'package:mall_app/constants/assets.dart';
 import 'package:mall_app/local_storage/shared_prefernce_services.dart';
 import 'package:mall_app/routes.dart';
 import 'package:mall_app/ui/widget/custom_dialog_contest_tips.dart';
@@ -31,8 +32,10 @@ class _HomePageState extends StateMVC<HomePage> {
   _HomePageState() : super(HomeController()) {
     _con = controller as HomeController;
   }
+
   DateTime? currentBackPressTime;
   int? cityId;
+
   @override
   void initState() {
     super.initState();
@@ -40,6 +43,7 @@ class _HomePageState extends StateMVC<HomePage> {
     _con.getCity();
     _con.getAllGames();
     _con.getAllNotification();
+    _con.getGiftData();
   }
 
   @override
@@ -174,92 +178,158 @@ class _HomePageState extends StateMVC<HomePage> {
                   decoration: BoxDecoration(
                     color: AppColors.appYellow.withOpacity(0.2),
                   ),
-                  child: Row(
+                  child: Column(
                     children: [
-                      Expanded(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              S.of(context).beTheWinnerTitle,
-                              style: Theme.of(context).textTheme.headline6,
-                            ),
-                            Text(
-                              S.of(context).beTheWinnerMessage,
-                              style: Theme.of(context).textTheme.subtitle2,
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Row(
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                InkWell(
-                                  onTap: () {
-                                    if (_con.malls.isNotEmpty) {
-                                      showDialog(
-                                        context: context,
-                                        builder: (BuildContext context) {
-                                          return MallsDropDownDialog(
-                                              malls: _con.malls,
-                                              selectedMall: (mall) {
-                                                _con.createGame(
-                                                    mall.mallId, mall.name ?? '');
-                                              });
-                                        },
-                                      );
-                                    }
-                                  },
-                                  child: Container(
-                                    padding: const EdgeInsets.all(8.0),
-                                    decoration: BoxDecoration(
-                                        color:
-                                            AppColors.appOrange.withOpacity(0.2)),
-                                    child: Text(
-                                      S.of(context).startACompetition,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .subtitle1
-                                          ?.copyWith(fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
+                                Text(
+                                  S.of(context).beTheWinnerTitle,
+                                  style: Theme.of(context).textTheme.headline6,
                                 ),
-                                const SizedBox(width: 15,),
-                                InkWell(
-                                  onTap: () {
-                                    if (_con.malls.isNotEmpty) {
-                                      showDialog(
-                                        context: context,
-                                        builder: (BuildContext context) {
-                                          return CustomDialogContestTips();
-                                        },
-                                      );
-                                    }
-                                  },
-                                  child: Container(
-                                    padding: const EdgeInsets.all(8.0),
-                                    decoration: BoxDecoration(
-                                        color:
-                                        AppColors.appOrange.withOpacity(0.2)),
-                                    child: Text(
-                                      'ارشادات المسابقة',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .subtitle1
-                                          ?.copyWith(fontWeight: FontWeight.bold),
+                                Text(
+                                  S.of(context).beTheWinnerMessage,
+                                  style: Theme.of(context).textTheme.subtitle2,
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  children: [
+                                    InkWell(
+                                      onTap: () {
+                                        if (_con.malls.isNotEmpty) {
+                                          showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return MallsDropDownDialog(
+                                                  malls: _con.malls,
+                                                  selectedMall: (mall) {
+                                                    _con.createGame(mall.mallId,
+                                                        mall.name ?? '');
+                                                  });
+                                            },
+                                          );
+                                        }
+                                      },
+                                      child: Container(
+                                        padding: const EdgeInsets.all(8.0),
+                                        decoration: BoxDecoration(
+                                            color: AppColors.appOrange
+                                                .withOpacity(0.2)),
+                                        child: Text(
+                                          S.of(context).startACompetition,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .subtitle1
+                                              ?.copyWith(
+                                                  fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
                                     ),
-                                  ),
+                                    const SizedBox(
+                                      width: 15,
+                                    ),
+                                    InkWell(
+                                      onTap: () {
+                                        if (_con.malls.isNotEmpty) {
+                                          showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return CustomDialogContestTips();
+                                            },
+                                          );
+                                        }
+                                      },
+                                      child: Container(
+                                        padding: const EdgeInsets.all(8.0),
+                                        decoration: BoxDecoration(
+                                            color: AppColors.appOrange
+                                                .withOpacity(0.2)),
+                                        child: Text(
+                                          'ارشادات المسابقة',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .subtitle1
+                                              ?.copyWith(
+                                                  fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
-
-                          ],
-                        ),
+                          ),
+                          SizedBox(
+                              width: 90,
+                              height: 100,
+                              child: Lottie.asset('assets/lottie/winner.json')),
+                        ],
                       ),
-                      SizedBox(
-                          width: 100,
-                          height: 100,
-                          child: Lottie.asset('assets/lottie/winner.json')),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Builder(builder: (context) {
+                        if (_con.loading1) {
+                          return const Center(
+                              child: CircularProgressIndicator());
+                        } else {
+                          return Align(
+                            alignment: Alignment.bottomRight,
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.pushNamed(
+                                    context, Routes.giftsAllForShopScreen);
+                              },
+                              child: Container(
+                                alignment: Alignment.bottomRight,
+                                // padding: const EdgeInsets.all(8.0),
+                                width: 300,
+                                decoration: BoxDecoration(
+                                    color:
+                                        AppColors.grayColor.withOpacity(0.2),
+                                ),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Container(
+                                        height: 50,
+                                        child: Lottie.asset(
+                                            Assets.assetsLottieGiftBox)),
+                                    Text.rich(
+                                      TextSpan(
+                                        children: [
+                                          TextSpan(
+                                            text: _con
+                                                .giftDataModel.giftQuantity
+                                                ?.toString(),
+                                            style: TextStyle(
+                                                color: Colors.deepOrange,
+                                                fontSize: 30 ,fontWeight: FontWeight.bold),
+                                          ),
+                                          TextSpan(
+                                            text:
+                                                '  جائزة للربح! ابدأ بمسابقة جديدة ',
+                                            style:
+                                                TextStyle(color: Colors.black),
+                                          ),
+                                        ],
+                                      ),
+                                      textAlign: TextAlign.center,
+                                      style: const TextStyle(height: 1.5),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                          );
+                        }
+                      }),
                     ],
                   ),
                 ),

@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:mall_app/main_sdk/apis/city/models/city_model.dart';
 import 'package:mall_app/main_sdk/apis/city/services/ciry_identity_apis.dart';
 import 'package:mall_app/main_sdk/apis/game/services/game_identity_apis.dart';
+import 'package:mall_app/main_sdk/apis/gift/models/gift_data_model.dart';
+import 'package:mall_app/main_sdk/apis/gift/models/gift_data_params_model.dart';
+import 'package:mall_app/main_sdk/apis/gift/services/gift_identity_apis.dart';
 import 'package:mall_app/main_sdk/apis/notification/models/notification_model.dart';
 import 'package:mall_app/main_sdk/apis/notification/services/notification_identity_apis.dart';
 import 'package:mall_app/routes.dart';
@@ -24,14 +27,17 @@ class HomeController extends ControllerMVC {
   late GlobalKey<ScaffoldState> scaffoldKey;
   late OverlayEntry loader;
   late List<MallModel> malls = [];
+  late GiftDataModel giftDataModel;
   List<CityModel> cities = [];
   bool loading = false;
+  bool loading1 = false;
   bool loadingCompetition = false;
   String currentCity = '';
   List<GameModel> games = [];
   int count = 0;
   List<NotificationModel> notifications = [];
   bool loadingNotifications = false;
+
   HomeController() {
     scaffoldKey = GlobalKey<ScaffoldState>();
     currentCity = LocalStorageService().cityName ?? '';
@@ -197,6 +203,24 @@ class HomeController extends ControllerMVC {
       SuccessState<NotificationModel> d =
           data as SuccessState<NotificationModel>;
       getAllNotification();
+    }
+  }
+
+  getGiftData() async {
+    loading1 = true;
+    setState(() {});
+    Future<ResponseState<GiftDataModel>> _giftData =
+        GiftIdentityApi().getGiftData(
+            giftDataParamsModel: GiftDataParamsModel(
+      token: LocalStorageService().token ?? '',
+      userid: LocalStorageService().id ?? '',
+    ));
+    ResponseState<GiftDataModel> data = await _giftData;
+    if (data is SuccessState) {
+      SuccessState<GiftDataModel> d = data as SuccessState<GiftDataModel>;
+      giftDataModel = d.data;
+      loading1 = false;
+      setState(() {});
     }
   }
 }

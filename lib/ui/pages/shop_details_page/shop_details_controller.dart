@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mall_app/local_storage/shared_prefernce_services.dart';
 import 'package:mall_app/main_sdk/apis/core/models/common/result_class.dart';
 import 'package:mall_app/main_sdk/apis/gift/models/get_gift_by_shop_params_model.dart';
+import 'package:mall_app/main_sdk/apis/gift/models/get_gift_params_model.dart';
 import 'package:mall_app/main_sdk/apis/gift/models/gift_model.dart';
 import 'package:mall_app/main_sdk/apis/gift/services/gift_identity_apis.dart';
 import 'package:mall_app/main_sdk/apis/product/models/product_model.dart';
@@ -13,6 +14,7 @@ class ShopDetailsController extends ControllerMVC {
   late GlobalKey<ScaffoldState> scaffoldKey;
   late OverlayEntry loader;
   late List<ProductModel> products = [];
+  late List<GiftModel> giftsByShop = [];
   late List<GiftModel> gifts = [];
   bool loading = false;
   bool loading1 = false;
@@ -42,7 +44,7 @@ class ShopDetailsController extends ControllerMVC {
     }
   }
 
-  getGifts(String shopId) async {
+  getGiftsByShop(String shopId) async {
     loading1 = true;
     setState(() {});
     Future<ResponseState<ListOfGiftModel>> _listOfMallModel =
@@ -56,7 +58,7 @@ class ShopDetailsController extends ControllerMVC {
     ResponseState<ListOfGiftModel> data = await _listOfMallModel;
     if (data is SuccessState) {
       SuccessState<ListOfGiftModel> d = data as SuccessState<ListOfGiftModel>;
-      gifts = d.data.data!;
+      giftsByShop = d.data.data!;
       loading1 = false;
       setState(() {});
     }
@@ -67,4 +69,5 @@ class ShopDetailsController extends ControllerMVC {
       ));
     }
   }
+
 }
