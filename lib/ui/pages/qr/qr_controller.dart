@@ -210,11 +210,9 @@ class QRController extends ControllerMVC {
   }
 
   runAudio() async {
-    AudioCache audioCache = AudioCache();
-    await audioCache.play(
-      'audios/audio.mp3',
-      mode: PlayerMode.LOW_LATENCY,
-    );
+    final player = AudioPlayer();
+    await player.play(AssetSource('audios/audio.mp3'),
+        mode: PlayerMode.lowLatency);
   }
 
   getData() async {
