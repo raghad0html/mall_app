@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lottie/lottie.dart';
-import 'package:flutter_application_1/constants/app_theme.dart';
-import 'package:flutter_application_1/constants/assets.dart';
-import 'package:flutter_application_1/local_storage/shared_prefernce_services.dart';
-import 'package:flutter_application_1/routes.dart';
-import 'package:flutter_application_1/ui/widget/custom_dialog_contest_tips.dart';
+import 'package:mall_app/constants/app_theme.dart';
+import 'package:mall_app/constants/assets.dart';
+import 'package:mall_app/local_storage/shared_prefernce_services.dart';
+import 'package:mall_app/routes.dart';
+import 'package:mall_app/ui/widget/custom_dialog_contest_tips.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 import '../../../generated/l10n.dart';
