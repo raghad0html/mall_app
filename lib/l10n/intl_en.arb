@@ -105,5 +105,10 @@
   "active": "جارية",
   "googLuck": "حظ اوفر",
   "youAreTheWinner": "ربحت",
-  "tapAgainToLeave": "اضغط مرة ثانية للمغادرة"
+  "tapAgainToLeave": "اضغط مرة ثانية للمغادرة",
+  "removeAccount": "Remove Account",
+  "verification": "Verification",
+  "verificationCode1": "Verification Code",
+  "enterverificationCode": "Enter Verification Code",
+  "resend": "resend"
 }
