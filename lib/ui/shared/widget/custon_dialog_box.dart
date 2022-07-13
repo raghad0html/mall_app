@@ -1,22 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:mall_app/constants/app_theme.dart';
-
 
 class CustomDialogBox extends StatefulWidget {
   final String? title, subTitle, textInButton, textInButton2;
   final bool check; // to check if one button or tow
   final VoidCallback? callback, callback2;
   final IconData? icon;
+  final Widget? lottieIcon;
+  final Color? color;
 
   const CustomDialogBox(
-      {Key? key, this.title,
+      {Key? key,
+      this.title,
       this.subTitle,
       this.textInButton = "",
       this.textInButton2 = "",
       this.check = true,
       this.callback,
       this.callback2,
-      this.icon}) : super(key: key);
+      this.icon,
+      this.lottieIcon,
+      this.color})
+      : super(key: key);
 
   @override
   _CustomDialogBoxState createState() => _CustomDialogBoxState();
@@ -45,7 +51,6 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
       decoration: BoxDecoration(
         color: AppColors.scaffoldBackGroundColor,
         borderRadius: BorderRadius.circular(10),
-
       ),
       child: Padding(
         padding: const EdgeInsets.only(top: 40),
@@ -54,17 +59,23 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Center(
-                child: Icon(
-                  widget.icon!,
-                  size: 50,
-                )),
+            widget.lottieIcon != null
+                ? widget.lottieIcon!
+                : Center(
+                    child: Icon(
+                    widget.icon!,
+                    color: widget.color == null
+                        ? AppColors.blackLightColor
+                        : Colors.red,
+                    size: 50,
+                  )),
             Text(
-               widget.title??'',
-              style: const TextStyle(
-                fontSize: 20.0,
-                color: AppColors.blackLightColor
-              ),
+              widget.title ?? '',
+              style: TextStyle(
+                  fontSize: 20.0,
+                  color: widget.color == null
+                      ? AppColors.blackLightColor
+                      : Colors.red),
               textAlign: TextAlign.center,
             ),
             const SizedBox(
@@ -73,9 +84,12 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
             if (widget.subTitle != null)
               Text(
                 widget.subTitle!,
-                style: const TextStyle(fontSize: 15.0 ,color: AppColors.blackLightColor),
+                style: TextStyle(
+                    fontSize: 15.0,
+                    color: widget.color == null
+                        ? AppColors.blackLightColor
+                        : Colors.red),
                 textAlign: TextAlign.center,
-
               ),
             const SizedBox(
               height: 22,
@@ -86,7 +100,7 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
                     child: TextButton(
                       onPressed: widget.callback,
                       child: Text(
-                         widget.textInButton??'',
+                        widget.textInButton ?? '',
                         style: const TextStyle(
                           fontSize: 20.0,
                           color: AppColors.primaryColor,
@@ -106,19 +120,18 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
                           TextButton(
                             onPressed: widget.callback,
                             child: Text(
-                               widget.textInButton??'',
+                              widget.textInButton ?? '',
                               style: const TextStyle(
                                 fontSize: 20.0,
                                 color: AppColors.primaryColor,
                               ),
                               textAlign: TextAlign.center,
-
                             ),
                           ),
                           TextButton(
                             onPressed: widget.callback2,
                             child: Text(
-                               widget.textInButton2??'',
+                              widget.textInButton2 ?? '',
                               style: const TextStyle(
                                 fontSize: 20.0,
                                 color: AppColors.blackLightColor,
