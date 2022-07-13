@@ -118,12 +118,97 @@ class _ProfilePageState extends StateMVC<ProfilePage> {
                       ),
                     ),
                   ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 20.0),
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.5,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            primary: Colors.white,
+                            side: BorderSide(width: 2, color: Colors.red)),
+                        onPressed: () {
+                          showDialog(
+                              context: context,
+                              //  barrierDismissible: false,
+                              builder: (BuildContext context) {
+                                return CustomDialogBox(
+                                  title: "انتباه",
+                                  subTitle: "هل أنت متأكد من حذف الحساب؟",
+                                  textInButton: "نعم",
+                                  textInButton2: "لا",
+                                  icon: Icons.delete_forever_outlined,
+                                  check: false,
+                                  callback: () {
+                                    Navigator.of(context)
+                                        .pushNamed(
+                                          Routes.removeAccount,
+                                          arguments: UserArgs(
+                                              userModel: _con.userModel!,
+                                              onChanges: (UserModel user) {
+                                                setState(() {
+                                                  _con.userModel = user;
+                                                });
+                                              }),
+                                        )
+                                        .then(
+                                            (value) => Navigator.pop(context));
+                                  },
+                                  callback2: () {
+                                    Navigator.pop(context);
+                                  },
+                                );
+                              });
+                        },
+                        child: Text(
+                          S.of(context).removeAccount,
+                          style: TextStyle(color: Colors.black),
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
           );
         }
       }),
+    );
+  }
+}
+
+class HeaderWidget extends StatelessWidget {
+  final String text;
+  final IconData iconData;
+
+  const HeaderWidget({Key? key, required this.text, required this.iconData})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.all(8),
+      decoration: BoxDecoration(
+          color: Colors.white, borderRadius: BorderRadius.circular(10)),
+      child: Row(
+        children: [
+          Icon(iconData),
+          const SizedBox(
+            width: 10,
+          ),
+          Expanded(
+            child: Text(
+              text,
+              style: Theme.of(context)
+                  .textTheme
+                  .labelMedium
+                  ?.copyWith(height: 1.1, fontSize: 15),
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
