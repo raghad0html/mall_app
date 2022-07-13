@@ -420,7 +420,8 @@ class UserController extends ControllerMVC {
 
         if (_res.data.codeAccepted ?? true) {
           LocalStorageService().logOut();
-          Navigator.pushNamed(state!.context, Routes.loginScreen);
+          Navigator.pushReplacementNamed(state!.context, Routes.loginScreen,
+              arguments: BoolArguments(fromLogout: false));
           ScaffoldMessenger.of(state!.context).showSnackBar(SnackBar(
             content: Text(_res.data.msg ?? ''),
           ));
