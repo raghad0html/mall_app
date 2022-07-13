@@ -187,7 +187,7 @@ class _CustomDialogContestTipsState extends State<CustomDialogContestTips> {
                           children: [
                             Expanded(
                               child: Text(
-                                'إن المسابقات والجوائز المقدمة ليست من تنظيم أو تقديم أو دعم شركة Aplle',
+                                'إن المسابقات والجوائز المقدمة ليست من تنظيم أو تقديم أو دعم شركة Apple',
                                 style: const TextStyle(
                                     fontSize: 15.0, color: AppColors.redColor),
                                 textAlign: TextAlign.start,
