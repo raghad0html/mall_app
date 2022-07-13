@@ -105,7 +105,7 @@ class _RemoveAccountState extends StateMVC<RemoveAccount> {
                           controller: codeController,
                           keyboardType: TextInputType.number,
                           decoration: InputDecoration(
-                            labelText: S.of(context).verificationCode,
+                            labelText: S.of(context).verificationCode1,
                           ),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
