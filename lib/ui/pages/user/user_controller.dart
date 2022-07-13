@@ -5,10 +5,13 @@ import 'package:mall_app/main_sdk/apis/city/models/city_model.dart';
 import 'package:mall_app/main_sdk/apis/city/services/ciry_identity_apis.dart';
 import 'package:mall_app/main_sdk/apis/user/models/profile_params_model.dart';
 import 'package:mall_app/main_sdk/apis/user/models/register_params_model.dart';
+import 'package:mall_app/main_sdk/apis/user/models/delete_account_model.dart';
 import 'package:mall_app/main_sdk/apis/user/models/resend_code_params_model.dart';
+import 'package:mall_app/main_sdk/apis/user/models/resend_delete_code_email_model.dart';
 import 'package:mall_app/main_sdk/apis/user/models/set_new_password_params_model.dart';
 import 'package:mall_app/main_sdk/apis/user/models/update_profile_params_model.dart';
 import 'package:mall_app/main_sdk/apis/user/models/verify_code_params_model.dart';
+import 'package:mall_app/main_sdk/apis/user/models/verify_delete_code_params_model.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 import '../../../local_storage/shared_prefernce_services.dart';
@@ -32,6 +35,7 @@ class UserController extends ControllerMVC {
   int timer = 0;
   bool loading = false;
   UserModel? userModel;
+  String msg = "";
 
   UserController() {
     formKey = GlobalKey<FormState>();
@@ -68,6 +72,7 @@ class UserController extends ControllerMVC {
         LocalStorageService().id = user.data.userId.toString();
         LocalStorageService().token = user.data.token;
         LocalStorageService().cityId = user.data.cityId.toString();
+        LocalStorageService().email = user.data.email.toString();
         LocalStorageService().cityName = user.data.cityName;
         Helper.hideLoader(loader);
         Navigator.pushNamed(state!.context, Routes.homeScreen);
@@ -334,6 +339,109 @@ class UserController extends ControllerMVC {
       userModel = d.data;
       loading = false;
       setState(() {});
+    }
+  }
+
+  deleteAccount() async {
+    DeleteAccountParamsModel deleteAccountParamsModel =
+        DeleteAccountParamsModel(
+      token: LocalStorageService().token ?? '',
+      userid: LocalStorageService().id ?? '',
+      email: LocalStorageService().email ?? '',
+      //email: email,
+    );
+    ResponseState<MessageModel> _response = await UserIdentityApi()
+        .deleteAccount(deleteAccountParamsModel: deleteAccountParamsModel);
+    if (_response is SuccessState) {
+      SuccessState<MessageModel> _res = _response as SuccessState<MessageModel>;
+      msg = _res.data.msg ?? '';
+      /*
+      ScaffoldMessenger.of(state!.context).showSnackBar(SnackBar(
+        content: Text(_res.data.msg ?? ''),
+      ));
+      */
+
+    } else if (_response is ErrorState) {
+      ErrorState<MessageModel> _res = _response as ErrorState<MessageModel>;
+      ScaffoldMessenger.of(state!.context).showSnackBar(SnackBar(
+        content: Text(_res.errorMessage.error!.message),
+      ));
+      msg = _res.errorMessage.error!.message;
+    }
+  }
+
+  resendDeleteCode() async {
+    ResendDeleteCodeEmailModel resendDeleteCodeEmailModel =
+        ResendDeleteCodeEmailModel(
+      token: LocalStorageService().token ?? '',
+      userid: LocalStorageService().id ?? '',
+      email: LocalStorageService().email ?? '',
+    );
+    ResponseState<MessageModel> _response = await UserIdentityApi()
+        .resendDeleteCodeEmail(
+            resendDeleteCodeEmailModel: resendDeleteCodeEmailModel);
+    if (_response is SuccessState) {
+      SuccessState<MessageModel> _res = _response as SuccessState<MessageModel>;
+      msg = _res.data.msg ?? '';
+      /*
+      ScaffoldMessenger.of(state!.context).showSnackBar(SnackBar(
+        content: Text(_res.data.msg ?? ''),
+      ));
+      */
+    } else if (_response is ErrorState) {
+      ErrorState<MessageModel> _res = _response as ErrorState<MessageModel>;
+      ScaffoldMessenger.of(state!.context).showSnackBar(SnackBar(
+        content: Text(_res.errorMessage.error!.message),
+      ));
+      msg = _res.errorMessage.error!.message;
+    }
+  }
+
+  verifyDeleteCode(String code) async {
+    if (formKey.currentState!.validate()) {
+      var loader = Helper.overlayLoader(state!.context);
+      FocusScope.of(state!.context).unfocus();
+      Helper.overlayLoader(state!.context);
+      Overlay.of(state!.context)?.insert(loader);
+      VerifyDeleteCodeParamsModel verifyDeleteCodeParamsModel =
+          VerifyDeleteCodeParamsModel(
+              token: LocalStorageService().token ?? '',
+              userid: LocalStorageService().id ?? '',
+              email: LocalStorageService().email ?? '',
+              code: code);
+      ResponseState<MessageModel> _response = await UserIdentityApi()
+          .verifyDeleteCode(
+              verifyDeleteCodeParamsModel: verifyDeleteCodeParamsModel);
+
+      if (_response is SuccessState) {
+        SuccessState<MessageModel> _res =
+            _response as SuccessState<MessageModel>;
+        Helper.hideLoader(loader);
+
+        if (_res.data.codeAccepted ?? true) {
+          LocalStorageService().logOut();
+          Navigator.pushNamed(state!.context, Routes.loginScreen);
+          ScaffoldMessenger.of(state!.context).showSnackBar(SnackBar(
+            content: Text(_res.data.msg ?? ''),
+          ));
+          msg = _res.data.msg ?? '';
+        } else {
+          msg = _res.data.msg ?? '';
+          /*
+      ScaffoldMessenger.of(state!.context).showSnackBar(SnackBar(
+        content: Text(_res.data.msg ?? ''),
+      ));
+      */
+
+        }
+      } else if (_response is ErrorState) {
+        ErrorState<MessageModel> _res = _response as ErrorState<MessageModel>;
+        Helper.hideLoader(loader);
+        ScaffoldMessenger.of(state!.context).showSnackBar(SnackBar(
+          content: Text(_res.errorMessage.error!.message),
+        ));
+        msg = _res.errorMessage.error!.message;
+      }
     }
   }
 }
