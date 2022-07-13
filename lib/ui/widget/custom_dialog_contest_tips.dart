@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/constants/app_theme.dart';
-import 'package:flutter_application_1/routes.dart';
+import 'package:mall_app/constants/app_theme.dart';
+import 'package:mall_app/routes.dart';
 
 class CustomDialogContestTips extends StatefulWidget {
   const CustomDialogContestTips({
