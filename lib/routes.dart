@@ -7,6 +7,7 @@ import 'package:mall_app/ui/pages/mall_page/mall_page.dart';
 import 'package:mall_app/ui/pages/user/forget_password.dart';
 import 'package:mall_app/ui/pages/user/profile_page.dart';
 import 'package:mall_app/ui/pages/user/register_screen.dart';
+import 'package:mall_app/ui/pages/user/remove_account.dart';
 import 'package:mall_app/ui/pages/user/reset_password_screen.dart';
 import 'package:mall_app/ui/pages/user/update_profile_page.dart';
 import 'package:page_transition/page_transition.dart';
@@ -53,6 +54,7 @@ class Routes {
   static const String giftsAllForShopScreen = '/giftsAllForShopScreen';
   static const String notificationScreen = '/notificationScreen';
   static const String contactInfoScreen = '/contactInfoScreen';
+  static const String removeAccount = '/removeAccount';
 
   static Route? getRoutes(settings) {
     final arguments = settings.arguments;
@@ -227,10 +229,9 @@ class Routes {
           settings: settings,
           duration: const Duration(milliseconds: 350),
         );
-        case giftsAllForShopScreen:
+      case giftsAllForShopScreen:
         return PageTransition(
-          child: GiftsForAllShopScreen(
-          ),
+          child: GiftsForAllShopScreen(),
           type: PageTransitionType.fade,
           settings: settings,
           duration: const Duration(milliseconds: 350),
@@ -251,6 +252,15 @@ class Routes {
           duration: const Duration(milliseconds: 350),
         );
 
+      case removeAccount:
+        final UserArgs args = settings.arguments;
+        return PageTransition(
+          child: RemoveAccount(
+              userModel: args.userModel, onChanged: args.onChanges),
+          type: PageTransitionType.fade,
+          settings: settings,
+          duration: const Duration(milliseconds: 350),
+        );
       default:
         return null;
     }
