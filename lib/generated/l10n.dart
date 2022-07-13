@@ -1109,6 +1109,56 @@ class S {
       args: [],
     );
   }
+
+  /// `RemoveAccount`
+  String get removeAccount {
+    return Intl.message(
+      'حذف الحساب',
+      name: 'removeAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Verification`
+  String get verification {
+    return Intl.message(
+      'تحقق',
+      name: 'verification',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `VerificationCode1`
+  String get verificationCode1 {
+    return Intl.message(
+      'رمز التحقق',
+      name: 'verificationCode1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `EnterVerificationCode`
+  String get enterVerificationCode {
+    return Intl.message(
+      'أدخل رمز التحقق',
+      name: 'enterVerificationCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ReSend`
+  String get resend {
+    return Intl.message(
+      'إعادة الإرسال',
+      name: 'Resend',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
