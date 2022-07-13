@@ -420,8 +420,19 @@ class UserController extends ControllerMVC {
 
         if (_res.data.codeAccepted ?? true) {
           LocalStorageService().logOut();
-          Navigator.pushReplacementNamed(state!.context, Routes.loginScreen,
-              arguments: BoolArguments(fromLogout: false));
+          LocalStorageService().login = false;
+          await Navigator.pushReplacementNamed(
+              state!.context, Routes.loginScreen,
+              arguments: BoolArguments(fromLogout: true));
+          var login = LocalStorageService().login ?? false;
+          print("*************************************");
+          print(login);
+          if (login) {
+            Navigator.pop(state!.context);
+          } else {
+            Navigator.pushReplacementNamed(state!.context, Routes.loginScreen,
+                arguments: BoolArguments(fromLogout: true));
+          }
           ScaffoldMessenger.of(state!.context).showSnackBar(SnackBar(
             content: Text(_res.data.msg ?? ''),
           ));
