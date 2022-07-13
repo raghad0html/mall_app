@@ -180,22 +180,15 @@ class _CustomDialogContestTipsState extends State<CustomDialogContestTips> {
                       ),
                     ],
                   ),
-                  Platform.isIOS
-                      ? Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              child: Text(
-                                'إن المسابقات والجوائز المقدمة ليست من تنظيم أو تقديم أو دعم شركة Apple',
-                                style: const TextStyle(
-                                    fontSize: 15.0, color: AppColors.redColor),
-                                textAlign: TextAlign.start,
-                              ),
-                            ),
-                          ],
-                        )
-                      : Container(),
+                  Container(
+                    margin: EdgeInsets.all(10),
+                    height: 2,
+                    width: MediaQuery.of(context).size.width / 1.2,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      color: AppColors.grayColor,
+                    ),
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -220,6 +213,25 @@ class _CustomDialogContestTipsState extends State<CustomDialogContestTips> {
                       )
                     ],
                   ),
+                  Platform.isAndroid
+                      ? Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: Text(
+                                'إن المسابقات والجوائز المقدمة ليست من تنظيم أو تقديم أو دعم شركة Apple',
+                                style: const TextStyle(
+                                  fontSize: 14.0,
+                                  color: AppColors.grayColor,
+                                  //fontWeight: FontWeight.bold,
+                                ),
+                                textAlign: TextAlign.start,
+                              ),
+                            ),
+                          ],
+                        )
+                      : Container(),
                 ],
               ),
             ),
