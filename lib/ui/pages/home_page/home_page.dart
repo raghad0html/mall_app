@@ -289,7 +289,7 @@ class _HomePageState extends StateMVC<HomePage> {
                               child: Container(
                                 alignment: Alignment.bottomRight,
                                 // padding: const EdgeInsets.all(8.0),
-                                width: 300,
+                                //width: 300,
                                 decoration: BoxDecoration(
                                   color: AppColors.grayColor.withOpacity(0.2),
                                 ),
