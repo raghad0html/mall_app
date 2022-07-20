@@ -49,15 +49,27 @@ class _MallsDropDownDialogState extends State<MallsDropDownDialog> {
         ),
       ),
       actions: <Widget>[
-        TextButton(
-          child: Text(S.of(context).ok),
-          onPressed: () {
-            widget.selectedMall(mall);
-          },
+        Container(
+          width: 50,
+          child: InkWell(
+            child: Text(
+              S.of(context).ok,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.blue,
+              ),
+            ),
+            onTap: () {
+              widget.selectedMall(mall);
+            },
+          ),
         ),
-        TextButton(
-          child: Text(S.of(context).cancel),
-          onPressed: () {
+        InkWell(
+          child: Text(
+            S.of(context).cancel,
+            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue),
+          ),
+          onTap: () {
             Navigator.of(context).pop();
           },
         ),
