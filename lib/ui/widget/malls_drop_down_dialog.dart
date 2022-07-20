@@ -50,6 +50,7 @@ class _MallsDropDownDialogState extends State<MallsDropDownDialog> {
       ),
       actions: <Widget>[
         Container(
+          padding: EdgeInsets.symmetric(vertical: 20),
           width: 50,
           child: InkWell(
             child: Text(
@@ -64,14 +65,18 @@ class _MallsDropDownDialogState extends State<MallsDropDownDialog> {
             },
           ),
         ),
-        InkWell(
-          child: Text(
-            S.of(context).cancel,
-            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue),
+        Container(
+          padding: EdgeInsets.symmetric(vertical: 20),
+          width: 50,
+          child: InkWell(
+            child: Text(
+              S.of(context).cancel,
+              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue),
+            ),
+            onTap: () {
+              Navigator.of(context).pop();
+            },
           ),
-          onTap: () {
-            Navigator.of(context).pop();
-          },
         ),
       ],
     );
